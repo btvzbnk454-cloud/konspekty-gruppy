@@ -1,0 +1,207 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Баланс по счетам</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Глиняный стайлгайд: светлая доска с линейкой и сеткой, мягкие объёмные плашки; актив и пассив — две колонки, счёт — объёмная фишка, мятная = прибавить, серая = вычесть. Одна светлая тема — так задумано. */
+:root{
+  color-scheme:light;
+  --room:#E4E5E1;      /* фон за доской */
+  --board:#F4F4F1;     /* доска */
+  --clay:#FBFBF9;      /* светлая плашка */
+  --ink:#2C2D2B;       /* текст */
+  --ink-2:#5E605C;
+  --ink-3:#8C8E89;
+  --grid:#DCDDD8;
+  --mint:#BDEDD8;      /* основной акцент */
+  --mint-deep:#7FD8B4;
+  --mint-ink:#1E5E47;
+  --stone:#D6D7D3;     /* серая плашка */
+  --stone-deep:#B9BAB5;
+  --sun:#F2E3A0;  --sun-ink:#6B5A12;
+  --rose:#F1A9A3; --rose-ink:#7C2A24;
+  --f-ui:"Onest","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --f-num:"JetBrains Mono",Consolas,"Courier New",monospace;
+  --lift:0 1px 0 rgba(255,255,255,.9) inset,0 -3px 6px rgba(0,0,0,.06) inset,0 6px 14px rgba(40,42,38,.12),0 2px 3px rgba(40,42,38,.08);
+  --lift-hi:0 1px 0 rgba(255,255,255,.95) inset,0 -3px 6px rgba(0,0,0,.05) inset,0 12px 26px rgba(40,42,38,.16),0 3px 5px rgba(40,42,38,.08);
+  --press:inset 0 3px 7px rgba(40,42,38,.14),inset 0 -1px 0 rgba(255,255,255,.8);
+}
+*{box-sizing:border-box}
+html,body{background:var(--room)}
+body{margin:0;color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--room)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:0 0 0 3px var(--board),0 0 0 6px var(--mint-deep)!important}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 48px}
+
+/* доска с линейкой */
+.board{position:relative;background:var(--board);border-radius:22px;box-shadow:var(--lift-hi);padding:46px 52px 52px;
+  background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--grid) calc(100%/12 - 1px) calc(100%/12));background-origin:content-box;background-clip:content-box}
+.ruler{position:absolute;left:52px;right:52px;display:grid;grid-template-columns:repeat(12,1fr);font-family:var(--f-num);font-size:10px;color:var(--ink-3);pointer-events:none}
+.ruler span{padding-left:3px;border-left:1px solid var(--grid);height:10px;line-height:10px}
+.ruler.r-top{top:18px}.ruler.r-bot{bottom:18px}
+.ticks{position:absolute;top:46px;bottom:46px;width:12px;background:repeating-linear-gradient(180deg,var(--grid) 0 1px,transparent 1px 24px);pointer-events:none}
+.ticks.l{left:20px}.ticks.r{right:20px}
+.in{position:relative}
+@media (max-width:700px){.board{padding:30px 18px 34px;border-radius:18px;background-image:none}.ruler,.ticks{display:none}}
+
+h1{font-weight:800;font-size:clamp(34px,6.2vw,64px);line-height:1;letter-spacing:-.02em;text-wrap:balance}
+.sub{margin-top:10px;color:var(--ink-2);max-width:60ch}
+.lbl{font-weight:600;font-size:18px;letter-spacing:-.005em}
+.small{font-size:12.5px;color:var(--ink-3)}
+
+/* токены-легенда и поиск */
+.top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px 40px;margin-top:30px;align-items:start}
+@media (max-width:860px){.top{grid-template-columns:minmax(0,1fr)}}
+.tokens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 14px;margin-top:14px}
+@media (max-width:520px){.tokens{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tok{display:grid;justify-items:center;gap:6px;text-align:center}
+.blob{width:70px;height:70px;border-radius:24px;box-shadow:var(--lift);display:grid;place-items:center;font-family:var(--f-num);font-weight:600;font-size:15px}
+.blob.mint{background:var(--mint);color:var(--mint-ink)}
+.blob.stone{background:var(--stone);color:var(--ink-2)}
+.blob.clay{background:var(--clay);color:var(--ink-2)}
+.blob.ring{background:transparent;box-shadow:0 0 0 7px var(--mint),0 0 18px 6px rgba(127,216,180,.55);width:56px;height:56px;border-radius:50%;margin:7px}
+.tok b{font-weight:600;font-size:14px}
+.tok span{font-size:12px;color:var(--ink-3);line-height:1.3}
+
+.search{display:flex;align-items:center;gap:10px;margin-top:14px;padding:6px;border-radius:999px;background:var(--stone);box-shadow:var(--lift)}
+.search label{flex:1;display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--clay);box-shadow:var(--press)}
+.search input{flex:1;min-width:0;border:0;background:transparent;font-size:16px;outline:none;box-shadow:none!important}
+.search input::placeholder{color:var(--ink-3)}
+.search svg{flex:none;color:var(--ink-2)}
+.info{margin-top:14px;min-height:96px;padding:14px 18px;border-radius:18px;background:var(--clay);box-shadow:var(--lift)}
+.info .h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.info .no{font-family:var(--f-num);font-weight:600;font-size:22px}
+.info .nm{font-weight:600;font-size:16px}
+.info ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:4px}
+.info li{font-size:14px;color:var(--ink-2)}
+.info li b{font-family:var(--f-num);color:var(--ink);font-weight:600}
+.pill{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;box-shadow:var(--lift)}
+.pill.A{background:var(--mint);color:var(--mint-ink)}
+.pill.P{background:var(--sun);color:var(--sun-ink)}
+.pill.AP{background:var(--stone);color:var(--ink)}
+
+/* баланс */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 40px;margin-top:40px}
+@media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}}
+.side-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.side-h h2{font-weight:800;font-size:30px;letter-spacing:-.015em}
+.side-h span{font-family:var(--f-num);font-size:13px;color:var(--ink-3)}
+.sec{margin-top:16px;padding:16px 18px 10px;border-radius:20px;background:var(--clay);box-shadow:var(--lift)}
+.sec-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding-bottom:6px}
+.sec-h h3{font-weight:700;font-size:17px}
+.sec-h .code{font-family:var(--f-num);font-size:12.5px;color:var(--ink-3)}
+.row{padding:10px 0;border-top:1px solid var(--grid)}
+.row-h{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:baseline}
+.ln{font-family:var(--f-num);font-weight:600;font-size:12.5px;padding:3px 9px;border-radius:999px;background:var(--board);box-shadow:var(--press);color:var(--ink-2)}
+.rn{font-weight:600;font-size:14.5px;min-width:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{display:inline-flex;align-items:baseline;gap:6px;border:0;padding:5px 11px 6px;border-radius:999px;box-shadow:var(--lift);cursor:pointer;font-size:13.5px;line-height:1.2;transition:transform .12s,box-shadow .12s}
+.chip:hover{transform:translateY(-1px);box-shadow:var(--lift-hi)}
+.chip b{font-family:var(--f-num);font-weight:600;font-size:14px}
+.chip i{font-style:normal;font-size:11.5px;opacity:.75}
+.chip.plus{background:var(--mint);color:var(--mint-ink)}
+.chip.minus{background:var(--stone);color:var(--ink)}
+.chip.on{box-shadow:0 0 0 3px var(--board),0 0 0 6px var(--mint-deep),0 0 16px 4px rgba(127,216,180,.6)}
+.row.dim{opacity:.32}
+.total{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding:12px 18px;border-radius:16px;background:var(--stone);box-shadow:var(--lift);font-weight:700}
+.total span:last-child{font-family:var(--f-num);font-weight:600}
+
+/* алерты */
+.alerts{display:grid;gap:12px;margin-top:40px}
+.alert{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 12px;align-items:start;padding:14px 18px;border-radius:999px;box-shadow:var(--lift)}
+.alert svg{margin-top:1px}
+.alert b{font-weight:700}
+.alert p{font-size:14.5px}
+.alert.ok{background:var(--mint);color:var(--mint-ink)}
+.alert.warn{background:var(--sun);color:var(--sun-ink)}
+.alert.err{background:var(--rose);color:var(--rose-ink)}
+@media (max-width:700px){.alert{border-radius:20px}}
+
+/* стопка «нет в балансе» */
+.stack{margin-top:40px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:14px}
+.card{padding:14px 16px;border-radius:18px;background:var(--clay);box-shadow:var(--lift),0 7px 0 -2px var(--stone),0 13px 0 -4px var(--stone-deep)}
+.card b{font-family:var(--f-num);font-weight:600;font-size:17px}
+.card .t{font-weight:600;margin-top:2px}
+.card p{font-size:13px;color:var(--ink-2);margin-top:4px}
+.foot{margin-top:34px;font-size:12.5px;color:var(--ink-3);max-width:80ch}
+@media (prefers-reduced-motion:reduce){.chip{transition:none}}
+</style>
+
+<div class="wrap">
+ <div class="board">
+  <div class="ruler r-top" aria-hidden="true"></div><div class="ruler r-bot" aria-hidden="true"></div>
+  <div class="ticks l" aria-hidden="true"></div><div class="ticks r" aria-hidden="true"></div>
+  <div class="in">
+   <h1>Баланс по счетам</h1>
+   <p class="sub">Из каких счетов Плана счетов собирается каждая строка бухгалтерского баланса (форма по ОКУД 0710001). Нажми на счёт — он подсветится во всех строках.</p>
+
+   <div class="top">
+    <div>
+     <p class="lbl">Обозначения</p>
+     <div class="tokens">
+      <div class="tok"><div class="blob mint">+ 01</div><b>Прибавить</b><span>остаток счёта входит в строку</span></div>
+      <div class="tok"><div class="blob stone">− 02</div><b>Вычесть</b><span>регулирующий счёт уменьшает строку</span></div>
+      <div class="tok"><div class="blob clay">Дт / Кт</div><b>Сторона</b><span>какое сальдо берут у активно-пассивного счёта</span></div>
+      <div class="tok"><div class="blob ring" aria-hidden="true"></div><b>Выбран</b><span>счёт подсвечен во всех строках</span></div>
+     </div>
+    </div>
+    <div>
+     <p class="lbl">Найти счёт</p>
+     <div class="search">
+      <label for="q"><input id="q" type="search" inputmode="numeric" placeholder="Номер счёта: 60, 02, 84…" autocomplete="off"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></label>
+     </div>
+     <div class="info" id="info" aria-live="polite"></div>
+    </div>
+   </div>
+
+   <div class="cols" id="cols"></div>
+
+   <div class="alerts">
+    <div class="alert ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg><p><b>Актив = Пассив.</b> Строка 1600 (I + II) всегда равна строке 1700 (III + IV + V).</p></div>
+    <div class="alert warn"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.8 19.5h18.4z"/><path d="M12 10v4.5M12 17.2v.2"/></svg><p><b>Регулирующие счета вычитают.</b> 02, 05, 14, 42, 59, 63 отдельной строкой не показывают: они уменьшают свою статью. 81 идёт в раздел III в скобках.</p></div>
+    <div class="alert err"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.3v.2"/></svg><p><b>Развёрнутое сальдо не сворачивают.</b> У 60, 62, 68, 69, 71, 73, 75, 76 дебетовое сальдо идёт в 1230, кредитовое — в 1520. Взаимозачёт актива и пассива запрещён.</p></div>
+   </div>
+
+   <div class="stack">
+    <p class="lbl">Не попадают в баланс</p>
+    <div class="cards" id="not"></div>
+   </div>
+
+   <p class="foot">Счета и их типы — по раздаточному Плану счетов курса. Состав строк — общепринятый; часть статей (08, 97, 86) организация распределяет по учётной политике, поэтому у них указано уточнение.</p>
+  </div>
+ </div>
+</div>
+
+<script>
+(function(){"use strict";
+const D={"acc": {"01": {"n": "Основные средства", "y": "А"}, "02": {"n": "Амортизация основных средств", "y": "П"}, "03": {"n": "Доходные вложения в материальные ценности", "y": "А"}, "04": {"n": "Нематериальные активы", "y": "А"}, "05": {"n": "Амортизация нематериальных активов", "y": "П"}, "07": {"n": "Оборудование к установке", "y": "А"}, "08": {"n": "Вложения во внеоборотные активы", "y": "А"}, "09": {"n": "Отложенные налоговые активы", "y": "А"}, "10": {"n": "Материалы", "y": "А"}, "11": {"n": "Животные на выращивании и откорме", "y": "А"}, "14": {"n": "Резервы под снижение стоимости материальных ценностей", "y": "АП"}, "15": {"n": "Заготовление и приобретение материальных ценностей", "y": "АП"}, "16": {"n": "Отклонение в стоимости материальных ценностей", "y": "АП"}, "19": {"n": "Налог на добавленную стоимость по приобретенным ценностям", "y": "А"}, "20": {"n": "Основное производство", "y": "А"}, "21": {"n": "Полуфабрикаты собственного производства", "y": "А"}, "23": {"n": "Вспомогательные производства", "y": "А"}, "25": {"n": "Общепроизводственные расходы", "y": "А"}, "26": {"n": "Общехозяйственные расходы", "y": "А"}, "28": {"n": "Брак в производстве", "y": "А"}, "29": {"n": "Обслуживающие производства и хозяйства", "y": "А"}, "40": {"n": "Выпуск продукции (работ, услуг)", "y": "АП"}, "41": {"n": "Товары", "y": "А"}, "42": {"n": "Торговая наценка", "y": "П"}, "43": {"n": "Готовая продукция", "y": "А"}, "44": {"n": "Расходы на продажу", "y": "А"}, "45": {"n": "Товары отгруженные", "y": "А"}, "46": {"n": "Выполненные этапы по незавершенным работам", "y": "А"}, "50": {"n": "Касса", "y": "А"}, "51": {"n": "Расчетные счета", "y": "А"}, "52": {"n": "Валютные счета", "y": "А"}, "55": {"n": "Специальные счета в банках", "y": "А"}, "57": {"n": "Переводы в пути", "y": "А"}, "58": {"n": "Финансовые вложения", "y": "А"}, "59": {"n": "Резервы под обесценение финансовых вложений", "y": "П"}, "60": {"n": "Расчеты с поставщиками и подрядчиками", "y": "АП"}, "62": {"n": "Расчеты с покупателями и заказчиками", "y": "АП"}, "63": {"n": "Резервы по сомнительным долгам", "y": "П"}, "66": {"n": "Расчеты по краткосрочным кредитам и займам", "y": "П"}, "67": {"n": "Расчеты по долгосрочным кредитам и займам", "y": "П"}, "68": {"n": "Расчеты по налогам и сборам", "y": "АП"}, "69": {"n": "Расчеты по социальному страхованию и обеспечению", "y": "АП"}, "70": {"n": "Расчеты с персоналом по оплате труда", "y": "П"}, "71": {"n": "Расчеты с подотчетными лицами", "y": "АП"}, "73": {"n": "Расчеты с персоналом по прочим операциям", "y": "АП"}, "75": {"n": "Расчеты с учредителями", "y": "АП"}, "76": {"n": "Расчеты с разными дебиторами и кредиторами", "y": "АП"}, "77": {"n": "Отложенные налоговые обязательства", "y": "П"}, "79": {"n": "Внутрихозяйственные расчеты", "y": "АП"}, "80": {"n": "Уставный капитал", "y": "П"}, "81": {"n": "Собственные акции (доли)", "y": "А"}, "82": {"n": "Резервный капитал", "y": "П"}, "83": {"n": "Добавочный капитал", "y": "П"}, "84": {"n": "Нераспределенная прибыль (непокрытый убыток)", "y": "АП"}, "86": {"n": "Целевое финансирование", "y": "П"}, "90": {"n": "Продажи", "y": "АП"}, "91": {"n": "Прочие доходы и расходы", "y": "АП"}, "94": {"n": "Недостачи и потери от порчи ценностей", "y": "А"}, "96": {"n": "Резервы предстоящих расходов", "y": "АП"}, "97": {"n": "Расходы будущих периодов", "y": "А"}, "98": {"n": "Доходы будущих периодов", "y": "П"}, "99": {"n": "Прибыли и убытки", "y": "АП"}, "001": {"n": "Арендованные основные средства", "y": ""}, "002": {"n": "Товарно-материальные ценности, принятые на ответственное хранение", "y": ""}, "003": {"n": "Материалы, принятые в переработку", "y": ""}, "004": {"n": "Товары, принятые на комиссию", "y": ""}, "005": {"n": "Оборудование, принятое для монтажа", "y": ""}, "006": {"n": "Бланки строгой отчетности", "y": ""}, "007": {"n": "Списанная в убыток задолженность неплатежеспособных дебиторов", "y": ""}, "008": {"n": "Обеспечения обязательств и платежей полученные", "y": ""}, "009": {"n": "Обеспечения обязательств и платежей выданные", "y": ""}, "010": {"n": "Износ основных средств", "y": ""}, "011": {"n": "Основные средства, сданные в аренду", "y": ""}}, "B": [["I", "Внеоборотные активы", "1100", [["1110", "Нематериальные активы", [["+", "04", "кроме НИОКР"], ["−", "05", ""]]], ["1120", "Результаты исследований и разработок", [["+", "04", "НИОКР"], ["+", "08", "субсчёт 8"]]], ["1150", "Основные средства", [["+", "01", ""], ["−", "02", "по ОС"], ["+", "08", "вложения в ОС, по учётной политике"]]], ["1160", "Доходные вложения в материальные ценности", [["+", "03", ""], ["−", "02", "по ним"]]], ["1170", "Финансовые вложения", [["+", "58", "срок > 12 мес."], ["+", "55", "депозиты > 12 мес."], ["−", "59", ""]]], ["1180", "Отложенные налоговые активы", [["+", "09", ""]]], ["1190", "Прочие внеоборотные активы", [["+", "07", ""], ["+", "08", "остальные вложения"]]]]], ["II", "Оборотные активы", "1200", [["1210", "Запасы", [["+", "10", ""], ["+", "11", ""], ["−", "14", ""], ["+", "15", "Дт"], ["+", "16", "Дт"], ["+", "20", ""], ["+", "21", ""], ["+", "23", ""], ["+", "28", ""], ["+", "29", ""], ["+", "41", ""], ["−", "42", ""], ["+", "43", ""], ["+", "44", ""], ["+", "45", ""], ["+", "97", ""]]], ["1220", "НДС по приобретённым ценностям", [["+", "19", ""]]], ["1230", "Дебиторская задолженность", [["+", "60", "Дт"], ["+", "62", "Дт"], ["−", "63", ""], ["+", "68", "Дт"], ["+", "69", "Дт"], ["+", "71", "Дт"], ["+", "73", "Дт"], ["+", "75", "Дт"], ["+", "76", "Дт"]]], ["1240", "Финансовые вложения (кроме денежных эквивалентов)", [["+", "58", "срок ≤ 12 мес."], ["+", "55", "депозиты"], ["−", "59", ""]]], ["1250", "Денежные средства и денежные эквиваленты", [["+", "50", ""], ["+", "51", ""], ["+", "52", ""], ["+", "55", ""], ["+", "57", ""]]], ["1260", "Прочие оборотные активы", [["+", "94", ""]]]]], ["III", "Капитал и резервы", "1300", [["1310", "Уставный капитал", [["+", "80", ""]]], ["1320", "Собственные акции, выкупленные у акционеров", [["−", "81", "в скобках"]]], ["1340", "Переоценка внеоборотных активов", [["+", "83", "дооценка"]]], ["1350", "Добавочный капитал (без переоценки)", [["+", "83", "остальное"]]], ["1360", "Резервный капитал", [["+", "82", ""]]], ["1370", "Нераспределённая прибыль (непокрытый убыток)", [["+", "84", "Кт; убыток Дт — в скобках"], ["+", "99", "в течение года, до реформации"]]]]], ["IV", "Долгосрочные обязательства", "1400", [["1410", "Заёмные средства", [["+", "67", "срок > 12 мес."]]], ["1420", "Отложенные налоговые обязательства", [["+", "77", ""]]], ["1430", "Оценочные обязательства", [["+", "96", "срок > 12 мес."]]], ["1450", "Прочие обязательства", [["+", "60", "Кт, долгосрочная"], ["+", "76", "Кт, долгосрочная"]]]]], ["V", "Краткосрочные обязательства", "1500", [["1510", "Заёмные средства", [["+", "66", ""], ["+", "67", "срок ≤ 12 мес."]]], ["1520", "Кредиторская задолженность", [["+", "60", "Кт"], ["+", "62", "Кт"], ["+", "68", "Кт"], ["+", "69", "Кт"], ["+", "70", ""], ["+", "71", "Кт"], ["+", "73", "Кт"], ["+", "75", "Кт"], ["+", "76", "Кт"]]], ["1530", "Доходы будущих периодов", [["+", "98", ""], ["+", "86", "бюджетные средства"]]], ["1540", "Оценочные обязательства", [["+", "96", "срок ≤ 12 мес."]]], ["1550", "Прочие обязательства", [["+", "86", "прочее целевое"]]]]]], "NOT": [["90", "Продажи", "закрывается на 99 каждый месяц"], ["91", "Прочие доходы и расходы", "закрывается на 99 каждый месяц"], ["99", "Прибыли и убытки", "в декабре закрывается на 84 (реформация баланса)"], ["25", "Общепроизводственные расходы", "распределяется на 20, 23, 29"], ["26", "Общехозяйственные расходы", "списывается на 20 или 90"], ["40", "Выпуск продукции (работ, услуг)", "закрывается в конце месяца"], ["001–011", "Забалансовые счета", "учитываются за балансом, без двойной записи"]]};
+const T={"А":"A","П":"P","АП":"AP"};
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+let sel=null;
+document.querySelectorAll(".ruler").forEach(r=>{r.innerHTML=Array.from({length:12},(_,i)=>`<span>${i+1}</span>`).join("")});
+function sec(s){return `<section class="sec"><div class="sec-h"><h3>${s[0]}. ${esc(s[1])}</h3><span class="code">итог — стр. ${s[2]}</span></div>${s[3].map(r=>{
+  const has=sel&&r[2].some(f=>f[1]===sel);
+  return `<div class="row${sel&&!has?" dim":""}"><div class="row-h"><span class="ln">${r[0]}</span><span class="rn">${esc(r[1])}</span></div><div class="chips">${r[2].map(f=>`<button type="button" class="chip ${f[0]==="+"?"plus":"minus"}${sel===f[1]?" on":""}" data-a="${f[1]}" title="${esc((D.acc[f[1]]||{}).n||"")}"><b>${f[0]} ${f[1]}</b>${f[2]?`<i>${esc(f[2])}</i>`:""}</button>`).join("")}</div></div>`}).join("")}</section>`}
+function render(){
+ const A=D.B.slice(0,2),P=D.B.slice(2);
+ document.getElementById("cols").innerHTML=`<div><div class="side-h"><h2>Актив</h2><span>I + II</span></div>${A.map(sec).join("")}<div class="total"><span>Баланс</span><span>стр. 1600</span></div></div>
+  <div><div class="side-h"><h2>Пассив</h2><span>III + IV + V</span></div>${P.map(sec).join("")}<div class="total"><span>Баланс</span><span>стр. 1700</span></div></div>`;
+ const info=document.getElementById("info");
+ if(!sel){info.innerHTML=`<p class="small">Введи номер счёта или нажми на фишку в балансе — здесь появится его название, тип и все строки, куда он попадает.</p>`;return}
+ const a=D.acc[sel],nt=D.NOT.find(x=>x[0]===sel);
+ const where=[];D.B.forEach(s=>s[3].forEach(r=>r[2].forEach(f=>{if(f[1]===sel)where.push(`<li><b>${r[0]}</b> ${esc(r[1])}: ${f[0]==="+"?"прибавить":"вычесть"}${f[2]?" ("+esc(f[2])+")":""}</li>`)})));
+ if(!a&&!nt){info.innerHTML=`<p class="small">Счёта ${esc(sel)} нет в Плане счетов курса. Проверь номер.</p>`;return}
+ info.innerHTML=`<div class="h"><span class="no">${esc(sel)}</span><span class="nm">${esc(a?a.n:nt[1])}</span>${a&&a.y?`<span class="pill ${T[a.y]}">${a.y==="А"?"активный":a.y==="П"?"пассивный":"активно-пассивный"}</span>`:""}</div>
+  <ul>${where.join("")||(nt?`<li>В баланс не попадает: ${esc(nt[2])}.</li>`:a&&!a.y?`<li>Забалансовый счёт: в баланс не попадает.</li>`:`<li>Отдельно в строки не выводится.</li>`)}</ul>`;
+}
+document.getElementById("not").innerHTML=D.NOT.map(n=>`<div class="card"><b>${n[0]}</b><div class="t">${esc(n[1])}</div><p>${esc(n[2])}</p></div>`).join("");
+document.getElementById("cols").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;sel=sel===c.dataset.a?null:c.dataset.a;document.getElementById("q").value=sel||"";render()});
+document.getElementById("q").addEventListener("input",e=>{let v=e.target.value.trim();if(/^\d$/.test(v))v="0"+v;sel=v?(D.acc[v]||D.NOT.find(x=>x[0]===v)?v:v.length>=2?v:null):null;render()});
+render();
+})();
+</script>
+
+</body></html>

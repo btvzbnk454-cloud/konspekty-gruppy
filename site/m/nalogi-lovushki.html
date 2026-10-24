@@ -1,0 +1,799 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Ловушки РК по налогам</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: same tax-form sheet as the main trainer; here the paper answer grid of the real test is the memorable element. */
+:root {
+  --paper: #EEF2F0; --sheet: #FFFFFF; --ink: #16203A; --ink-2: #59647A; --rule: #D5DCE2; --cell: #9FAABB;
+  --pen: #2B50DE; --pen-ink: #FFFFFF; --pen-soft: #E3E9FF; --marker: #EDF46A; --marker-ink: #16203A;
+  --ok: #0F8458; --ok-soft: #DCF1E7; --on-ok: #FFFFFF; --bad: #CF3732; --bad-soft: #FBE3E1; --on-bad: #FFFFFF;
+  --trap: #7A3FC2; --trap-soft: #EFE6FB;
+  --shadow: 0 1px 0 rgba(22, 32, 58, .05), 0 22px 44px -30px rgba(22, 32, 58, .5);
+  --f-display: "Unbounded", "Arial Black", "Segoe UI", system-ui, sans-serif;
+  --f-text: "Onest", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0E1322; --sheet: #161C2F; --ink: #E7EBF5; --ink-2: #A1AAC1; --rule: #29324A; --cell: #50607F;
+    --pen: #8DA3FF; --pen-ink: #0E1322; --pen-soft: #212C55; --marker: #D6E45A; --marker-ink: #10141F;
+    --ok: #4FCB93; --ok-soft: #113628; --on-ok: #0E1322; --bad: #FF7C74; --bad-soft: #3E1F20; --on-bad: #0E1322;
+    --trap: #C9A4FF; --trap-soft: #2E2147;
+    --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 22px 44px -30px rgba(0, 0, 0, .85);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0E1322; --sheet: #161C2F; --ink: #E7EBF5; --ink-2: #A1AAC1; --rule: #29324A; --cell: #50607F;
+  --pen: #8DA3FF; --pen-ink: #0E1322; --pen-soft: #212C55; --marker: #D6E45A; --marker-ink: #10141F;
+  --ok: #4FCB93; --ok-soft: #113628; --on-ok: #0E1322; --bad: #FF7C74; --bad-soft: #3E1F20; --on-bad: #0E1322;
+  --trap: #C9A4FF; --trap-soft: #2E2147;
+  --shadow: 0 1px 0 rgba(0, 0, 0, .3), 0 22px 44px -30px rgba(0, 0, 0, .85);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--f-text); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+button { font: inherit; color: inherit; }
+button:not(:disabled) { cursor: pointer; }
+:focus-visible { outline: 2.5px solid var(--pen); outline-offset: 2px; }
+mark { background: linear-gradient(transparent 10%, var(--marker) 10%, var(--marker) 90%, transparent 90%); color: var(--marker-ink); padding: 0 .14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.app { max-width: 820px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 64px; overflow-x: clip; }
+@media (min-width: 700px) { .app { padding-inline: 32px; padding-block: 36px 80px; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5em; min-height: 44px; padding: 9px 18px; border-radius: 10px; border: 1.5px solid var(--ink); background: transparent; font-weight: 600; line-height: 1.2; }
+.btn.primary { background: var(--pen); border-color: var(--pen); color: var(--pen-ink); }
+.btn.quiet { border-color: var(--rule); }
+.btn.quiet:hover:not(:disabled) { border-color: var(--cell); }
+.btn.link { border: 0; min-height: 36px; padding: 4px 2px; color: var(--ink-2); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.btn:disabled { opacity: .42; }
+.btn .n { opacity: .8; font-weight: 500; font-variant-numeric: tabular-nums; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.cells { display: inline-flex; gap: 3px; vertical-align: middle; }
+.cell { display: inline-grid; place-items: center; width: 1.32em; height: 1.66em; border: 1px solid var(--cell); border-radius: 3px; background: var(--sheet); font-family: var(--f-display); font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1; }
+
+.form-strip { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; margin-bottom: 6px; border-bottom: 1px dashed var(--cell); font-size: 14px; color: var(--ink-2); }
+.masthead { display: grid; gap: 14px; padding-bottom: 24px; }
+.title { font-family: var(--f-display); font-weight: 700; font-size: clamp(28px, 6.2vw, 44px); line-height: 1.06; letter-spacing: -.015em; }
+.lede { color: var(--ink-2); font-size: 18px; max-width: 38em; }
+.h2 { font-family: var(--f-display); font-weight: 600; font-size: 18px; }
+.block { padding-block: 26px 4px; }
+.block-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px 14px; margin-bottom: 12px; }
+.muted { color: var(--ink-2); font-size: 14px; }
+
+.tally { display: flex; flex-wrap: wrap; gap: 16px 34px; padding-block: 16px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.tally-item { display: grid; gap: 8px; }
+.tally-item .cells { font-size: 20px; }
+.tally-label { font-size: 14px; color: var(--ink-2); }
+@media (max-width: 600px) { .tally { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; } .tally-item .cells { font-size: 17px; } .tally-label { font-size: 13px; line-height: 1.35; } }
+
+.modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.mode { display: grid; gap: 10px; align-content: start; padding: 16px; border: 1.5px solid var(--rule); border-radius: 8px; background: var(--sheet); }
+.mode.main { border-color: var(--ink); }
+.mode-title { font-weight: 700; font-size: 17px; }
+.mode p { color: var(--ink-2); font-size: 15px; }
+
+.traps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.trap-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 16px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+@media (max-width: 600px) { .trap-row { grid-template-columns: 1fr; } }
+.trap-name { display: flex; align-items: baseline; gap: 10px; font-weight: 700; }
+.trap-name .k { font-family: var(--f-display); color: var(--trap); font-size: 14px; }
+.trap-d { margin-top: 4px; color: var(--ink-2); font-size: 15px; }
+.trap-tip { margin-top: 6px; font-size: 15px; }
+.trap-tip b { color: var(--trap); }
+.trap-side { display: grid; gap: 8px; justify-items: end; align-content: start; }
+@media (max-width: 600px) { .trap-side { justify-items: start; } }
+.trap-count { font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.runbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 8px 12px; margin: -20px -16px 18px; padding: 10px 16px 0; background: var(--paper); }
+@media (min-width: 700px) { .runbar { margin: -36px -32px 22px; padding: 14px 32px 0; } }
+.back { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 4px 10px 4px 4px; border: 0; border-radius: 8px; background: transparent; font-weight: 600; }
+.back:hover { background: var(--pen-soft); }
+.run-title { font-weight: 600; font-size: 14px; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.run-count { font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
+.progress { grid-column: 1 / -1; height: 3px; background: var(--rule); margin-top: 6px; }
+.progress i { display: block; height: 100%; background: var(--pen); }
+
+.sheet { position: relative; background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; box-shadow: var(--shadow); padding: 16px 16px 0; }
+@media (min-width: 700px) { .sheet { padding: 22px 30px 0; } }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px dashed var(--rule); font-size: 14px; color: var(--ink-2); }
+.sheet-head .cells { font-size: 15px; color: var(--ink); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag { display: inline-flex; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--rule); font-size: 13px; color: var(--ink-2); font-weight: 500; }
+.tag.trap { border-color: var(--trap); color: var(--trap); background: var(--trap-soft); font-weight: 600; }
+.prompt { font-size: clamp(18px, 2.4vw, 21px); font-weight: 600; line-height: 1.4; margin-top: 12px; outline: none; }
+.hint { margin-top: 6px; font-size: 14px; color: var(--ink-2); }
+.opts { display: grid; gap: 8px; margin-top: 14px; }
+.opt { display: grid; grid-template-columns: 22px 1.2em minmax(0, 1fr); gap: 10px; align-items: start; width: 100%; padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 10px; background: transparent; text-align: left; line-height: 1.45; }
+@media (max-width: 600px) { .opt { grid-template-columns: 20px 1em minmax(0, 1fr); gap: 9px; padding: 11px 12px; } }
+.opt:hover:not(:disabled) { border-color: var(--cell); }
+.opt:disabled { cursor: default; }
+.box { width: 20px; height: 20px; margin-top: 1px; display: grid; place-items: center; border: 1.5px solid var(--cell); border-radius: 4px; color: var(--pen-ink); }
+.let { font-weight: 700; color: var(--ink-2); }
+.opt[aria-pressed="true"] { border-color: var(--pen); background: var(--pen-soft); }
+.opt[aria-pressed="true"] .box { background: var(--pen); border-color: var(--pen); }
+.opt.is-ok { border-color: var(--ok); background: var(--ok-soft); }
+.opt.is-ok .box { background: var(--ok); border-color: var(--ok); color: var(--on-ok); }
+.opt.is-bad { border-color: var(--bad); background: var(--bad-soft); }
+.opt.is-bad .box { background: var(--bad); border-color: var(--bad); color: var(--on-bad); }
+.opt.is-miss { border-color: var(--ok); border-style: dashed; }
+.opt.is-miss .box { border-color: var(--ok); color: var(--ok); }
+.opt.is-dim { opacity: .62; }
+.feedback { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--rule); display: grid; gap: 12px; }
+.verdict { font-weight: 600; }
+.verdict.ok { color: var(--ok); }
+.verdict.bad { color: var(--bad); }
+.trapnote { padding: 12px 14px; border-radius: 8px; background: var(--trap-soft); border: 1px solid var(--trap); font-size: 15px; }
+.trapnote b { color: var(--trap); }
+.actions { position: sticky; bottom: 0; z-index: 2; display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 20px; padding: 12px 0 calc(14px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--rule); background: var(--sheet); }
+.actions .spacer { flex: 1 1 auto; }
+.stamp { position: absolute; top: -16px; right: 14px; z-index: 3; padding: 7px 13px 6px; border: 3px solid currentColor; border-radius: 8px; outline: 1.5px solid currentColor; outline-offset: 2.5px; background: var(--sheet); font-family: var(--f-display); font-weight: 800; font-size: 17px; letter-spacing: .09em; line-height: 1; transform: rotate(-7deg); pointer-events: none; }
+.stamp.ok { color: var(--ok); }
+.stamp.bad { color: var(--bad); }
+.stamp.anim { animation: stamp .34s cubic-bezier(.2, .9, .3, 1.25) both; }
+@keyframes stamp { 0% { opacity: 0; transform: rotate(-7deg) scale(1.5); } 60% { opacity: 1; transform: rotate(-7deg) scale(.94); } 100% { transform: rotate(-7deg) scale(1); } }
+
+/* answer grid like the paper blank */
+.blank { border: 1.5px solid var(--ink); border-radius: 6px; background: var(--sheet); padding: 14px; }
+.blank-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.blank-title { font-family: var(--f-display); font-weight: 600; font-size: 15px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); border-top: 1px solid var(--cell); border-left: 1px solid var(--cell); }
+.gcell { display: grid; grid-template-columns: 2.1em minmax(0, 1fr); align-items: stretch; border-right: 1px solid var(--cell); border-bottom: 1px solid var(--cell); background: transparent; padding: 0; text-align: left; min-height: 32px; font-size: 14px; }
+.gcell .gn { display: grid; place-items: center; border-right: 1px solid var(--cell); color: var(--ink-2); font-variant-numeric: tabular-nums; font-size: 12px; }
+.gcell .ga { display: flex; align-items: center; padding: 0 6px; font-family: "Segoe Print", "Comic Sans MS", var(--f-text); color: var(--pen); font-weight: 700; letter-spacing: .04em; }
+.gcell.is-ok { background: var(--ok-soft); }
+.gcell.is-bad { background: var(--bad-soft); }
+.gcell.is-bad .ga { color: var(--bad); text-decoration: line-through; }
+.sticky-blank { position: sticky; bottom: 0; z-index: 4; margin-top: 18px; padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px)); background: var(--paper); display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; border-top: 1px solid var(--rule); }
+.sq { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.sq-item { background: var(--sheet); border: 1px solid var(--rule); border-radius: 6px; padding: 14px; scroll-margin-top: 70px; }
+@media (min-width: 700px) { .sq-item { padding: 18px 22px; } }
+.sq-q { display: grid; grid-template-columns: 2.2em minmax(0, 1fr); gap: 8px; font-weight: 600; line-height: 1.4; }
+.sq-q .num { font-family: var(--f-display); color: var(--pen); font-size: 15px; padding-top: 2px; }
+.sq .opts { margin-top: 10px; }
+.sq .opt { padding: 9px 12px; }
+.result-head { display: grid; gap: 12px; padding-bottom: 20px; position: relative; }
+.result-head .stamp { position: static; justify-self: start; transform: rotate(-5deg); font-size: 22px; }
+.score { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 18px; }
+.score .cells { font-size: 26px; }
+.bytrap { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.bytrap li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; font-size: 15px; padding-block: 6px; border-bottom: 1px dashed var(--rule); }
+.review { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.review > li { padding-block: 14px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; }
+.review-q { font-weight: 600; line-height: 1.4; }
+.review-a { font-size: 15px; }
+.review-a .lbl { color: var(--ink-2); }
+.review-a.bad { color: var(--bad); }
+.review details summary { cursor: pointer; color: var(--ink-2); font-size: 15px; }
+.review details p { margin-top: 6px; font-size: 15px; }
+.confirm { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; border: 1.5px solid var(--bad); border-radius: 10px; background: var(--bad-soft); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+<main id="app" class="app"><noscript><p>Для тренажёра нужен JavaScript.</p></noscript></main>
+<script>
+/* Сложные вопросы по налогам в стиле реального РК. a — индексы верных вариантов; alt — допустимый альтернативный набор. */
+window.HARD = (function () {
+  'use strict';
+  var traps = [
+    { id: 'multi', n: 'Сколько верных — не сказано', d: 'Вопрос выглядит как обычный, с одним ответом, а верных два-три. В бланке по финансовому анализу у вопросов 9 и 11 стоят по три буквы, у 19, 28 и 29 — по две.', tip: 'Проверяй каждый вариант отдельно: «это верно?» — да/нет. Не останавливайся на первом подходящем.' },
+    { id: 'neg', n: 'Отрицание «не относится»', d: 'Вопрос 1 того теста: какая характеристика НЕ относится к финансовому анализу. Глаз ищет верное и выбирает его.', tip: 'Обведи «не» и ищи лишнее: три варианта из одной группы, один чужой.' },
+    { id: 'word', n: 'Отличие в одном слове', d: 'Вопросы 2, 3 и 46 про вертикальный и горизонтальный анализ: варианты почти одинаковые, разница в одном слове.', tip: 'Сверяй с определением слово в слово: «единица измерения», «индивидуально», «в фиксированной сумме или процентах».' },
+    { id: 'case', n: 'Ситуация вместо определения', d: 'Вопросы 4, 32 и 44: «если темпы роста выручки меньше темпов роста активов, это свидетельствует о…». Определение надо применить, а не вспомнить.', tip: 'Переведи ситуацию в термин: кто, что сделал, какой срок, — и только потом смотри варианты.' },
+    { id: 'abs', n: 'Утверждение с подвохом', d: 'Вопрос 17: «Любое изменение выручки порождает ещё более сильное изменение прибыли». Одно слово «любое» делает утверждение неверным. Вопрос 38 подменяет понятие близким.', tip: 'Ищи «любой», «всегда», «только», «если иное не предусмотрено» и вторую половину фразы: часто верна только первая.' },
+    { id: 'mirror', n: 'Зеркальные пары', d: 'Вопросы 7 и 10: ликвидность и платёжеспособность с одинаковыми вариантами; 35 и 43 — коэффициенты с похожими названиями.', tip: 'Учи пары вместе и формулируй, чем они отличаются: камеральная/выездная, отсрочка/рассрочка, реальные/личные.' },
+    { id: 'all', n: 'Длинные списки и «все ответы верны»', d: 'Вопросы 20, 27 и 34 с вариантом «все ответы верны», вопросы 29 и 30 с шестью вариантами до «Е».', tip: 'Если все пункты списка верны и есть «все ответы верны», отмечай его. В длинных списках чаще ошибаются на последних вариантах.' }
+  ];
+
+  var Q = [
+    { trap: 'multi', topic: 'Система налогов',
+      q: 'К федеральным налогам относятся:',
+      o: ['налог на добавленную стоимость', 'налог на имущество организаций', 'налог на добычу полезных ископаемых', 'водный налог', 'транспортный налог'],
+      a: [0, 2, 3],
+      e: 'Федеральные: **НДС, НДПИ, водный налог**. Налог на имущество организаций и транспортный — региональные.' },
+    { trap: 'multi', topic: 'Система налогов',
+      q: 'К местным налогам и сборам относятся:',
+      o: ['земельный налог', 'налог на имущество физических лиц', 'торговый сбор', 'транспортный налог', 'налог на имущество организаций'],
+      a: [0, 1, 2],
+      e: 'Местные по конспекту: **земельный, налог на имущество физлиц, торговый сбор** (с 2025 г. ещё туристический налог). Транспортный и налог на имущество организаций — региональные.' },
+    { trap: 'neg', topic: 'Система налогов',
+      q: 'Не является региональным налогом (по конспекту):',
+      o: ['налог на имущество организаций', 'транспортный налог', 'налог на игорный бизнес', 'земельный налог'],
+      a: [3],
+      e: '**Земельный налог — местный.** Остальные три в конспекте региональные. С 2026 г. налог на игорный бизнес стал федеральным, но конспект его ещё относит к региональным.' },
+    { trap: 'neg', topic: 'Спецрежимы',
+      q: 'К специальным налоговым режимам не относится:',
+      o: ['ЕСХН', 'патентная система налогообложения', 'налог на профессиональный доход', 'инвестиционный налоговый кредит', 'автоматизированная УСН'],
+      a: [3],
+      e: '**ИНК — форма изменения срока уплаты**, а не спецрежим. Остальные четыре есть в списке спецрежимов конспекта.' },
+    { trap: 'multi', topic: 'Элементы налогообложения',
+      q: 'Обязательными элементами налогообложения являются:',
+      o: ['объект налогообложения', 'налоговая льгота', 'налоговый период', 'порядок и сроки уплаты налога', 'единица обложения', 'налоговая ставка'],
+      a: [0, 2, 3, 5],
+      e: 'Обязательные (ст. 17 НК): объект, база, ставка, период, порядок исчисления, порядок и сроки уплаты. **Льгота и единица обложения — необязательные.**' },
+    { trap: 'word', topic: 'Элементы налогообложения',
+      q: 'Налоговая ставка — это величина налоговых начислений на единицу:',
+      o: ['налоговой базы', 'измерения налоговой базы', 'объекта налогообложения', 'налогового периода'],
+      a: [1],
+      e: 'По ст. 53 НК — на **единицу измерения налоговой базы**. Вариант «единицу налоговой базы» без слова «измерения» — та же ловушка, что в тесте 1.' },
+    { trap: 'word', topic: 'Элементы налогообложения',
+      q: 'Пропорциональным называют налог, ставка которого:',
+      o: ['не зависит от величины налоговой базы', 'повышается по мере роста налоговой базы', 'понижается по мере роста налоговой базы', 'устанавливается только в процентах'],
+      a: [0],
+      e: 'Пропорциональный налог устанавливается **в фиксированной сумме или в фиксированных процентах** и не зависит от базы. Слово «только» делает последний вариант неверным.' },
+    { trap: 'abs', topic: 'Элементы налогообложения',
+      q: 'Верно ли утверждение? Регрессивный налог — налог, ставка которого понижается по мере роста налоговой базы; в современной России пример такого налога — НДФЛ.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'Первая половина верна, вторая нет. Регрессивную шкалу в РФ имел **единый социальный налог до 2010 г.** НДФЛ с 2021 г. прогрессивный.' },
+    { trap: 'multi', topic: 'Налог и сбор',
+      q: 'Признаками налога по схеме из конспекта являются:',
+      o: ['императивность', 'возмездность', 'индивидуальная безвозмездность', 'периодичность внесения платежей', 'целевой характер каждого платежа'],
+      a: [0, 2, 3],
+      e: 'Четыре признака: **императивность, индивидуальная безвозмездность, направление средств на финансирование расходов государства, периодичность.** «Целевой характер каждого платежа» — подмена: налог идёт на расходы государства в целом.' },
+    { trap: 'abs', topic: 'Налог и сбор',
+      q: 'Верно ли утверждение? Сбор, как и налог, является индивидуально безвозмездным платежом.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'Сбор — **взнос**, за которым следует юридически значимое действие государства (регистрация, лицензия). Безвозмездность — признак именно налога.' },
+    { trap: 'word', topic: 'Налог и сбор',
+      q: 'Налоговый агент — это лицо, которое:',
+      o: ['исчисляет, удерживает у налогоплательщика и перечисляет налог в бюджет', 'уплачивает налог за свой счёт вместо налогоплательщика', 'представляет интересы налогоплательщика в налоговом органе', 'проводит налоговые проверки'],
+      a: [0],
+      e: 'Агент **удерживает** налог из выплаты налогоплательщику и перечисляет его. Платить налог за свой счёт он не обязан, представителем налогоплательщика не является.' },
+    { trap: 'case', topic: 'Элементы налогообложения',
+      q: 'Работодатель начислил сотруднику зарплату, удержал из неё НДФЛ и перечислил налог в бюджет. Какой способ уплаты налога и кем выступает работодатель?',
+      o: ['у источника выплаты дохода, налоговый агент', 'по декларации, налогоплательщик', 'у источника выплаты дохода, налогоплательщик', 'по налоговому уведомлению, налоговый агент'],
+      a: [0],
+      e: 'Налог удержан **у источника** дохода, и работодатель — **налоговый агент**. Налогоплательщик здесь сотрудник.' },
+    { trap: 'abs', topic: 'Принципы',
+      q: 'Верно ли утверждение? Неустранимые сомнения, противоречия и неясности актов законодательства о налогах и сборах толкуются в пользу налогоплательщика, если иное не предусмотрено НК РФ.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'В п. 7 ст. 3 НК никаких оговорок нет: сомнения толкуются в пользу налогоплательщика **всегда**. Хвост «если иное не предусмотрено» делает фразу неверной.' },
+    { trap: 'case', topic: 'Принципы',
+      q: 'Субъект РФ своим законом ввёл новый налог, который платят только предприниматели, приехавшие из других регионов. Какие принципы налоговой системы нарушены?',
+      o: ['равенства', 'единства экономического пространства', 'налогового федерализма', 'признания правоты налогоплательщика'],
+      a: [0, 1, 2],
+      e: 'Нарушены три принципа: **равенство** (дискриминация по происхождению), **единство экономического пространства** (препятствие деятельности и перемещению) и **налоговый федерализм** (нельзя ввести налог, которого нет в НК РФ). Принцип правоты налогоплательщика касается толкования сомнений.' },
+    { trap: 'word', topic: 'Принципы',
+      q: 'Требование, чтобы акты о налогах были сформулированы так, чтобы каждый точно знал, какие налоги, когда и в каком порядке он должен платить, выражает принцип:',
+      o: ['всеобщности', 'определённости', 'экономической обоснованности', 'налогового федерализма'],
+      a: [1],
+      e: 'Это **принцип определённости**. Всеобщность — каждый платит законно установленные налоги.' },
+    { trap: 'mirror', topic: 'Принципы',
+      q: 'Правила А. Вагнера «достаточность обложения» и «эластичность обложения» относятся к группе:',
+      o: ['финансовых принципов', 'народнохозяйственных принципов', 'этических принципов', 'принципов налогового управления'],
+      a: [0],
+      e: '**Финансовые** принципы — про то, чтобы казне хватало денег и сбор можно было гибко менять.' },
+    { trap: 'mirror', topic: 'Принципы',
+      q: 'Правила А. Вагнера «удобство уплаты налогов» и «максимальное уменьшение издержек взимания» относятся к группе:',
+      o: ['финансовых принципов', 'народнохозяйственных принципов', 'этических принципов', 'принципов налогового управления'],
+      a: [3],
+      e: '**Принципы налогового управления**: определённость, удобство, дешевизна взимания. Этические — всеобщность и равномерность.' },
+    { trap: 'multi', topic: 'Система налогов',
+      q: 'В понятие налоговой системы, в отличие от понятия системы налогов, входят:',
+      o: ['методы и принципы построения налогов', 'способы исчисления и взимания налогов', 'налоговый контроль', 'совокупность налогов и сборов'],
+      a: [0, 1, 2],
+      e: 'Совокупность налогов и сборов есть в **обоих** понятиях. Налоговую систему от системы налогов отличают **методы и принципы, способы исчисления и взимания, налоговый контроль**.' },
+    { trap: 'multi', topic: 'Система налогов',
+      q: 'По таблице из конспекта и с юридических, и с физических лиц взимаются:',
+      o: ['государственная пошлина', 'транспортный налог', 'НДФЛ', 'упрощённая система налогообложения', 'налог на прибыль организаций', 'земельный налог'],
+      a: [0, 1, 3, 5],
+      e: 'В столбце «и с юридических, и с физических лиц»: **госпошлина, транспортный, земельный налог, торговый сбор, ЕСХН, УСН**. НДФЛ — только физлица, налог на прибыль — только организации.' },
+    { trap: 'multi', topic: 'Функции налогов',
+      q: 'Функциями налогообложения по конспекту являются:',
+      o: ['фискальная', 'распределительная', 'регулирующая', 'контрольная', 'поощрительная', 'эмиссионная'],
+      a: [0, 1, 2, 3, 4],
+      e: 'Пять функций: **фискальная, распределительная (социальная), регулирующая, контрольная, поощрительная.** Эмиссия — функция центрального банка.' },
+    { trap: 'multi', topic: 'Функции налогов',
+      q: 'Воспроизводственную (экологическую) подфункцию выполняют:',
+      o: ['налог на добычу полезных ископаемых', 'водный налог', 'НДС', 'сборы за пользование объектами животного мира', 'акцизы'],
+      a: [0, 1, 3],
+      e: 'Воспроизводственная подфункция — средства за пользование ресурсами на их восстановление: **НДПИ, водный налог, сборы за пользование объектами животного мира и водных биоресурсов**.' },
+    { trap: 'case', topic: 'Функции налогов',
+      q: 'Государство ввело повышенные ставки на ввозимые товары, чтобы защитить отечественных производителей. Какая подфункция регулирующей функции здесь работает?',
+      o: ['стимулирующая', 'дестимулирующая', 'воспроизводственная', 'поощрительная'],
+      a: [1],
+      e: 'Повышенное бремя, которое мешает процессу (здесь ввозу), — **дестимулирующая** подфункция. По конспекту это и есть протекционизм через повышенные ставки.' },
+    { trap: 'mirror', topic: 'Функции налогов',
+      q: 'Налоговые льготы Героям России и участникам ВОВ — проявление функции:',
+      o: ['распределительной', 'поощрительной', 'стимулирующей', 'контрольной'],
+      a: [1],
+      e: '**Поощрительная** функция — признание особых заслуг. Распределительная перераспределяет доходы между слоями населения, а не награждает.' },
+    { trap: 'multi', topic: 'Классификация',
+      q: 'К косвенным налогам относятся:',
+      o: ['НДС', 'акцизы', 'НДФЛ', 'таможенные пошлины', 'налог на прибыль организаций'],
+      a: [0, 1, 3],
+      e: 'Косвенные включаются в цену: **НДС, акцизы, таможенные пошлины**. НДФЛ и налог на прибыль — прямые.' },
+    { trap: 'neg', topic: 'Классификация',
+      q: 'Не является критерием деления налогов на прямые и косвенные:',
+      o: ['место формирования источника уплаты налога', 'возможность переложения налога на потребителя', 'уровень бюджета, в который зачисляется налог', 'то, кто в итоге несёт тяжесть налога'],
+      a: [2],
+      e: 'Критерии деления на прямые и косвенные: **место формирования источника** и **возможность переложения** (кто в итоге несёт тяжесть). Уровень бюджета — основание другой классификации: закреплённые и регулирующие.' },
+    { trap: 'mirror', topic: 'Классификация',
+      q: 'Реальные прямые налоги уплачиваются:',
+      o: ['с фактически полученного дохода', 'с предполагаемого среднего дохода от объекта', 'в составе цены товара', 'только организациями'],
+      a: [1],
+      e: '**Реальные** — с предполагаемого среднего дохода от объекта. С фактически полученного дохода платят **личные** налоги.' },
+    { trap: 'mirror', topic: 'Классификация',
+      q: 'Личные прямые налоги уплачиваются:',
+      o: ['с фактически полученного дохода', 'с предполагаемого среднего дохода от объекта', 'в составе цены товара', 'только физическими лицами'],
+      a: [0],
+      e: '**Личные** налоги отражают фактическую платёжеспособность: их платят с действительно полученного дохода. «Только физлицами» — подмена: личный налог платит и организация (налог на прибыль).' },
+    { trap: 'case', topic: 'Классификация',
+      q: 'Налог одновременно зачисляется в федеральный и региональный бюджеты в пропорции, установленной бюджетным законодательством. По уровню бюджета это налог:',
+      o: ['закреплённый', 'регулирующий', 'целевой', 'факультативный'],
+      a: [1],
+      e: '**Регулирующие** (разноуровневые) налоги поступают в бюджеты разных уровней одновременно. Закреплённые целиком идут в один бюджет.' },
+    { trap: 'word', topic: 'Классификация',
+      q: 'Контингентированными и репартиционными называют налоги:',
+      o: ['раскладочные', 'количественные', 'долевые', 'квотативные'],
+      a: [0],
+      e: 'Контингентированные и репартиционные — синонимы **раскладочных**. Долевые и квотативные — синонимы количественных.' },
+    { trap: 'all', topic: 'Налоговая политика',
+      q: 'Целями налоговой политики по конспекту являются:',
+      o: ['фискальная', 'монетарная', 'социальная', 'экологическая', 'международная', 'контрольная'],
+      a: [0, 2, 3, 4, 5],
+      e: 'Цели: фискальная, экономическая, социальная, стимулирующая, экологическая, **контрольная, международная**. Монетарной цели нет: это денежно-кредитная политика. Длинный список проверяют до последней строки.' },
+    { trap: 'mirror', topic: 'Налоговая политика',
+      q: 'Решение задач конкретного периода путём своевременного изменения налоговой системы — это налоговая:',
+      o: ['стратегия', 'тактика', 'концепция', 'нагрузка'],
+      a: [1],
+      e: '**Тактика** — задачи конкретного периода. Стратегия — крупномасштабные задачи, концепция развития налоговой системы.' },
+    { trap: 'case', topic: 'Налоговая политика',
+      q: 'Государство резко повышает налоговые ставки, но поступления в бюджет не растут. Как называется эта ситуация и при каком типе налоговой политики она возникает?',
+      o: ['налоговая ловушка, политика максимальных налогов', 'налоговая ловушка, политика разумных налогов', 'налоговые каникулы, политика максимальных налогов', 'налоговая амнистия, высокий уровень обложения при социальной защите'],
+      a: [0],
+      e: 'По конспекту **налоговая ловушка** грозит **политике максимальных налогов** («взять всё, что можно»).' },
+    { trap: 'case', topic: 'Кривая Лаффера',
+      q: 'Текущая ставка налога выше Tmax. Как изменятся доходы бюджета, если ставку немного снизить?',
+      o: ['увеличатся', 'уменьшатся', 'не изменятся', 'станут равны нулю'],
+      a: [0],
+      e: 'Выше Tmax — **запретная зона**: снижение ставки оживляет экономику, и доходы **растут**.' },
+    { trap: 'mirror', topic: 'Кривая Лаффера',
+      q: 'Текущая ставка налога ниже Tmax. Как изменятся доходы бюджета, если ставку немного снизить?',
+      o: ['увеличатся', 'уменьшатся', 'не изменятся', 'станут максимальными'],
+      a: [1],
+      e: 'Ниже Tmax — **нормальная зона**: доходы растут вместе со ставкой, поэтому снижение ставки их **уменьшает**. Зеркальная пара к предыдущему вопросу.' },
+    { trap: 'mirror', topic: 'Теории налогов',
+      q: 'Налог — плата за услуги государства, в том числе за право жить в цивилизованном обществе. Это положение теории:',
+      o: ['публичного договора', 'атомистической', 'удобств', 'страхования'],
+      a: [1],
+      e: '**Атомистическая** теория (Монтескье, Вобан): плата за реальные и абстрактные услуги. Теория публичного договора — плата **по договору** за охрану и защиту.' },
+    { trap: 'multi', topic: 'Теории налогов',
+      q: 'Авторами теории налогового нейтралитета являются:',
+      o: ['А. Смит', 'Д. Рикардо', 'Дж. Кейнс', 'Б. Г. Мильгаузен'],
+      a: [0, 1],
+      e: 'Налоговый нейтралитет — **Смит и Рикардо**. Кейнс — противоположная позиция (налог — рычаг регулирования), Мильгаузен — теория жертвы.' },
+    { trap: 'abs', topic: 'Налоговое бремя',
+      q: 'Верно ли утверждение? ФНС использует налоговую нагрузку при выборе плательщиков для выездной проверки, поскольку понятие «налоговое бремя» закреплено в НК РФ.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'Первая часть верна, вторая нет: **понятия «налоговое бремя» в законодательстве нет**. Фраза из двух частей верна, только если верны обе.' },
+    { trap: 'word', topic: 'Налоговое бремя',
+      q: 'Уровень налогового бремени рассчитывается как отношение:',
+      o: ['суммы подлежащих уплате налогов к величине полученных доходов', 'суммы подлежащих уплате налогов к прибыли', 'величины полученных доходов к сумме налогов', 'суммы подлежащих уплате налогов к расходам'],
+      a: [0],
+      e: 'Налоги к уплате **делятся на полученные доходы** и умножаются на 100 %.' },
+    { trap: 'all', topic: 'Налоговый механизм',
+      q: 'Элементами налогового механизма являются:',
+      o: ['налоговая информация', 'налоговое планирование и прогнозирование', 'налоговое регулирование', 'налоговое право', 'налоговый контроль', 'все ответы верны'],
+      a: [5], alt: [0, 1, 2, 3, 4, 5],
+      e: 'Все пять пунктов — элементы налогового механизма, поэтому верен вариант **«все ответы верны»**. Засчитывается и отметка всех шести.' },
+    { trap: 'multi', topic: 'Налоговый механизм',
+      q: 'Стратегическое налоговое управление осуществляют:',
+      o: ['Президент РФ', 'Правительство РФ', 'ФНС России', 'аппарат Президента РФ', 'финансовые органы'],
+      a: [0, 1, 3],
+      e: 'Стратегическое управление — **Президент, аппарат Президента, Правительство**. ФНС и финансовые органы ведут текущее управление.' },
+    { trap: 'case', topic: 'Изменение сроков уплаты',
+      q: 'Организации разрешили в течение двух лет уменьшать платежи по налогу на прибыль, а затем поэтапно вернуть эту сумму с процентами. Это:',
+      o: ['отсрочка', 'рассрочка', 'инвестиционный налоговый кредит', 'налоговые каникулы'],
+      a: [2],
+      e: 'Уменьшение платежей с последующим возвратом суммы **и процентов** — **ИНК**. Отсрочка и рассрочка переносят срок уплаты уже начисленного налога и даются не более чем на год.' },
+    { trap: 'multi', topic: 'Изменение сроков уплаты',
+      q: 'Инвестиционный налоговый кредит может быть предоставлен по:',
+      o: ['налогу на прибыль организаций', 'НДС', 'региональным налогам', 'местным налогам', 'НДФЛ'],
+      a: [0, 2, 3],
+      e: 'ИНК — по **налогу на прибыль, региональным и местным налогам**. По НДС и НДФЛ его не дают.' },
+    { trap: 'multi', topic: 'Изменение сроков уплаты',
+      q: 'Проценты на сумму отсрочки (рассрочки) не начисляются, если основанием является:',
+      o: ['ущерб от стихийного бедствия', 'задержка финансирования из бюджета', 'угроза банкротства', 'сезонный характер производства', 'имущественное положение физического лица'],
+      a: [0, 1],
+      e: 'Без процентов — только по **первым двум основаниям**: стихийное бедствие (непреодолимая сила) и задержка бюджетного финансирования или оплаты госзаказа.' },
+    { trap: 'case', topic: 'Изменение сроков уплаты',
+      q: 'В отношении организации возбуждено уголовное дело по ст. 199 УК РФ. Она просит отсрочку из-за сезонного характера производства. Налоговый орган:',
+      o: ['обязан дать отсрочку под 1/2 ставки рефинансирования', 'обязан дать отсрочку без процентов', 'не может изменить срок уплаты налога', 'может вместо отсрочки дать ИНК'],
+      a: [2],
+      e: 'Возбуждённое уголовное дело по налоговому преступлению — **запрет на любое изменение срока уплаты**, в том числе ИНК. Сезонность — основание для отсрочки, но запрет сильнее.' },
+    { trap: 'word', topic: 'Изменение сроков уплаты',
+      q: 'Инвестиционный налоговый кредит по общему правилу предоставляется на срок:',
+      o: ['не более 1 года', 'от 1 года до 5 лет', 'до 3 лет', 'от 1 года до 10 лет для любой организации'],
+      a: [1],
+      e: 'Общее правило — **от 1 года до 5 лет**. До 10 лет — только резидентам зоны территориального развития, а не любой организации. Не более 1 года — это отсрочка и рассрочка.' },
+    { trap: 'mirror', topic: 'Изменение сроков уплаты',
+      q: 'Изменение срока уплаты налога с поэтапной уплатой суммы задолженности — это:',
+      o: ['отсрочка', 'рассрочка', 'налоговые каникулы', 'налоговая амнистия'],
+      a: [1],
+      e: 'Поэтапная уплата — **рассрочка**, единовременная — отсрочка.' },
+    { trap: 'all', topic: 'Налоговый контроль',
+      q: 'К формам налогового контроля относятся:',
+      o: ['налоговые проверки', 'получение объяснений налогоплательщиков', 'осмотр помещений и территорий', 'налоговый мониторинг', 'взыскание пени', 'проверки данных учёта и отчётности'],
+      a: [0, 1, 2, 3, 5],
+      e: 'Формы контроля: **проверки, объяснения, проверки данных учёта и отчётности, осмотр помещений, налоговый мониторинг**. Взыскание пени — последствие нарушения, а не форма контроля. Лишний вариант спрятан в середине списка.' },
+    { trap: 'mirror', topic: 'Налоговый контроль',
+      q: 'Проверка проводится в здании налогового органа по декларации, которую представил налогоплательщик, без специального решения руководителя. Это проверка:',
+      o: ['камеральная', 'выездная', 'целевая выездная', 'встречная'],
+      a: [0],
+      e: 'По месту нахождения налогового органа, по декларации и **без решения руководителя** — **камеральная**.' },
+    { trap: 'mirror', topic: 'Налоговый контроль',
+      q: 'Проверка проводится в здании налогового органа по решению его руководителя, потому что у налогоплательщика нет помещения для проверяющих. Это проверка:',
+      o: ['камеральная', 'выездная', 'встречная', 'это недопустимо'],
+      a: [1],
+      e: 'Это **выездная** проверка: её признак — решение руководителя. Если у плательщика нет помещения, по конспекту выездную проверку можно провести по месту нахождения налогового органа.' },
+    { trap: 'word', topic: 'Налоговый контроль',
+      q: 'Максимальный срок выездной налоговой проверки с учётом продления в исключительных случаях составляет:',
+      o: ['два месяца', 'три месяца', 'четыре месяца', 'шесть месяцев'],
+      a: [3],
+      e: 'Базовый срок — 2 месяца, продление до 4, **в исключительных случаях до 6**. В тесте 3 спрашивали про общий срок (два месяца) — читай, о каком сроке вопрос.' },
+    { trap: 'word', topic: 'Налоговый контроль',
+      q: 'Акт выездной налоговой проверки составляется не позднее двух месяцев со дня составления:',
+      o: ['справки о проведённой проверке', 'решения о проведении проверки', 'требования об уплате налога', 'возражений налогоплательщика'],
+      a: [0],
+      e: 'Отсчёт — от **справки** о проведённой проверке, которую составляют в последний день проверки.' },
+    { trap: 'case', topic: 'Налоговый контроль',
+      q: 'Налоговый орган изучает все документы организации без исключения, но только по вопросам исчисления и уплаты НДС. По методу и по объёму это проверка:',
+      o: ['сплошная и комплексная', 'сплошная и выборочная', 'фрагментарная и выборочная', 'фрагментарная и целевая'],
+      a: [1],
+      e: 'Все документы — **сплошная** (по методу). Один налог — **выборочная** (по объёму). Комплексная охватывает все налоги.' },
+    { trap: 'case', topic: 'Цена для налогообложения',
+      q: 'Организация в январе продавала товар по 1 000 ₽, а в феврале продала идентичный товар по 700 ₽ без каких-либо особых причин. Вправе ли налоговый орган проверить правильность цены?',
+      o: ['нет: цена сторон всегда считается рыночной', 'да: отклонение больше 20 %', 'да, но только если это бартерная сделка', 'нет: отклонение меньше 30 %'],
+      a: [1],
+      e: 'Цена упала на 30 %, это **больше 20 %** за короткий период, значит проверка возможна. Цена сторон считается рыночной, **пока не доказано обратное**, а не всегда.' },
+    { trap: 'abs', topic: 'Цена для налогообложения',
+      q: 'Верно ли утверждение? Магазин зимой продал летние шины на 35 % дешевле обычной цены, поэтому налоговый орган обязательно доначислит налог исходя из рыночной цены.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'Отклонение больше 20 %, но его причина — **сезонные колебания спроса**, а это допустимое основание по ст. 40. Слово «обязательно» делает утверждение неверным.' },
+    { trap: 'mirror', topic: 'Пени',
+      q: 'Организация просрочила уплату налога на 45 дней. По конспекту ставка пени за 40-й день просрочки составляет:',
+      o: ['1/300 ставки рефинансирования', '1/150 ставки рефинансирования', '1/2 ставки рефинансирования', '1/100 ставки рефинансирования'],
+      a: [1],
+      e: 'Для **организаций** с 31-го дня — **1/150**. Временное правило 2025–2026 гг. оставляет 1/150 с 31-го по 90-й день, так что ответ тот же.' },
+    { trap: 'mirror', topic: 'Пени',
+      q: 'Физическое лицо просрочило уплату налога на 60 дней. Ставка пени за 50-й день просрочки:',
+      o: ['1/300 ставки рефинансирования', '1/150 ставки рефинансирования', '1/2 ставки рефинансирования', 'пеня не начисляется'],
+      a: [0],
+      e: 'Повышенная ставка 1/150 — **только для организаций**. Физлица (и ИП) всегда платят **1/300**.' },
+    { trap: 'multi', topic: 'Ответственность',
+      q: 'Обстоятельствами, исключающими привлечение лица к ответственности за налоговое правонарушение, являются:',
+      o: ['отсутствие события налогового правонарушения', 'отсутствие вины лица', 'совершение деяния лицом, не достигшим 16 лет', 'истечение срока давности', 'тяжёлое материальное положение', 'совершение правонарушения впервые'],
+      a: [0, 1, 2, 3],
+      e: 'Ст. 109 НК: **нет события, нет вины, младше 16 лет, истекла давность**. Тяжёлое материальное положение только **смягчает** ответственность (ст. 112).' },
+    { trap: 'abs', topic: 'Ответственность',
+      q: 'Верно ли утверждение? Срок давности привлечения к налоговой ответственности и срок, в течение которого лицо считается подвергнутым налоговой санкции, одинаковы и составляют 3 года.',
+      o: ['да', 'нет'],
+      a: [1],
+      e: 'Срок давности — **3 года**, а подвергнутым санкции лицо считается **12 месяцев**. Сроки разные.' },
+    { trap: 'case', topic: 'Ответственность',
+      q: 'Организацию оштрафовали по КоАП за непредставление декларации. Освобождает ли это её от штрафа по главе 16 НК РФ за то же нарушение?',
+      o: ['да, за одно нарушение нельзя наказать дважды', 'нет, административный штраф не освобождает от налоговой ответственности', 'да, если штраф уже уплачен', 'нет, но штраф по НК уменьшается вдвое'],
+      a: [1],
+      e: 'По конспекту **административный штраф не освобождает** от налоговой ответственности и штрафа по гл. 16 НК за то же нарушение.' },
+    { trap: 'case', topic: 'Ответственность',
+      q: 'Работодатель удержал НДФЛ из зарплаты сотрудников, но в крупном размере не перечислил его в бюджет. Какая статья УК РФ?',
+      o: ['ст. 198', 'ст. 199', 'ст. 199.1', 'ст. 199.2'],
+      a: [2],
+      e: 'Работодатель здесь налоговый агент, значит это **ст. 199.1** — неисполнение обязанностей налогового агента. Ст. 199 — уклонение организации от уплаты **своих** налогов.' },
+    { trap: 'case', topic: 'Штрафы',
+      q: 'ИП вёл деятельность без постановки на учёт и получил за это время доход 200 000 ₽. Какой штраф по п. 2 ст. 116 НК?',
+      o: ['20 000 ₽', '40 000 ₽', '10 000 ₽', '60 000 ₽'],
+      a: [1],
+      e: '10 % от 200 000 ₽ — 20 000 ₽, но штраф **не менее 40 000 ₽**. Ловушка в слове «не менее».' },
+    { trap: 'mirror', topic: 'Штрафы',
+      q: 'Налогоплательщик подал заявление о постановке на учёт с опозданием, но деятельность без учёта не вёл. Размер штрафа:',
+      o: ['10 000 ₽', '10 % от доходов, но не менее 40 000 ₽', '200 ₽', '5 000 ₽'],
+      a: [0],
+      e: 'Нарушение **срока подачи заявления** — п. 1 ст. 116, **10 000 ₽**. 10 % и 40 000 ₽ — это за деятельность без учёта (п. 2), 200 ₽ — за неверный способ подачи декларации.' },
+    { trap: 'multi', topic: 'Налоговые системы стран',
+      q: 'По межстрановому анализу в конспекте налоговая система России является:',
+      o: ['фискально-умеренной', 'с преобладанием прямых налогов', 'децентрализованной', 'нейтральной по влиянию на неравенство', 'фискально-жёсткой'],
+      a: [0, 1, 3],
+      e: 'Россия: **фискально-умеренная, с преобладанием прямых налогов, централизованная, нейтральная**. Децентрализованные — Канада, Дания, США.' },
+    { trap: 'neg', topic: 'Налоговые системы стран',
+      q: 'Не относится к странам с умеренной долей косвенных налогов (не более 50 %):',
+      o: ['Италия', 'Франция', 'Германия', 'Бразилия'],
+      a: [3],
+      e: '**Бразилия** — страна с преобладанием косвенных налогов (вместе с Индией и Пакистаном). Италия, Франция, Германия — умеренная доля.' },
+    { trap: 'word', topic: 'Переплата',
+      q: 'Заявление о возврате излишне уплаченного налога может быть подано в течение трёх лет со дня:',
+      o: ['уплаты указанной суммы', 'обнаружения переплаты налоговым органом', 'подачи налоговой декларации', 'окончания налогового периода'],
+      a: [0],
+      e: 'По классической редакции ст. 78 НК (вопрос 4 теста 3) — три года **со дня уплаты**.' }
+  ];
+  return { traps: traps, questions: Q };
+})();
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var H = window.HARD, QS = H.questions, TR = {};
+  H.traps.forEach(function (t, i) { t.no = i + 1; TR[t.id] = t; });
+  var LET = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж'];
+  var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var app = document.getElementById('app');
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function md(s) { return esc(s).replace(/\*\*(.+?)\*\*/g, '<mark>$1</mark>'); }
+  function pad(n, w) { var s = String(n); while (s.length < w) s = '0' + s; return s; }
+  function cells(str, label) { return '<span class="sr">' + esc(label) + '</span><span class="cells" aria-hidden="true">' + String(str).split('').map(function (c) { return '<span class="cell">' + esc(c) + '</span>'; }).join('') + '</span>'; }
+  function now() { return Date.now(); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function plural(n, a, b, c) { var n10 = n % 10, n100 = n % 100; return n10 === 1 && n100 !== 11 ? a : n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14) ? b : c; }
+  function same(x, y) { if (!x || !y || x.length !== y.length) return false; for (var i = 0; i < y.length; i++) if (x.indexOf(y[i]) < 0) return false; return true; }
+  function isRight(q, sel) { return same(sel, q.a) || (q.alt ? same(sel, q.alt) : false); }
+  function letters(arr) { return (arr || []).slice().sort().map(function (i) { return LET[i]; }).join(''); }
+  var I = {
+    check: '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.2 6.4 4.9 9 9.8 3.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    cross: '<svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.2 3.2l5.6 5.6M8.8 3.2 3.2 8.8" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>',
+    back: '<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M13.5 5.5 8 11l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  };
+  function barcode() {
+    var h = '', x = 0, s = 7;
+    while (x < 90) { s = (s * 9301 + 49297) % 233280; var w = 1 + (s % 3); if (s % 10 > 2) h += '<rect x="' + x + '" y="0" width="' + w + '" height="22"/>'; x += w + 1 + (s % 2); }
+    return '<svg width="94" height="22" viewBox="0 0 94 22" aria-hidden="true" fill="currentColor" style="opacity:.75">' + h + '</svg>';
+  }
+
+  /* ---------- state ---------- */
+  var KEY = 'nalogi-hard-v1';
+  function blank() { return { q: {}, train: null, sheet: null }; }
+  var S = (function () { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.q) return s; } catch (e) { /* ignore */ } return blank(); })();
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
+  function record(i, ok) { S.q[i] = { l: ok ? 1 : 0, t: now() }; }
+  function errIds() { return QS.map(function (_, i) { return i; }).filter(function (i) { return S.q[i] && S.q[i].l === 0; }); }
+
+  var view = { name: 'home' };
+  var cur = { sel: [], checked: false, anim: false };
+
+  /* ---------- home ---------- */
+  function vHome() {
+    var seen = 0, ok = 0;
+    Object.keys(S.q).forEach(function (k) { seen++; if (S.q[k].l === 1) ok++; });
+    var errs = errIds().length;
+    var h = '<header class="masthead"><div class="form-strip">' + barcode() + '<span>НиНП, вопросы повышенной сложности</span></div>' +
+      '<h1 class="title">Ловушки РК по налогам</h1>' +
+      '<p class="lede">' + QS.length + ' вопросов по трём конспектам, собранных теми же приёмами, что и реальный РК по финансовому анализу. Сколько ответов верно, не подсказывается: отмечай всё, что считаешь верным.</p></header>';
+    h += '<div class="tally"><div class="tally-item">' + cells(pad(seen, 2), String(seen)) + '<span class="tally-label">из ' + QS.length + ' решено хотя бы раз</span></div>' +
+      '<div class="tally-item">' + cells(seen ? pad(Math.round(100 * ok / seen), 2) : '––', seen ? Math.round(100 * ok / seen) + ' процентов' : 'нет данных') + '<span class="tally-label">% верных по последней попытке</span></div>' +
+      '<div class="tally-item">' + cells(pad(errs, 2), String(errs)) + '<span class="tally-label">' + plural(errs, 'вопрос', 'вопроса', 'вопросов') + ' с ошибкой</span></div></div>';
+
+    var tr = S.train && !S.train.done && S.train.i > 0 ? S.train : null;
+    var sh = S.sheet && !S.sheet.done ? S.sheet : null;
+    h += '<section class="block"><div class="block-head"><h2 class="h2">Как тренироваться</h2></div><div class="modes">' +
+      '<div class="mode main"><p class="mode-title">Тренировка с разбором</p><p>По одному вопросу. После ответа видно, какая была ловушка и как её распознать.</p><div class="btns">' +
+      (tr ? '<button class="btn primary" data-act="resume-train">Продолжить <span class="n">' + (tr.i + 1) + ' из ' + tr.ids.length + '</span></button><button class="btn link" data-act="train" data-set="all">Заново</button>'
+        : '<button class="btn primary" data-act="train" data-set="all">Начать <span class="n">' + QS.length + '</span></button>') + '</div></div>' +
+      '<div class="mode"><p class="mode-title">Как на РК</p><p>Все вопросы листом, ответы в бланке, проверка только после «Сдать работу». Делай последним помидором.</p><div class="btns">' +
+      (sh ? '<button class="btn quiet" data-act="sheet">Продолжить бланк <span class="n">' + Object.keys(sh.ans).filter(function (k) { return sh.ans[k].length; }).length + ' из ' + sh.ids.length + '</span></button><button class="btn link" data-act="sheet-new">Заново</button>'
+        : '<button class="btn quiet" data-act="sheet-new">Открыть бланк</button>') + '</div></div>' +
+      '<div class="mode"><p class="mode-title">Только ошибки</p><p>Вопросы, где последний ответ был неверным, пока не ответишь правильно.</p><div class="btns">' +
+      (errs ? '<button class="btn quiet" data-act="train" data-set="err">Повторить <span class="n">' + errs + '</span></button>' : '<button class="btn quiet" disabled>Ошибок пока нет</button>') + '</div></div></div></section>';
+
+    h += '<section class="block"><div class="block-head"><h2 class="h2">Чем реальный тест сложнее конспекта</h2><span class="muted">По снимкам РК по финансовому анализу</span></div><ul class="traps">';
+    H.traps.forEach(function (t) {
+      var n = QS.filter(function (q) { return q.trap === t.id; }).length;
+      h += '<li class="trap-row"><div><p class="trap-name"><span class="k">' + t.no + '</span>' + esc(t.n) + '</p><p class="trap-d">' + esc(t.d) + '</p><p class="trap-tip"><b>Как не попасться:</b> ' + esc(t.tip) + '</p></div>' +
+        '<div class="trap-side"><span class="trap-count">' + n + ' ' + plural(n, 'вопрос', 'вопроса', 'вопросов') + '</span><button class="btn quiet" data-act="train" data-set="' + t.id + '">Тренировать</button></div></li>';
+    });
+    h += '</ul></section>';
+    h += '<section class="block"><p class="muted">Ещё два общих приёма того теста: варианты иногда выходят за рамки лекций (практические вопросы про аудит и оценку компаний), а одна тема повторяется в нескольких вопросах с разными формулировками. Здесь всё в рамках трёх конспектов и тестов 1–3.</p>';
+    h += view.confirmReset ? '<div class="confirm" style="margin-top:14px"><span>Стереть ответы этого тренажёра?</span><button class="btn quiet" data-act="reset-yes">Да, стереть</button><button class="btn link" data-act="reset-no">Отмена</button></div>'
+      : '<p style="margin-top:10px"><button class="btn link" data-act="reset">Сбросить прогресс</button></p>';
+    return h + '</section>';
+  }
+
+  /* ---------- train ---------- */
+  function startTrain(set) {
+    var ids;
+    if (set === 'all') ids = shuffle(QS.map(function (_, i) { return i; }));
+    else if (set === 'err') ids = shuffle(errIds());
+    else ids = shuffle(QS.map(function (_, i) { return i; }).filter(function (i) { return QS[i].trap === set; }));
+    S.train = { set: set, ids: ids, i: 0, ok: 0, done: false };
+    save();
+    cur = { sel: [], checked: false, anim: false };
+    view = { name: 'train' };
+    render(true);
+  }
+  function trainTitle(t) { return t.set === 'all' ? 'Тренировка' : t.set === 'err' ? 'Только ошибки' : TR[t.set].n; }
+  function optsHTML(q, sel, checked, name) {
+    var h = '<div class="opts" role="group" aria-label="Варианты ответа">';
+    q.o.forEach(function (o, i) {
+      var p = sel.indexOf(i) >= 0, cls = '', icon = p ? I.check : '';
+      if (checked) {
+        var right = q.a.indexOf(i) >= 0 || (q.alt && isRight(q, sel) && q.alt.indexOf(i) >= 0);
+        if (right && p) { cls = 'is-ok'; icon = I.check; } else if (!right && p) { cls = 'is-bad'; icon = I.cross; } else if (right) { cls = 'is-miss'; icon = I.check; } else cls = 'is-dim';
+      }
+      h += '<button type="button" class="opt ' + cls + '" data-act="' + name + '" data-i="' + i + '" aria-pressed="' + p + '"' + (checked ? ' disabled' : '') + '><span class="box" aria-hidden="true">' + icon + '</span><span class="let">' + LET[i] + ')</span><span>' + esc(o) + '</span></button>';
+    });
+    return h + '</div>';
+  }
+  function runbar(title, count, pct) {
+    return '<header class="runbar"><button class="back" data-act="home">' + I.back + 'Меню</button><p class="run-title">' + esc(title) + '</p><p class="run-count">' + count + '</p><div class="progress" aria-hidden="true"><i style="width:' + pct + '%"></i></div></header>';
+  }
+  function vTrain() {
+    var t = S.train;
+    if (!t) { view = { name: 'home' }; return vHome(); }
+    if (!t.ids.length) return runbar(trainTitle(t), '', 0) + '<p class="muted">Здесь пока нет вопросов.</p><div class="btns" style="margin-top:14px"><button class="btn primary" data-act="home">В меню</button></div>';
+    if (t.done) {
+      return runbar(trainTitle(t), 'итог', 100) + '<section class="result-head"><h1 class="title">' + t.ok + ' из ' + t.ids.length + ' верно</h1><p class="lede">' +
+        (t.ok === t.ids.length ? 'Ни одна ловушка не сработала.' : 'Вопросы с ошибкой собраны в «Только ошибки».') + '</p><div class="btns">' +
+        (errIds().length ? '<button class="btn primary" data-act="train" data-set="err">Только ошибки <span class="n">' + errIds().length + '</span></button>' : '') +
+        '<button class="btn quiet" data-act="home">В меню</button></div></section>';
+    }
+    var qi = t.ids[t.i], q = QS[qi], tr = TR[q.trap];
+    var h = runbar(trainTitle(t), (t.i + 1) + ' / ' + t.ids.length, (100 * t.i / t.ids.length).toFixed(1));
+    h += '<article class="sheet"><div class="sheet-head">' + barcode() + '<span>Вопрос ' + cells(pad(t.i + 1, 2), String(t.i + 1)) + '</span></div>';
+    h += '<div class="tags"><span class="tag">' + esc(q.topic) + '</span>' + (cur.checked ? '<span class="tag trap">Ловушка: ' + esc(tr.n) + '</span>' : '') + '</div>';
+    h += '<h2 class="prompt" id="prompt" tabindex="-1">' + esc(q.q) + '</h2><p class="hint">Отметь все верные варианты.</p>' + optsHTML(q, cur.sel, cur.checked, 'pick');
+    if (cur.checked) {
+      var ok = isRight(q, cur.sel);
+      h += '<div class="feedback" aria-live="polite"><p class="verdict ' + (ok ? 'ok' : 'bad') + '">' + (ok ? 'Верно.' : 'Неверно. Правильно: ' + letters(q.a) + '.') + '</p><p>' + md(q.e) + '</p>' +
+        '<p class="trapnote"><b>' + esc(tr.n) + '.</b> ' + esc(tr.tip) + '</p></div>';
+      h += '<div class="stamp ' + (ok ? 'ok' : 'bad') + (cur.anim && !RM ? ' anim' : '') + '" aria-hidden="true">' + (ok ? 'ВЕРНО' : 'НЕВЕРНО') + '</div>';
+      h += '<div class="actions"><span class="spacer"></span><button class="btn primary" data-act="next" id="next">' + (t.i >= t.ids.length - 1 ? 'Завершить' : 'Дальше') + '</button></div>';
+    } else {
+      h += '<div class="actions"><span class="spacer"></span><button class="btn primary" data-act="check" id="check"' + (cur.sel.length ? '' : ' disabled') + '>Проверить</button></div>';
+    }
+    return h + '</article>';
+  }
+
+  /* ---------- sheet (как на РК) ---------- */
+  function newSheet() {
+    S.sheet = { ids: shuffle(QS.map(function (_, i) { return i; })), ans: {}, done: false, started: now() };
+    save();
+  }
+  function gridHTML(sh, graded) {
+    var h = '<div class="grid">';
+    sh.ids.forEach(function (qi, n) {
+      var a = sh.ans[n] || [], cls = '';
+      if (graded) cls = isRight(QS[qi], a) ? 'is-ok' : 'is-bad';
+      h += '<button type="button" class="gcell ' + cls + '" data-act="jump" data-n="' + n + '" aria-label="Вопрос ' + (n + 1) + (a.length ? ', ответ ' + letters(a) : ', без ответа') + '"><span class="gn">' + (n + 1) + '</span><span class="ga">' + letters(a) + '</span></button>';
+    });
+    return h + '</div>';
+  }
+  function vSheet() {
+    var sh = S.sheet;
+    if (!sh) { newSheet(); sh = S.sheet; }
+    if (sh.done) return vSheetResult();
+    var filled = Object.keys(sh.ans).filter(function (k) { return sh.ans[k].length; }).length;
+    var h = runbar('Как на РК', filled + ' / ' + sh.ids.length, (100 * filled / sh.ids.length).toFixed(1));
+    h += '<section class="masthead" style="padding-bottom:16px"><h1 class="title" style="font-size:clamp(24px,5vw,34px)">Тест рубежного контроля по налогам</h1><p class="muted">Отмечай все верные варианты, их может быть несколько. Бланк заполняется сам, по клетке можно перейти к вопросу.</p></section>';
+    h += '<div class="blank"><div class="blank-head"><p class="blank-title">Бланк ответов</p><span class="muted">' + filled + ' из ' + sh.ids.length + '</span></div>' + gridHTML(sh, false) + '</div>';
+    h += '<ol class="sq" style="margin-top:18px">';
+    sh.ids.forEach(function (qi, n) {
+      var q = QS[qi];
+      h += '<li class="sq-item" id="sq' + n + '"><p class="sq-q"><span class="num">' + (n + 1) + '</span><span>' + esc(q.q) + '</span></p>' + optsHTML(q, sh.ans[n] || [], false, 'mark').replace(/data-act="mark"/g, 'data-act="mark" data-n="' + n + '"') + '</li>';
+    });
+    h += '</ol><div class="sticky-blank"><span class="muted">Отмечено ' + filled + ' из ' + sh.ids.length + '</span>';
+    if (view.confirmSubmit) h += '<div class="btns"><span>Без ответа: ' + (sh.ids.length - filled) + '. Сдать всё равно?</span><button class="btn primary" data-act="submit-yes">Сдать</button><button class="btn link" data-act="submit-no">Вернуться</button></div>';
+    else h += '<button class="btn primary" data-act="submit">Сдать работу</button>';
+    return h + '</div>';
+  }
+  function vSheetResult() {
+    var sh = S.sheet, ok = 0, by = {};
+    sh.ids.forEach(function (qi, n) {
+      var q = QS[qi], r = isRight(q, sh.ans[n] || []);
+      if (r) ok++;
+      by[q.trap] = by[q.trap] || { ok: 0, n: 0 }; by[q.trap].n++; if (r) by[q.trap].ok++;
+    });
+    var pass = ok / sh.ids.length >= 0.7;
+    var h = runbar('Как на РК', 'итог', 100);
+    h += '<section class="result-head"><div class="stamp ' + (pass ? 'ok' : 'bad') + (RM ? '' : ' anim') + '" aria-hidden="true">' + (pass ? 'ЗАЧТЕНО' : 'НА ДОРАБОТКУ') + '</div>' +
+      '<p class="score">' + cells(pad(ok, 2), String(ok)) + '<span>верно из ' + sh.ids.length + '</span>' + (sh.fin ? '<span class="muted">за ' + Math.max(1, Math.round((sh.fin - sh.started) / 60000)) + ' мин</span>' : '') + '</p>' +
+      '<div class="btns">' + (errIds().length ? '<button class="btn primary" data-act="train" data-set="err">Разобрать ошибки <span class="n">' + errIds().length + '</span></button>' : '') + '<button class="btn quiet" data-act="sheet-new">Новый бланк</button><button class="btn quiet" data-act="home">В меню</button></div></section>';
+    h += '<div class="blank"><div class="blank-head"><p class="blank-title">Проверенный бланк</p></div>' + gridHTML(sh, true) + '</div>';
+    h += '<section class="block"><div class="block-head"><h2 class="h2">Какие ловушки сработали</h2></div><ul class="bytrap">';
+    H.traps.forEach(function (t) { var b = by[t.id]; if (b) h += '<li><span>' + esc(t.n) + '</span><span class="muted">' + b.ok + ' из ' + b.n + '</span></li>'; });
+    h += '</ul></section><section class="block"><div class="block-head"><h2 class="h2">Разбор ошибок</h2></div><ol class="review">';
+    sh.ids.forEach(function (qi, n) {
+      var q = QS[qi], a = sh.ans[n] || [];
+      if (isRight(q, a)) return;
+      h += '<li id="sq' + n + '"><div class="tags" style="margin:0"><span class="tag">Вопрос ' + (n + 1) + '</span><span class="tag trap">' + esc(TR[q.trap].n) + '</span></div><p class="review-q">' + esc(q.q) + '</p>' +
+        '<p class="review-a bad"><span class="lbl">Твой ответ: </span>' + (a.length ? letters(a) + ' — ' + a.slice().sort().map(function (i) { return esc(q.o[i]); }).join('; ') : 'нет ответа') + '</p>' +
+        '<p class="review-a"><span class="lbl">Верно: </span>' + letters(q.a) + ' — ' + q.a.map(function (i) { return esc(q.o[i]); }).join('; ') + '</p>' +
+        '<details><summary>Разбор</summary><p>' + md(q.e) + '</p></details></li>';
+    });
+    return h + '</ol></section>';
+  }
+
+  /* ---------- render & events ---------- */
+  function render(top) {
+    app.innerHTML = view.name === 'train' ? vTrain() : view.name === 'sheet' ? vSheet() : vHome();
+    if (top) window.scrollTo(0, 0);
+  }
+  var H2 = {
+    home: function () { view = { name: 'home' }; render(true); },
+    train: function (el) { startTrain(el.dataset.set); },
+    'resume-train': function () { cur = { sel: [], checked: false, anim: false }; view = { name: 'train' }; render(true); },
+    pick: function (el) {
+      if (cur.checked) return;
+      var i = +el.dataset.i, k = cur.sel.indexOf(i);
+      if (k >= 0) cur.sel.splice(k, 1); else cur.sel.push(i);
+      render();
+      var b = app.querySelector('.opt[data-i="' + i + '"]'); if (b) b.focus({ preventScroll: true });
+    },
+    check: function () {
+      var t = S.train, q = QS[t.ids[t.i]];
+      if (!cur.sel.length) return;
+      var ok = isRight(q, cur.sel);
+      record(t.ids[t.i], ok);
+      if (ok) t.ok++; else if (t.set === 'err' && t.ids.slice(t.i + 1).indexOf(t.ids[t.i]) < 0) t.ids.push(t.ids[t.i]);
+      save();
+      cur.checked = true; cur.anim = true;
+      render(); cur.anim = false;
+      var n = document.getElementById('next'); if (n) n.focus({ preventScroll: true });
+    },
+    next: function () {
+      var t = S.train;
+      t.i++;
+      if (t.i >= t.ids.length) t.done = true;
+      save();
+      cur = { sel: [], checked: false, anim: false };
+      render(true);
+      var p = document.getElementById('prompt'); if (p) p.focus({ preventScroll: true });
+    },
+    sheet: function () { view = { name: 'sheet' }; render(true); },
+    'sheet-new': function () { newSheet(); view = { name: 'sheet' }; render(true); },
+    mark: function (el) {
+      var sh = S.sheet, n = el.dataset.n, i = +el.dataset.i, a = (sh.ans[n] || []).slice(), k = a.indexOf(i);
+      if (k >= 0) a.splice(k, 1); else a.push(i);
+      sh.ans[n] = a; save();
+      var y = window.scrollY; render(); window.scrollTo(0, y);
+      var b = app.querySelector('.opt[data-n="' + n + '"][data-i="' + i + '"]'); if (b) b.focus({ preventScroll: true });
+    },
+    jump: function (el) { var t = document.getElementById('sq' + el.dataset.n); if (t) t.scrollIntoView({ block: 'start', behavior: RM ? 'auto' : 'smooth' }); },
+    submit: function () {
+      var sh = S.sheet, filled = Object.keys(sh.ans).filter(function (k) { return sh.ans[k].length; }).length;
+      if (filled < sh.ids.length) { view.confirmSubmit = true; var y = window.scrollY; render(); window.scrollTo(0, y); return; }
+      H2['submit-yes']();
+    },
+    'submit-no': function () { view.confirmSubmit = false; var y = window.scrollY; render(); window.scrollTo(0, y); },
+    'submit-yes': function () {
+      var sh = S.sheet;
+      sh.ids.forEach(function (qi, n) { record(qi, isRight(QS[qi], sh.ans[n] || [])); });
+      sh.done = true; sh.fin = now(); save();
+      view = { name: 'sheet' }; render(true);
+    },
+    reset: function () { view.confirmReset = true; render(); },
+    'reset-no': function () { view.confirmReset = false; render(); },
+    'reset-yes': function () { S = blank(); save(); view = { name: 'home' }; render(true); }
+  };
+  app.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-act]');
+    if (!el || el.disabled) return;
+    var f = H2[el.dataset.act];
+    if (f) f(el, e);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (view.name !== 'train' || e.altKey || e.ctrlKey || e.metaKey) return;
+    var t = e.target;
+    if (/^[1-7]$/.test(e.key) && !cur.checked) {
+      var q = QS[S.train.ids[S.train.i]], i = +e.key - 1;
+      if (i < q.o.length) { e.preventDefault(); H2.pick({ dataset: { i: String(i) } }); }
+    } else if (e.key === 'Enter' && !(t && t.tagName === 'BUTTON')) {
+      e.preventDefault();
+      if (cur.checked) H2.next(); else if (cur.sel.length) H2.check();
+    }
+  });
+  render();
+  window.__hard = { state: function () { return S; }, view: function () { return view; } };
+})();
+
+</script>
+
+</body></html>

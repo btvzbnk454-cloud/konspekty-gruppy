@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head><meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Химия ОУП.07 — конспект к зачёту</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F6F8;--paper:#FFFFFF;--ink:#1B2430;--muted:#5A6675;--rule:#D5DCE3;--strip:#EEF3F8;
+  --accent:#1D5FA8;
+  --g1:#DDE8F6;--g1i:#1D5FA8;
+  --g2:#D8EFEA;--g2i:#0E6E61;
+  --g3:#F5E8D0;--g3i:#875709;
+  --g4:#E2EFD7;--g4i:#3B6A1C;
+  --g5:#F3DCE7;--g5i:#A1275D;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131920;--paper:#1A222B;--ink:#E2E8EF;--muted:#9AA6B4;--rule:#2D3844;--strip:#202B37;
+    --accent:#7EB0EA;
+    --g1:#1E3350;--g1i:#8FBDF0;--g2:#153A36;--g2i:#72D1C1;--g3:#3E3019;--g3i:#E7BC6C;
+    --g4:#243A1B;--g4i:#A6D685;--g5:#43202F;--g5i:#EE93BA;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131920;--paper:#1A222B;--ink:#E2E8EF;--muted:#9AA6B4;--rule:#2D3844;--strip:#202B37;
+  --accent:#7EB0EA;
+  --g1:#1E3350;--g1i:#8FBDF0;--g2:#153A36;--g2i:#72D1C1;--g3:#3E3019;--g3i:#E7BC6C;
+  --g4:#243A1B;--g4i:#A6D685;--g5:#43202F;--g5i:#EE93BA;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;font-size:17px;line-height:1.62}
+.wrap{max-width:820px;margin:0 auto;padding:40px 20px 96px}
+h1,h2,h3,.tile,.legend,.top,table th{font-family:Manrope,"Segoe UI",Arial,sans-serif}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.08;font-weight:800;margin:0 0 10px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin:0 0 14px}
+.tile{display:flex;flex-direction:column;justify-content:space-between;min-height:104px;padding:7px 8px;
+  border-radius:3px;text-decoration:none;color:var(--ink);background:var(--gb);border:1px solid transparent}
+.tile:hover{border-color:var(--gi)}
+.tile:focus-visible,a:focus-visible,.top:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tile .num{font-size:12px;font-weight:600;color:var(--gi)}
+.tile .sym{font-size:28px;font-weight:800;line-height:1;color:var(--gi)}
+.tile .nm{font-size:11px;line-height:1.2;font-weight:600}
+.g1{--gb:var(--g1);--gi:var(--g1i)}.g2{--gb:var(--g2);--gi:var(--g2i)}.g3{--gb:var(--g3);--gi:var(--g3i)}
+.g4{--gb:var(--g4);--gi:var(--g4i)}.g5{--gb:var(--g5);--gi:var(--g5i)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);margin:0 0 48px}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--gi);margin-right:6px;vertical-align:-1px}
+section.q{background:var(--paper);border-top:4px solid var(--gi);padding:26px 26px 20px;margin:0 0 28px;border-radius:2px}
+.qh{display:flex;gap:14px;align-items:flex-start;margin:0 0 14px}
+.qh .mini{flex:0 0 auto;width:54px;height:54px;background:var(--gb);color:var(--gi);border-radius:3px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:Manrope,Arial,sans-serif;line-height:1}
+.qh .mini b{font-size:21px;font-weight:800}.qh .mini small{font-size:11px;font-weight:600;margin-top:3px}
+h2{font-size:22px;line-height:1.25;margin:4px 0 0;font-weight:800}
+h3{font-size:16px;margin:24px 0 6px;font-weight:800;color:var(--gi)}
+p{margin:0 0 10px}
+ul,ol{margin:0 0 12px;padding-left:22px}li{margin:0 0 4px}
+.rx{background:var(--strip);border-left:3px solid var(--gi);padding:10px 14px;margin:8px 0 14px;border-radius:0 3px 3px 0;
+  overflow-x:auto;font-size:16.5px}
+.rx>div{white-space:nowrap;padding:2px 0}
+.rx .n{font-style:italic;color:var(--muted);font-size:14.5px;white-space:normal;margin-left:8px}
+.ar{display:inline-flex;flex-direction:column;align-items:center;line-height:.9;vertical-align:-2px;margin:0 .2em}
+.ar i{font-style:normal;font-size:.62em;color:var(--muted);white-space:nowrap}
+sub,sup{font-size:.7em;line-height:0}
+.tw{overflow-x:auto;margin:8px 0 14px}
+table{border-collapse:collapse;width:100%;font-size:15.5px}
+th,td{border-bottom:1px solid var(--rule);padding:7px 10px 7px 0;text-align:left;vertical-align:top}
+th{font-size:13px;font-weight:600;color:var(--muted)}
+.key{border:1px solid var(--gi);border-radius:3px;padding:10px 14px;margin:10px 0 14px}
+.key p:last-child{margin:0}
+.tip{color:var(--muted);font-size:15px}
+.back{display:inline-block;margin-top:10px;font-family:Manrope,Arial,sans-serif;font-size:13px;color:var(--muted)}
+.top{position:fixed;right:16px;bottom:16px;background:var(--ink);color:var(--bg);text-decoration:none;
+  font-size:14px;font-weight:600;padding:10px 14px;border-radius:24px}
+footer{color:var(--muted);font-size:14px;margin-top:40px}
+@media (max-width:560px){section.q{padding:20px 16px 16px}.qh .mini{width:46px;height:46px}h2{font-size:19px}body{font-size:16px}}
+@media print{.top,.back{display:none}body{background:#fff}section.q{break-inside:auto;border:1px solid #ccc}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header id="top">
+<h1>Химия: конспект к зачёту</h1>
+<p class="sub">ОУП.07 · 21 вопрос, теория с примерами реакций. Нажмите на клетку, чтобы перейти к вопросу.</p>
+<nav class="grid" aria-label="Вопросы">
+<a class="tile g1" href="#q1"><span class="num">1</span><span class="sym">Ат</span><span class="nm">Строение атома, природа связи</span></a>
+<a class="tile g1" href="#q2"><span class="num">2</span><span class="sym">Пз</span><span class="nm">Периодический закон</span></a>
+<a class="tile g1" href="#q3"><span class="num">3</span><span class="sym">Св</span><span class="nm">Виды связи</span></a>
+<a class="tile g1" href="#q4"><span class="num">4</span><span class="sym">Со</span><span class="nm">Валентность и степень окисления</span></a>
+<a class="tile g1" href="#q5"><span class="num">5</span><span class="sym">Тр</span><span class="nm">Типы реакций</span></a>
+<a class="tile g1" href="#q6"><span class="num">6</span><span class="sym">Ск</span><span class="nm">Скорость реакций</span></a>
+<a class="tile g1" href="#q7"><span class="num">7</span><span class="sym">Рв</span><span class="nm">Равновесие, уравнение реакции</span></a>
+<a class="tile g2" href="#q8"><span class="num">8</span><span class="sym">Рс</span><span class="nm">Растворы, типы</span></a>
+<a class="tile g2" href="#q9"><span class="num">9</span><span class="sym">Ис</span><span class="nm">Свойства растворов</span></a>
+<a class="tile g2" href="#q10"><span class="num">10</span><span class="sym">Эд</span><span class="nm">Диссоциация, ионный обмен</span></a>
+<a class="tile g3" href="#q11"><span class="num">11</span><span class="sym">Нк</span><span class="nm">Номенклатура неорганики</span></a>
+<a class="tile g3" href="#q12"><span class="num">12</span><span class="sym">Ме</span><span class="nm">Свойства металлов</span></a>
+<a class="tile g3" href="#q13"><span class="num">13</span><span class="sym">Нм</span><span class="nm">Свойства неметаллов</span></a>
+<a class="tile g3" href="#q14"><span class="num">14</span><span class="sym">Кл</span><span class="nm">Классы сложных веществ</span></a>
+<a class="tile g3" href="#q15"><span class="num">15</span><span class="sym">Кр</span><span class="nm">Качественные реакции ионов</span></a>
+<a class="tile g3" href="#q16"><span class="num">16</span><span class="sym">Кс</span><span class="nm">Кислоты</span></a>
+<a class="tile g4" href="#q17"><span class="num">17</span><span class="sym">Ор</span><span class="nm">Строение органики</span></a>
+<a class="tile g4" href="#q18"><span class="num">18</span><span class="sym">Ос</span><span class="nm">Свойства органики</span></a>
+<a class="tile g4" href="#q19"><span class="num">19</span><span class="sym">Ио</span><span class="nm">Идентификация органики</span></a>
+<a class="tile g4" href="#q20"><span class="num">20</span><span class="sym">Ув</span><span class="nm">Углеводороды</span></a>
+<a class="tile g5" href="#q21"><span class="num">21</span><span class="sym">Бт</span><span class="nm">Химия в быту и производстве</span></a>
+</nav>
+<div class="legend"><span class="g1">Общая химия</span><span class="g2">Растворы</span><span class="g3">Неорганическая</span><span class="g4">Органическая</span><span class="g5">Прикладная</span></div>
+</header>
+<main>
+
+<!-- ============ 1 ============ -->
+<section class="q g1" id="q1">
+<div class="qh"><div class="mini"><b>Ат</b><small>1</small></div><h2>Строение атомов химических элементов и природа химической связи</h2></div>
+<h3>Состав атома</h3>
+<p>Атом — электронейтральная частица из положительно заряженного ядра и электронной оболочки.</p>
+<ul>
+<li><b>Протоны</b> p⁺ (заряд +1, масса ≈ 1) и <b>нейтроны</b> n⁰ (заряд 0, масса ≈ 1) образуют ядро.</li>
+<li><b>Электроны</b> e⁻ (заряд −1, масса ≈ 1/1836) движутся вокруг ядра.</li>
+<li>Порядковый номер Z = заряд ядра = число протонов = число электронов.</li>
+<li>Массовое число A = Z + N, где N — число нейтронов. Для <sup>35</sup>Cl: p = 17, e = 17, n = 35 − 17 = 18.</li>
+</ul>
+<p><b>Изотопы</b> — атомы одного элемента с разным числом нейтронов: протий ¹H, дейтерий ²H, тритий ³H; хлор ³⁵Cl и ³⁷Cl (поэтому Ar(Cl) = 35,5).</p>
+<h3>Электронная оболочка</h3>
+<ul>
+<li>Число энергетических уровней = номер периода.</li>
+<li>Максимум электронов на уровне — 2n² (на 1-м — 2, на 2-м — 8, на 3-м — 18).</li>
+<li>Подуровни: s (до 2 e), p (до 6 e), d (до 10 e), f (до 14 e).</li>
+<li>Порядок заполнения: 1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → 5s…</li>
+<li>У элементов главных подгрупп число внешних электронов = номер группы.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Элемент</th><th>Z</th><th>Схема по уровням</th><th>Электронная формула</th></tr>
+<tr><td>Na</td><td>11</td><td>2, 8, 1</td><td>1s²2s²2p⁶3s¹</td></tr>
+<tr><td>Cl</td><td>17</td><td>2, 8, 7</td><td>1s²2s²2p⁶3s²3p⁵</td></tr>
+<tr><td>Ca</td><td>20</td><td>2, 8, 8, 2</td><td>1s²2s²2p⁶3s²3p⁶4s²</td></tr>
+<tr><td>Fe</td><td>26</td><td>2, 8, 14, 2</td><td>…3s²3p⁶3d⁶4s²</td></tr>
+</table></div>
+<h3>Природа химической связи</h3>
+<p>Химическая связь — взаимодействие атомов, удерживающее их в молекулах и кристаллах. Её природа электростатическая: связь образуется за счёт перераспределения внешних (валентных) электронов, и при этом выделяется энергия — система становится устойчивее.</p>
+<p>Атомы стремятся к завершённому внешнему уровню (8 электронов, у H и Li — 2). Добиться этого можно двумя путями: образовать общие электронные пары (ковалентная связь) или отдать/принять электроны (ионная связь).</p>
+<p><b>Электроотрицательность (ЭО)</b> — способность атома притягивать электроны связи. Ряд: F > O > N > Cl > Br > S > C > H > … > Na > K. Разница ЭО определяет тип связи (подробно — в вопросе 3).</p>
+<div class="rx">
+<div>Na<sup>0</sup> − 1e → Na<sup>+</sup> <span class="n">металл отдаёт электрон</span></div>
+<div>Cl<sup>0</sup> + 1e → Cl<sup>−</sup> <span class="n">неметалл принимает электрон</span></div>
+</div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="q g1" id="q2">
+<div class="qh"><div class="mini"><b>Пз</b><small>2</small></div><h2>Периодический закон и таблица Д. И. Менделеева</h2></div>
+<div class="key">
+<p><b>Формулировка Менделеева (1869):</b> свойства простых тел, а также формы и свойства соединений элементов находятся в периодической зависимости от величины атомных весов.</p>
+<p><b>Современная формулировка:</b> свойства элементов и их соединений находятся в периодической зависимости от заряда ядра атома.</p>
+</div>
+<p>Причина периодичности — периодическое повторение строения внешнего электронного уровня.</p>
+<h3>Структура таблицы</h3>
+<ul>
+<li><b>Периоды</b> — горизонтальные ряды (7). Малые: 1–3; большие: 4–7. Каждый (кроме 1-го) начинается щелочным металлом и заканчивается благородным газом.</li>
+<li><b>Группы</b> — вертикальные столбцы (8). Делятся на главные (А: s- и p-элементы) и побочные (Б: d-элементы).</li>
+<li>Лантаноиды и актиноиды (f-элементы) вынесены отдельно.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Характеристика</th><th>Физический смысл</th></tr>
+<tr><td>Порядковый номер</td><td>Заряд ядра, число протонов и электронов</td></tr>
+<tr><td>Номер периода</td><td>Число энергетических уровней</td></tr>
+<tr><td>Номер группы (А)</td><td>Число внешних электронов, высшая степень окисления (кроме O, F)</td></tr>
+</table></div>
+<h3>Закономерности</h3>
+<div class="tw"><table>
+<tr><th>Свойство</th><th>В периоде слева направо</th><th>В группе сверху вниз</th></tr>
+<tr><td>Радиус атома</td><td>уменьшается</td><td>увеличивается</td></tr>
+<tr><td>Электроотрицательность</td><td>растёт</td><td>падает</td></tr>
+<tr><td>Металлические свойства</td><td>ослабевают</td><td>усиливаются</td></tr>
+<tr><td>Неметаллические свойства</td><td>усиливаются</td><td>ослабевают</td></tr>
+</table></div>
+<p>Характер оксидов 3-го периода меняется от основных к кислотным:</p>
+<div class="rx">
+<div>Na<sub>2</sub>O, MgO <span class="n">основные</span> → Al<sub>2</sub>O<sub>3</sub> <span class="n">амфотерный</span> → SiO<sub>2</sub>, P<sub>2</sub>O<sub>5</sub>, SO<sub>3</sub>, Cl<sub>2</sub>O<sub>7</sub> <span class="n">кислотные</span></div>
+</div>
+<p>Рост активности щелочных металлов в группе: литий реагирует с водой спокойно, натрий — бурно, калий — с воспламенением водорода.</p>
+<div class="rx">
+<div>2K + 2H<sub>2</sub>O → 2KOH + H<sub>2</sub>↑</div>
+</div>
+<h3>Значение</h3>
+<p>Менделеев оставил пустые клетки и предсказал свойства неоткрытых элементов — экабора (скандий), экаалюминия (галлий), экасилиция (германий). Закон стал основой систематизации химии и объяснения строения атома.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="q g1" id="q3">
+<div class="qh"><div class="mini"><b>Св</b><small>3</small></div><h2>Виды связи между частицами вещества</h2></div>
+<div class="tw"><table>
+<tr><th>Тип связи</th><th>Между какими атомами</th><th>Механизм</th><th>Примеры</th></tr>
+<tr><td>Ковалентная неполярная</td><td>одинаковые неметаллы</td><td>общая пара посередине</td><td>H<sub>2</sub>, O<sub>2</sub>, N<sub>2</sub>, Cl<sub>2</sub></td></tr>
+<tr><td>Ковалентная полярная</td><td>разные неметаллы</td><td>пара смещена к более ЭО атому</td><td>HCl, H<sub>2</sub>O, NH<sub>3</sub>, CO<sub>2</sub></td></tr>
+<tr><td>Ионная</td><td>металл + неметалл</td><td>передача электронов, притяжение ионов</td><td>NaCl, CaF<sub>2</sub>, K<sub>2</sub>O</td></tr>
+<tr><td>Металлическая</td><td>атомы металлов</td><td>обобществлённые электроны («электронный газ»)</td><td>Fe, Cu, сплавы</td></tr>
+<tr><td>Водородная</td><td>H и сильно ЭО атом (F, O, N) разных или одной молекулы</td><td>электростатическое притяжение</td><td>H<sub>2</sub>O, HF, спирты, белки, ДНК</td></tr>
+</table></div>
+<h3>Ковалентная связь</h3>
+<p><b>Обменный механизм:</b> каждый атом даёт по одному электрону в общую пару: H· + ·H → H:H.</p>
+<p><b>Донорно-акцепторный механизм:</b> один атом (донор) даёт готовую пару, другой (акцептор) — свободную орбиталь.</p>
+<div class="rx"><div>NH<sub>3</sub> + H<sup>+</sup> → NH<sub>4</sub><sup>+</sup> <span class="n">азот — донор, H⁺ — акцептор</span></div></div>
+<h3>Ионная связь</h3>
+<div class="rx">
+<div>2Na + Cl<sub>2</sub> → 2NaCl</div>
+<div>Na<sup>0</sup> − 1e → Na<sup>+</sup> ;  Cl<sup>0</sup> + 1e → Cl<sup>−</sup></div>
+</div>
+<h3>Водородная связь</h3>
+<p>Объясняет аномально высокую температуру кипения воды (100 °C против −60 °C у H<sub>2</sub>S), растворимость спиртов в воде, спиральную структуру белков и двойную спираль ДНК.</p>
+<h3>Кристаллические решётки</h3>
+<div class="tw"><table>
+<tr><th>Решётка</th><th>В узлах</th><th>Свойства</th><th>Примеры</th></tr>
+<tr><td>Ионная</td><td>ионы</td><td>твёрдые, тугоплавкие, растворы и расплавы проводят ток</td><td>NaCl, KOH</td></tr>
+<tr><td>Атомная</td><td>атомы</td><td>очень твёрдые, очень тугоплавкие, нерастворимы</td><td>алмаз, SiO<sub>2</sub>, кремний</td></tr>
+<tr><td>Молекулярная</td><td>молекулы</td><td>летучие, легкоплавкие, непрочные</td><td>лёд, I<sub>2</sub>, CO<sub>2</sub> (сухой лёд)</td></tr>
+<tr><td>Металлическая</td><td>атомы и ионы металла</td><td>блеск, электро- и теплопроводность, пластичность</td><td>Cu, Al</td></tr>
+</table></div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="q g1" id="q4">
+<div class="qh"><div class="mini"><b>Со</b><small>4</small></div><h2>Валентность и степень окисления</h2></div>
+<div class="key">
+<p><b>Валентность</b> — число химических связей, которые атом образует с другими атомами. Знака не имеет, пишется римскими цифрами.</p>
+<p><b>Степень окисления (СО)</b> — условный заряд атома, вычисленный из предположения, что все связи в веществе ионные. Имеет знак.</p>
+</div>
+<h3>Валентность</h3>
+<ul>
+<li>Постоянная: H — I, O — II, щелочные металлы — I, Mg, Ca, Zn — II, Al — III.</li>
+<li>Переменная: S — II, IV, VI; Fe — II, III; C — II, IV; Cu — I, II; N — до IV.</li>
+</ul>
+<h3>Правила определения степени окисления</h3>
+<ol>
+<li>В простом веществе СО = 0: O<sub>2</sub>, Fe, H<sub>2</sub>.</li>
+<li>Сумма СО в молекуле = 0, в ионе = заряду иона.</li>
+<li>Фтор всегда −1.</li>
+<li>Кислород обычно −2; в пероксидах −1 (H<sub>2</sub>O<sub>2</sub>), в OF<sub>2</sub> +2.</li>
+<li>Водород обычно +1; в гидридах металлов −1 (NaH, CaH<sub>2</sub>).</li>
+<li>Металлы — только положительные СО; щелочные +1, щёлочноземельные +2, Al +3.</li>
+<li>Высшая СО = номер группы; низшая для неметаллов = номер группы − 8.</li>
+</ol>
+<h3>Пример расчёта</h3>
+<div class="rx">
+<div>K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>:  2·(+1) + 2x + 7·(−2) = 0  →  x = +6</div>
+<div>H<sub>2</sub>SO<sub>4</sub>:  2·(+1) + x + 4·(−2) = 0  →  x = +6</div>
+<div>KMnO<sub>4</sub>:  +1 + x + 4·(−2) = 0  →  x = +7</div>
+<div>NH<sub>4</sub><sup>+</sup>:  x + 4·(+1) = +1  →  x = −3</div>
+</div>
+<h3>Когда валентность и СО не совпадают</h3>
+<div class="tw"><table>
+<tr><th>Вещество</th><th>Степень окисления</th><th>Валентность</th></tr>
+<tr><td>N<sub>2</sub> (N≡N)</td><td>0</td><td>III</td></tr>
+<tr><td>H<sub>2</sub>O<sub>2</sub> (H–O–O–H), кислород</td><td>−1</td><td>II</td></tr>
+<tr><td>CH<sub>2</sub>Cl<sub>2</sub>, углерод</td><td>0</td><td>IV</td></tr>
+</table></div>
+<p class="tip">СО нужна для составления формул по названию и для уравнивания окислительно-восстановительных реакций.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="q g1" id="q5">
+<div class="qh"><div class="mini"><b>Тр</b><small>5</small></div><h2>Типы химических реакций</h2></div>
+<h3>По числу и составу веществ</h3>
+<div class="tw"><table>
+<tr><th>Тип</th><th>Схема</th><th>Пример</th></tr>
+<tr><td>Соединения</td><td>A + B → AB</td><td>CaO + H<sub>2</sub>O → Ca(OH)<sub>2</sub></td></tr>
+<tr><td>Разложения</td><td>AB → A + B</td><td>CaCO<sub>3</sub> <span class="ar"><i>t°</i>→</span> CaO + CO<sub>2</sub>↑</td></tr>
+<tr><td>Замещения</td><td>A + BC → AC + B</td><td>Zn + 2HCl → ZnCl<sub>2</sub> + H<sub>2</sub>↑</td></tr>
+<tr><td>Обмена</td><td>AB + CD → AD + CB</td><td>BaCl<sub>2</sub> + Na<sub>2</sub>SO<sub>4</sub> → BaSO<sub>4</sub>↓ + 2NaCl</td></tr>
+</table></div>
+<h3>Другие признаки классификации</h3>
+<ul>
+<li><b>По тепловому эффекту:</b> экзотермические (с выделением теплоты) и эндотермические (с поглощением).
+<div class="rx"><div>C + O<sub>2</sub> → CO<sub>2</sub> + 393 кДж <span class="n">экзо</span></div><div>N<sub>2</sub> + O<sub>2</sub> ⇄ 2NO − 180 кДж <span class="n">эндо</span></div></div></li>
+<li><b>По обратимости:</b> необратимые (→) и обратимые (⇄).</li>
+<li><b>По участию катализатора:</b> каталитические и некаталитические.
+<div class="rx"><div>2H<sub>2</sub>O<sub>2</sub> <span class="ar"><i>MnO<sub>2</sub></i>→</span> 2H<sub>2</sub>O + O<sub>2</sub>↑</div></div></li>
+<li><b>По фазовому составу:</b> гомогенные (все вещества в одной фазе: H<sub>2</sub> + Cl<sub>2</sub>) и гетерогенные (Zn тв. + HCl р-р).</li>
+<li><b>По изменению степеней окисления:</b> окислительно-восстановительные (ОВР) и без изменения СО (все реакции обмена).</li>
+</ul>
+<h3>Окислительно-восстановительные реакции</h3>
+<p><b>Окислитель</b> принимает электроны и восстанавливается (СО понижается). <b>Восстановитель</b> отдаёт электроны и окисляется (СО повышается).</p>
+<p>Метод электронного баланса на примере восстановления железа из руды:</p>
+<div class="rx">
+<div>Fe<sup>+3</sup> + 3e → Fe<sup>0</sup>   | 2 |  <span class="n">окислитель, восстанавливается</span></div>
+<div>C<sup>+2</sup> − 2e → C<sup>+4</sup>   | 3 |  <span class="n">восстановитель, окисляется</span></div>
+<div>Fe<sub>2</sub>O<sub>3</sub> + 3CO → 2Fe + 3CO<sub>2</sub></div>
+</div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="q g1" id="q6">
+<div class="qh"><div class="mini"><b>Ск</b><small>6</small></div><h2>Скорость химических реакций</h2></div>
+<div class="key">
+<p><b>Скорость гомогенной реакции</b> — изменение концентрации вещества в единицу времени: v = ±Δc / Δt, моль/(л·с).</p>
+<p>Для гетерогенной реакции — изменение количества вещества на единице площади поверхности раздела фаз.</p>
+</div>
+<h3>Факторы, влияющие на скорость</h3>
+<p><b>1. Природа реагирующих веществ.</b> Магний с соляной кислотой реагирует быстрее, чем железо; фтор с водородом — со взрывом даже в темноте, иод — медленно при нагревании.</p>
+<p><b>2. Концентрация — закон действующих масс</b> (Гульдберг, Вааге): скорость пропорциональна произведению концентраций реагентов в степенях, равных коэффициентам (для простых реакций).</p>
+<div class="rx">
+<div>2NO + O<sub>2</sub> → 2NO<sub>2</sub>    v = k·[NO]²·[O₂]</div>
+<div><span class="n">При увеличении [NO] в 2 раза скорость вырастет в 2² = 4 раза.</span></div>
+<div>C(тв) + O<sub>2</sub> → CO<sub>2</sub>    v = k·[O₂]  <span class="n">концентрация твёрдого вещества не учитывается</span></div>
+</div>
+<p><b>3. Температура — правило Вант-Гоффа:</b> при нагревании на каждые 10 °C скорость возрастает в 2–4 раза.</p>
+<div class="rx">
+<div>v₂ = v₁ · γ<sup>(t₂ − t₁)/10</sup></div>
+<div><span class="n">γ = 3, нагрев с 20 до 50 °C: v₂/v₁ = 3³ = 27 раз.</span></div>
+</div>
+<p><b>4. Площадь поверхности</b> (для гетерогенных реакций). Железный порошок сгорает в пламени, а гвоздь — нет; мука в воздухе может взорваться.</p>
+<p><b>5. Катализатор</b> — вещество, которое ускоряет реакцию, снижая энергию активации, и само при этом не расходуется. Ингибиторы замедляют реакции (защита от коррозии, консерванты). Биологические катализаторы — ферменты.</p>
+<div class="rx"><div>2SO<sub>2</sub> + O<sub>2</sub> <span class="ar"><i>V<sub>2</sub>O<sub>5</sub>, t°</i>⇄</span> 2SO<sub>3</sub></div></div>
+<p><b>Энергия активации</b> — минимальная избыточная энергия, которой должны обладать частицы, чтобы их столкновение привело к реакции.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="q g1" id="q7">
+<div class="qh"><div class="mini"><b>Рв</b><small>7</small></div><h2>Химическое равновесие. Уравнение реакции</h2></div>
+<div class="key"><p><b>Химическое равновесие</b> — состояние обратимой реакции, при котором скорость прямой реакции равна скорости обратной, а концентрации веществ не меняются. Равновесие динамическое: обе реакции продолжают идти.</p></div>
+<h3>Константа равновесия</h3>
+<div class="rx">
+<div>aA + bB ⇄ cC + dD      K = [C]<sup>c</sup>·[D]<sup>d</sup> / ([A]<sup>a</sup>·[B]<sup>b</sup>)</div>
+<div>N<sub>2</sub> + 3H<sub>2</sub> ⇄ 2NH<sub>3</sub> + Q      K = [NH₃]² / ([N₂]·[H₂]³)</div>
+</div>
+<h3>Принцип Ле Шателье</h3>
+<p>Если на систему в равновесии оказать внешнее воздействие, равновесие смещается в сторону, ослабляющую это воздействие.</p>
+<div class="tw"><table>
+<tr><th>Воздействие</th><th>Куда смещается</th><th>Синтез аммиака N<sub>2</sub> + 3H<sub>2</sub> ⇄ 2NH<sub>3</sub> + Q</th></tr>
+<tr><td>↑ концентрации исходных веществ</td><td>вправо</td><td>добавили N<sub>2</sub> → вправо</td></tr>
+<tr><td>Отвод продукта</td><td>вправо</td><td>выводят NH<sub>3</sub> → вправо</td></tr>
+<tr><td>↑ температуры</td><td>в сторону эндотермической реакции</td><td>прямая экзо → влево</td></tr>
+<tr><td>↑ давления (газы)</td><td>в сторону меньшего числа молей газа</td><td>4 моль → 2 моль → вправо</td></tr>
+<tr><td>Катализатор</td><td>не смещает, ускоряет достижение равновесия</td><td>—</td></tr>
+</table></div>
+<p class="tip">Если число молей газа слева и справа одинаково (H<sub>2</sub> + I<sub>2</sub> ⇄ 2HI), давление на равновесие не влияет.</p>
+<h3>Уравнение реакции</h3>
+<p>Уравнение реакции — условная запись реакции с помощью формул и коэффициентов. Основано на <b>законе сохранения массы</b> (Ломоносов, Лавуазье): масса веществ до реакции равна массе после. Число атомов каждого элемента слева и справа должно совпадать.</p>
+<div class="rx">
+<div>Al + O<sub>2</sub> → Al<sub>2</sub>O<sub>3</sub>  <span class="n">схема</span></div>
+<div>4Al + 3O<sub>2</sub> → 2Al<sub>2</sub>O<sub>3</sub>  <span class="n">уравнено: 4 Al и 6 O с каждой стороны</span></div>
+</div>
+<p><b>Термохимическое уравнение</b> указывает тепловой эффект: CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O + 890 кДж.</p>
+<h3>Расчёт по уравнению</h3>
+<div class="rx">
+<div><span class="n">Какая масса воды образуется при сгорании 4 г водорода?</span></div>
+<div>2H<sub>2</sub> + O<sub>2</sub> → 2H<sub>2</sub>O</div>
+<div>n(H₂) = m/M = 4 / 2 = 2 моль  →  n(H₂O) = n(H₂) = 2 моль</div>
+<div>m(H₂O) = n·M = 2 · 18 = 36 г</div>
+</div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="q g2" id="q8">
+<div class="qh"><div class="mini"><b>Рс</b><small>8</small></div><h2>Понятие о растворах, типы растворов</h2></div>
+<div class="key"><p><b>Раствор</b> — однородная (гомогенная) система переменного состава из растворителя, растворённого вещества и продуктов их взаимодействия.</p></div>
+<h3>Дисперсные системы</h3>
+<p>Растворы — частный случай дисперсных систем, где одно вещество (дисперсная фаза) распределено в другом (дисперсионная среда).</p>
+<div class="tw"><table>
+<tr><th>Система</th><th>Размер частиц</th><th>Признаки</th><th>Примеры</th></tr>
+<tr><td>Истинный раствор</td><td>&lt; 1 нм</td><td>прозрачный, не расслаивается</td><td>соль или сахар в воде</td></tr>
+<tr><td>Коллоидный раствор</td><td>1–100 нм</td><td>эффект Тиндаля (светящийся «конус» луча), коагуляция</td><td>кисель, яичный белок, клей</td></tr>
+<tr><td>Суспензия</td><td>&gt; 100 нм, твёрдое в жидком</td><td>мутная, оседает</td><td>глина в воде, известковое молоко</td></tr>
+<tr><td>Эмульсия</td><td>&gt; 100 нм, жидкость в жидкости</td><td>мутная, расслаивается</td><td>молоко, майонез</td></tr>
+</table></div>
+<h3>Типы растворов</h3>
+<ul>
+<li><b>По агрегатному состоянию:</b> газообразные (воздух), жидкие (раствор соли), твёрдые (сплавы: латунь, бронза).</li>
+<li><b>По насыщенности:</b> ненасыщенный (вещество ещё растворяется), насыщенный (растворение прекратилось при данной t, есть равновесие с осадком), пересыщенный (содержит больше, чем насыщенный; неустойчив, при встряхивании выпадают кристаллы).</li>
+<li><b>По количеству растворённого вещества:</b> разбавленные и концентрированные.</li>
+<li><b>По электропроводности:</b> растворы электролитов (NaCl, HCl) и неэлектролитов (сахар, спирт).</li>
+</ul>
+<h3>Растворимость</h3>
+<p>Растворимость — максимальная масса вещества, которая растворяется в 100 г растворителя при данной температуре. По растворимости вещества делят на растворимые (Р), малорастворимые (М) и нерастворимые (Н) — см. таблицу растворимости.</p>
+<ul>
+<li>Растворимость большинства твёрдых веществ с ростом температуры <b>увеличивается</b>.</li>
+<li>Растворимость газов с ростом температуры <b>уменьшается</b>, а с ростом давления увеличивается (газировка).</li>
+<li>«Подобное растворяется в подобном»: полярные вещества — в воде, неполярные (жиры) — в бензине.</li>
+</ul>
+<h3>Растворение — физико-химический процесс</h3>
+<p>Физическая сторона — разрушение кристалла и диффузия; химическая — гидратация (связывание частиц с молекулами воды). Отсюда тепловые эффекты: при растворении H<sub>2</sub>SO<sub>4</sub> и NaOH раствор разогревается, при растворении NH<sub>4</sub>NO<sub>3</sub> — охлаждается.</p>
+<p>Кристаллогидраты — кристаллы, содержащие воду: медный купорос CuSO<sub>4</sub>·5H<sub>2</sub>O, гипс CaSO<sub>4</sub>·2H<sub>2</sub>O, глауберова соль Na<sub>2</sub>SO<sub>4</sub>·10H<sub>2</sub>O.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="q g2" id="q9">
+<div class="qh"><div class="mini"><b>Ис</b><small>9</small></div><h2>Исследование свойств растворов</h2></div>
+<h3>Способы выражения концентрации</h3>
+<div class="tw"><table>
+<tr><th>Величина</th><th>Формула</th><th>Единицы</th></tr>
+<tr><td>Массовая доля</td><td>ω = m(в-ва) / m(р-ра) · 100%</td><td>%, доли</td></tr>
+<tr><td>Масса раствора</td><td>m(р-ра) = m(в-ва) + m(воды) = ρ · V</td><td>г</td></tr>
+<tr><td>Молярная концентрация</td><td>c = n(в-ва) / V(р-ра)</td><td>моль/л</td></tr>
+</table></div>
+<div class="rx">
+<div><span class="n">1) В 180 г воды растворили 20 г соли. Массовая доля?</span></div>
+<div>ω = 20 / (20 + 180) · 100% = 10%</div>
+<div><span class="n">2) Сколько NaCl нужно для 500 г физраствора (0,9%)?</span></div>
+<div>m = 500 · 0,009 = 4,5 г соли и 495,5 г воды</div>
+<div><span class="n">3) 4 г NaOH растворили, объём раствора 500 мл. Молярная концентрация?</span></div>
+<div>n = 4 / 40 = 0,1 моль;  c = 0,1 / 0,5 = 0,2 моль/л</div>
+<div><span class="n">4) Разбавление: масса вещества не меняется</span>   m₁·ω₁ = m₂·ω₂</div>
+</div>
+<h3>Среда раствора и индикаторы</h3>
+<p>Среду выражают водородным показателем pH: pH &lt; 7 — кислая, pH = 7 — нейтральная, pH &gt; 7 — щелочная.</p>
+<div class="tw"><table>
+<tr><th>Индикатор</th><th>Кислая</th><th>Нейтральная</th><th>Щелочная</th></tr>
+<tr><td>Лакмус</td><td>красный</td><td>фиолетовый</td><td>синий</td></tr>
+<tr><td>Метиловый оранжевый</td><td>розовый</td><td>оранжевый</td><td>жёлтый</td></tr>
+<tr><td>Фенолфталеин</td><td>бесцветный</td><td>бесцветный</td><td>малиновый</td></tr>
+<tr><td>Универсальная бумага</td><td>красная</td><td>жёлтая</td><td>синяя</td></tr>
+</table></div>
+<h3>Гидролиз солей</h3>
+<p>Гидролиз — обменное взаимодействие ионов соли с водой. Среду определяет «сильный» участник.</p>
+<div class="tw"><table>
+<tr><th>Соль образована</th><th>Пример</th><th>Среда</th></tr>
+<tr><td>сильным основанием и слабой кислотой</td><td>Na<sub>2</sub>CO<sub>3</sub>, K<sub>2</sub>S, CH<sub>3</sub>COONa</td><td>щелочная</td></tr>
+<tr><td>слабым основанием и сильной кислотой</td><td>ZnCl<sub>2</sub>, AlCl<sub>3</sub>, CuSO<sub>4</sub></td><td>кислая</td></tr>
+<tr><td>сильным основанием и сильной кислотой</td><td>NaCl, KNO<sub>3</sub></td><td>нейтральная, гидролиза нет</td></tr>
+</table></div>
+<div class="rx">
+<div>CO<sub>3</sub><sup>2−</sup> + H<sub>2</sub>O ⇄ HCO<sub>3</sub><sup>−</sup> + OH<sup>−</sup> <span class="n">щелочная среда</span></div>
+<div>Zn<sup>2+</sup> + H<sub>2</sub>O ⇄ ZnOH<sup>+</sup> + H<sup>+</sup> <span class="n">кислая среда</span></div>
+</div>
+<h3>Другие свойства растворов</h3>
+<ul>
+<li><b>Электропроводность:</b> растворы электролитов проводят ток (опыт с лампочкой).</li>
+<li><b>Температура кипения и замерзания:</b> раствор кипит при более высокой и замерзает при более низкой температуре, чем растворитель. Поэтому дороги посыпают солью, а в радиатор заливают антифриз.</li>
+<li><b>Осмос</b> — односторонняя диффузия растворителя через полупроницаемую мембрану в сторону более концентрированного раствора (набухание семян, гибель клеток в солёной воде).</li>
+</ul>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="q g2" id="q10">
+<div class="qh"><div class="mini"><b>Эд</b><small>10</small></div><h2>Электролитическая диссоциация и ионный обмен</h2></div>
+<div class="key"><p><b>Электролитическая диссоциация</b> — распад электролита на ионы при растворении в воде или расплавлении (теория С. Аррениуса, 1887).</p></div>
+<ul>
+<li><b>Электролиты</b> — вещества с ионной или сильно полярной связью: кислоты, основания, соли. Их растворы проводят ток.</li>
+<li><b>Неэлектролиты</b> — сахар, спирт, глюкоза, кислород.</li>
+<li>Причина диссоциации — действие полярных молекул воды (гидратация ионов).</li>
+<li><b>Степень диссоциации</b> α = число распавшихся молекул / общее число молекул.</li>
+</ul>
+<div class="tw"><table>
+<tr><th>Сильные (α → 1)</th><th>Слабые (α &lt; 3%)</th></tr>
+<tr><td>кислоты HCl, HBr, HI, HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub>, HClO<sub>4</sub>; щёлочи NaOH, KOH, Ba(OH)<sub>2</sub>; почти все растворимые соли</td><td>H<sub>2</sub>CO<sub>3</sub>, H<sub>2</sub>S, H<sub>2</sub>SO<sub>3</sub>, HF, CH<sub>3</sub>COOH; NH<sub>3</sub>·H<sub>2</sub>O; нерастворимые основания; вода</td></tr>
+</table></div>
+<h3>Кислоты, основания, соли с позиции теории</h3>
+<div class="rx">
+<div>HNO<sub>3</sub> → H<sup>+</sup> + NO<sub>3</sub><sup>−</sup> <span class="n">кислота: из катионов — только H⁺</span></div>
+<div>Ba(OH)<sub>2</sub> → Ba<sup>2+</sup> + 2OH<sup>−</sup> <span class="n">основание: из анионов — только OH⁻</span></div>
+<div>Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> → 2Al<sup>3+</sup> + 3SO<sub>4</sub><sup>2−</sup> <span class="n">соль: катионы металла и анионы кислотного остатка</span></div>
+<div>CH<sub>3</sub>COOH ⇄ CH<sub>3</sub>COO<sup>−</sup> + H<sup>+</sup> <span class="n">слабый электролит — обратимо</span></div>
+</div>
+<p>Многоосновные кислоты диссоциируют ступенчато:</p>
+<div class="rx">
+<div>H<sub>3</sub>PO<sub>4</sub> ⇄ H<sup>+</sup> + H<sub>2</sub>PO<sub>4</sub><sup>−</sup></div>
+<div>H<sub>2</sub>PO<sub>4</sub><sup>−</sup> ⇄ H<sup>+</sup> + HPO<sub>4</sub><sup>2−</sup></div>
+<div>HPO<sub>4</sub><sup>2−</sup> ⇄ H<sup>+</sup> + PO<sub>4</sub><sup>3−</sup></div>
+</div>
+<h3>Реакции ионного обмена</h3>
+<p>Идут до конца, если образуется <b>осадок</b>, <b>газ</b> или <b>слабый электролит</b> (например, вода). Записываются в молекулярной, полной и сокращённой ионной форме. На ионы не расписывают осадки, газы, слабые электролиты, оксиды и воду.</p>
+<p><b>1. С образованием осадка</b></p>
+<div class="rx">
+<div>BaCl<sub>2</sub> + Na<sub>2</sub>SO<sub>4</sub> → BaSO<sub>4</sub>↓ + 2NaCl</div>
+<div>Ba<sup>2+</sup> + 2Cl<sup>−</sup> + 2Na<sup>+</sup> + SO<sub>4</sub><sup>2−</sup> → BaSO<sub>4</sub>↓ + 2Na<sup>+</sup> + 2Cl<sup>−</sup></div>
+<div>Ba<sup>2+</sup> + SO<sub>4</sub><sup>2−</sup> → BaSO<sub>4</sub>↓</div>
+</div>
+<p><b>2. С выделением газа</b></p>
+<div class="rx">
+<div>Na<sub>2</sub>CO<sub>3</sub> + 2HCl → 2NaCl + H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+<div>2Na<sup>+</sup> + CO<sub>3</sub><sup>2−</sup> + 2H<sup>+</sup> + 2Cl<sup>−</sup> → 2Na<sup>+</sup> + 2Cl<sup>−</sup> + H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+<div>CO<sub>3</sub><sup>2−</sup> + 2H<sup>+</sup> → H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+</div>
+<p><b>3. С образованием воды (нейтрализация)</b></p>
+<div class="rx">
+<div>KOH + HNO<sub>3</sub> → KNO<sub>3</sub> + H<sub>2</sub>O</div>
+<div>K<sup>+</sup> + OH<sup>−</sup> + H<sup>+</sup> + NO<sub>3</sub><sup>−</sup> → K<sup>+</sup> + NO<sub>3</sub><sup>−</sup> + H<sub>2</sub>O</div>
+<div>H<sup>+</sup> + OH<sup>−</sup> → H<sub>2</sub>O</div>
+</div>
+<p class="tip">KNO<sub>3</sub> + NaCl — реакция не идёт: в растворе остаются те же ионы, ничего не связывается.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="q g3" id="q11">
+<div class="qh"><div class="mini"><b>Нк</b><small>11</small></div><h2>Классификация, номенклатура и строение неорганических веществ</h2></div>
+<h3>Классификация</h3>
+<ul>
+<li><b>Простые вещества</b> (из атомов одного элемента): металлы (Na, Fe, Cu) и неметаллы (O<sub>2</sub>, S, P, Cl<sub>2</sub>), благородные газы.</li>
+<li><b>Сложные вещества</b>: оксиды, основания, кислоты, амфотерные гидроксиды, соли (подробно — вопрос 14).</li>
+</ul>
+<p><b>Аллотропия</b> — существование элемента в виде нескольких простых веществ: кислород O<sub>2</sub> и озон O<sub>3</sub>; алмаз, графит, карбин и фуллерен (C); белый и красный фосфор; ромбическая, моноклинная и пластическая сера.</p>
+<h3>Номенклатура</h3>
+<div class="tw"><table>
+<tr><th>Класс</th><th>Правило названия</th><th>Примеры</th></tr>
+<tr><td>Оксиды</td><td>оксид + элемент в род. п. + СО, если переменная</td><td>CaO оксид кальция; Fe<sub>2</sub>O<sub>3</sub> оксид железа(III); SO<sub>2</sub> оксид серы(IV)</td></tr>
+<tr><td>Основания</td><td>гидроксид + металл + СО</td><td>NaOH гидроксид натрия; Fe(OH)<sub>2</sub> гидроксид железа(II)</td></tr>
+<tr><td>Кислоты</td><td>традиционные названия</td><td>см. таблицу ниже</td></tr>
+<tr><td>Средние соли</td><td>анион + катион в род. п. + СО</td><td>FeSO<sub>4</sub> сульфат железа(II); K<sub>3</sub>PO<sub>4</sub> фосфат калия</td></tr>
+<tr><td>Кислые соли</td><td>приставка гидро-</td><td>NaHCO<sub>3</sub> гидрокарбонат натрия</td></tr>
+<tr><td>Основные соли</td><td>приставка гидроксо-</td><td>(CuOH)<sub>2</sub>CO<sub>3</sub> гидроксокарбонат меди(II)</td></tr>
+</table></div>
+<div class="tw"><table>
+<tr><th>Кислота</th><th>Название</th><th>Кислотный остаток</th><th>Название соли</th></tr>
+<tr><td>HF</td><td>фтороводородная (плавиковая)</td><td>F<sup>−</sup></td><td>фторид</td></tr>
+<tr><td>HCl</td><td>хлороводородная (соляная)</td><td>Cl<sup>−</sup></td><td>хлорид</td></tr>
+<tr><td>HBr / HI</td><td>бромоводородная / иодоводородная</td><td>Br<sup>−</sup> / I<sup>−</sup></td><td>бромид / иодид</td></tr>
+<tr><td>H<sub>2</sub>S</td><td>сероводородная</td><td>S<sup>2−</sup></td><td>сульфид</td></tr>
+<tr><td>H<sub>2</sub>SO<sub>4</sub></td><td>серная</td><td>SO<sub>4</sub><sup>2−</sup></td><td>сульфат</td></tr>
+<tr><td>H<sub>2</sub>SO<sub>3</sub></td><td>сернистая</td><td>SO<sub>3</sub><sup>2−</sup></td><td>сульфит</td></tr>
+<tr><td>HNO<sub>3</sub></td><td>азотная</td><td>NO<sub>3</sub><sup>−</sup></td><td>нитрат</td></tr>
+<tr><td>HNO<sub>2</sub></td><td>азотистая</td><td>NO<sub>2</sub><sup>−</sup></td><td>нитрит</td></tr>
+<tr><td>H<sub>2</sub>CO<sub>3</sub></td><td>угольная</td><td>CO<sub>3</sub><sup>2−</sup></td><td>карбонат</td></tr>
+<tr><td>H<sub>2</sub>SiO<sub>3</sub></td><td>кремниевая</td><td>SiO<sub>3</sub><sup>2−</sup></td><td>силикат</td></tr>
+<tr><td>H<sub>3</sub>PO<sub>4</sub></td><td>(орто)фосфорная</td><td>PO<sub>4</sub><sup>3−</sup></td><td>фосфат</td></tr>
+<tr><td>CH<sub>3</sub>COOH</td><td>уксусная</td><td>CH<sub>3</sub>COO<sup>−</sup></td><td>ацетат</td></tr>
+</table></div>
+<h3>Составление формулы по названию</h3>
+<div class="rx">
+<div><span class="n">Сульфат алюминия: Al⁺³ и SO₄²⁻ → НОК зарядов = 6</span></div>
+<div>Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>   <span class="n">2·(+3) + 3·(−2) = 0</span></div>
+</div>
+<h3>Строение</h3>
+<ul>
+<li>Соли, щёлочи, оксиды активных металлов — ионное строение, ионная решётка.</li>
+<li>Кислоты, большинство оксидов неметаллов (CO<sub>2</sub>, SO<sub>2</sub>) — молекулярное строение, ковалентная полярная связь.</li>
+<li>SiO<sub>2</sub>, Al<sub>2</sub>O<sub>3</sub> — атомная (немолекулярная) решётка.</li>
+<li>В кислородсодержащих кислотах атомы H связаны с центральным атомом через кислород: в H<sub>2</sub>SO<sub>4</sub> две группы –OH и два атома =O при сере.</li>
+</ul>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="q g3" id="q12">
+<div class="qh"><div class="mini"><b>Ме</b><small>12</small></div><h2>Физико-химические свойства металлов</h2></div>
+<h3>Положение и строение</h3>
+<p>Металлы расположены левее и ниже диагонали B–At, это более 80% элементов. На внешнем уровне у них 1–3 электрона, радиусы большие, поэтому атомы легко отдают электроны. <b>Металлы — восстановители</b>.</p>
+<h3>Физические свойства</h3>
+<p>Обусловлены металлической связью и решёткой:</p>
+<ul>
+<li>металлический блеск, непрозрачность;</li>
+<li>электро- и теплопроводность (лучшие: Ag > Cu > Au > Al);</li>
+<li>пластичность, ковкость (самый пластичный — золото);</li>
+<li>температура плавления: от −39 °C (ртуть) до 3410 °C (вольфрам);</li>
+<li>плотность: лёгкие (Li, Na, Al) и тяжёлые (Pb, Os); твёрдость: самый твёрдый — хром, самые мягкие — щелочные металлы.</li>
+</ul>
+<h3>Электрохимический ряд напряжений</h3>
+<div class="rx"><div>Li  K  Ba  Ca  Na  Mg  Al  Zn  Fe  Ni  Sn  Pb  <b>(H)</b>  Cu  Hg  Ag  Pt  Au</div>
+<div><span class="n">Слева направо восстановительная активность падает.</span></div></div>
+<h3>Химические свойства</h3>
+<p><b>1. С неметаллами</b></p>
+<div class="rx">
+<div>2Mg + O<sub>2</sub> <span class="ar"><i>t°</i>→</span> 2MgO</div>
+<div>2Fe + 3Cl<sub>2</sub> <span class="ar"><i>t°</i>→</span> 2FeCl<sub>3</sub></div>
+<div>Fe + S <span class="ar"><i>t°</i>→</span> FeS</div>
+<div>6Li + N<sub>2</sub> → 2Li<sub>3</sub>N <span class="n">литий — при комнатной температуре</span></div>
+</div>
+<p><b>2. С водой</b> — активные металлы (до Mg) при обычных условиях, средние — при нагревании, металлы после (H) не реагируют.</p>
+<div class="rx">
+<div>2Na + 2H<sub>2</sub>O → 2NaOH + H<sub>2</sub>↑</div>
+<div>Ca + 2H<sub>2</sub>O → Ca(OH)<sub>2</sub> + H<sub>2</sub>↑</div>
+<div>3Fe + 4H<sub>2</sub>O <span class="ar"><i>t°</i>→</span> Fe<sub>3</sub>O<sub>4</sub> + 4H<sub>2</sub>↑ <span class="n">с водяным паром</span></div>
+</div>
+<p><b>3. С кислотами</b> — металлы, стоящие в ряду до водорода, вытесняют его из растворов кислот (кроме HNO<sub>3</sub> и конц. H<sub>2</sub>SO<sub>4</sub>).</p>
+<div class="rx">
+<div>Zn + 2HCl → ZnCl<sub>2</sub> + H<sub>2</sub>↑</div>
+<div>Fe + H<sub>2</sub>SO<sub>4</sub>(разб) → FeSO<sub>4</sub> + H<sub>2</sub>↑</div>
+<div>Cu + HCl → реакция не идёт</div>
+</div>
+<p class="tip">Железо, алюминий и хром пассивируются концентрированными HNO<sub>3</sub> и H<sub>2</sub>SO<sub>4</sub> на холоду — поэтому эти кислоты перевозят в стальных цистернах.</p>
+<p><b>4. С растворами солей</b> — более активный металл вытесняет менее активный.</p>
+<div class="rx">
+<div>Fe + CuSO<sub>4</sub> → FeSO<sub>4</sub> + Cu <span class="n">гвоздь покрывается красной медью</span></div>
+<div>Cu + 2AgNO<sub>3</sub> → Cu(NO<sub>3</sub>)<sub>2</sub> + 2Ag</div>
+</div>
+<p><b>5. С оксидами менее активных металлов</b> (металлотермия)</p>
+<div class="rx"><div>2Al + Fe<sub>2</sub>O<sub>3</sub> <span class="ar"><i>t°</i>→</span> Al<sub>2</sub>O<sub>3</sub> + 2Fe <span class="n">алюминотермия, сварка рельсов</span></div></div>
+<p><b>6. Амфотерные металлы (Al, Zn) — со щелочами</b></p>
+<div class="rx"><div>2Al + 2NaOH + 6H<sub>2</sub>O → 2Na[Al(OH)<sub>4</sub>] + 3H<sub>2</sub>↑</div></div>
+<h3>Коррозия</h3>
+<p>Коррозия — самопроизвольное разрушение металлов под действием среды. Бывает химическая (в газах, неэлектролитах) и электрохимическая (в растворах электролитов, при контакте разных металлов).</p>
+<div class="rx"><div>4Fe + 3O<sub>2</sub> + 6H<sub>2</sub>O → 4Fe(OH)<sub>3</sub> <span class="n">ржавление железа</span></div></div>
+<p>Защита: покрытия (краски, лаки, цинкование, хромирование), легирование (нержавеющая сталь), протекторы (более активный металл, например Zn на корпусе судна), ингибиторы.</p>
+<h3>Получение металлов</h3>
+<div class="rx">
+<div>Fe<sub>2</sub>O<sub>3</sub> + 3CO <span class="ar"><i>t°</i>→</span> 2Fe + 3CO<sub>2</sub> <span class="n">пирометаллургия (доменная печь)</span></div>
+<div>CuSO<sub>4</sub> + Fe → FeSO<sub>4</sub> + Cu <span class="n">гидрометаллургия</span></div>
+<div>2NaCl <span class="ar"><i>электролиз расплава</i>→</span> 2Na + Cl<sub>2</sub>↑ <span class="n">электрометаллургия</span></div>
+</div>
+<p><b>Сплавы:</b> чугун (Fe + 2–4% C), сталь (Fe + до 2% C), бронза (Cu + Sn), латунь (Cu + Zn), дюралюминий (Al + Cu, Mg, Mn).</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="q g3" id="q13">
+<div class="qh"><div class="mini"><b>Нм</b><small>13</small></div><h2>Физико-химические свойства неметаллов</h2></div>
+<h3>Положение и строение</h3>
+<p>Неметаллы расположены правее и выше диагонали B–At; к ним относится и водород. Атомы имеют 4–8 электронов на внешнем уровне (кроме H, He, B), малые радиусы, высокую электроотрицательность. Поэтому неметаллы в основном <b>окислители</b>, но (кроме фтора) могут быть и восстановителями.</p>
+<p>Ряд окислительной активности: F > O > N > Cl > Br > I > S > C > P > Si > H (упрощённо).</p>
+<h3>Физические свойства</h3>
+<ul>
+<li>Агрегатное состояние: газы (H<sub>2</sub>, N<sub>2</sub>, O<sub>2</sub>, F<sub>2</sub>, Cl<sub>2</sub>, благородные газы), жидкость (Br<sub>2</sub>), твёрдые (C, S, P, I<sub>2</sub>, Si).</li>
+<li>Цвет разный: Cl<sub>2</sub> жёлто-зелёный, Br<sub>2</sub> красно-бурый, I<sub>2</sub> фиолетово-чёрный, сера жёлтая.</li>
+<li>Как правило, не проводят ток и тепло (исключения — графит, кремний как полупроводник).</li>
+<li>Решётки молекулярные (O<sub>2</sub>, I<sub>2</sub>, S<sub>8</sub>) или атомные (алмаз, кремний, бор).</li>
+</ul>
+<h3>Окислительные свойства</h3>
+<p><b>С металлами</b></p>
+<div class="rx">
+<div>2Na + Cl<sub>2</sub> → 2NaCl</div>
+<div>3Mg + N<sub>2</sub> <span class="ar"><i>t°</i>→</span> Mg<sub>3</sub>N<sub>2</sub></div>
+<div>2Al + 3S <span class="ar"><i>t°</i>→</span> Al<sub>2</sub>S<sub>3</sub></div>
+</div>
+<p><b>С водородом</b></p>
+<div class="rx">
+<div>H<sub>2</sub> + Cl<sub>2</sub> <span class="ar"><i>hν</i>→</span> 2HCl</div>
+<div>N<sub>2</sub> + 3H<sub>2</sub> <span class="ar"><i>t°, p, кат.</i>⇄</span> 2NH<sub>3</sub></div>
+<div>H<sub>2</sub> + S <span class="ar"><i>t°</i>→</span> H<sub>2</sub>S</div>
+</div>
+<p><b>Более активный галоген вытесняет менее активный из солей</b></p>
+<div class="rx">
+<div>Cl<sub>2</sub> + 2KBr → 2KCl + Br<sub>2</sub></div>
+<div>Cl<sub>2</sub> + 2KI → 2KCl + I<sub>2</sub> <span class="n">раствор буреет</span></div>
+</div>
+<h3>Восстановительные свойства</h3>
+<p><b>С кислородом</b> (кроме F, благородных газов)</p>
+<div class="rx">
+<div>S + O<sub>2</sub> <span class="ar"><i>t°</i>→</span> SO<sub>2</sub></div>
+<div>4P + 5O<sub>2</sub> <span class="ar"><i>t°</i>→</span> 2P<sub>2</sub>O<sub>5</sub></div>
+<div>N<sub>2</sub> + O<sub>2</sub> <span class="ar"><i>электр. разряд</i>⇄</span> 2NO</div>
+</div>
+<p><b>С кислотами-окислителями</b></p>
+<div class="rx">
+<div>S + 2H<sub>2</sub>SO<sub>4</sub>(конц) <span class="ar"><i>t°</i>→</span> 3SO<sub>2</sub>↑ + 2H<sub>2</sub>O</div>
+<div>C + 4HNO<sub>3</sub>(конц) <span class="ar"><i>t°</i>→</span> CO<sub>2</sub>↑ + 4NO<sub>2</sub>↑ + 2H<sub>2</sub>O</div>
+</div>
+<p><b>С оксидами металлов</b> (получение металлов)</p>
+<div class="rx">
+<div>CuO + H<sub>2</sub> <span class="ar"><i>t°</i>→</span> Cu + H<sub>2</sub>O</div>
+<div>ZnO + C <span class="ar"><i>t°</i>→</span> Zn + CO</div>
+</div>
+<h3>Диспропорционирование галогенов</h3>
+<div class="rx">
+<div>Cl<sub>2</sub> + H<sub>2</sub>O ⇄ HCl + HClO <span class="n">хлорная вода</span></div>
+<div>Cl<sub>2</sub> + 2NaOH → NaCl + NaClO + H<sub>2</sub>O <span class="n">на холоду</span></div>
+</div>
+<h3>Соединения неметаллов</h3>
+<p>Летучие водородные соединения: CH<sub>4</sub>, NH<sub>3</sub>, H<sub>2</sub>O, HF, H<sub>2</sub>S, HCl. Кислотные свойства растут по периоду вправо и по группе вниз (HF &lt; HCl &lt; HBr &lt; HI). Высшие оксиды неметаллов — кислотные.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="q g3" id="q14">
+<div class="qh"><div class="mini"><b>Кл</b><small>14</small></div><h2>Классификация сложных неорганических соединений</h2></div>
+<h3>Оксиды</h3>
+<p>Сложные вещества из двух элементов, один из которых — кислород в СО −2.</p>
+<div class="tw"><table>
+<tr><th>Вид</th><th>Кем образованы</th><th>Примеры</th></tr>
+<tr><td>Основные</td><td>металлы в СО +1, +2</td><td>Na<sub>2</sub>O, CaO, CuO, FeO</td></tr>
+<tr><td>Кислотные</td><td>неметаллы; металлы в СО +5…+7</td><td>CO<sub>2</sub>, SO<sub>3</sub>, P<sub>2</sub>O<sub>5</sub>, N<sub>2</sub>O<sub>5</sub>, CrO<sub>3</sub>, Mn<sub>2</sub>O<sub>7</sub></td></tr>
+<tr><td>Амфотерные</td><td>металлы в СО +3, +4, а также Zn, Be</td><td>ZnO, Al<sub>2</sub>O<sub>3</sub>, BeO, Fe<sub>2</sub>O<sub>3</sub>, Cr<sub>2</sub>O<sub>3</sub></td></tr>
+<tr><td>Несолеобразующие</td><td>не образуют солей</td><td>CO, NO, N<sub>2</sub>O</td></tr>
+</table></div>
+<div class="rx">
+<div>CaO + H<sub>2</sub>O → Ca(OH)<sub>2</sub> <span class="n">основный оксид + вода (только оксиды щелочных и щёлочноземельных металлов)</span></div>
+<div>CuO + 2HCl → CuCl<sub>2</sub> + H<sub>2</sub>O <span class="n">основный оксид + кислота</span></div>
+<div>SO<sub>3</sub> + H<sub>2</sub>O → H<sub>2</sub>SO<sub>4</sub> <span class="n">кислотный оксид + вода (кроме SiO₂)</span></div>
+<div>CO<sub>2</sub> + 2NaOH → Na<sub>2</sub>CO<sub>3</sub> + H<sub>2</sub>O <span class="n">кислотный оксид + щёлочь</span></div>
+<div>CaO + CO<sub>2</sub> → CaCO<sub>3</sub> <span class="n">основный + кислотный</span></div>
+<div>ZnO + 2HCl → ZnCl<sub>2</sub> + H<sub>2</sub>O <span class="n">амфотерный с кислотой</span></div>
+<div>ZnO + 2NaOH + H<sub>2</sub>O → Na<sub>2</sub>[Zn(OH)<sub>4</sub>] <span class="n">амфотерный со щёлочью</span></div>
+</div>
+<h3>Основания</h3>
+<p>Сложные вещества из атомов металла и гидроксогрупп –OH.</p>
+<ul>
+<li><b>Растворимые (щёлочи):</b> LiOH, NaOH, KOH, Ca(OH)<sub>2</sub>, Ba(OH)<sub>2</sub>.</li>
+<li><b>Нерастворимые:</b> Cu(OH)<sub>2</sub>, Fe(OH)<sub>3</sub>, Mg(OH)<sub>2</sub>.</li>
+<li>По кислотности (числу OH): однокислотные NaOH, двухкислотные Ca(OH)<sub>2</sub>.</li>
+</ul>
+<div class="rx">
+<div>2NaOH + H<sub>2</sub>SO<sub>4</sub> → Na<sub>2</sub>SO<sub>4</sub> + 2H<sub>2</sub>O <span class="n">нейтрализация</span></div>
+<div>CuSO<sub>4</sub> + 2NaOH → Cu(OH)<sub>2</sub>↓ + Na<sub>2</sub>SO<sub>4</sub> <span class="n">щёлочь + соль</span></div>
+<div>Cu(OH)<sub>2</sub> <span class="ar"><i>t°</i>→</span> CuO + H<sub>2</sub>O <span class="n">нерастворимые основания разлагаются</span></div>
+</div>
+<h3>Амфотерные гидроксиды</h3>
+<p>Zn(OH)<sub>2</sub>, Al(OH)<sub>3</sub>, Be(OH)<sub>2</sub>, Cr(OH)<sub>3</sub> — реагируют и с кислотами, и со щелочами.</p>
+<div class="rx">
+<div>Al(OH)<sub>3</sub> + 3HCl → AlCl<sub>3</sub> + 3H<sub>2</sub>O</div>
+<div>Al(OH)<sub>3</sub> + NaOH → Na[Al(OH)<sub>4</sub>]</div>
+</div>
+<h3>Кислоты</h3>
+<p>Сложные вещества из атомов водорода, способных замещаться на металл, и кислотного остатка. Виды: кислородсодержащие (H<sub>2</sub>SO<sub>4</sub>) и бескислородные (HCl); одно-, двух-, трёхосновные; сильные и слабые. Свойства — вопрос 16.</p>
+<h3>Соли</h3>
+<div class="tw"><table>
+<tr><th>Вид</th><th>Состав</th><th>Примеры</th></tr>
+<tr><td>Средние</td><td>металл + кислотный остаток</td><td>Na<sub>2</sub>SO<sub>4</sub>, CaCO<sub>3</sub></td></tr>
+<tr><td>Кислые</td><td>H замещён не полностью</td><td>NaHSO<sub>4</sub>, Ca(HCO<sub>3</sub>)<sub>2</sub></td></tr>
+<tr><td>Основные</td><td>OH замещены не полностью</td><td>Mg(OH)Cl, (CuOH)<sub>2</sub>CO<sub>3</sub></td></tr>
+<tr><td>Двойные</td><td>два разных катиона</td><td>KAl(SO<sub>4</sub>)<sub>2</sub> (алюмокалиевые квасцы)</td></tr>
+<tr><td>Комплексные</td><td>комплексный ион</td><td>K<sub>4</sub>[Fe(CN)<sub>6</sub>], Na[Al(OH)<sub>4</sub>]</td></tr>
+</table></div>
+<div class="rx">
+<div>AgNO<sub>3</sub> + NaCl → AgCl↓ + NaNO<sub>3</sub> <span class="n">соль + соль</span></div>
+<div>CaCO<sub>3</sub> <span class="ar"><i>t°</i>→</span> CaO + CO<sub>2</sub>↑ <span class="n">разложение</span></div>
+<div>Fe + CuSO<sub>4</sub> → FeSO<sub>4</sub> + Cu <span class="n">соль + металл</span></div>
+</div>
+<h3>Генетическая связь</h3>
+<div class="rx">
+<div>Ca → CaO → Ca(OH)<sub>2</sub> → CaCO<sub>3</sub> <span class="n">металл → основный оксид → основание → соль</span></div>
+<div>S → SO<sub>2</sub> → SO<sub>3</sub> → H<sub>2</sub>SO<sub>4</sub> → BaSO<sub>4</sub> <span class="n">неметалл → кислотный оксид → кислота → соль</span></div>
+</div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 15 ============ -->
+<section class="q g3" id="q15">
+<div class="qh"><div class="mini"><b>Кр</b><small>15</small></div><h2>Идентификация неорганических веществ. Качественные реакции на катионы и анионы</h2></div>
+<p><b>Качественная реакция</b> — реакция, позволяющая обнаружить ион или вещество по заметному признаку: выпадению осадка определённого цвета, выделению газа, изменению окраски раствора или пламени.</p>
+<h3>Катионы</h3>
+<div class="tw"><table>
+<tr><th>Ион</th><th>Реактив</th><th>Признак</th><th>Сокращённое уравнение</th></tr>
+<tr><td>H<sup>+</sup></td><td>лакмус, метилоранж</td><td>красный / розовый цвет</td><td>—</td></tr>
+<tr><td>NH<sub>4</sub><sup>+</sup></td><td>щёлочь, нагрев</td><td>запах аммиака, влажная лакмусовая бумажка синеет</td><td>NH<sub>4</sub><sup>+</sup> + OH<sup>−</sup> <span class="ar"><i>t°</i>→</span> NH<sub>3</sub>↑ + H<sub>2</sub>O</td></tr>
+<tr><td>Ag<sup>+</sup></td><td>Cl<sup>−</sup></td><td>белый творожистый осадок</td><td>Ag<sup>+</sup> + Cl<sup>−</sup> → AgCl↓</td></tr>
+<tr><td>Ba<sup>2+</sup></td><td>SO<sub>4</sub><sup>2−</sup></td><td>белый осадок, нерастворим в кислотах</td><td>Ba<sup>2+</sup> + SO<sub>4</sub><sup>2−</sup> → BaSO<sub>4</sub>↓</td></tr>
+<tr><td>Ca<sup>2+</sup></td><td>CO<sub>3</sub><sup>2−</sup></td><td>белый осадок</td><td>Ca<sup>2+</sup> + CO<sub>3</sub><sup>2−</sup> → CaCO<sub>3</sub>↓</td></tr>
+<tr><td>Cu<sup>2+</sup></td><td>щёлочь</td><td>голубой осадок</td><td>Cu<sup>2+</sup> + 2OH<sup>−</sup> → Cu(OH)<sub>2</sub>↓</td></tr>
+<tr><td>Fe<sup>2+</sup></td><td>щёлочь</td><td>серо-зелёный осадок, буреет на воздухе</td><td>Fe<sup>2+</sup> + 2OH<sup>−</sup> → Fe(OH)<sub>2</sub>↓</td></tr>
+<tr><td>Fe<sup>2+</sup></td><td>K<sub>3</sub>[Fe(CN)<sub>6</sub>]</td><td>синий осадок (турнбулева синь)</td><td>—</td></tr>
+<tr><td>Fe<sup>3+</sup></td><td>щёлочь</td><td>бурый осадок</td><td>Fe<sup>3+</sup> + 3OH<sup>−</sup> → Fe(OH)<sub>3</sub>↓</td></tr>
+<tr><td>Fe<sup>3+</sup></td><td>KSCN (роданид)</td><td>кроваво-красный раствор</td><td>Fe<sup>3+</sup> + 3SCN<sup>−</sup> → Fe(SCN)<sub>3</sub></td></tr>
+<tr><td>Fe<sup>3+</sup></td><td>K<sub>4</sub>[Fe(CN)<sub>6</sub>]</td><td>синий осадок (берлинская лазурь)</td><td>—</td></tr>
+<tr><td>Al<sup>3+</sup>, Zn<sup>2+</sup></td><td>щёлочь по каплям</td><td>белый осадок, растворяется в избытке щёлочи</td><td>Al<sup>3+</sup> + 3OH<sup>−</sup> → Al(OH)<sub>3</sub>↓<br>Al(OH)<sub>3</sub> + OH<sup>−</sup> → [Al(OH)<sub>4</sub>]<sup>−</sup></td></tr>
+</table></div>
+<p><b>Окрашивание пламени:</b> Li⁺ — карминово-красное, Na⁺ — жёлтое, K⁺ — фиолетовое, Ca²⁺ — кирпично-красное, Sr²⁺ — карминово-красное, Ba²⁺ — жёлто-зелёное, Cu²⁺ — зелёное.</p>
+<h3>Анионы</h3>
+<div class="tw"><table>
+<tr><th>Ион</th><th>Реактив</th><th>Признак</th><th>Сокращённое уравнение</th></tr>
+<tr><td>OH<sup>−</sup></td><td>фенолфталеин</td><td>малиновая окраска</td><td>—</td></tr>
+<tr><td>Cl<sup>−</sup></td><td>AgNO<sub>3</sub></td><td>белый творожистый осадок</td><td>Ag<sup>+</sup> + Cl<sup>−</sup> → AgCl↓</td></tr>
+<tr><td>Br<sup>−</sup></td><td>AgNO<sub>3</sub></td><td>светло-жёлтый осадок</td><td>Ag<sup>+</sup> + Br<sup>−</sup> → AgBr↓</td></tr>
+<tr><td>I<sup>−</sup></td><td>AgNO<sub>3</sub></td><td>жёлтый осадок</td><td>Ag<sup>+</sup> + I<sup>−</sup> → AgI↓</td></tr>
+<tr><td>SO<sub>4</sub><sup>2−</sup></td><td>BaCl<sub>2</sub></td><td>белый осадок</td><td>Ba<sup>2+</sup> + SO<sub>4</sub><sup>2−</sup> → BaSO<sub>4</sub>↓</td></tr>
+<tr><td>CO<sub>3</sub><sup>2−</sup></td><td>кислота</td><td>«вскипание», газ мутит известковую воду</td><td>CO<sub>3</sub><sup>2−</sup> + 2H<sup>+</sup> → H<sub>2</sub>O + CO<sub>2</sub>↑</td></tr>
+<tr><td>SO<sub>3</sub><sup>2−</sup></td><td>кислота</td><td>газ с резким запахом</td><td>SO<sub>3</sub><sup>2−</sup> + 2H<sup>+</sup> → H<sub>2</sub>O + SO<sub>2</sub>↑</td></tr>
+<tr><td>S<sup>2−</sup></td><td>соль свинца / кислота</td><td>чёрный осадок / запах тухлых яиц</td><td>Pb<sup>2+</sup> + S<sup>2−</sup> → PbS↓</td></tr>
+<tr><td>PO<sub>4</sub><sup>3−</sup></td><td>AgNO<sub>3</sub></td><td>жёлтый осадок</td><td>3Ag<sup>+</sup> + PO<sub>4</sub><sup>3−</sup> → Ag<sub>3</sub>PO<sub>4</sub>↓</td></tr>
+<tr><td>SiO<sub>3</sub><sup>2−</sup></td><td>кислота</td><td>студенистый осадок</td><td>SiO<sub>3</sub><sup>2−</sup> + 2H<sup>+</sup> → H<sub>2</sub>SiO<sub>3</sub>↓</td></tr>
+<tr><td>NO<sub>3</sub><sup>−</sup></td><td>Cu + конц. H<sub>2</sub>SO<sub>4</sub>, нагрев</td><td>бурый газ NO<sub>2</sub></td><td>—</td></tr>
+</table></div>
+<h3>Распознавание газов</h3>
+<div class="tw"><table>
+<tr><th>Газ</th><th>Способ</th></tr>
+<tr><td>O<sub>2</sub></td><td>тлеющая лучина вспыхивает</td></tr>
+<tr><td>H<sub>2</sub></td><td>горит с характерным хлопком</td></tr>
+<tr><td>CO<sub>2</sub></td><td>гасит лучину, мутит известковую воду: Ca(OH)<sub>2</sub> + CO<sub>2</sub> → CaCO<sub>3</sub>↓ + H<sub>2</sub>O</td></tr>
+<tr><td>NH<sub>3</sub></td><td>резкий запах, влажная лакмусовая бумажка синеет, белый «дым» с HCl</td></tr>
+<tr><td>Cl<sub>2</sub></td><td>жёлто-зелёный, иодкрахмальная бумажка синеет</td></tr>
+</table></div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 16 ============ -->
+<section class="q g3" id="q16">
+<div class="qh"><div class="mini"><b>Кс</b><small>16</small></div><h2>Кислоты, их свойства и значение в химии</h2></div>
+<div class="key"><p><b>Кислоты</b> — сложные вещества из атомов водорода, способных замещаться на атомы металла, и кислотного остатка. С позиции теории диссоциации — электролиты, образующие в растворе из катионов только H<sup>+</sup>.</p></div>
+<h3>Классификация</h3>
+<div class="tw"><table>
+<tr><th>Признак</th><th>Группы</th></tr>
+<tr><td>Наличие кислорода</td><td>кислородсодержащие HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub>; бескислородные HCl, H<sub>2</sub>S</td></tr>
+<tr><td>Основность (число H)</td><td>одноосновные HCl, HNO<sub>3</sub>; двухосновные H<sub>2</sub>SO<sub>4</sub>, H<sub>2</sub>CO<sub>3</sub>; трёхосновные H<sub>3</sub>PO<sub>4</sub></td></tr>
+<tr><td>Сила</td><td>сильные HCl, HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub>; слабые H<sub>2</sub>S, H<sub>2</sub>CO<sub>3</sub>, CH<sub>3</sub>COOH</td></tr>
+<tr><td>Устойчивость</td><td>устойчивые H<sub>2</sub>SO<sub>4</sub>; неустойчивые H<sub>2</sub>CO<sub>3</sub>, H<sub>2</sub>SO<sub>3</sub></td></tr>
+<tr><td>Летучесть</td><td>летучие HCl, HNO<sub>3</sub>; нелетучие H<sub>2</sub>SO<sub>4</sub>, H<sub>3</sub>PO<sub>4</sub></td></tr>
+</table></div>
+<h3>Общие химические свойства</h3>
+<p><b>1. Изменяют окраску индикаторов:</b> лакмус — красный, метилоранж — розовый.</p>
+<p><b>2. С металлами, стоящими до водорода</b></p>
+<div class="rx"><div>Mg + 2HCl → MgCl<sub>2</sub> + H<sub>2</sub>↑</div></div>
+<p><b>3. С основными и амфотерными оксидами</b></p>
+<div class="rx"><div>CuO + H<sub>2</sub>SO<sub>4</sub> → CuSO<sub>4</sub> + H<sub>2</sub>O <span class="n">чёрный порошок растворяется, раствор голубой</span></div></div>
+<p><b>4. С основаниями (нейтрализация)</b></p>
+<div class="rx">
+<div>H<sub>2</sub>SO<sub>4</sub> + 2KOH → K<sub>2</sub>SO<sub>4</sub> + 2H<sub>2</sub>O</div>
+<div>2HCl + Cu(OH)<sub>2</sub> → CuCl<sub>2</sub> + 2H<sub>2</sub>O <span class="n">растворяет нерастворимое основание</span></div>
+</div>
+<p><b>5. С солями</b> — если выпадает осадок, выделяется газ или образуется более слабая кислота.</p>
+<div class="rx">
+<div>H<sub>2</sub>SO<sub>4</sub> + BaCl<sub>2</sub> → BaSO<sub>4</sub>↓ + 2HCl</div>
+<div>CaCO<sub>3</sub> + 2HCl → CaCl<sub>2</sub> + H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+<div>Na<sub>2</sub>SiO<sub>3</sub> + 2HCl → 2NaCl + H<sub>2</sub>SiO<sub>3</sub>↓</div>
+</div>
+<p class="tip">Ряд кислот по силе: H<sub>2</sub>SO<sub>4</sub>, HNO<sub>3</sub>, HCl > H<sub>3</sub>PO<sub>4</sub> > CH<sub>3</sub>COOH > H<sub>2</sub>CO<sub>3</sub> > H<sub>2</sub>SiO<sub>3</sub>. Каждая кислота вытесняет стоящие правее из их солей.</p>
+<p><b>6. Разложение неустойчивых кислот</b></p>
+<div class="rx">
+<div>H<sub>2</sub>CO<sub>3</sub> → H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+<div>H<sub>2</sub>SiO<sub>3</sub> <span class="ar"><i>t°</i>→</span> SiO<sub>2</sub> + H<sub>2</sub>O</div>
+</div>
+<h3>Особые свойства кислот-окислителей</h3>
+<p>Азотная кислота любой концентрации и концентрированная серная кислота реагируют с металлами без выделения водорода — окислителем выступает N⁺⁵ или S⁺⁶. Реагируют даже с медью и серебром.</p>
+<div class="rx">
+<div>Cu + 4HNO<sub>3</sub>(конц) → Cu(NO<sub>3</sub>)<sub>2</sub> + 2NO<sub>2</sub>↑ + 2H<sub>2</sub>O <span class="n">бурый газ</span></div>
+<div>3Cu + 8HNO<sub>3</sub>(разб) → 3Cu(NO<sub>3</sub>)<sub>2</sub> + 2NO↑ + 4H<sub>2</sub>O</div>
+<div>Cu + 2H<sub>2</sub>SO<sub>4</sub>(конц) <span class="ar"><i>t°</i>→</span> CuSO<sub>4</sub> + SO<sub>2</sub>↑ + 2H<sub>2</sub>O</div>
+</div>
+<div class="rx">
+<div>Cu<sup>0</sup> − 2e → Cu<sup>+2</sup>   | 1 |  <span class="n">восстановитель</span></div>
+<div>N<sup>+5</sup> + 1e → N<sup>+4</sup>   | 2 |  <span class="n">окислитель (для реакции с конц. HNO₃)</span></div>
+</div>
+<p>Концентрированная H<sub>2</sub>SO<sub>4</sub> гигроскопична и обугливает органические вещества (сахар, бумагу). Правило разбавления: <b>кислоту льют в воду</b>, а не наоборот.</p>
+<h3>Значение</h3>
+<ul>
+<li>Серная кислота — «хлеб химической промышленности»: производство удобрений, красителей, моющих средств, аккумуляторов, очистка нефтепродуктов.</li>
+<li>Азотная — производство азотных удобрений, красителей, лекарств, полимеров.</li>
+<li>Соляная — травление металлов, получение хлоридов; входит в состав желудочного сока.</li>
+<li>Фосфорная — фосфорные удобрения, пищевая добавка E338.</li>
+<li>Органические кислоты — уксусная, лимонная, молочная в пищевой промышленности, аскорбиновая (витамин C).</li>
+<li>В химии кислоты — реагенты для получения солей, катализаторы (этерификация, гидратация), средства анализа.</li>
+</ul>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 17 ============ -->
+<section class="q g4" id="q17">
+<div class="qh"><div class="mini"><b>Ор</b><small>17</small></div><h2>Классификация, строение и номенклатура органических веществ</h2></div>
+<p><b>Органическая химия</b> — химия соединений углерода (кроме CO, CO<sub>2</sub>, угольной кислоты и её солей, карбидов, цианидов).</p>
+<h3>Теория химического строения А. М. Бутлерова (1861)</h3>
+<ol>
+<li>Атомы в молекулах соединены в определённой последовательности согласно их валентности. Углерод всегда четырёхвалентен.</li>
+<li>Свойства веществ зависят не только от состава, но и от химического строения.</li>
+<li>По свойствам можно установить строение, а по строению — предсказать свойства.</li>
+<li>Атомы и группы атомов в молекуле взаимно влияют друг на друга.</li>
+</ol>
+<h3>Изомерия и гомология</h3>
+<p><b>Изомеры</b> — вещества с одинаковым составом, но разным строением и свойствами.</p>
+<div class="rx">
+<div>C<sub>4</sub>H<sub>10</sub>:  CH<sub>3</sub>–CH<sub>2</sub>–CH<sub>2</sub>–CH<sub>3</sub> бутан   и   CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH<sub>3</sub> 2-метилпропан <span class="n">изомерия углеродного скелета</span></div>
+<div>C<sub>2</sub>H<sub>6</sub>O:  CH<sub>3</sub>–CH<sub>2</sub>–OH этанол   и   CH<sub>3</sub>–O–CH<sub>3</sub> диметиловый эфир <span class="n">межклассовая изомерия</span></div>
+<div>C<sub>4</sub>H<sub>8</sub>:  бутен-1 CH<sub>2</sub>=CH–CH<sub>2</sub>–CH<sub>3</sub>  и  бутен-2 CH<sub>3</sub>–CH=CH–CH<sub>3</sub> <span class="n">изомерия положения кратной связи</span></div>
+</div>
+<p>Бутен-2 существует ещё и в виде <b>цис- и транс-изомеров</b> (пространственная изомерия).</p>
+<p><b>Гомологи</b> — вещества одного класса, сходные по строению и свойствам, отличающиеся на группу CH<sub>2</sub> (гомологическую разность): CH<sub>4</sub>, C<sub>2</sub>H<sub>6</sub>, C<sub>3</sub>H<sub>8</sub>…</p>
+<h3>Гибридизация атома углерода</h3>
+<div class="tw"><table>
+<tr><th>Тип</th><th>Связи</th><th>Угол, форма</th><th>Примеры</th></tr>
+<tr><td>sp³</td><td>4 одинарные σ</td><td>109°28′, тетраэдр</td><td>алканы, CH<sub>4</sub></td></tr>
+<tr><td>sp²</td><td>двойная (σ + π)</td><td>120°, плоский треугольник</td><td>алкены, бензол</td></tr>
+<tr><td>sp</td><td>тройная (σ + 2π)</td><td>180°, линейная</td><td>алкины, C<sub>2</sub>H<sub>2</sub></td></tr>
+</table></div>
+<h3>Классификация по углеродному скелету</h3>
+<ul>
+<li><b>Ациклические (с открытой цепью):</b> предельные — алканы; непредельные — алкены, алкадиены, алкины.</li>
+<li><b>Карбоциклические:</b> циклоалканы (циклогексан), арены (бензол).</li>
+<li><b>Гетероциклические:</b> в цикле кроме C есть N, O, S (пиридин, пиррол).</li>
+</ul>
+<h3>Классификация по функциональным группам</h3>
+<div class="tw"><table>
+<tr><th>Класс</th><th>Группа</th><th>Суффикс</th><th>Пример</th></tr>
+<tr><td>Спирты</td><td>–OH</td><td>-ол</td><td>C<sub>2</sub>H<sub>5</sub>OH этанол</td></tr>
+<tr><td>Фенолы</td><td>–OH у бензольного кольца</td><td>—</td><td>C<sub>6</sub>H<sub>5</sub>OH фенол</td></tr>
+<tr><td>Альдегиды</td><td>–CHO</td><td>-аль</td><td>CH<sub>3</sub>CHO этаналь (уксусный альдегид)</td></tr>
+<tr><td>Кетоны</td><td>&gt;C=O</td><td>-он</td><td>CH<sub>3</sub>COCH<sub>3</sub> пропанон (ацетон)</td></tr>
+<tr><td>Карбоновые кислоты</td><td>–COOH</td><td>-овая кислота</td><td>CH<sub>3</sub>COOH этановая (уксусная)</td></tr>
+<tr><td>Сложные эфиры</td><td>–COO–</td><td>-оат</td><td>CH<sub>3</sub>COOC<sub>2</sub>H<sub>5</sub> этилацетат</td></tr>
+<tr><td>Амины</td><td>–NH₂</td><td>-амин</td><td>CH<sub>3</sub>NH<sub>2</sub> метиламин</td></tr>
+<tr><td>Аминокислоты</td><td>–NH₂ и –COOH</td><td>—</td><td>NH<sub>2</sub>CH<sub>2</sub>COOH глицин</td></tr>
+<tr><td>Галогенпроизводные</td><td>–Hal</td><td>приставка</td><td>CH<sub>3</sub>Cl хлорметан</td></tr>
+</table></div>
+<p>Отдельно рассматривают углеводы, жиры и белки.</p>
+<h3>Номенклатура ИЮПАК: алгоритм</h3>
+<ol>
+<li>Выбрать самую длинную цепь, включающую кратную связь и функциональную группу.</li>
+<li>Пронумеровать цепь с того конца, к которому ближе старшая группа, затем кратная связь, затем заместитель.</li>
+<li>Назвать заместители с номерами (при нескольких одинаковых — ди-, три-), в алфавитном порядке.</li>
+<li>Корень — по числу атомов C в цепи: мет-, эт-, проп-, бут-, пент-, гекс-, гепт-, окт-, нон-, дек-.</li>
+<li>Суффикс — по классу: -ан, -ен, -ин, -ол, -аль, -он, -овая кислота; указать номер.</li>
+</ol>
+<div class="rx">
+<div>CH<sub>3</sub>–CH(CH<sub>3</sub>)–CH<sub>2</sub>–CH<sub>3</sub>   2-метилбутан</div>
+<div>CH<sub>3</sub>–C(CH<sub>3</sub>)<sub>2</sub>–CH<sub>2</sub>–CH(CH<sub>3</sub>)–CH<sub>3</sub>   2,2,4-триметилпентан <span class="n">«изооктан»</span></div>
+<div>CH<sub>2</sub>=CH–CH(CH<sub>3</sub>)–CH<sub>3</sub>   3-метилбутен-1</div>
+<div>CH<sub>3</sub>–CH(OH)–CH<sub>3</sub>   пропанол-2</div>
+<div>CH≡C–CH<sub>2</sub>–CH<sub>3</sub>   бутин-1</div>
+</div>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 18 ============ -->
+<section class="q g4" id="q18">
+<div class="qh"><div class="mini"><b>Ос</b><small>18</small></div><h2>Свойства органических соединений</h2></div>
+<p>Свойства определяются типом связей и функциональными группами. Общие черты органических веществ: в основном молекулярное строение, низкие температуры плавления, горючесть, медленные реакции.</p>
+<h3>Алканы C<sub>n</sub>H<sub>2n+2</sub> — реакции замещения</h3>
+<div class="rx">
+<div>CH<sub>4</sub> + Cl<sub>2</sub> <span class="ar"><i>hν</i>→</span> CH<sub>3</sub>Cl + HCl <span class="n">хлорирование на свету</span></div>
+<div>CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O <span class="n">горение</span></div>
+<div>C<sub>8</sub>H<sub>18</sub> <span class="ar"><i>t°</i>→</span> C<sub>4</sub>H<sub>10</sub> + C<sub>4</sub>H<sub>8</sub> <span class="n">крекинг</span></div>
+<div>C<sub>2</sub>H<sub>6</sub> <span class="ar"><i>t°, Ni</i>→</span> C<sub>2</sub>H<sub>4</sub> + H<sub>2</sub> <span class="n">дегидрирование</span></div>
+</div>
+<h3>Алкены C<sub>n</sub>H<sub>2n</sub> — реакции присоединения</h3>
+<div class="rx">
+<div>CH<sub>2</sub>=CH<sub>2</sub> + Br<sub>2</sub> → CH<sub>2</sub>Br–CH<sub>2</sub>Br <span class="n">обесцвечивание бромной воды</span></div>
+<div>CH<sub>2</sub>=CH<sub>2</sub> + H<sub>2</sub> <span class="ar"><i>Ni, t°</i>→</span> CH<sub>3</sub>–CH<sub>3</sub></div>
+<div>CH<sub>2</sub>=CH<sub>2</sub> + H<sub>2</sub>O <span class="ar"><i>H<sup>+</sup></i>→</span> CH<sub>3</sub>–CH<sub>2</sub>OH <span class="n">гидратация</span></div>
+<div>CH<sub>2</sub>=CH–CH<sub>3</sub> + HBr → CH<sub>3</sub>–CHBr–CH<sub>3</sub> <span class="n">правило Марковникова: H идёт к более гидрогенизированному атому C</span></div>
+<div>nCH<sub>2</sub>=CH<sub>2</sub> <span class="ar"><i>кат.</i>→</span> (–CH<sub>2</sub>–CH<sub>2</sub>–)<sub>n</sub> <span class="n">полимеризация, полиэтилен</span></div>
+</div>
+<h3>Алкины C<sub>n</sub>H<sub>2n−2</sub></h3>
+<div class="rx">
+<div>HC≡CH + 2Br<sub>2</sub> → CHBr<sub>2</sub>–CHBr<sub>2</sub></div>
+<div>HC≡CH + H<sub>2</sub>O <span class="ar"><i>Hg<sup>2+</sup></i>→</span> CH<sub>3</sub>CHO <span class="n">реакция Кучерова</span></div>
+<div>3C<sub>2</sub>H<sub>2</sub> <span class="ar"><i>C акт., t°</i>→</span> C<sub>6</sub>H<sub>6</sub> <span class="n">тримеризация в бензол</span></div>
+</div>
+<h3>Арены (бензол C<sub>6</sub>H<sub>6</sub>) — замещение, присоединение трудно</h3>
+<div class="rx">
+<div>C<sub>6</sub>H<sub>6</sub> + Br<sub>2</sub> <span class="ar"><i>FeBr<sub>3</sub></i>→</span> C<sub>6</sub>H<sub>5</sub>Br + HBr</div>
+<div>C<sub>6</sub>H<sub>6</sub> + HNO<sub>3</sub> <span class="ar"><i>H<sub>2</sub>SO<sub>4</sub></i>→</span> C<sub>6</sub>H<sub>5</sub>NO<sub>2</sub> + H<sub>2</sub>O <span class="n">нитрование</span></div>
+<div>C<sub>6</sub>H<sub>6</sub> + 3H<sub>2</sub> <span class="ar"><i>Ni, t°</i>→</span> C<sub>6</sub>H<sub>12</sub> <span class="n">гидрирование</span></div>
+</div>
+<p class="tip">Бензол, в отличие от алкенов, не обесцвечивает бромную воду и раствор KMnO<sub>4</sub>.</p>
+<h3>Спирты</h3>
+<div class="rx">
+<div>2C<sub>2</sub>H<sub>5</sub>OH + 2Na → 2C<sub>2</sub>H<sub>5</sub>ONa + H<sub>2</sub>↑ <span class="n">с активными металлами</span></div>
+<div>C<sub>2</sub>H<sub>5</sub>OH <span class="ar"><i>H<sub>2</sub>SO<sub>4</sub>, t° > 140°</i>→</span> CH<sub>2</sub>=CH<sub>2</sub> + H<sub>2</sub>O <span class="n">внутримолекулярная дегидратация</span></div>
+<div>C<sub>2</sub>H<sub>5</sub>OH + CuO <span class="ar"><i>t°</i>→</span> CH<sub>3</sub>CHO + Cu + H<sub>2</sub>O <span class="n">окисление до альдегида</span></div>
+<div>C<sub>2</sub>H<sub>5</sub>OH + 3O<sub>2</sub> → 2CO<sub>2</sub> + 3H<sub>2</sub>O</div>
+</div>
+<p>Многоатомные спирты (этиленгликоль, глицерин) дают ярко-синий раствор со свежим Cu(OH)<sub>2</sub>.</p>
+<h3>Фенол</h3>
+<div class="rx">
+<div>C<sub>6</sub>H<sub>5</sub>OH + NaOH → C<sub>6</sub>H<sub>5</sub>ONa + H<sub>2</sub>O <span class="n">слабые кислотные свойства</span></div>
+<div>C<sub>6</sub>H<sub>5</sub>OH + 3Br<sub>2</sub> → C<sub>6</sub>H<sub>2</sub>Br<sub>3</sub>OH↓ + 3HBr <span class="n">белый осадок 2,4,6-трибромфенола</span></div>
+</div>
+<h3>Альдегиды</h3>
+<div class="rx">
+<div>CH<sub>3</sub>CHO + Ag<sub>2</sub>O <span class="ar"><i>NH<sub>3</sub>, t°</i>→</span> CH<sub>3</sub>COOH + 2Ag↓ <span class="n">«серебряное зеркало»</span></div>
+<div>CH<sub>3</sub>CHO + 2Cu(OH)<sub>2</sub> <span class="ar"><i>t°</i>→</span> CH<sub>3</sub>COOH + Cu<sub>2</sub>O↓ + 2H<sub>2</sub>O <span class="n">красный осадок</span></div>
+<div>CH<sub>3</sub>CHO + H<sub>2</sub> <span class="ar"><i>Ni</i>→</span> C<sub>2</sub>H<sub>5</sub>OH</div>
+</div>
+<h3>Карбоновые кислоты</h3>
+<div class="rx">
+<div>2CH<sub>3</sub>COOH + Mg → (CH<sub>3</sub>COO)<sub>2</sub>Mg + H<sub>2</sub>↑</div>
+<div>CH<sub>3</sub>COOH + NaOH → CH<sub>3</sub>COONa + H<sub>2</sub>O</div>
+<div>2CH<sub>3</sub>COOH + Na<sub>2</sub>CO<sub>3</sub> → 2CH<sub>3</sub>COONa + H<sub>2</sub>O + CO<sub>2</sub>↑</div>
+<div>CH<sub>3</sub>COOH + C<sub>2</sub>H<sub>5</sub>OH <span class="ar"><i>H<sub>2</sub>SO<sub>4</sub></i>⇄</span> CH<sub>3</sub>COOC<sub>2</sub>H<sub>5</sub> + H<sub>2</sub>O <span class="n">этерификация</span></div>
+</div>
+<h3>Жиры</h3>
+<p>Сложные эфиры глицерина и высших карбоновых кислот. Щелочной гидролиз (омыление) даёт глицерин и мыло:</p>
+<div class="rx"><div>жир + 3NaOH → глицерин + 3C<sub>17</sub>H<sub>35</sub>COONa <span class="n">стеарат натрия — мыло</span></div></div>
+<p>Жидкие растительные масла гидрируют до твёрдых жиров (маргарин).</p>
+<h3>Углеводы</h3>
+<div class="rx">
+<div>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> <span class="ar"><i>дрожжи</i>→</span> 2C<sub>2</sub>H<sub>5</sub>OH + 2CO<sub>2</sub>↑ <span class="n">спиртовое брожение глюкозы</span></div>
+<div>6CO<sub>2</sub> + 6H<sub>2</sub>O <span class="ar"><i>hν, хлорофилл</i>→</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub> <span class="n">фотосинтез</span></div>
+<div>(C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)<sub>n</sub> + nH<sub>2</sub>O <span class="ar"><i>H<sup>+</sup></i>→</span> nC<sub>6</sub>H<sub>12</sub>O<sub>6</sub> <span class="n">гидролиз крахмала и целлюлозы</span></div>
+<div>C<sub>12</sub>H<sub>22</sub>O<sub>11</sub> + H<sub>2</sub>O <span class="ar"><i>H<sup>+</sup></i>→</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> <span class="n">сахароза → глюкоза + фруктоза</span></div>
+</div>
+<h3>Амины, аминокислоты, белки</h3>
+<div class="rx">
+<div>CH<sub>3</sub>NH<sub>2</sub> + HCl → [CH<sub>3</sub>NH<sub>3</sub>]Cl <span class="n">амины — органические основания</span></div>
+<div>NH<sub>2</sub>CH<sub>2</sub>COOH + HCl → [NH<sub>3</sub>CH<sub>2</sub>COOH]Cl <span class="n">аминокислоты амфотерны</span></div>
+<div>NH<sub>2</sub>CH<sub>2</sub>COOH + NaOH → NH<sub>2</sub>CH<sub>2</sub>COONa + H<sub>2</sub>O</div>
+<div>NH<sub>2</sub>–CH<sub>2</sub>–COOH + NH<sub>2</sub>–CH<sub>2</sub>–COOH → NH<sub>2</sub>–CH<sub>2</sub>–CO–NH–CH<sub>2</sub>–COOH + H<sub>2</sub>O <span class="n">пептидная связь</span></div>
+</div>
+<p>Белки подвергаются гидролизу до аминокислот и денатурации (разрушению структуры при нагревании, действии кислот, солей тяжёлых металлов, спирта).</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 19 ============ -->
+<section class="q g4" id="q19">
+<div class="qh"><div class="mini"><b>Ио</b><small>19</small></div><h2>Идентификация органических веществ. Качественные реакции</h2></div>
+<p>Органические вещества распознают по функциональным группам и кратным связям: каждой соответствует реакция с заметным признаком.</p>
+<div class="tw"><table>
+<tr><th>Что определяем</th><th>Реактив</th><th>Признак</th></tr>
+<tr><td>Кратная связь (алкены, алкины)</td><td>бромная вода</td><td>жёлто-бурая окраска исчезает</td></tr>
+<tr><td>Кратная связь</td><td>раствор KMnO<sub>4</sub></td><td>фиолетовая окраска исчезает, бурый осадок MnO<sub>2</sub></td></tr>
+<tr><td>Ацетилен (концевая ≡)</td><td>аммиачный р-р Ag<sub>2</sub>O</td><td>светло-серый осадок ацетиленида</td></tr>
+<tr><td>Одноатомные спирты</td><td>раскалённая окисленная медная проволока</td><td>чёрная проволока краснеет, запах альдегида</td></tr>
+<tr><td>Многоатомные спирты</td><td>свежий Cu(OH)<sub>2</sub></td><td>ярко-синий раствор</td></tr>
+<tr><td>Фенол</td><td>FeCl<sub>3</sub></td><td>фиолетовое окрашивание</td></tr>
+<tr><td>Фенол, анилин</td><td>бромная вода</td><td>белый осадок</td></tr>
+<tr><td>Альдегиды</td><td>аммиачный р-р Ag<sub>2</sub>O, нагрев</td><td>серебряный налёт на стенках</td></tr>
+<tr><td>Альдегиды</td><td>Cu(OH)<sub>2</sub>, нагрев</td><td>голубой → жёлтый → красный осадок Cu<sub>2</sub>O</td></tr>
+<tr><td>Карбоновые кислоты</td><td>лакмус; Na<sub>2</sub>CO<sub>3</sub></td><td>красный цвет; выделение CO<sub>2</sub></td></tr>
+<tr><td>Глюкоза</td><td>Cu(OH)<sub>2</sub></td><td>на холоду синий раствор, при нагревании красный осадок</td></tr>
+<tr><td>Крахмал</td><td>раствор иода</td><td>синее окрашивание</td></tr>
+<tr><td>Белки</td><td>CuSO<sub>4</sub> + NaOH (биуретовая)</td><td>фиолетовое окрашивание</td></tr>
+<tr><td>Белки с ароматическими кольцами</td><td>конц. HNO<sub>3</sub> (ксантопротеиновая)</td><td>жёлтое окрашивание</td></tr>
+<tr><td>Белки с серой</td><td>Pb(CH<sub>3</sub>COO)<sub>2</sub> + NaOH, нагрев</td><td>чёрный осадок PbS</td></tr>
+</table></div>
+<h3>Уравнения качественных реакций</h3>
+<p><b>Непредельные углеводороды</b></p>
+<div class="rx">
+<div>CH<sub>2</sub>=CH<sub>2</sub> + Br<sub>2</sub> → CH<sub>2</sub>Br–CH<sub>2</sub>Br</div>
+<div>3CH<sub>2</sub>=CH<sub>2</sub> + 2KMnO<sub>4</sub> + 4H<sub>2</sub>O → 3CH<sub>2</sub>OH–CH<sub>2</sub>OH + 2MnO<sub>2</sub>↓ + 2KOH <span class="n">реакция Вагнера</span></div>
+<div>HC≡CH + Ag<sub>2</sub>O <span class="ar"><i>NH<sub>3</sub></i>→</span> AgC≡CAg↓ + H<sub>2</sub>O</div>
+</div>
+<p><b>Спирты</b></p>
+<div class="rx">
+<div>2Cu + O<sub>2</sub> <span class="ar"><i>t°</i>→</span> 2CuO <span class="n">прокаливаем проволоку</span></div>
+<div>C<sub>2</sub>H<sub>5</sub>OH + CuO <span class="ar"><i>t°</i>→</span> CH<sub>3</sub>CHO + Cu + H<sub>2</sub>O</div>
+</div>
+<p><b>Фенол и анилин</b></p>
+<div class="rx">
+<div>C<sub>6</sub>H<sub>5</sub>OH + 3Br<sub>2</sub> → C<sub>6</sub>H<sub>2</sub>Br<sub>3</sub>OH↓ + 3HBr</div>
+<div>C<sub>6</sub>H<sub>5</sub>NH<sub>2</sub> + 3Br<sub>2</sub> → C<sub>6</sub>H<sub>2</sub>Br<sub>3</sub>NH<sub>2</sub>↓ + 3HBr</div>
+</div>
+<p><b>Альдегиды и глюкоза</b></p>
+<div class="rx">
+<div>HCHO + Ag<sub>2</sub>O <span class="ar"><i>NH<sub>3</sub>, t°</i>→</span> HCOOH + 2Ag↓</div>
+<div>CH<sub>2</sub>OH(CHOH)<sub>4</sub>CHO + Ag<sub>2</sub>O <span class="ar"><i>NH<sub>3</sub>, t°</i>→</span> CH<sub>2</sub>OH(CHOH)<sub>4</sub>COOH + 2Ag↓ <span class="n">глюкоза → глюконовая кислота</span></div>
+<div>CH<sub>3</sub>CHO + 2Cu(OH)<sub>2</sub> <span class="ar"><i>t°</i>→</span> CH<sub>3</sub>COOH + Cu<sub>2</sub>O↓ + 2H<sub>2</sub>O</div>
+</div>
+<p><b>Карбоновые кислоты</b></p>
+<div class="rx">
+<div>2CH<sub>3</sub>COOH + Na<sub>2</sub>CO<sub>3</sub> → 2CH<sub>3</sub>COONa + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">«вскипание»</span></div>
+</div>
+<p class="tip">Муравьиная кислота HCOOH содержит альдегидную группу, поэтому тоже даёт реакцию «серебряного зеркала».</p>
+<h3>Как распознать вещества в пробирках: пример</h3>
+<p>Даны глицерин, этаналь и уксусная кислота. Добавляем во все пробирки Cu(OH)<sub>2</sub>:</p>
+<ul>
+<li>ярко-синий раствор на холоду — глицерин;</li>
+<li>осадок растворяется с образованием голубого раствора — уксусная кислота (реакция нейтрализации);</li>
+<li>изменений нет, а при нагревании образуется красный осадок — этаналь.</li>
+</ul>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 20 ============ -->
+<section class="q g4" id="q20">
+<div class="qh"><div class="mini"><b>Ув</b><small>20</small></div><h2>Углеводороды, их значение в хозяйственной деятельности человека</h2></div>
+<p><b>Углеводороды</b> — органические соединения, состоящие только из углерода и водорода.</p>
+<div class="tw"><table>
+<tr><th>Класс</th><th>Общая формула</th><th>Связь</th><th>Пример</th><th>Типичные реакции</th></tr>
+<tr><td>Алканы</td><td>C<sub>n</sub>H<sub>2n+2</sub></td><td>одинарные</td><td>метан CH<sub>4</sub></td><td>замещение, горение, крекинг</td></tr>
+<tr><td>Циклоалканы</td><td>C<sub>n</sub>H<sub>2n</sub></td><td>одинарные, цикл</td><td>циклогексан C<sub>6</sub>H<sub>12</sub></td><td>замещение</td></tr>
+<tr><td>Алкены</td><td>C<sub>n</sub>H<sub>2n</sub></td><td>одна двойная</td><td>этилен C<sub>2</sub>H<sub>4</sub></td><td>присоединение, полимеризация</td></tr>
+<tr><td>Алкадиены</td><td>C<sub>n</sub>H<sub>2n−2</sub></td><td>две двойные</td><td>бутадиен-1,3 C<sub>4</sub>H<sub>6</sub></td><td>присоединение, полимеризация</td></tr>
+<tr><td>Алкины</td><td>C<sub>n</sub>H<sub>2n−2</sub></td><td>одна тройная</td><td>ацетилен C<sub>2</sub>H<sub>2</sub></td><td>присоединение</td></tr>
+<tr><td>Арены</td><td>C<sub>n</sub>H<sub>2n−6</sub></td><td>ароматическая система</td><td>бензол C<sub>6</sub>H<sub>6</sub></td><td>замещение</td></tr>
+</table></div>
+<h3>Природные источники</h3>
+<ul>
+<li><b>Природный газ</b> — в основном метан (до 98%); топливо, сырьё для химии.</li>
+<li><b>Попутный нефтяной газ</b> — метан, этан, пропан, бутан.</li>
+<li><b>Нефть</b> — сложная смесь углеводородов (алканов, циклоалканов, аренов).</li>
+<li><b>Каменный уголь</b> — при коксовании (нагрев без воздуха ~1000 °C) даёт кокс, каменноугольную смолу (бензол, фенол, нафталин) и коксовый газ.</li>
+</ul>
+<h3>Переработка нефти</h3>
+<p><b>Перегонка (ректификация)</b> — физический процесс разделения на фракции по температурам кипения:</p>
+<div class="tw"><table>
+<tr><th>Фракция</th><th>Применение</th></tr>
+<tr><td>Газы</td><td>бытовой газ, сырьё</td></tr>
+<tr><td>Бензин</td><td>автомобильное топливо, растворитель</td></tr>
+<tr><td>Лигроин</td><td>топливо для тракторов</td></tr>
+<tr><td>Керосин</td><td>авиатопливо, осветительное</td></tr>
+<tr><td>Газойль (дизельное топливо)</td><td>дизельные двигатели</td></tr>
+<tr><td>Мазут (остаток)</td><td>котельное топливо, смазочные масла, вазелин, парафин, гудрон для асфальта</td></tr>
+</table></div>
+<p><b>Крекинг</b> — химическое расщепление крупных молекул для увеличения выхода бензина:</p>
+<div class="rx"><div>C<sub>16</sub>H<sub>34</sub> <span class="ar"><i>t°, кат.</i>→</span> C<sub>8</sub>H<sub>18</sub> + C<sub>8</sub>H<sub>16</sub></div></div>
+<p><b>Риформинг</b> — ароматизация, повышает октановое число бензина (устойчивость к детонации):</p>
+<div class="rx"><div>C<sub>6</sub>H<sub>14</sub> <span class="ar"><i>t°, Pt</i>→</span> C<sub>6</sub>H<sub>6</sub> + 4H<sub>2</sub></div></div>
+<h3>Получение важнейших углеводородов</h3>
+<div class="rx">
+<div>2CH<sub>4</sub> <span class="ar"><i>1500 °C</i>→</span> C<sub>2</sub>H<sub>2</sub> + 3H<sub>2</sub> <span class="n">ацетилен из метана</span></div>
+<div>CaC<sub>2</sub> + 2H<sub>2</sub>O → C<sub>2</sub>H<sub>2</sub>↑ + Ca(OH)<sub>2</sub> <span class="n">ацетилен из карбида кальция</span></div>
+<div>C<sub>2</sub>H<sub>5</sub>OH <span class="ar"><i>H<sub>2</sub>SO<sub>4</sub>, t°</i>→</span> C<sub>2</sub>H<sub>4</sub> + H<sub>2</sub>O <span class="n">этилен в лаборатории</span></div>
+<div>2CH<sub>3</sub>Cl + 2Na → C<sub>2</sub>H<sub>6</sub> + 2NaCl <span class="n">реакция Вюрца</span></div>
+</div>
+<h3>Применение</h3>
+<div class="tw"><table>
+<tr><th>Вещество</th><th>Где используется</th></tr>
+<tr><td>Метан</td><td>топливо, получение водорода, сажи (для резины и красок), метанола</td></tr>
+<tr><td>Пропан, бутан</td><td>сжиженный газ в баллонах, топливо для автомобилей</td></tr>
+<tr><td>Этилен</td><td>полиэтилен, этанол, этиленгликоль (антифриз); ускорение созревания плодов</td></tr>
+<tr><td>Пропилен</td><td>полипропилен (трубы, упаковка, волокна)</td></tr>
+<tr><td>Ацетилен</td><td>газовая сварка и резка металлов (пламя около 3000 °C), получение ПВХ, уксусной кислоты</td></tr>
+<tr><td>Бутадиен, изопрен</td><td>синтетические каучуки → резина (вулканизация серой) → шины</td></tr>
+<tr><td>Бензол, толуол</td><td>красители, лекарства, пестициды, полистирол, растворители</td></tr>
+</table></div>
+<div class="rx"><div>nCH<sub>2</sub>=CH–CH=CH<sub>2</sub> <span class="ar"><i>кат.</i>→</span> (–CH<sub>2</sub>–CH=CH–CH<sub>2</sub>–)<sub>n</sub> <span class="n">бутадиеновый каучук (метод Лебедева)</span></div></div>
+<h3>Экологические проблемы</h3>
+<p>Сжигание углеводородного топлива даёт CO<sub>2</sub> (парниковый эффект), угарный газ CO, оксиды азота и серы (кислотные дожди), сажу. Разливы нефти губят водные экосистемы. Решения: каталитические нейтрализаторы в автомобилях, очистка выбросов, переход на газ и возобновляемые источники энергии, переработка полимеров.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+<!-- ============ 21 ============ -->
+<section class="q g5" id="q21">
+<div class="qh"><div class="mini"><b>Бт</b><small>21</small></div><h2>Химия в быту и производственной деятельности человека</h2></div>
+<h3>Моющие средства</h3>
+<p><b>Мыло</b> — натриевые (твёрдое) и калиевые (жидкое) соли высших карбоновых кислот. Молекула содержит гидрофобный углеводородный «хвост», растворяющий жир, и гидрофильную «голову» –COO⁻, связанную с водой.</p>
+<div class="rx"><div>2C<sub>17</sub>H<sub>35</sub>COONa + Ca<sup>2+</sup> → (C<sub>17</sub>H<sub>35</sub>COO)<sub>2</sub>Ca↓ + 2Na<sup>+</sup> <span class="n">в жёсткой воде мыло образует нерастворимые хлопья и плохо моет</span></div></div>
+<p><b>СМС</b> (синтетические моющие средства) содержат ПАВ, которые не теряют моющей способности в жёсткой воде, а также отбеливатели, ферменты, ароматизаторы.</p>
+<h3>Жёсткость воды</h3>
+<p>Обусловлена ионами Ca<sup>2+</sup> и Mg<sup>2+</sup>.</p>
+<div class="rx">
+<div>Ca(HCO<sub>3</sub>)<sub>2</sub> <span class="ar"><i>t°</i>→</span> CaCO<sub>3</sub>↓ + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">временная жёсткость устраняется кипячением — так образуется накипь</span></div>
+<div>CaSO<sub>4</sub> + Na<sub>2</sub>CO<sub>3</sub> → CaCO<sub>3</sub>↓ + Na<sub>2</sub>SO<sub>4</sub> <span class="n">постоянная жёсткость — содой</span></div>
+<div>CaCO<sub>3</sub> + 2CH<sub>3</sub>COOH → (CH<sub>3</sub>COO)<sub>2</sub>Ca + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">удаление накипи уксусом (или лимонной кислотой)</span></div>
+</div>
+<h3>Химия на кухне</h3>
+<div class="rx">
+<div>NaHCO<sub>3</sub> + CH<sub>3</sub>COOH → CH<sub>3</sub>COONa + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">гашёная сода в тесте</span></div>
+<div>2NaHCO<sub>3</sub> <span class="ar"><i>t°</i>→</span> Na<sub>2</sub>CO<sub>3</sub> + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">разрыхлитель при выпечке</span></div>
+<div>NaHCO<sub>3</sub> + HCl → NaCl + H<sub>2</sub>O + CO<sub>2</sub>↑ <span class="n">сода от изжоги нейтрализует желудочную кислоту</span></div>
+</div>
+<p>Пищевые добавки обозначаются кодами E: красители (E100–E199), консерванты (E200–E299), антиоксиданты (E300–E399, например аскорбиновая кислота E300), загустители и эмульгаторы (E400–E499).</p>
+<h3>Средства бытовой химии и безопасность</h3>
+<ul>
+<li>Отбеливатели на основе гипохлорита натрия NaClO; средства для труб — NaOH; антисептики — H<sub>2</sub>O<sub>2</sub> (3%), этанол (70%), раствор иода.</li>
+<li>Нашатырный спирт — водный раствор аммиака; перманганат калия — антисептик.</li>
+<li><b>Нельзя смешивать</b> хлорсодержащие отбеливатели с кислотными средствами для сантехники — выделяется ядовитый хлор:</li>
+</ul>
+<div class="rx"><div>NaClO + 2HCl → NaCl + Cl<sub>2</sub>↑ + H<sub>2</sub>O</div></div>
+<p class="tip">Правила: хранить средства в подписанной оригинальной упаковке, вдали от детей и продуктов; работать в перчатках; проветривать помещение.</p>
+<h3>Строительные материалы</h3>
+<div class="rx">
+<div>CaCO<sub>3</sub> <span class="ar"><i>t°</i>→</span> CaO + CO<sub>2</sub>↑ <span class="n">обжиг известняка → негашёная известь</span></div>
+<div>CaO + H<sub>2</sub>O → Ca(OH)<sub>2</sub> <span class="n">гашение извести</span></div>
+<div>Ca(OH)<sub>2</sub> + CO<sub>2</sub> → CaCO<sub>3</sub> + H<sub>2</sub>O <span class="n">твердение известкового раствора</span></div>
+</div>
+<p>Гипс, цемент, бетон, стекло (сплавление песка, соды и известняка) — продукты силикатной промышленности.</p>
+<h3>Химическое производство</h3>
+<p><b>Научные принципы:</b> оптимальные температура и давление, катализ, непрерывность процесса, противоток веществ, циркуляция непрореагировавшего сырья, использование теплоты реакций, комплексное использование сырья, защита окружающей среды.</p>
+<p><b>Производство серной кислоты (контактный способ)</b></p>
+<div class="rx">
+<div>4FeS<sub>2</sub> + 11O<sub>2</sub> <span class="ar"><i>t°</i>→</span> 2Fe<sub>2</sub>O<sub>3</sub> + 8SO<sub>2</sub> <span class="n">обжиг пирита (или сжигание серы)</span></div>
+<div>2SO<sub>2</sub> + O<sub>2</sub> <span class="ar"><i>V<sub>2</sub>O<sub>5</sub>, 450 °C</i>⇄</span> 2SO<sub>3</sub> + Q <span class="n">контактный аппарат</span></div>
+<div>SO<sub>3</sub> + H<sub>2</sub>O → H<sub>2</sub>SO<sub>4</sub> <span class="n">на практике SO₃ поглощают концентрированной H₂SO₄ — образуется олеум</span></div>
+</div>
+<p><b>Производство аммиака</b> (процесс Габера — Боша)</p>
+<div class="rx"><div>N<sub>2</sub> + 3H<sub>2</sub> <span class="ar"><i>Fe, 450–500 °C, высокое p</i>⇄</span> 2NH<sub>3</sub> + Q <span class="n">аммиак отделяют охлаждением, непрореагировавшую смесь возвращают в цикл</span></div></div>
+<p><b>Металлургия</b></p>
+<div class="rx">
+<div>Fe<sub>2</sub>O<sub>3</sub> + 3CO <span class="ar"><i>t°</i>→</span> 2Fe + 3CO<sub>2</sub> <span class="n">получение чугуна в доменной печи</span></div>
+<div>C + O<sub>2</sub> → CO<sub>2</sub> <span class="n">выжигание избытка углерода при переделе чугуна в сталь</span></div>
+</div>
+<h3>Удобрения</h3>
+<ul>
+<li>Азотные: аммиачная селитра NH<sub>4</sub>NO<sub>3</sub>, мочевина (NH<sub>2</sub>)<sub>2</sub>CO.</li>
+<li>Фосфорные: суперфосфат Ca(H<sub>2</sub>PO<sub>4</sub>)<sub>2</sub>, преципитат.</li>
+<li>Калийные: KCl, зола.</li>
+<li>Комплексные: аммофос, нитрофоска.</li>
+</ul>
+<h3>Полимеры в быту</h3>
+<p>Полиэтилен (пакеты, плёнка), полипропилен (трубы, посуда), ПВХ (линолеум, изоляция), полистирол (одноразовая посуда, пенопласт), капрон и лавсан (ткани), резина (шины, обувь).</p>
+<h3>Экология производства</h3>
+<p>Очистка газовых выбросов и сточных вод, замкнутые циклы водоснабжения, безотходные технологии, переработка отходов, «зелёная химия» — замена опасных реагентов безопасными.</p>
+<a class="back" href="#top">К списку вопросов</a>
+</section>
+
+</main>
+<footer>ОУП.07 Химия · вопросы к комплексному зачёту с оценкой, 2026</footer>
+</div>
+<a class="top" href="#top">Все вопросы</a>
+</body>
+</html>

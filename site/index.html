@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Готовимся к контрольным</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f5d50'/%3E%3Cpath d='M9 10h9a5 5 0 0 1 5 5v8H14a5 5 0 0 1-5-5z' fill='%23f4efe6'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f3ee; --surface:#fffdf9; --ink:#1f2421; --muted:#5f6862; --line:#e4ded3;
+  --accent:#2f5d50; --accent-soft:#e3ece7; --new:#b4532a;
+  --shadow:0 1px 2px rgba(31,36,33,.05),0 4px 14px rgba(31,36,33,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#151816; --surface:#1d211f; --ink:#ebe8e2; --muted:#9aa39d; --line:#2e3431;
+    --accent:#8cc2ae; --accent-soft:#24312c; --new:#e79a72;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:960px;margin:0 auto;padding:40px 16px 64px}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 8px}
+.search{flex:1 1 240px;min-width:0;padding:11px 14px;border:1px solid var(--line);border-radius:10px;
+  background:var(--surface);color:var(--ink);font:inherit}
+.search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 24px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:14px;
+  padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+section{margin-top:28px}
+section h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 10px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:14px;background:var(--surface);
+  border:1px solid var(--line);box-shadow:var(--shadow);color:inherit;text-decoration:none;transition:transform .12s,border-color .12s}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.card .top{display:flex;gap:8px;align-items:center;font-size:12.5px}
+.kind{background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;font-weight:600}
+.new{color:var(--new);font-weight:600}
+.card h3{margin:0;font-size:17px;line-height:1.3}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.card time{margin-top:auto;padding-top:6px;color:var(--muted);font-size:12.5px}
+.empty{color:var(--muted);padding:24px 0}
+footer{margin-top:48px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tools">
+    <input class="search" id="q" type="search" placeholder="Найти материал…" autocomplete="off" aria-label="Поиск по материалам">
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Фильтр по предмету"></div>
+
+  <main id="list"></main>
+
+  <footer>Обновлено <span id="updated"></span></footer>
+</div>
+
+<script>
+// Чтобы добавить материал: положи файл в папку m/ и допиши строку сюда.
+// date — дата последнего обновления (ГГГГ-ММ-ДД), по ней показывается метка «новое».
+const MATERIALS = [
+  { subject:"Учёт и анализ",        kind:"Билеты",     title:"Билеты по учёту и анализу",        file:"uchet-bilety.html",          date:"2026-10-06", note:"По лекциям и практикам 1–3" },
+  { subject:"Учёт и анализ",        kind:"Справочник", title:"Баланс по счетам",                 file:"balans-po-schetam.html",     date:"2026-10-21", note:"Из каких счетов складываются строки баланса" },
+  { subject:"Учёт и анализ",        kind:"Шпаргалка",  title:"План счетов: шпаргалка",           file:"plan-schetov.html",          date:"2026-10-21", note:"Счета по приказу Минфина № 94н" },
+  { subject:"Учёт и анализ",        kind:"Тренажёр",   title:"Конструктор баланса",              file:"konstruktor-balansa.html",   date:"2026-10-21", note:"Составь баланс АО «Вектор-Пласт»" },
+  { subject:"Финансовый анализ",    kind:"Билеты",     title:"Билеты по финанализу",             file:"finanaliz-bilety.html",      date:"2026-09-24", note:"160 вопросов в формате ПДД, лекции 1–2" },
+  { subject:"Налоги",               kind:"Тренажёр",   title:"Тренажёр по налогам",              file:"nalogi-trenazher.html",      date:"2026-10-12", note:"Подготовка к рубежному контролю" },
+  { subject:"Налоги",               kind:"Тренажёр",   title:"Ловушки РК по налогам",            file:"nalogi-lovushki.html",       date:"2026-10-13", note:"65 вопросов повышенной сложности" },
+  { subject:"Управление качеством", kind:"Тренажёр",   title:"Тренажёр по управлению качеством", file:"kachestvo-trenazher.html",   date:"2026-10-07", note:"Рубежный контроль № 1, 24 вопроса" },
+  { subject:"Основы проектно-конструкторской деятельности", kind:"Тренажёр", title:"Тренажёр по соединениям", file:"soedineniya-trenazher.html", date:"2026-10-24", note:"РК-1: резьбовые, сварные и другие соединения" },
+  { subject:"Химия",                kind:"Конспект",   title:"Химия ОУП.07 — конспект к зачёту", file:"himiya-konspekt.html",       date:"2026-09-16", note:"21 вопрос, теория с примерами реакций" },
+];
+
+const NEW_DAYS = 7;
+const fmt = new Intl.DateTimeFormat("ru-RU",{day:"numeric",month:"long"});
+const subjects = [...new Set(MATERIALS.map(m=>m.subject))];
+let active = "Все";
+
+function readHash(){ const h = decodeURIComponent(location.hash.slice(1)); active = subjects.includes(h) ? h : "Все"; }
+
+function renderChips(){
+  const box = document.getElementById("chips");
+  box.innerHTML = "";
+  ["Все",...subjects].forEach(s=>{
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = s; b.setAttribute("aria-pressed", s===active);
+    b.onclick = ()=>{ active = s; history.replaceState(null,"", s==="Все" ? location.pathname : "#"+encodeURIComponent(s)); renderChips(); renderList(); };
+    box.appendChild(b);
+  });
+}
+
+function renderList(){
+  const q = document.getElementById("q").value.trim().toLowerCase();
+  const list = document.getElementById("list");
+  list.innerHTML = "";
+  const now = Date.now();
+  let shown = 0;
+  subjects.filter(s=>active==="Все"||s===active).forEach(s=>{
+    const items = MATERIALS.filter(m=>m.subject===s && (!q || (m.title+" "+m.note+" "+m.kind+" "+m.subject).toLowerCase().includes(q)))
+      .sort((a,b)=>b.date.localeCompare(a.date));
+    if(!items.length) return;
+    const sec = document.createElement("section");
+    const h = document.createElement("h2"); h.textContent = s; sec.appendChild(h);
+    const grid = document.createElement("div"); grid.className = "grid";
+    items.forEach(m=>{
+      const d = new Date(m.date+"T12:00:00");
+      const isNew = (now - d) / 864e5 <= NEW_DAYS;
+      const a = document.createElement("a");
+      a.className = "card"; a.href = "m/"+m.file;
+      a.innerHTML = `<div class="top"><span class="kind"></span>${isNew?'<span class="new">новое</span>':''}</div><h3></h3><p></p><time></time>`;
+      a.querySelector(".kind").textContent = m.kind;
+      a.querySelector("h3").textContent = m.title;
+      a.querySelector("p").textContent = m.note;
+      a.querySelector("time").textContent = "обновлено " + fmt.format(d);
+      a.querySelector("time").dateTime = m.date;
+      grid.appendChild(a); shown++;
+    });
+    sec.appendChild(grid); list.appendChild(sec);
+  });
+  if(!shown){ list.innerHTML = '<p class="empty">Ничего не нашлось.</p>'; }
+}
+
+const latest = MATERIALS.map(m=>m.date).sort().pop();
+document.getElementById("updated").textContent = fmt.format(new Date(latest+"T12:00:00"));
+document.getElementById("q").addEventListener("input", renderList);
+window.addEventListener("hashchange", ()=>{ readHash(); renderChips(); renderList(); });
+readHash(); renderChips(); renderList();
+</script>
+</body>
+</html>

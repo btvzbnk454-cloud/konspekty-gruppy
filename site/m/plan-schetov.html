@@ -1,0 +1,112 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>План счетов: шпаргалка</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sofia+Sans:wght@400;500;700;800&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap">
+<style>
+/* Карточка-раскладка Плана счетов: разделы двумя колонками, номер счёта крупно, тип — штампом; режим самопроверки размывает выбранный столбец. */
+:root{
+  --paper:#F2F4F1; --sheet:#FAFBF9; --ink:#1D2025; --ink-2:#4A505A; --ink-3:#69707B; --rule:#C7CCD0; --rule-2:#9AA1A9;
+  --copy:#4630A6; --copy-soft:#E6E2F5; --on-copy:#fff; --pass:#9A5B00; --pass-soft:#F6EBD9; --ap:#1F6E5B; --ap-soft:#DDEFE9;
+  --f-body:"Sofia Sans","Segoe UI",system-ui,Arial,sans-serif; --f-cond:"Sofia Sans Extra Condensed","Arial Narrow",Impact,sans-serif; --f-type:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#171528;--sheet:#1F1C36;--ink:#ECE9F8;--ink-2:#B9B4D3;--ink-3:#928DAE;--rule:#37335A;--rule-2:#5A557F;--copy:#B9A9FF;--copy-soft:#2B2552;--on-copy:#171528;--pass:#F0B565;--pass-soft:#3A2C17;--ap:#7ED9BD;--ap-soft:#173A33}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#171528;--sheet:#1F1C36;--ink:#ECE9F8;--ink-2:#B9B4D3;--ink-3:#928DAE;--rule:#37335A;--rule-2:#5A557F;--copy:#B9A9FF;--copy-soft:#2B2552;--on-copy:#171528;--pass:#F0B565;--pass-soft:#3A2C17;--ap:#7ED9BD;--ap-soft:#173A33}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--copy);outline-offset:2px}
+h1,h2,p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 56px}
+.head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px 24px;align-items:end;padding-bottom:12px;border-bottom:3px double var(--ink)}
+.formno{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(40px,8vw,64px);line-height:.92}
+.legend{display:grid;gap:4px;font-size:13.5px;color:var(--ink-2)}
+.legend span{display:flex;gap:8px;align-items:center}
+@media (max-width:700px){.head{grid-template-columns:minmax(0,1fr)}}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;padding-block:10px;border-bottom:1.5px solid var(--ink)}
+.q{flex:1 1 220px;min-width:0;border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:6px 2px;font-size:16px}
+.q:focus{outline:none;border-bottom-color:var(--copy)}
+.seg{display:inline-flex;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden}
+.seg button{border:0;border-right:1.5px solid var(--ink);background:none;padding:6px 10px;font-weight:700;font-size:13.5px;cursor:pointer}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.seg-l{font-size:13px;color:var(--ink-3)}
+.grid{columns:2 460px;column-gap:28px;margin-top:8px}
+.sec{break-inside:avoid;padding-top:18px}
+.sec h2{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1;padding-bottom:5px;border-bottom:1.5px solid var(--ink)}
+.sec h2 span{font-family:var(--f-type);font-weight:500;font-size:12.5px;color:var(--ink-3);text-transform:none}
+.acc{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--rule)}
+.no{font-family:var(--f-type);font-weight:600;font-size:18px;color:var(--copy);line-height:1.2}
+.nm{min-width:0;font-weight:600}
+.subs{grid-column:2/-1;font-size:12.5px;color:var(--ink-3);line-height:1.35}
+.subs b{font-family:var(--f-type);font-weight:500;color:var(--ink-2)}
+.ty{font-family:var(--f-type);font-weight:600;font-size:12.5px;padding:2px 7px;border-radius:3px;border:1.5px solid currentColor;white-space:nowrap;min-width:34px;text-align:center}
+.ty.A{color:var(--copy);background:var(--copy-soft)}
+.ty.P{color:var(--pass);background:var(--pass-soft)}
+.ty.AP{color:var(--ap);background:var(--ap-soft)}
+.ty.Z{color:var(--ink-3);background:transparent;border-style:dashed}
+.hid{filter:blur(6px);cursor:pointer;user-select:none}
+.ty.hid{color:var(--ink-3);background:var(--sheet);border-style:solid}
+.miss{padding:18px 0;color:var(--ink-3)}
+.traps{margin-top:30px;border:1.5px solid var(--ink);border-radius:4px;padding:12px 16px 14px}
+.traps h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:24px}
+.traps ul{margin:8px 0 0;padding-left:18px;display:grid;gap:6px;max-width:80ch}
+.traps .num{font-family:var(--f-type);font-weight:600;color:var(--copy)}
+mark{background:var(--copy-soft);color:inherit;border-radius:2px}
+</style>
+<div class="wrap">
+ <header class="head">
+  <div><p class="formno">По раздаточному материалу курса · приказ Минфина от 31.10.2000 № 94н</p><h1>План счетов</h1></div>
+  <div class="legend">
+   <span><b class="ty A">А</b> активный: сальдо дебетовое, рост по дебету</span>
+   <span><b class="ty P">П</b> пассивный: сальдо кредитовое, рост по кредиту</span>
+   <span><b class="ty AP">АП</b> активно-пассивный: сальдо с любой стороны или развёрнутое</span>
+  </div>
+ </header>
+ <div class="bar">
+  <input class="q" id="q" type="search" placeholder="Номер или название: 60, амортизация, касса…" aria-label="Поиск счёта">
+  <span class="seg-l">Проверить себя, закрыть:</span>
+  <div class="seg" role="group" aria-label="Что закрыть">
+   <button type="button" data-h="" aria-pressed="true">ничего</button><button type="button" data-h="no" aria-pressed="false">номер</button><button type="button" data-h="nm" aria-pressed="false">название</button><button type="button" data-h="ty" aria-pressed="false">тип</button>
+  </div>
+ </div>
+ <div class="grid" id="grid"></div>
+ <section class="traps">
+  <h2>Где ошибаются</h2>
+  <ul>
+   <li><span class="num">02, 05</span> — пассивные, хотя стоят среди активов: амортизация уменьшает оценку 01 и 04 (регулирующие счета). Так же работают <span class="num">59</span> и <span class="num">63</span>.</li>
+   <li><span class="num">66, 67, 70</span> — пассивные, хотя большинство счетов расчётов (<span class="num">60, 62, 68, 69, 71, 73, 75, 76, 79</span>) активно-пассивные.</li>
+   <li><span class="num">81</span> «Собственные акции» — активный, хотя стоит в разделе «Капитал».</li>
+   <li><span class="num">94, 97</span> — активные, <span class="num">98</span> — пассивный, хотя все трое в разделе «Финансовые результаты». <span class="num">84, 90, 91, 99</span> — активно-пассивные: результат бывает прибылью и убытком.</li>
+   <li><span class="num">14, 15, 16, 40</span> — активно-пассивные по раздаточному материалу. <span class="num">42</span> «Торговая наценка» — пассивный.</li>
+   <li><span class="num">08</span> — не нематериальные активы, а вложения во внеоборотные активы: здесь копят затраты до принятия к учёту на 01 или 04. <span class="num">07</span> — оборудование к установке.</li>
+   <li>Забалансовые счета трёхзначные (<span class="num">001–011</span>) и ведутся без двойной записи.</li>
+  </ul>
+ </section>
+</div>
+<script>
+(function(){"use strict";
+const DATA=[{"t": "Раздел I. Внеоборотные активы", "a": [{"y": "А", "n": "Основные средства", "c": "01", "s": ["По видам основных средств"]}, {"y": "П", "n": "Амортизация основных средств", "c": "02", "s": []}, {"y": "А", "n": "Доходные вложения в материальные ценности", "c": "03", "s": ["По видам материальных ценностей"]}, {"y": "А", "n": "Нематериальные активы", "c": "04", "s": ["По видам нематериальных активов и по расходам на научно-исследовательские, опытно-конструкторские и технологические работы"]}, {"y": "П", "n": "Амортизация нематериальных активов", "c": "05", "s": []}, {"y": "А", "n": "Оборудование к установке", "c": "07", "s": []}, {"y": "А", "n": "Вложения во внеоборотные активы", "c": "08", "s": ["1. Приобретение земельных участков", "2. Приобретение объектов природопользования", "3. Строительство объектов основных средств", "4. Приобретение объектов основных средств", "5. Приобретение нематериальных активов", "6. Перевод молодняка животных в основное стадо", "7. Приобретение взрослых животных", "8. Выполнение научно-исследовательских, опытно-конструкторских и технологических работ"]}, {"y": "А", "n": "Отложенные налоговые активы", "c": "09", "s": []}]}, {"t": "Раздел II. Производственные запасы", "a": [{"y": "А", "n": "Материалы", "c": "10", "s": ["1. Сырье и материалы", "2. Покупные полуфабрикаты и комплектующие изделия, конструкции и детали", "3. Топливо", "4. Тара и тарные материалы", "5. Запасные части", "6. Прочие материалы", "7. Материалы, переданные в переработку на сторону", "8. Строительные материалы", "9. Инвентарь и хозяйственные принадлежности", "10. Специальная оснастка и специальная одежда на складе", "11. Специальная оснастка и специальная одежда в эксплуатации"]}, {"y": "А", "n": "Животные на выращивании и откорме", "c": "11", "s": []}, {"y": "АП", "n": "Резервы под снижение стоимости материальных ценностей", "c": "14", "s": []}, {"y": "АП", "n": "Заготовление и приобретение материальных ценностей", "c": "15", "s": []}, {"y": "АП", "n": "Отклонение в стоимости материальных ценностей", "c": "16", "s": []}, {"y": "А", "n": "Налог на добавленную стоимость по приобретенным ценностям", "c": "19", "s": ["1. Налог на добавленную стоимость при приобретении основных средств", "2. Налог на добавленную стоимость по приобретенным нематериальным активам", "3. Налог на добавленную стоимость по приобретенным материально-производственным запасам"]}]}, {"t": "Раздел III. Затраты на производство", "a": [{"y": "А", "n": "Основное производство", "c": "20", "s": []}, {"y": "А", "n": "Полуфабрикаты собственного производства", "c": "21", "s": []}, {"y": "А", "n": "Вспомогательные производства", "c": "23", "s": []}, {"y": "А", "n": "Общепроизводственные расходы", "c": "25", "s": []}, {"y": "А", "n": "Общехозяйственные расходы", "c": "26", "s": []}, {"y": "А", "n": "Брак в производстве", "c": "28", "s": []}, {"y": "А", "n": "Обслуживающие производства и хозяйства", "c": "29", "s": []}]}, {"t": "Раздел IV. Готовая продукция и товары", "a": [{"y": "АП", "n": "Выпуск продукции (работ, услуг)", "c": "40", "s": []}, {"y": "А", "n": "Товары", "c": "41", "s": ["1. Товары на складах", "2. Товары в розничной торговле", "3. Тара под товаром и порожняя", "4. Покупные изделия"]}, {"y": "П", "n": "Торговая наценка", "c": "42", "s": []}, {"y": "А", "n": "Готовая продукция", "c": "43", "s": []}, {"y": "А", "n": "Расходы на продажу", "c": "44", "s": []}, {"y": "А", "n": "Товары отгруженные", "c": "45", "s": []}, {"y": "А", "n": "Выполненные этапы по незавершенным работам", "c": "46", "s": []}]}, {"t": "Раздел V. Денежные средства", "a": [{"y": "А", "n": "Касса", "c": "50", "s": ["1. Касса организации", "2. Операционная касса", "3. Денежные документы"]}, {"y": "А", "n": "Расчетные счета", "c": "51", "s": []}, {"y": "А", "n": "Валютные счета", "c": "52", "s": []}, {"y": "А", "n": "Специальные счета в банках", "c": "55", "s": ["1. Аккредитивы", "2. Чековые книжки", "3. Депозитные счета"]}, {"y": "А", "n": "Переводы в пути", "c": "57", "s": []}, {"y": "А", "n": "Финансовые вложения", "c": "58", "s": ["1. Паи и акции", "2. Долговые ценные бумаги", "3. Предоставленные займы", "4. Вклады по договору простого товарищества"]}, {"y": "П", "n": "Резервы под обесценение финансовых вложений", "c": "59", "s": []}]}, {"t": "Раздел VI. Расчеты", "a": [{"y": "АП", "n": "Расчеты с поставщиками и подрядчиками", "c": "60", "s": []}, {"y": "АП", "n": "Расчеты с покупателями и заказчиками", "c": "62", "s": []}, {"y": "П", "n": "Резервы по сомнительным долгам", "c": "63", "s": []}, {"y": "П", "n": "Расчеты по краткосрочным кредитам и займам", "c": "66", "s": ["По видам кредитов и займов"]}, {"y": "П", "n": "Расчеты по долгосрочным кредитам и займам", "c": "67", "s": ["По видам кредитов и займов"]}, {"y": "АП", "n": "Расчеты по налогам и сборам", "c": "68", "s": ["По видам налогов и сборов"]}, {"y": "АП", "n": "Расчеты по социальному страхованию и обеспечению", "c": "69", "s": ["1. Расчеты по социальному страхованию", "2. Расчеты по пенсионному обеспечению", "3. Расчеты по обязательному медицинскому страхованию"]}, {"y": "П", "n": "Расчеты с персоналом по оплате труда", "c": "70", "s": []}, {"y": "АП", "n": "Расчеты с подотчетными лицами", "c": "71", "s": []}, {"y": "АП", "n": "Расчеты с персоналом по прочим операциям", "c": "73", "s": ["1. Расчеты по предоставленным займам", "2. Расчеты по возмещению материального ущерба"]}, {"y": "АП", "n": "Расчеты с учредителями", "c": "75", "s": ["1. Расчеты по вкладам в уставный (складочный) капитал", "2. Расчеты по выплате доходов"]}, {"y": "АП", "n": "Расчеты с разными дебиторами и кредиторами", "c": "76", "s": ["1. Расчеты по имущественному и личному страхованию", "2. Расчеты по претензиям", "3. Расчеты по причитающимся дивидендам и другим доходам", "4. Расчеты по депонированным суммам"]}, {"y": "П", "n": "Отложенные налоговые обязательства", "c": "77", "s": []}, {"y": "АП", "n": "Внутрихозяйственные расчеты", "c": "79", "s": ["1. Расчеты по выделенному имуществу", "2. Расчеты по текущим операциям", "3. Расчеты по договору доверительного управления имуществом"]}]}, {"t": "Раздел VII. Капитал", "a": [{"y": "П", "n": "Уставный капитал", "c": "80", "s": []}, {"y": "А", "n": "Собственные акции (доли)", "c": "81", "s": []}, {"y": "П", "n": "Резервный капитал", "c": "82", "s": []}, {"y": "П", "n": "Добавочный капитал", "c": "83", "s": []}, {"y": "АП", "n": "Нераспределенная прибыль (непокрытый убыток)", "c": "84", "s": []}, {"y": "П", "n": "Целевое финансирование", "c": "86", "s": ["По видам финансирования"]}]}, {"t": "Раздел VIII. Финансовые результаты", "a": [{"y": "АП", "n": "Продажи", "c": "90", "s": ["1. Выручка", "2. Себестоимость продаж", "3. Налог на добавленную стоимость", "4. Акцизы", "9. Прибыль/убыток от продаж"]}, {"y": "АП", "n": "Прочие доходы и расходы", "c": "91", "s": ["1. Прочие доходы", "2. Прочие расходы", "9. Сальдо прочих доходов и расходов"]}, {"y": "А", "n": "Недостачи и потери от порчи ценностей", "c": "94", "s": []}, {"y": "АП", "n": "Резервы предстоящих расходов", "c": "96", "s": ["По видам резервов"]}, {"y": "А", "n": "Расходы будущих периодов", "c": "97", "s": ["По видам расходов"]}, {"y": "П", "n": "Доходы будущих периодов", "c": "98", "s": ["1. Доходы, полученные в счет будущих периодов", "2. Безвозмездные поступления", "3. Предстоящие поступления задолженности по недостачам, выявленным за прошлые годы", "4. Разница между суммой, подлежащей взысканию с виновных лиц, и балансовой стоимостью по недостачам ценностей"]}, {"y": "АП", "n": "Прибыли и убытки", "c": "99", "s": []}]}, {"t": "Забалансовые счета", "a": [{"y": "", "n": "Арендованные основные средства", "c": "001", "s": []}, {"y": "", "n": "Товарно-материальные ценности, принятые на ответственное хранение", "c": "002", "s": []}, {"y": "", "n": "Материалы, принятые в переработку", "c": "003", "s": []}, {"y": "", "n": "Товары, принятые на комиссию", "c": "004", "s": []}, {"y": "", "n": "Оборудование, принятое для монтажа", "c": "005", "s": []}, {"y": "", "n": "Бланки строгой отчетности", "c": "006", "s": []}, {"y": "", "n": "Списанная в убыток задолженность неплатежеспособных дебиторов", "c": "007", "s": []}, {"y": "", "n": "Обеспечения обязательств и платежей полученные", "c": "008", "s": []}, {"y": "", "n": "Обеспечения обязательств и платежей выданные", "c": "009", "s": []}, {"y": "", "n": "Износ основных средств", "c": "010", "s": []}, {"y": "", "n": "Основные средства, сданные в аренду", "c": "011", "s": []}]}];
+const T={"А":"A","П":"P","АП":"AP","":"Z"};
+let hide="",q="";
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const hl=(s)=>{s=esc(s);if(!q||/^\d/.test(q))return s;const i=s.toLowerCase().indexOf(q);return i<0?s:s.slice(0,i)+"<mark>"+s.slice(i,i+q.length)+"</mark>"+s.slice(i+q.length)};
+function render(){let h="",n=0;
+ DATA.forEach((sec,si)=>{const rows=sec.a.filter(a=>!q||(/^\d/.test(q)?a.c.startsWith(q):(a.n+" "+a.s.join(" ")).toLowerCase().includes(q)));
+  if(!rows.length)return;n+=rows.length;
+  const nums=sec.a.map(a=>a.c);const range=sec.a.length?nums[0]+"–"+nums[nums.length-1]:"";
+  h+=`<section class="sec"><h2>${esc(sec.t.replace(/^Раздел /,""))}<span>${range}</span></h2>`;
+  rows.forEach(a=>{const subs=a.s.map(x=>{const m=x.match(/^(\d+)\.\s*(.*)$/);return m?`<b>${a.c}.${m[1]}</b> ${hl(m[2])}`:hl(x)}).join("; ");
+   h+=`<div class="acc"><span class="no${hide==="no"?" hid":""}">${a.c}</span><span class="nm${hide==="nm"?" hid":""}">${hl(a.n)}</span><span class="ty ${T[a.y]}${hide==="ty"&&a.y?" hid":""}">${a.y||"забал."}</span>${subs?`<span class="subs${hide==="nm"?" hid":""}">${subs}</span>`:""}</div>`});
+  h+=`</section>`});
+ document.getElementById("grid").innerHTML=n?h:`<p class="miss">Такого счёта нет. Попробуй номер (например, 76) или часть названия.</p>`}
+document.getElementById("q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();render()});
+document.querySelector(".seg").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;hide=b.dataset.h;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));render()});
+document.getElementById("grid").addEventListener("click",e=>{const el=e.target.closest(".hid");if(el)el.classList.remove("hid")});
+render();
+})();
+</script>
+
+</body></html>

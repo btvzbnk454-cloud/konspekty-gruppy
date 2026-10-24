@@ -1,0 +1,2448 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Тренажёр по управлению качеством</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Literata:wght@400;500&display=swap">
+<style>
+/* Layout: одна колонка-лист до 720px; сверху липкая «рулетка» прогресса, снизу закреплённая кнопка действия. */
+:root{
+  --bg:#EDF0F3; --sheet:#FFFFFF; --sunk:#F4F6F8;
+  --ink:#11151B; --ink-2:#55606E; --ink-3:#7C8794;
+  --line:#D5DAE1; --line-2:#B7BFCA;
+  --tape:#FFC62B; --tape-hi:#FFD45C; --tape-ink:#1B1500; --tape-soft:#FFF3CC; --tape-edge:#B98600;
+  --ok:#17804A; --ok-soft:#E2F3E9; --bad:#C3362B; --bad-soft:#FBE7E4;
+  --focus:#1F5AE0; --shade:rgba(10,14,20,.18);
+  --f-display:'Fira Sans Condensed','Roboto Condensed','Arial Narrow',sans-serif;
+  --f-body:'Golos Text','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --f-math:'Literata','PT Serif',Georgia,'Times New Roman',serif;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1216; --sheet:#181C22; --sunk:#12161B;
+    --ink:#ECEFF3; --ink-2:#A6B0BD; --ink-3:#7B8693;
+    --line:#2A313B; --line-2:#434D5A;
+    --tape:#FFC62B; --tape-hi:#FFD45C; --tape-ink:#1B1500; --tape-soft:#3A2F08; --tape-edge:#FFD45C;
+    --ok:#4FC98A; --ok-soft:#10301F; --bad:#F47F73; --bad-soft:#3B1915;
+    --focus:#8FB0FF; --shade:rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1216; --sheet:#181C22; --sunk:#12161B;
+  --ink:#ECEFF3; --ink-2:#A6B0BD; --ink-3:#7B8693;
+  --line:#2A313B; --line-2:#434D5A;
+  --tape:#FFC62B; --tape-hi:#FFD45C; --tape-ink:#1B1500; --tape-soft:#3A2F08; --tape-edge:#FFD45C;
+  --ok:#4FC98A; --ok-soft:#10301F; --bad:#F47F73; --bad-soft:#3B1915;
+  --focus:#8FB0FF; --shade:rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--f-body);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.app{max-width:752px;margin-inline:auto;padding-inline:16px;padding-block:20px 28px}
+.f{font-family:var(--f-math);font-size:1.04em}
+.fn{white-space:nowrap}
+.f sub,.f sup,.prose sub,.prose sup{font-size:.72em;line-height:0}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* ── типографика ── */
+.eyebrow{font:600 13px/1.2 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0}
+h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;margin:8px 0 0;text-wrap:balance}
+.lead{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:60ch;margin:14px 0 0}
+.sec-h{font:600 13px/1.2 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:32px 0 8px}
+.note{font-size:14px;color:var(--ink-2);margin:0}
+
+/* ── кнопки ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:8px;border:1.5px solid var(--line-2);background:var(--sheet);color:var(--ink);font:600 17px/1 var(--f-display);letter-spacing:.05em;text-transform:uppercase;transition:transform .08s,background .15s,border-color .15s}
+.btn:hover:not(:disabled){border-color:var(--ink-2)}
+.btn:active:not(:disabled){transform:translateY(1px)}
+.btn.pri{background:var(--tape);border-color:var(--tape-ink);color:var(--tape-ink)}
+.btn.pri:hover:not(:disabled){background:var(--tape-hi);border-color:var(--tape-ink)}
+.btn:disabled{opacity:.42;cursor:not-allowed}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink-2);padding:0 12px}
+.btn.ghost:hover:not(:disabled){border-color:var(--line-2)}
+.btn .cnt{font-variant-numeric:tabular-nums;opacity:.75}
+.ibtn{flex:none;width:44px;height:44px;display:grid;place-items:center;border:1.5px solid var(--line-2);border-radius:8px;background:var(--sheet);color:var(--ink)}
+.ibtn:hover{border-color:var(--ink-2)}
+.seg{display:inline-flex;border:1.5px solid var(--line-2);border-radius:8px;overflow:hidden;background:var(--sheet)}
+.seg button{border:0;background:transparent;padding:8px 14px;min-height:42px;font:500 15px/1.2 var(--f-body);color:var(--ink-2)}
+.seg button + button{border-left:1.5px solid var(--line-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
+.seg .cnt{font-variant-numeric:tabular-nums;opacity:.7;margin-left:4px}
+
+/* ── рулетка ── */
+.ruler{position:relative;height:32px;border-radius:5px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line-2);overflow:hidden;flex:1 1 auto;min-width:0}
+.ruler .tape{position:absolute;inset:0 auto 0 0;width:0;background:var(--tape);box-shadow:inset 0 0 0 1px var(--tape-edge);border-radius:5px 0 0 5px;transition:width .35s ease}
+.ruler .tape.full{border-radius:5px}
+.ruler .tks{position:absolute;inset:0;display:flex}
+.ruler i{flex:1 1 0;min-width:0;position:relative}
+.ruler i::before{content:"";position:absolute;right:0;bottom:0;width:1px;height:7px;background:var(--line-2)}
+.ruler i.m5::before{height:11px}
+.ruler i.m10::before{height:17px;background:var(--ink-3)}
+.ruler.dense i:not(.m5):not(.m10)::before{display:none}
+.ruler i b{position:absolute;right:4px;top:4px;font:600 11px/1 var(--f-display);color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ruler i.d::before,.ruler i.d.m10::before{background:var(--tape-ink)}
+.ruler i.d b{color:var(--tape-ink)}
+.ruler i.x::after{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--bad)}
+.ruler-cap{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--ink-2);margin-top:6px}
+.ruler-cap span:last-child{white-space:nowrap}
+
+/* ── главная ── */
+.mast{padding:6px 0 0}
+.home-ruler{margin-top:24px}
+.panel{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:16px}
+@media(min-width:600px){.panel{padding:22px 24px}}
+.setup{display:grid;gap:10px}
+.setup-row{display:grid;grid-template-columns:5.6em 1fr;gap:6px 14px;align-items:center;justify-items:start}
+.setup-row > .lbl{font:600 12.5px/1 var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+@media(max-width:480px){.setup-row{grid-template-columns:1fr}}
+.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.actions .btn.pri{flex:1 1 240px}
+.panel-h{font:600 20px/1.2 var(--f-body);margin:0}
+.panel p{margin:0}
+.hist{font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.tl{border-top:1px solid var(--line-2)}
+.tl details{border-bottom:1px solid var(--line)}
+.tl summary{display:grid;grid-template-columns:2em 1fr auto;gap:10px;align-items:baseline;padding:12px 2px;cursor:pointer;list-style:none}
+.tl summary::-webkit-details-marker{display:none}
+.tl summary:hover .ti{text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-2)}
+.tl .no{font:600 16px/1 var(--f-display);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tl .ti{min-width:0}
+.tl .sc{font:600 14px/1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap}
+.tl .sc.full{color:var(--ok)}
+.tl .sc.miss{color:var(--bad)}
+.tl .tb{padding:0 2px 16px 2em}
+@media(max-width:560px){.tl .tb{padding-left:2px}}
+.sync{margin:22px 0 0;font-size:13.5px;color:var(--ink-2)}
+
+/* ── тест ── */
+.quiz{display:flex;flex-direction:column;min-height:calc(100dvh - 48px)}
+.quiz .grow{flex:1 1 auto}
+@media(min-width:720px) and (min-height:760px){.quiz{min-height:0}.quiz .grow{display:none}}
+.qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;align-items:center;gap:10px;padding:8px 0 10px;background:var(--bg)}
+.qcount{flex:none;min-width:3.4em;text-align:right;font:600 18px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.qcount small{font-size:13px;color:var(--ink-2);font-weight:500}
+.qcard{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:20px 16px 18px}
+@media(min-width:600px){.qcard{padding:28px 30px 26px}}
+.qmeta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:10px}
+.qtopic{font:600 13px/1.3 var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.qsrc{font:500 12px/1.3 var(--f-body);color:var(--ink-2);border:1px dashed var(--line-2);border-radius:999px;padding:2px 9px}
+.qtext{font:600 20px/1.32 var(--f-body);margin:0}
+@media(min-width:600px){.qtext{font-size:22px}}
+.qnote{margin:10px 0 0;font-size:16.5px;line-height:1.5}
+.qhint{margin:8px 0 16px;font-size:14px;color:var(--ink-2)}
+.act{position:sticky;bottom:0;z-index:4;margin-top:6px;padding:14px 0 calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,var(--bg) 72%,transparent)}
+.act .btn{width:100%}
+@media(min-width:720px){.act .btn{width:auto;min-width:240px}}
+
+/* варианты ответа */
+.opts{display:grid;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px 14px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet);line-height:1.4;transition:border-color .12s,background .12s}
+.opt-k{flex:none;width:26px;height:26px;display:grid;place-items:center;border-radius:6px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line);font:600 14px/1 var(--f-display);color:var(--ink-2)}
+.opt-t{flex:1 1 auto;min-width:0;padding-top:2px}
+.opt:hover:not(:disabled){border-color:var(--ink-2)}
+.opt.on{border-color:var(--ink);background:var(--tape-soft)}
+.opt.on .opt-k{background:var(--tape);color:var(--tape-ink);box-shadow:inset 0 0 0 1px var(--tape-ink)}
+.opt:disabled{cursor:default;color:var(--ink);opacity:1}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.right .opt-k,.opt.missed .opt-k{background:var(--ok);color:var(--sheet);box-shadow:none}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .opt-k{background:var(--bad);color:var(--sheet);box-shadow:none}
+.opt.missed{border-color:var(--ok);border-style:dashed}
+.opt-tag{flex:none;align-self:center;font:600 12px/1.2 var(--f-display);letter-spacing:.05em;text-transform:uppercase;color:var(--ok)}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tf .opt{justify-content:center;align-items:center;padding:16px 10px;font-weight:600}
+.tf .opt-t{flex:0 1 auto;padding:0}
+
+/* сопоставление */
+.g{display:grid;gap:10px}
+.g-row{border:1.5px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:10px;background:var(--sheet)}
+.g-t{line-height:1.4}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:38px;padding:6px 12px;border:1.5px solid var(--line-2);border-radius:999px;background:var(--sheet);font:500 14.5px/1.2 var(--f-body);color:var(--ink);transition:border-color .12s,background .12s}
+.chip:hover:not(:disabled){border-color:var(--ink-2)}
+.chip.on{background:var(--tape);border-color:var(--tape-ink);color:var(--tape-ink)}
+.chip:disabled{cursor:default;opacity:1;color:var(--ink-2)}
+.chip.on:disabled{color:var(--tape-ink)}
+.chip.good:disabled{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
+.chip.badc:disabled{background:var(--bad);border-color:var(--bad);color:var(--sheet)}
+.chip.need:disabled{border-color:var(--ok);border-style:dashed;color:var(--ok);font-weight:600}
+.g-row.ok{border-color:var(--ok);background:var(--ok-soft)}
+.g-row.no{border-color:var(--bad);background:var(--bad-soft)}
+select.sel{width:100%;min-height:44px;padding:8px 10px;border:1.5px solid var(--line-2);border-radius:8px;background:var(--sheet);color:var(--ink)}
+select.sel:disabled{opacity:1;color:var(--ink)}
+.g-fix{font-size:14.5px}
+.g-fix b{color:var(--ok)}
+
+/* порядок */
+.ord{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ord li{display:flex;align-items:center;gap:6px;padding:6px 8px 6px 2px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet)}
+.ord .grip{flex:none;width:34px;height:44px;display:grid;place-items:center;color:var(--ink-3);cursor:grab;touch-action:none;border:0;background:none;border-radius:6px}
+.ord .n{flex:none;width:22px;text-align:center;font:600 15px/1 var(--f-display);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.ord .t{flex:1 1 auto;min-width:0;line-height:1.35;padding:4px 0}
+.ord .mv{flex:none;display:flex;gap:4px}
+.ord .mv button{width:38px;height:38px;border:1.5px solid var(--line-2);border-radius:8px;background:var(--sheet);display:grid;place-items:center;color:var(--ink)}
+.ord .mv button:disabled{opacity:.3;cursor:default}
+.ord li.drag{border-color:var(--ink);background:var(--tape-soft);position:relative;z-index:2;box-shadow:0 8px 18px var(--shade)}
+.ord li.drag .grip{cursor:grabbing}
+.ord li.ok{border-color:var(--ok);background:var(--ok-soft)}
+.ord li.no{border-color:var(--bad);background:var(--bad-soft)}
+.ord.locked .grip,.ord.locked .mv{display:none}
+.ord.locked li{padding-left:12px}
+@media(max-width:520px){
+  .ord li{padding:4px 6px 4px 0;gap:4px}
+  .ord .grip{width:30px}
+  .ord .n{width:18px}
+  .ord .mv{flex-direction:column;gap:3px}
+  .ord .mv button{width:36px;height:30px}
+}
+.ord-key{margin:14px 0 0}
+.ord-key p{margin:0 0 6px;font-weight:600}
+.ord-key ol{margin:0;padding-left:1.5em}
+.ord-key li{margin:3px 0}
+
+/* пропуски */
+.bk-text{font-size:17.5px;line-height:2.3;margin:0}
+.slot{display:inline-flex;align-items:center;justify-content:center;min-width:5.5em;min-height:34px;padding:1px 10px;margin:0 2px;border:1.5px dashed var(--line-2);border-radius:8px;background:var(--sunk);vertical-align:middle;font:500 16px/1.25 var(--f-body);color:var(--ink)}
+.slot.cur{border-color:var(--ink);border-style:solid}
+.slot.full{border-style:solid;border-color:var(--tape-ink);background:var(--tape);color:var(--tape-ink)}
+.slot:disabled{cursor:default;opacity:1}
+.slot.ok:disabled{border-style:solid;border-color:var(--ok);background:var(--ok-soft);color:var(--ink)}
+.slot.no:disabled{border-style:solid;border-color:var(--bad);background:var(--bad-soft);color:var(--ink);text-decoration:line-through}
+.slot-fix{color:var(--ok);font-weight:600;margin:0 4px 0 2px}
+.bk-bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line-2)}
+.bk-bank .chip{border-radius:8px;font-size:15.5px;min-height:42px}
+.bk-bank .chip.used{opacity:.25}
+
+/* ввод */
+.inrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.inp{width:100%;max-width:22em;min-height:48px;padding:10px 14px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet);font-size:18px}
+.inp.num{max-width:9em;font-variant-numeric:tabular-nums}
+.inp.ok{border-color:var(--ok);background:var(--ok-soft)}
+.inp.no{border-color:var(--bad);background:var(--bad-soft)}
+.inp:disabled{opacity:1;color:var(--ink);-webkit-text-fill-color:var(--ink)}
+.unit{color:var(--ink-2)}
+.right-val{font-weight:600;color:var(--ok)}
+
+/* расчётная задача */
+.tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font:600 12.5px/1.3 var(--f-display);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);background:var(--sunk)}
+thead th .f{text-transform:none;letter-spacing:0;font-size:14px;font-weight:500}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+tbody th{font-weight:500}
+td.nm{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+@media(max-width:480px){th,td{padding:8px}table{font-size:14.5px}thead th{font-size:11.5px}}
+th.nm{text-align:right}
+.parts{display:grid;gap:14px}
+.part{display:grid;gap:6px}
+.plabel{font-weight:500}
+@media(min-width:600px){.part.pn{grid-template-columns:1fr auto;align-items:center;gap:14px}.part.pn .inrow{justify-content:flex-end}}
+
+/* ползунок потребительской ценности */
+.val{display:grid;gap:12px}
+.val svg{width:100%;max-width:440px;height:auto;display:block;margin-inline:auto}
+.val-ctl{display:grid;gap:4px}
+.val-ctl label{font-weight:500}
+.val-ctl input[type=range]{width:100%;height:36px;accent-color:var(--tape-edge)}
+.val-out{font:600 26px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.val-leg{font-size:14px;color:var(--ink-2)}
+.sv-ink{fill:var(--ink)} .sv-ink2{fill:var(--ink-2)} .sv-cost{fill:var(--line-2)} .sv-profit{fill:var(--tape)} .sv-max{fill:var(--sunk);stroke:var(--ink-2);stroke-width:1.5}
+.sv-line{stroke:var(--ink);stroke-width:1.5;fill:none} .sv-dash{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:4 3;fill:none} .sv-base{stroke:var(--ink-2);stroke-width:1.5}
+.sv-t{font:600 14px var(--f-display);letter-spacing:.04em} .sv-s{font:400 12px var(--f-body)} .sv-k{font:500 17px var(--f-math)}
+.sv-tapeink{fill:var(--tape-ink)}
+
+/* разбор */
+.fb{margin-top:18px;border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;scroll-margin:76px 0 96px}
+.fb.ok{background:var(--ok-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb-h{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font:700 18px/1 var(--f-display);letter-spacing:.06em;text-transform:uppercase}
+.fb.ok .fb-h{color:var(--ok)}
+.fb.bad .fb-h{color:var(--bad)}
+.fb-n{font:500 14px/1.3 var(--f-body);letter-spacing:0;text-transform:none;color:var(--ink-2)}
+.fb-t{margin:0;line-height:1.5}
+details.cheat{border-top:1px solid var(--line-2);padding-top:4px;margin-top:2px}
+details.cheat > summary{cursor:pointer;display:flex;gap:10px;align-items:baseline;list-style:none;padding:8px 0;font-size:15px}
+details.cheat > summary::-webkit-details-marker{display:none}
+.cheat-k{flex:none;font:600 12.5px/1.2 var(--f-display);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+.cheat-k::before{content:"▸";display:inline-block;width:1em}
+details[open] > summary .cheat-k::before{content:"▾"}
+.cheat-t{min-width:0}
+.prose{font-size:15.5px;line-height:1.55;min-width:0}
+.prose p{margin:.6em 0}
+.prose ul,.prose ol{margin:.5em 0;padding-left:1.3em}
+.prose li{margin:.25em 0}
+.prose .fm{font-family:var(--f-math);font-size:1.04em;padding-left:1em}
+.prose .key{font-weight:500}
+.prose .tw{margin:.8em 0}
+.prose table{font-size:14px;min-width:520px}
+
+/* результат */
+.score{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;margin-top:8px}
+.score .big{font:700 clamp(64px,19vw,104px)/.86 var(--f-display);font-variant-numeric:tabular-nums}
+.score .of{font:600 26px/1 var(--f-display);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.lvl{margin:12px 0 0;color:var(--ink-2)}
+.res-ruler{margin-top:22px}
+.res-actions{margin-top:22px}
+.segs{display:inline-flex;gap:3px;vertical-align:middle}
+.segs i{width:9px;height:9px;border-radius:2px;background:var(--ok)}
+.segs i.x{background:var(--bad)}
+.miss-list{margin:.2em 0 .8em;padding-left:1.2em}
+.miss-list li{margin:.3em 0}
+.okline{color:var(--ink-2);font-size:15px;margin:0}
+
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--sheet);padding:10px 14px;border-radius:8px;font-size:14px;z-index:20;max-width:calc(100% - 32px);text-align:center}
+
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+<div id="app" class="app"></div>
+<script>
+(function () {
+'use strict';
+
+const TOPICS = [
+  'Качество и последовательность оценки',
+  'Конкурентоспособность и конкуренция',
+  'Потребительская ценность товара',
+  'Виды измерений и шкалы',
+  'Принципы квалиметрии',
+  'Шкалы порядка и интервалов',
+  'Шкала отношений',
+  'Закон о единстве измерений',
+  'Методы определения показателей',
+  'Классификация показателей качества',
+  'Номенклатура показателей качества',
+  'Дифференциальный метод',
+  'Базовый образец и аналоги',
+  'Комплексный метод',
+  'Весовые коэффициенты',
+  'Интегральный метод',
+  'Смешанный метод',
+  'Экономико-статистический метод',
+  'Экспертные методы',
+  'Закон о техническом регулировании',
+  'Технический регламент и стандарт',
+  'Цена потребления',
+  'Услуга и её виды',
+  'Показатели качества услуг'
+];
+
+const QUESTIONS = [
+
+/* ───────── 1. Качество. Последовательность оценки уровня качества ───────── */
+{ id: 't01a', t: 1, type: 'bank',
+  q: 'Восстановите определение качества.',
+  text: 'Качество — совокупность {0} объекта, относящихся к его {1} удовлетворять {2} и {3} потребности.',
+  gaps: ['характеристик', 'способности', 'установленные', 'предполагаемые'],
+  extra: ['требований', 'готовности', 'обязательные', 'будущие'],
+  sets: [[2, 3]],
+  ex: 'Это определение из лекции. По ГОСТ Р ИСО 9000-2015 качество — степень соответствия совокупности присущих характеристик объекта требованиям.' },
+
+{ id: 't01b', t: 1, type: 'grid', sel: true, src: 'лекция 1',
+  q: 'Качество чего здесь определено? Соотнесите формулировку с понятием.',
+  cols: ['Качество (ИСО 9000-2015)', 'Качество продукции, услуги', 'Качество работы', 'Качество персонала'],
+  rows: [
+    ['Степень соответствия совокупности присущих характеристик объекта требованиям', 0],
+    ['Совокупность свойств и характеристик, которые придают способность удовлетворять обусловленные или предполагаемые потребности', 1],
+    ['Соответствие условиям договора подряда, а при их отсутствии или неполноте — требованиям, обычно предъявляемым к работам соответствующего рода', 2],
+    ['Совокупность человеческих характеристик, проявляющихся в процессе труда', 3]
+  ],
+  ex: 'Качество — ГОСТ Р ИСО 9000-2015; качество продукции, услуги — ИСО 8402-86; качество работы — ГК РФ, ст. 721. В шпаргалке есть первые два определения, остальные — со слайда вводной лекции.' },
+
+{ id: 't01c', t: 1, type: 'order',
+  q: 'Расставьте этапы оценки уровня качества по порядку.',
+  items: [
+    'Определение цели оценки уровня качества',
+    'Классификация и выбор номенклатуры показателей качества',
+    'Выбор базовых образцов и определение базовых показателей качества',
+    'Выбор методов и определение значений показателей качества',
+    'Выбор и обоснование метода оценки уровня качества',
+    'Оценка уровня качества',
+    'Выработка рекомендаций',
+    'Принятие управленческих решений'
+  ],
+  rank: [1, 2, 2, 3, 4, 5, 6, 7],
+  ex: 'Цель → номенклатура показателей и базовые образцы (эти два шага идут параллельно, их взаимный порядок не важен) → определение значений показателей → выбор метода оценки → оценка $У_{К}$ → рекомендации → управленческие решения.' },
+
+{ id: 't01d', t: 1, type: 'many',
+  q: 'Какие задачи относятся к основным задачам оценки уровня качества продукции?',
+  opts: ['Аттестация продукции', 'Выбор наилучшего варианта продукции', 'Планирование показателей качества', 'Анализ изменения уровня качества', 'Утверждение типа средств измерений', 'Установление оптовой цены продукции'],
+  a: [0, 1, 2, 3],
+  ex: 'Задач шесть: обеспечение и управление качеством, аттестация продукции, выбор наилучшего варианта продукции, планирование показателей качества, контроль качества, анализ изменения уровня качества. Утверждение типа средств измерений — задача обеспечения единства измерений.' },
+
+{ id: 't01e', t: 1, type: 'grid',
+  q: 'Каким документом руководствуются на каждом этапе оценки?',
+  cols: ['ГОСТ 22851-77', 'РД 50-451-84', 'РД 50-149-79'],
+  rows: [
+    ['Классификация и выбор номенклатуры показателей качества', 0],
+    ['Выбор базовых образцов и определение базовых показателей', 1],
+    ['Выбор методов и определение значений показателей качества', 2],
+    ['Выбор и обоснование метода оценки уровня качества', 2],
+    ['Оценка уровня качества', 2]
+  ],
+  ex: 'ГОСТ 22851-77 — выбор номенклатуры показателей качества промышленной продукции. РД 50-451-84 — установление базовых образцов. РД 50-149-79 — методические указания по оценке технического уровня и качества продукции: определение значений показателей, выбор метода и сама оценка.' },
+
+{ id: 't01f', t: 1, type: 'tf',
+  q: 'Выбор номенклатуры показателей качества и выбор базовых образцов выполняются параллельно, после того как определена цель оценки.',
+  a: true,
+  ex: 'На схеме из лекции от цели оценки идут две параллельные ветви: номенклатура показателей (ГОСТ 22851-77) и базовые образцы (РД 50-451-84). Обе нужны, чтобы перейти к определению значений показателей.' },
+
+/* ───────── 2. Конкурентоспособность. Конкуренция ───────── */
+{ id: 't02a', t: 2, type: 'one',
+  q: 'Конкурентоспособность товара — это…',
+  opts: [
+    'его способность быть реализованным на определённом рынке в определённый момент времени',
+    'максимальная цена, которую потребитель считает для себя выгодным заплатить за товар',
+    'совокупность характеристик объекта, относящихся к его способности удовлетворять установленные и предполагаемые потребности',
+    'элемент рыночного механизма — борьба рыночных субъектов за наиболее выгодные условия приложения капитала'
+  ],
+  a: 0,
+  ex: 'Остальные варианты — определения потребительской ценности товара, качества и конкуренции. Конкурентоспособность всегда привязана к конкретному рынку и моменту времени.' },
+
+{ id: 't02b', t: 2, type: 'bank',
+  q: 'Восстановите определение конкуренции.',
+  text: 'Конкуренция — элемент {0}, реализующийся в форме {1} рыночных субъектов и {2} между ними за наиболее выгодные условия {3}.',
+  gaps: ['рыночного механизма', 'взаимодействия', 'борьбы', 'приложения капитала'],
+  extra: ['плановой экономики', 'соглашения', 'получения субсидий'],
+  sets: [[1, 2]],
+  ex: 'Конкуренция — основной механизм формирования хозяйственных отношений в условиях рынка и способ оздоровления экономики.' },
+
+{ id: 't02c', t: 2, type: 'many',
+  q: 'По каким признакам классифицируют виды конкуренции?',
+  opts: ['Этические нормы', 'Ценовой признак', 'Территориальный или страновой признак', 'Тип рынка или конкурентной среды', 'Количество участвующих в противоборстве хозяйствующих субъектов', 'Стадия определения показателей', 'Способ получения информации'],
+  a: [0, 1, 2, 3, 4],
+  ex: 'Признаков девять: этические нормы; тип рынка или конкурентной среды; ценовой признак; форма; территориальный или страновой признак; уровень конкуренции; тип конкурентов и их роль в конкурентной борьбе; субъект; количество участвующих в противоборстве хозяйствующих субъектов. Стадия определения — признак классификации показателей качества, способ получения информации — методов определения показателей.' },
+
+{ id: 't02d', t: 2, type: 'one',
+  q: 'Деление конкуренции на добросовестную и недобросовестную — это классификация по признаку…',
+  opts: ['этических норм', 'формы', 'уровня конкуренции', 'субъекта'],
+  a: 0,
+  ex: 'По этическим нормам конкуренция бывает добросовестной и недобросовестной, по ценовому признаку — ценовой и неценовой.' },
+
+{ id: 't02e', t: 2, type: 'tf',
+  q: 'Конкурентоспособность — постоянное свойство товара: она не зависит ни от рынка, ни от момента времени.',
+  a: false,
+  ex: 'Конкурентоспособность товара — способность быть реализованным на определённом рынке в определённый момент времени. На другом рынке или позже тот же товар может оказаться неконкурентоспособным.' },
+
+{ id: 't02f', t: 2, type: 'grid', src: 'лекция 1',
+  q: 'Рыночные ниши и конкуренты: соотнесите определение с понятием.',
+  cols: ['Фундаментальная ниша', 'Реализованная ниша', 'Конкурирующие фирмы'],
+  rows: [
+    ['Совокупность рыночных сегментов, для которых подходят товары или услуги фирмы', 0],
+    ['Часть ниши, которую фирме удаётся удержать в борьбе с конкурентами', 1],
+    ['Фирмы, у которых полностью или частично совпадают фундаментальные ниши', 2]
+  ],
+  ex: 'Фундаментальная рыночная ниша (ФН) — все сегменты, которым подходит продукция фирмы. Реализованная (РН) — та часть ФН, что удержана в конкурентной борьбе. Конкуренты — фирмы с пересекающимися ФН.' },
+
+{ id: 't02g', t: 2, type: 'grid', src: 'лекция 3',
+  q: 'Конкурентоспособность какого объекта описана?',
+  cols: ['Товара', 'Услуги', 'Персонала', 'Государства'],
+  rows: [
+    ['Способность быть реализованным на определённом рынке в определённый момент времени', 0],
+    ['Совокупность характеристик и свойств, которая позволяет эффективнее удовлетворять потребности потребителей по сравнению с аналогами, представленными на рынке', 1],
+    ['Комплекс психофизиологических, профессионально-квалификационных, ценностно-мотивационных и стоимостных характеристик трудовых ресурсов', 2],
+    ['Способность производить товары и услуги, отвечающие требованиям мировых рынков, обеспечивая устойчивый рост ВВП и качество жизни населения', 3]
+  ],
+  ex: 'Определения со слайда лекции «Анализ конкурентоспособности объектов». Основные объекты оценки конкурентоспособности: товар, услуга, персонал, предприятие, регион, государство.' },
+
+/* ───────── 3. Потребительская ценность товара ───────── */
+{ id: 't03a', t: 3, type: 'one',
+  q: 'Потребительская ценность товара — это…',
+  opts: [
+    'максимальная цена, которую потребитель считает для себя выгодным заплатить за товар',
+    'полные расходы потребителя на приобретение и эксплуатацию товара за срок службы',
+    'цена, по которой товар фактически продаётся на рынке',
+    'разница между ценой товара и затратами производителя'
+  ],
+  a: 0,
+  ex: 'Потребительская ценность — это $Ц_{max}$. Полные расходы на приобретение и эксплуатацию — цена потребления (вопрос 22), а разница между ценой и затратами производителя — его прибыль.' },
+
+{ id: 't03b', t: 3, type: 'num',
+  q: 'Найдите неоплаченную часть потребительской ценности К.',
+  note: 'Покупатель готов заплатить за товар не больше 1 500 ₽. Затраты производителя — 900 ₽, прибыль — 300 ₽.',
+  a: 300, tol: 0.5, unit: '₽',
+  ex: '$Ц = З + П$ = 900 + 300 = 1 200 ₽. $К = Ц_{max} − Ц$ = 1 500 − 1 200 = 300 ₽.' },
+
+{ id: 't03c', t: 3, type: 'value',
+  q: 'Подберите цену, при которой неоплаченная часть потребительской ценности К равна 400 ₽.',
+  note: 'Потребительская ценность товара — 2 000 ₽, затраты производителя — 1 100 ₽.',
+  cmax: 2000, cost: 1100, min: 1100, max: 2000, step: 50, start: 1900, a: 1600,
+  ex: '$К = Ц_{max} − Ц$, значит $Ц = Ц_{max} − К$ = 2 000 − 400 = 1 600 ₽. Прибыль продавца при этом П = 1 600 − 1 100 = 500 ₽.' },
+
+{ id: 't03d', t: 3, type: 'one',
+  q: 'Продавец поднял цену, а ценность товара для покупателя не изменилась. Что произойдёт?',
+  opts: [
+    'К уменьшится, товар станет менее конкурентоспособным',
+    'К увеличится, товар станет более конкурентоспособным',
+    'К не изменится: она зависит только от затрат производителя',
+    'Потребительская ценность вырастет вместе с ценой'
+  ],
+  a: 0,
+  ex: '$К = Ц_{max} − Ц$. При росте цены ($П_{1} > П$) и неизменной $Ц_{max}$ неоплаченная часть сокращается, а она пропорциональна конкурентоспособности.' },
+
+{ id: 't03e', t: 3, type: 'many',
+  q: 'Как, согласно модели потребительской ценности, повысить конкурентоспособность товара?',
+  opts: ['Снизить цену', 'Увеличить ценность товара в глазах покупателя', 'Увеличить прибыль в цене при той же ценности', 'Поднять цену до уровня потребительской ценности'],
+  a: [0, 1],
+  ex: 'Конкурентоспособность пропорциональна $К = Ц_{max} − Ц$. К растёт, если падает цена или растёт ценность $Ц_{max}$. При $Ц = Ц_{max}$ неоплаченная часть равна нулю.' },
+
+{ id: 't03f', t: 3, type: 'bank',
+  q: 'Соберите три формулы модели потребительской ценности.',
+  text: 'Цена продавца: $Ц$ = {0} + {1}. Потребительская ценность: $Ц_{max}$ = {2} + {3}. Неоплаченная часть: $К$ = {4} − {5}.',
+  gaps: ['$З$', '$П$', '$З_{п}$', '$П_{п}$', '$Ц_{max}$', '$Ц$'],
+  extra: ['$Ц_{О}$', '$Э$'],
+  sets: [[0, 1], [2, 3]],
+  ex: 'З и П — затраты и прибыль продавца; $З_{п}$ и $П_{п}$ — составляющие ценности для покупателя; К — выгода покупателя, неоплаченная часть ценности.' },
+
+/* ───────── 4. Виды измерений. Измерительные шкалы ───────── */
+{ id: 't04a', t: 4, type: 'grid',
+  q: 'Определите вид измерения.',
+  cols: ['Прямое', 'Косвенное', 'Совокупное', 'Совместное'],
+  rows: [
+    ['Длину детали сравнили с линейкой', 0],
+    ['Плотность нашли расчётом по измеренным массе и объёму', 1],
+    ['Массы гирь набора нашли, взвешивая их в разных сочетаниях и решая систему уравнений', 2],
+    ['Одновременно измеряли сопротивление и температуру проводника, чтобы найти зависимость между ними', 3]
+  ],
+  ex: 'Прямые — непосредственное сравнение с мерой. Косвенные — расчёт по известной зависимости от величин, найденных прямыми измерениями. Совокупные — одновременные измерения нескольких одноимённых величин с решением системы уравнений. Совместные — одновременные измерения разноимённых величин для нахождения зависимости между ними.' },
+
+{ id: 't04b', t: 4, type: 'one',
+  q: 'Чем совокупные измерения отличаются от совместных?',
+  opts: [
+    'Совокупные — измерения одноимённых величин, совместные — разноимённых',
+    'Совокупные — измерения разноимённых величин, совместные — одноимённых',
+    'Совокупные дают значение сравнением с мерой, совместные — расчётом по формуле',
+    'Совокупные проводит один эксперт, совместные — группа экспертов'
+  ],
+  a: 0,
+  ex: 'В совокупных измерениях одновременно измеряют несколько одноимённых величин и решают систему уравнений; в совместных — несколько разноимённых, чтобы найти зависимость между ними.' },
+
+{ id: 't04c', t: 4, type: 'one',
+  q: 'В основном уравнении измерений $Q_{i} = N_{i} · [Q]$ символ $[Q]$ обозначает…',
+  opts: ['единицу величины', 'числовое значение величины', 'погрешность измерения', 'базовое значение показателя'],
+  a: 0,
+  ex: '$Q_{i}$ — размер измеряемой величины, $N_{i}$ — числовое значение, $[Q]$ — единица величины. Измерение — получение численного значения размера.' },
+
+{ id: 't04d', t: 4, type: 'grid',
+  q: 'О какой шкале идёт речь?',
+  cols: ['Порядка', 'Интервалов', 'Отношений'],
+  rows: [
+    ['Определяет только операцию упорядочения между объектами', 0],
+    ['Фиксирует отличия сопоставляемых размеров; начало отсчёта произвольное', 1],
+    ['Определяет численное значение измеряемой величины; не имеет отрицательных значений', 2]
+  ],
+  ex: 'Шкала порядка: $Q_{3} < Q_{1} < Q_{2}$… Шкала интервалов: $Q_{i} − Q_{j} = ΔQ_{ij}$. Шкала отношений: $N_{i} = Q_{i} / [Q]$.' },
+
+{ id: 't04e', t: 4, type: 'order', src: 'лекция 2',
+  q: 'Расположите шкалы по возрастанию информативности результатов измерения.',
+  items: ['Шкала наименований', 'Шкала порядка (ранговая)', 'Шкала интервалов', 'Шкала отношений'],
+  ex: 'По таблице квалиметрических шкал из лекции: наименований — низкая информативность, порядка — средняя, интервалов — высокая, отношений и абсолютных величин — наивысшая.' },
+
+{ id: 't04f', t: 4, type: 'tf',
+  q: 'При косвенном измерении искомое значение получают непосредственным сравнением с мерой этой величины.',
+  a: false,
+  ex: 'Так описывается прямое измерение. При косвенном значение вычисляют по известной зависимости от величин, полученных прямыми измерениями.' },
+
+/* ───────── 5. Основные принципы квалиметрии ───────── */
+{ id: 't05a', t: 5, type: 'input',
+  q: 'Как называется учение об измерении и количественной оценке качества объектов и процессов деятельности людей?',
+  accept: ['квалиметрия', 'квалиметрии', 'квалиметрией'], show: 'Квалиметрия',
+  ex: 'Квалиметрия — учение об измерении и количественной оценке качества. По ГОСТ 15467-79 — область науки, предметом которой являются количественные методы оценки качества продукции.' },
+
+{ id: 't05b', t: 5, type: 'many',
+  q: 'Какие утверждения входят в основные принципы квалиметрии?',
+  opts: [
+    'Количественная оценка качества проводится после того, как установлены условия и цель оценки',
+    'Качество рассматривается как иерархическая совокупность свойств, расположенных на различных уровнях',
+    'Оценка качества проводится с точки зрения общественной потребности',
+    'Оценка свойств объекта заканчивается вычислением абсолютного показателя качества',
+    'Каждое свойство качества определяется одним параметром — весовым коэффициентом'
+  ],
+  a: [0, 1, 2],
+  ex: 'Принципов пять. Оценка свойств заканчивается вычислением относительного показателя, а каждое свойство определяется двумя параметрами — относительным показателем и весовым коэффициентом.' },
+
+{ id: 't05c', t: 5, type: 'bank',
+  q: 'Дополните пятый принцип квалиметрии.',
+  text: 'Каждое свойство качества определяется двумя параметрами — {0} и {1}.',
+  gaps: ['относительным показателем', 'весовым коэффициентом'],
+  extra: ['абсолютным показателем', 'базовым образцом', 'ценой потребления'],
+  sets: [[0, 1]],
+  ex: 'Относительный показатель показывает, как объект соотносится с базой по данному свойству, весовой коэффициент — насколько это свойство важно. На этой паре построен комплексный метод: $K = Σ m_{i} q_{i}$.' },
+
+{ id: 't05d', t: 5, type: 'one',
+  q: 'Чем, согласно принципам квалиметрии, заканчивается оценка свойств объекта?',
+  opts: ['Вычислением относительного показателя качества', 'Измерением абсолютного значения показателя', 'Выбором базового образца', 'Назначением весовых коэффициентов'],
+  a: 0,
+  ex: 'Третий принцип: оценка свойств объекта заканчивается вычислением относительного показателя качества, то есть сравнением с базовым значением.' },
+
+{ id: 't05e', t: 5, type: 'one',
+  q: 'С какой точки зрения, согласно принципам квалиметрии, проводится оценка качества?',
+  opts: ['С точки зрения общественной потребности', 'С точки зрения производителя продукции', 'С точки зрения минимальных затрат на оценку', 'С точки зрения эксперта, проводящего оценку'],
+  a: 0,
+  ex: 'Четвёртый принцип квалиметрии: оценка качества проводится с точки зрения общественной потребности.' },
+
+/* ───────── 6. Шкала порядка и шкала интервалов ───────── */
+{ id: 't06a', t: 6, type: 'grid',
+  q: 'По какой шкале измеряют эти характеристики?',
+  cols: ['Порядка', 'Интервалов', 'Отношений'],
+  rows: [
+    ['Сила ветра по шкале Бофорта', 0],
+    ['Воинские звания', 0],
+    ['Температура в градусах Цельсия', 1],
+    ['Календарные даты', 1],
+    ['Температура в кельвинах', 2],
+    ['Возраст', 2]
+  ],
+  ex: 'Шкала порядка только упорядочивает: оценки, звания, баллы силы ветра и землетрясений. У шкалы интервалов условный ноль: °C, °F, даты. У шкалы отношений ноль естественный: кельвины, возраст, время.' },
+
+{ id: 't06b', t: 6, type: 'many', fix: true,
+  q: 'Какие отношения между размерами определены на шкале порядка?',
+  opts: ['= и ≠', '< и >', '+ и −', '× и ÷'],
+  a: [0, 1],
+  ex: 'Шкала порядка допускает только сравнение: =, ≠, <, >. Сложение и вычитание появляются на шкале интервалов, умножение и деление — на шкале отношений.' },
+
+{ id: 't06c', t: 6, type: 'many',
+  q: 'Что верно для шкалы интервалов?',
+  opts: [
+    'Начало отсчёта выбирается произвольно',
+    'Деление шкалы на равные части — произвольное',
+    'Позволяет определить, на сколько один размер отличается от другого',
+    'Позволяет сказать, во сколько раз один размер больше другого',
+    'Не имеет отрицательных значений'
+  ],
+  a: [0, 1, 2],
+  ex: 'На шкале интервалов фиксируются разности: $Q_{i} − Q_{j} = ΔQ_{ij}$. Ноль условный, поэтому отношения «во сколько раз» не определены, а отрицательные значения возможны (−10 °C).' },
+
+{ id: 't06d', t: 6, type: 'one',
+  q: 'В чём недостаток шкалы порядка?',
+  opts: [
+    'Не даёт возможности определить, на сколько и во сколько раз один размер больше или меньше другого',
+    'Сложна в построении и редко используется на практике',
+    'Не позволяет расположить объекты по степени выраженности свойства',
+    'Не имеет отрицательных значений'
+  ],
+  a: 0,
+  ex: 'Шкала порядка проста и широко используется на практике — это её преимущества. Но она показывает только, что больше, а что меньше, без величины различия.' },
+
+{ id: 't06e', t: 6, type: 'grid',
+  q: 'Соотнесите математическую модель со шкалой.',
+  cols: ['Порядка', 'Интервалов', 'Отношений'],
+  rows: [
+    ['$Q_{3} < Q_{1} < Q_{2} < Q_{4} < Q_{5}$', 0],
+    ['$Q_{i} − Q_{j} = ΔQ_{ij}$', 1],
+    ['$N_{i} = Q_{i} / [Q]$', 2]
+  ],
+  ex: 'Упорядочение — шкала порядка (здесь возрастающего). Разность размеров — шкала интервалов. Отношение размера к единице величины — шкала отношений.' },
+
+{ id: 't06f', t: 6, type: 'tf',
+  q: 'Вчера было +10 °C, сегодня +20 °C. Значит, сегодня вдвое теплее.',
+  a: false,
+  ex: 'Шкала Цельсия — шкала интервалов, ноль на ней условный. Можно сказать, что стало теплее на 10 градусов, но не «в два раза»: в кельвинах это 283 К и 293 К.' },
+
+/* ───────── 7. Шкала отношений ───────── */
+{ id: 't07a', t: 7, type: 'one',
+  q: 'Что отличает шкалу отношений от шкалы интервалов?',
+  opts: ['Абсолютный (естественный) ноль', 'Равные интервалы между делениями', 'Возможность упорядочить объекты', 'Возможность складывать и вычитать значения'],
+  a: 0,
+  ex: 'Равные интервалы, упорядочение, сложение и вычитание есть у обеих шкал. Естественный ноль есть только у шкалы отношений, поэтому на ней допустимы умножение и деление.' },
+
+{ id: 't07b', t: 7, type: 'many',
+  q: 'Что общего у шкалы интервалов и шкалы отношений?',
+  opts: ['Обе метрические (количественные)', 'Имеют равные интервалы', 'Допускают сложение и вычитание', 'Имеют естественный ноль', 'Допускают умножение и деление'],
+  a: [0, 1, 2],
+  ex: 'Сходство: обе шкалы метрические, с равными интервалами, допускают упорядочение, сложение и вычитание. Отличие — в нуле: у шкалы отношений он абсолютный.' },
+
+{ id: 't07c', t: 7, type: 'grid',
+  q: 'Какой набор отношений и операций определён на каждой шкале?',
+  cols: ['Порядка', 'Интервалов', 'Отношений'],
+  rows: [
+    ['=, ≠, <, >', 0],
+    ['=, ≠, <, >, +, −', 1],
+    ['=, ≠, <, >, +, −, ×, ÷', 2]
+  ],
+  ex: 'Каждая следующая шкала добавляет операции: порядок → разности → отношения. Шкала абсолютных величин допускает тот же набор, что и шкала отношений.' },
+
+{ id: 't07d', t: 7, type: 'many',
+  q: 'Какие особенности шкалы отношений названы в лекции?',
+  opts: ['Не имеет отрицательных значений', 'Её построение не всегда возможно', 'Начало отсчёта выбирается произвольно', 'Определяет только порядок объектов'],
+  a: [0, 1],
+  ex: 'Шкала отношений определяет численное значение величины: $N_{i} = Q_{i} / [Q]$. Ей нужен естественный ноль, поэтому построить её можно не всегда, а отрицательных значений на ней нет.' },
+
+{ id: 't07e', t: 7, type: 'one',
+  q: 'Почему про массу можно сказать «в три раза больше», а про температуру в °C — нельзя?',
+  opts: [
+    'Масса измеряется по шкале отношений с естественным нулём, а °C — по шкале интервалов с условным нулём',
+    'Массу измеряют прямыми измерениями, а температуру — косвенными',
+    'Температура — качественная характеристика, а масса — количественная',
+    'Шкала Цельсия — шкала порядка, она только упорядочивает значения'
+  ],
+  a: 0,
+  ex: 'Отношение значений имеет смысл, только когда ноль шкалы означает отсутствие свойства. У шкалы Цельсия ноль условный.' },
+
+/* ───────── 8. Закон «Об обеспечении единства измерений» ───────── */
+{ id: 't08a', t: 8, type: 'bank',
+  q: 'Восстановите требование единства измерений.',
+  text: 'Единство измерений — такое их осуществление, которое обеспечивает {0} и {1} результатов однородных измерений, а значения измеряемых величин выражаются в {2} и общепринятых единицах.',
+  gaps: ['достоверность', 'сопоставимость', 'узаконенных'],
+  extra: ['секретность', 'окупаемость', 'произвольных'],
+  sets: [[0, 1]],
+  ex: 'Формулировка из Закона РФ «Об обеспечении единства измерений» от 27.04.1993 № 4871-1, на который ссылается лекция. Сейчас действует закон с тем же названием от 26.06.2008 № 102-ФЗ.' },
+
+{ id: 't08b', t: 8, type: 'grid',
+  q: 'На чём держится единство измерений? Соотнесите.',
+  cols: ['Правовая основа', 'Организационное обеспечение', 'Техническая база'],
+  rows: [
+    ['Законодательная метрология', 0],
+    ['Федеральное агентство по техническому регулированию и метрологии', 1],
+    ['Система хранения эталонов', 2]
+  ],
+  ex: 'Правовая основа — законодательная метрология. Организационное обеспечение осуществляет Федеральное агентство по техническому регулированию и метрологии (Росстандарт). Техническая база — система хранения эталонов.' },
+
+{ id: 't08c', t: 8, type: 'many',
+  q: 'Что относится к основным задачам обеспечения единства измерений?',
+  opts: [
+    'Утверждение и хранение государственных эталонов единиц величин',
+    'Аттестация методик выполнения измерений',
+    'Поверка и калибровка средств измерений',
+    'Контроль за количеством фасованных товаров в упаковках',
+    'Разработка технических регламентов',
+    'Выбор номенклатуры показателей качества продукции'
+  ],
+  a: [0, 1, 2, 3],
+  ex: 'Ещё задачи: государственное управление деятельностью по обеспечению единства измерений, утверждение типа средств измерений, государственный метрологический надзор за количеством товаров при торговых операциях, координация работ службы времени и частоты и службы стандартных справочных данных.' },
+
+{ id: 't08d', t: 8, type: 'one',
+  q: 'Что координирует Государственная служба времени и частоты?',
+  opts: [
+    'Работы по обеспечению единства измерений времени, частоты и определению параметров вращения Земли',
+    'Разработку и внедрение стандартных справочных данных о физических константах и свойствах веществ',
+    'Поверку и калибровку средств измерений',
+    'Утверждение типа средств измерений'
+  ],
+  a: 0,
+  ex: 'Стандартными справочными данными о физических константах и свойствах веществ и материалов занимается Государственная служба стандартных справочных данных.' },
+
+{ id: 't08e', t: 8, type: 'input',
+  q: 'Как сокращённо называют Федеральное агентство по техническому регулированию и метрологии, которое организационно обеспечивает единство измерений?',
+  accept: ['росстандарт', 'росстандартом'], show: 'Росстандарт',
+  ex: 'Росстандарт — Федеральное агентство по техническому регулированию и метрологии.' },
+
+/* ───────── 9. Методы количественной оценки показателей качества ───────── */
+{ id: 't09a', t: 9, type: 'grid', sel: true, src: 'ГОСТ 15467-79',
+  q: 'Определите метод получения значений показателей качества по его описанию.',
+  cols: ['Измерительный', 'Регистрационный', 'Расчётный', 'Органолептический', 'Экспертный', 'Социологический'],
+  rows: [
+    ['На основе технических средств измерений', 0],
+    ['На основе наблюдения и подсчёта числа определённых событий, предметов или затрат', 1],
+    ['На основе теоретических или эмпирических зависимостей показателей качества от параметров продукции', 2],
+    ['На основе анализа восприятий органов чувств', 3],
+    ['На основе решения, принимаемого экспертами', 4],
+    ['На основе сбора и анализа мнений фактических или возможных потребителей', 5]
+  ],
+  ex: 'Определения из ГОСТ 15467-79. В шпаргалке эти шесть методов перечислены как методы по способу получения значений показателей.' },
+
+{ id: 't09b', t: 9, type: 'grid', src: 'лекция 2',
+  q: 'Как на слайде лекции сгруппированы методы определения значений показателей качества?',
+  cols: ['По способам получения информации', 'По источникам получения информации'],
+  rows: [
+    ['Измерительный', 0], ['Регистрационный', 0], ['Органолептический', 0], ['Расчётный', 0],
+    ['Традиционный', 1], ['Экспертный', 1], ['Социологический', 1]
+  ],
+  ex: 'По способам получения информации: измерительный, регистрационный, органолептический, расчётный. По источникам получения информации: традиционный, экспертный, социологический.' },
+
+{ id: 't09c', t: 9, type: 'many',
+  q: 'Какие шкалы относятся к метрическим и дают количественную оценку показателей качества?',
+  opts: ['Шкала интервалов', 'Шкала отношений', 'Шкала абсолютных величин', 'Шкала порядка', 'Шкала наименований'],
+  a: [0, 1, 2],
+  ex: 'Метрические шкалы позволяют выполнять математические операции с результатами измерений. Шкала наименований только различает объекты (=, ≠), шкала порядка — упорядочивает.' },
+
+{ id: 't09d', t: 9, type: 'grid', sel: true, src: 'ГОСТ 15467-79',
+  q: 'Каким методом получено значение показателя?',
+  cols: ['Измерительный', 'Регистрационный', 'Расчётный', 'Органолептический', 'Социологический'],
+  rows: [
+    ['Массу изделия определили на весах', 0],
+    ['Число отказов прибора подсчитали за год наблюдений', 1],
+    ['Ресурс двигателя вычислили по эмпирической зависимости от его параметров', 2],
+    ['Вкус и аромат чая оценили на дегустации', 3],
+    ['Удобство интерфейса выяснили опросом покупателей', 4]
+  ],
+  ex: 'Измерительный — техническими средствами измерений; регистрационный — подсчётом событий, предметов или затрат; расчётный — по теоретическим или эмпирическим зависимостям; органолептический — органами чувств; социологический — по мнениям потребителей.' },
+
+{ id: 't09e', t: 9, type: 'tf',
+  q: 'Чем информативнее шкала, тем ниже её чувствительность к погрешностям измерения.',
+  a: false,
+  ex: 'Наоборот: по таблице из лекции чувствительность к погрешностям растёт вместе с информативностью — высокая у шкалы интервалов, наивысшая у шкал отношений и абсолютных величин.' },
+
+/* ───────── 10. Классификация показателей качества ───────── */
+{ id: 't10a', t: 10, type: 'grid', sel: true,
+  q: 'По какому признаку классификации выделены эти показатели качества?',
+  cols: ['По характеризуемым свойствам', 'По стадии определения', 'По применению для оценки', 'По количеству характеризуемых свойств'],
+  rows: [
+    ['Эргономические, эстетические, патентно-правовые', 0],
+    ['Прогнозируемые, проектные, производственные, эксплуатационные', 1],
+    ['Базовые и относительные', 2],
+    ['Единичные и комплексные', 3]
+  ],
+  ex: 'Четыре признака классификации: характеризуемые свойства (12 групп), стадия определения, применение для оценки, количество характеризуемых свойств.' },
+
+{ id: 't10b', t: 10, type: 'grid', sel: true,
+  q: 'Какую группу показателей качества описывает определение?',
+  cols: ['Надёжности', 'Эргономические', 'Стандартизации и унификации', 'Транспортабельности', 'Патентно-правовые', 'Технологичности'],
+  rows: [
+    ['Характеризуют изменение качества изделия во времени', 0],
+    ['Характеризуют систему «человек — изделие» и учитывают гигиенические, антропометрические, физиологические и психофизиологические свойства человека', 1],
+    ['Характеризуют насыщенность продукции стандартными, унифицированными и оригинальными частями', 2],
+    ['Характеризуют приспособленность продукции к перемещению без её использования', 3],
+    ['Характеризуют степень обновления технических решений, их защиту и возможность беспрепятственной реализации в стране и за рубежом', 4],
+    ['Характеризуют оптимальное распределение затрат материалов, средств труда и времени при подготовке производства, изготовлении, эксплуатации, ремонте и утилизации', 5]
+  ],
+  ex: 'Все шесть — группы показателей по характеризуемым свойствам. Всего таких групп двенадцать.' },
+
+{ id: 't10c', t: 10, type: 'grid', sel: true,
+  q: 'Какую группу показателей качества описывает определение?',
+  cols: ['Назначения', 'Экономного использования ресурсов', 'Экологические', 'Безопасности', 'Эстетические', 'Экономические'],
+  rows: [
+    ['Характеризуют свойства, определяющие основные функции продукции, и обусловливают область её применения', 0],
+    ['Отражают техническое совершенство изделия по количеству потребляемых в процессе работы ресурсов', 1],
+    ['Характеризуют уровень вредного воздействия на окружающую среду при эксплуатации изделия', 2],
+    ['Характеризуют защищённость персонала, пассажиров и окружающих людей при эксплуатации, хранении и утилизации изделия', 3],
+    ['Характеризуют информационную выразительность, рациональность формы, гармоничность сочетания элементов изделия', 4],
+    ['Характеризуют затраты на разработку, изготовление и эксплуатацию изделия и эффективность его применения', 5]
+  ],
+  ex: 'Вместе с предыдущим вопросом это все двенадцать групп показателей по характеризуемым свойствам: назначения, надёжности, экономного использования ресурсов, технологичности, транспортабельности, эргономические, экологические, безопасности, эстетические, стандартизации и унификации, патентно-правовые, экономические.' },
+
+{ id: 't10d', t: 10, type: 'order',
+  q: 'Расположите показатели по стадиям определения — от самой ранней.',
+  items: ['Прогнозируемые', 'Проектные', 'Производственные', 'Эксплуатационные'],
+  ex: 'По стадии определения показатели бывают прогнозируемые, проектные, производственные и эксплуатационные — в порядке жизненного цикла изделия.' },
+
+{ id: 't10e', t: 10, type: 'many',
+  q: 'Какие показатели относятся к комплексным?',
+  opts: ['Групповые', 'Интегральные', 'Обобщённые', 'Единичные', 'Базовые'],
+  a: [0, 1, 2],
+  ex: 'По количеству характеризуемых свойств показатели делятся на единичные (одно свойство) и комплексные (несколько свойств): групповые, интегральные, обобщённые. Базовые и относительные — другой признак, применение для оценки.' },
+
+{ id: 't10f', t: 10, type: 'grid', sel: true, src: 'ГОСТ 22851-77',
+  q: 'К какой группе относится показатель?',
+  cols: ['Назначения', 'Надёжности', 'Технологичности', 'Стандартизации и унификации', 'Патентно-правовые', 'Экономические'],
+  rows: [
+    ['Производительность, мощность', 0],
+    ['Средняя наработка до отказа', 1],
+    ['Трудоёмкость изготовления продукции', 2],
+    ['Коэффициент применяемости', 3],
+    ['Показатель патентной чистоты', 4],
+    ['Себестоимость изготовления', 5]
+  ],
+  ex: 'Примеры взяты из ГОСТ 22851-77. Наработка до отказа — показатель безотказности, то есть надёжности. Коэффициент применяемости показывает долю стандартных и унифицированных частей.' },
+
+{ id: 't10g', t: 10, type: 'one',
+  q: 'Что такое относительный показатель качества?',
+  opts: ['Отношение значения показателя объекта к базовому значению', 'Значение показателя у базового образца', 'Показатель, характеризующий несколько свойств продукции', 'Показатель, определённый на стадии проектирования'],
+  a: 0,
+  ex: 'Базовые показатели — значения у базового образца. Относительные — отношение показателя оцениваемого объекта к базовому. Это деление по применению для оценки.' },
+
+/* ───────── 11. Номенклатура показателей качества ───────── */
+{ id: 't11a', t: 11, type: 'one',
+  q: 'Номенклатура показателей качества — это…',
+  opts: [
+    'перечень показателей, по которым оценивают качество данного вида продукции',
+    'совокупность значений показателей качества, принятых для сравнения',
+    'отношение значений показателей объекта к базовым значениям',
+    'перечень стандартов, которым должна соответствовать продукция'
+  ],
+  a: 0,
+  ex: 'Номенклатуру выбирают на основе классификации показателей по ГОСТ 22851-77. Совокупность значений, принятых для сравнения, — это базовый образец.' },
+
+{ id: 't11b', t: 11, type: 'one',
+  q: 'Какой документ устанавливает основные положения выбора номенклатуры показателей качества промышленной продукции?',
+  opts: ['ГОСТ 22851-77', 'ГОСТ Р 52113-2014', 'РД 50-149-79', 'ГОСТ Р 50646-2012'],
+  a: 0,
+  ex: 'ГОСТ Р 52113-2014 — номенклатура показателей качества услуг, ГОСТ Р 50646-2012 — термины в области услуг, РД 50-149-79 — оценка технического уровня и качества продукции.' },
+
+{ id: 't11c', t: 11, type: 'many',
+  q: 'От чего зависит номенклатура показателей качества?',
+  opts: ['От назначения и условий использования продукции', 'От требований потребителей', 'От цели оценки', 'От оптовой цены единицы продукции', 'От числа экспертов в комиссии'],
+  a: [0, 1, 2],
+  ex: 'По ГОСТ 22851-77 выбор обосновывают с учётом назначения и условий использования продукции, анализа требований потребителей, задач управления качеством, состава и структуры характеризуемых свойств.' },
+
+{ id: 't11d', t: 11, type: 'tf',
+  q: 'Номенклатура показателей базового образца может отличаться от номенклатуры показателей оцениваемой продукции.',
+  a: false,
+  ex: 'Сравнивать можно только одноимённые показатели, поэтому номенклатура показателей базового образца должна совпадать с номенклатурой показателей оцениваемой продукции.' },
+
+{ id: 't11e', t: 11, type: 'one', src: 'ГОСТ 22851-77',
+  q: 'Какой метод ГОСТ 22851-77 называет основным при определении исходной номенклатуры показателей качества?',
+  opts: ['Экспертный', 'Измерительный', 'Расчётный', 'Регистрационный'],
+  a: 0,
+  ex: 'В стандарте сказано прямо: основным методом определения исходной номенклатуры показателей качества является экспертный. В шпаргалке: для выбора номенклатуры часто применяют экспертные методы.' },
+
+/* ───────── 12. Дифференциальный метод ───────── */
+{ id: 't12a', t: 12, type: 'one',
+  q: 'В формуле $q_{i} = (P_{i} / P_{iБ})^{ξ}$ чему равен показатель степени $ξ$, если рост $P_{i}$ означает снижение качества (например, расход топлива)?',
+  opts: ['−1', '1', '0', '2'],
+  a: 0,
+  ex: '$ξ = 1$, если росту показателя соответствует повышение качества, и $ξ = −1$, если снижение. При $ξ = −1$ дробь переворачивается: $q_{i} = P_{iБ} / P_{i}$.' },
+
+{ id: 't12b', t: 12, type: 'num',
+  q: 'Производительность станка — 120 деталей в час, базового образца — 100. Найдите относительный показатель q.',
+  a: 1.2, tol: 0.005,
+  ex: 'Рост производительности повышает качество, $ξ = 1$: q = 120 / 100 = 1,2.' },
+
+{ id: 't12c', t: 12, type: 'num',
+  q: 'Расход топлива автомобиля — 8 л на 100 км, базового образца — 10 л на 100 км. Найдите относительный показатель q.',
+  a: 1.25, tol: 0.005,
+  ex: 'Рост расхода снижает качество, $ξ = −1$: q = (8 / 10)$^{−1}$ = 10 / 8 = 1,25. Объект экономичнее базы, поэтому q > 1.' },
+
+{ id: 't12d', t: 12, type: 'case',
+  q: 'Оцените электродвигатель дифференциальным методом: найдите относительные показатели и сделайте вывод.',
+  table: {
+    head: ['Показатель', 'Объект', 'База', 'Лучше, когда'],
+    rows: [
+      ['Мощность, кВт', '110', '100', 'больше'],
+      ['Ресурс, тыс. ч', '12', '10', 'больше'],
+      ['Масса, кг', '450', '540', 'меньше'],
+      ['Уровень шума, дБ', '64', '80', 'меньше']
+    ]
+  },
+  parts: [
+    { label: '$q_{1}$ — мощность', kind: 'num', a: 1.1, tol: 0.005 },
+    { label: '$q_{2}$ — ресурс', kind: 'num', a: 1.2, tol: 0.005 },
+    { label: '$q_{3}$ — масса', kind: 'num', a: 1.2, tol: 0.005 },
+    { label: '$q_{4}$ — уровень шума', kind: 'num', a: 1.25, tol: 0.005 },
+    { label: 'Вывод', kind: 'one', a: 0, opts: [
+      'Уровень качества объекта не ниже уровня базового образца',
+      'Уровень качества объекта не выше уровня базового образца',
+      'Однозначного вывода нет, нужен другой метод'
+    ] }
+  ],
+  ex: '$q_{1}$ = 110 / 100 = 1,10; $q_{2}$ = 12 / 10 = 1,20. Масса и шум тем лучше, чем меньше, поэтому $ξ = −1$ и дробь переворачивается: $q_{3}$ = 540 / 450 = 1,20; $q_{4}$ = 80 / 64 = 1,25. Все $q_{i}$ ≥ 1, значит уровень качества объекта не ниже уровня базового образца.' },
+
+{ id: 't12e', t: 12, type: 'grid',
+  q: 'Какой вывод даёт дифференциальный метод?',
+  cols: ['Не ниже базового', 'Не выше базового', 'Нужен другой метод'],
+  rows: [
+    ['Все $q_{i}$ ≥ 1', 0],
+    ['Все $q_{i}$ < 1', 1],
+    ['Часть $q_{i}$ ≥ 1, часть < 1', 2],
+    ['$q_{1}$ = 1,3; $q_{2}$ = 1,0; $q_{3}$ = 1,1', 0],
+    ['$q_{1}$ = 0,8; $q_{2}$ = 1,4; $q_{3}$ = 1,0', 2]
+  ],
+  ex: 'Если все относительные показатели не меньше единицы — уровень качества объекта не ниже базового; если все меньше единицы — не выше. При смешанной картине однозначного вывода нет, и берут комплексный или смешанный метод.' },
+
+{ id: 't12f', t: 12, type: 'tf',
+  q: 'В дифференциальном методе весовые коэффициенты не используются: свойства условно считаются равнозначными.',
+  a: true,
+  ex: 'Дифференциальный метод сопоставляет единичные показатели объекта и базы один к одному. Важность свойств начинает учитываться в комплексном методе.' },
+
+/* ───────── 13. Базовый образец. Аналоги ───────── */
+{ id: 't13a', t: 13, type: 'bank',
+  q: 'Восстановите определение базового образца.',
+  text: 'Базовый образец — совокупность реально достигаемых значений {0} определённого типа продукции, принятых для {1} и отражающих в среднем {2} определённой группы {3}.',
+  gaps: ['показателей качества', 'сравнения', 'потребности', 'потребителей'],
+  extra: ['оптовых цен', 'сертификации', 'затраты', 'производителей'],
+  ex: 'Базовый образец отражает требования, установленные на определённый период. В РД 50-149-79: реально достижимая совокупность значений показателей качества продукции, принятых для сравнения.' },
+
+{ id: 't13b', t: 13, type: 'grid',
+  q: 'Определите группу базовых образцов.',
+  cols: ['Перспективные', 'Реальные мировые', 'Реальные отечественные'],
+  rows: [
+    ['Прогнозируемые реально достижимые значения показателей, соответствующие передовым научно-техническим достижениям на установленный будущий период', 0],
+    ['Образцы, отражающие современные мировые достижения на установленный период', 1],
+    ['Образцы, отражающие наиболее высокие отечественные научно-технические достижения на установленный период', 2]
+  ],
+  ex: 'Три группы базовых образцов выделяет РД 50-451-84: перспективные, реальные мировые, реальные отечественные.' },
+
+{ id: 't13c', t: 13, type: 'grid',
+  q: 'На какой стадии это может служить базовым образцом?',
+  cols: ['На стадии разработки', 'На стадии изготовления'],
+  rows: [
+    ['Перспективный образец', 0],
+    ['Планируемая к освоению продукция, показатели которой заложены в техническом задании или проекте', 0],
+    ['Выпускаемая в России или за рубежом продукция с самыми высокими показателями, наиболее эффективная в эксплуатации', 1],
+    ['Национальные, международные и прогрессивные зарубежные стандарты с оптимальными значениями показателей', 1]
+  ],
+  ex: 'На стадии разработки сравнивают с перспективным образцом или с показателями из технического задания и проекта. На стадии изготовления — с лучшей выпускаемой продукцией или со стандартами и техническими условиями, где закреплены оптимальные значения показателей.' },
+
+{ id: 't13d', t: 13, type: 'many',
+  q: 'Какая продукция должна входить в группу, из которой выбирают базовый образец?',
+  opts: [
+    'Составляющая значительную часть общего объёма продукции, производимой и реализуемой в России и за рубежом',
+    'Пользующаяся устойчивым спросом на внутреннем рынке',
+    'Конкурентоспособная на международном рынке',
+    'Самая дешёвая в своём классе',
+    'Гипотетические образцы, которые ещё не прошли инженерной проработки'
+  ],
+  a: [0, 1, 2],
+  ex: 'Такая группа характеризует достигнутый уровень качества, близкий к оптимальному. РД 50-149-79 отдельно запрещает брать за базу гипотетические (воображаемые) образцы.' },
+
+{ id: 't13e', t: 13, type: 'input',
+  q: 'Как называется продукция отечественного или зарубежного производства, сходная с оцениваемой по назначению и области применения?',
+  accept: ['аналог', 'аналоги', 'аналогом', 'аналог продукции'], show: 'Аналог',
+  ex: 'У аналога те же классификационные показатели, что и у оцениваемой продукции. Базовый образец выбирают из группы аналогов.' },
+
+{ id: 't13f', t: 13, type: 'tf',
+  q: 'Аналоги в группе могут отличаться от оцениваемой продукции значениями классификационных показателей.',
+  a: false,
+  ex: 'Все аналоги в группе и оцениваемая продукция должны иметь одинаковые значения классификационных показателей, иначе сравнение некорректно.' },
+
+/* ───────── 14. Комплексный метод ───────── */
+{ id: 't14a', t: 14, type: 'one',
+  q: 'В чём суть комплексного метода оценки уровня качества?',
+  opts: [
+    'Единичные показатели объединяют в один комплексный показатель, и уровень качества выражается одним числом',
+    'Каждый единичный показатель объекта по отдельности сравнивают с базовым',
+    'Уровень качества находят как отношение суммарного полезного эффекта к суммарным затратам',
+    'Показатели делят на группы, считают групповые показатели, а затем обобщённый'
+  ],
+  a: 0,
+  ex: 'По отдельности сравнивает показатели дифференциальный метод, эффект к затратам относит интегральный, групповые и обобщённый показатели считает смешанный.' },
+
+{ id: 't14b', t: 14, type: 'case',
+  q: 'Оцените принтер комплексным методом.',
+  note: 'Потребляемая мощность тем лучше, чем она меньше; остальные показатели — чем больше. Весовые коэффициенты нормированы, поэтому $K_{Б}$ = 1.',
+  table: {
+    head: ['Показатель', 'Объект', 'База', 'Вес $m_{i}$'],
+    rows: [
+      ['Скорость печати, стр./мин', '36', '30', '0,5'],
+      ['Ресурс картриджа, тыс. стр.', '9', '10', '0,3'],
+      ['Потребляемая мощность, Вт', '400', '440', '0,2']
+    ]
+  },
+  parts: [
+    { label: '$q_{1}$ — скорость печати', kind: 'num', a: 1.2, tol: 0.005 },
+    { label: '$q_{2}$ — ресурс картриджа', kind: 'num', a: 0.9, tol: 0.005 },
+    { label: '$q_{3}$ — потребляемая мощность', kind: 'num', a: 1.1, tol: 0.005 },
+    { label: 'Комплексный показатель $K$', kind: 'num', a: 1.09, tol: 0.005 },
+    { label: 'Вывод', kind: 'one', a: 0, opts: ['Качество объекта выше базового', 'Качество объекта ниже базового', 'Качество объекта равно базовому'] }
+  ],
+  ex: '$q_{1}$ = 36 / 30 = 1,2; $q_{2}$ = 9 / 10 = 0,9; $q_{3}$ = 440 / 400 = 1,1. $K$ = 0,5 · 1,2 + 0,3 · 0,9 + 0,2 · 1,1 = 1,09. $У_{К} = K / K_{Б}$ = 1,09 > 1 — качество выше базового. Дифференциальный метод здесь однозначного вывода не дал бы: $q_{2}$ < 1.' },
+
+{ id: 't14c', t: 14, type: 'num',
+  q: 'Найдите комплексный показатель K.',
+  note: 'Относительные показатели: $q_{1}$ = 1,1; $q_{2}$ = 1,3; $q_{3}$ = 0,8. Весовые коэффициенты: 0,5; 0,3; 0,2.',
+  a: 1.1, tol: 0.005,
+  ex: '$K = Σ m_{i} q_{i}$ = 0,5 · 1,1 + 0,3 · 1,3 + 0,2 · 0,8 = 0,55 + 0,39 + 0,16 = 1,10.' },
+
+{ id: 't14d', t: 14, type: 'bank',
+  q: 'Соберите формулы комплексного метода.',
+  text: '$K$ = $Σ$ {0} · {1}, причём $Σ$ {2} = {3}. Уровень качества: $У_{К}$ = {4} / {5}.',
+  gaps: ['$m_{i}$', '$q_{i}$', '$m_{i}$', '1', '$K$', '$K_{Б}$'],
+  extra: ['$P_{i}$', '0', '$ξ$'],
+  sets: [[0, 1]],
+  ex: '$m_{i}$ — весовые коэффициенты (определяются экспертно), их сумма равна единице. $K_{Б}$ — комплексный показатель базового образца.' },
+
+{ id: 't14e', t: 14, type: 'one',
+  q: 'Чему равен комплексный показатель базового образца $K_{Б}$, если весовые коэффициенты нормированы ($Σ m_{i} = 1$)?',
+  opts: ['Единице', 'Нулю', 'Числу показателей n', 'Сумме базовых значений показателей'],
+  a: 0,
+  ex: 'У базового образца каждый относительный показатель равен единице (сравнение с самим собой), поэтому $K_{Б} = Σ m_{i} · 1 = 1$ и $У_{К} = K$.' },
+
+{ id: 't14f', t: 14, type: 'one',
+  q: 'Когда вместо дифференциального метода берут комплексный?',
+  opts: [
+    'Когда единичных показателей много или часть из них лучше базовых, а часть хуже, и однозначного вывода нет',
+    'Когда все относительные показатели больше единицы и вывод уже очевиден',
+    'Когда у продукции только один показатель качества',
+    'Когда нет базового образца для сравнения'
+  ],
+  a: 0,
+  ex: 'Для сложной продукции учитывается много единичных показателей, и вывод по каждому в отдельности затруднён. Комплексный показатель сводит их в одно число с учётом важности каждого свойства.' },
+
+/* ───────── 15. Весовые коэффициенты ───────── */
+{ id: 't15a', t: 15, type: 'one',
+  q: 'Что отражают весовые коэффициенты?',
+  opts: ['Важность (значимость) соответствующих свойств в количественном выражении', 'Отношение показателя объекта к базовому значению', 'Затраты на обеспечение каждого свойства', 'Точность измерения каждого показателя'],
+  a: 0,
+  ex: 'Величина весового коэффициента задаёт предпочтение i-го критерия над другими. Отношение показателя к базовому — это относительный показатель $q_{i}$.' },
+
+{ id: 't15b', t: 15, type: 'many',
+  q: 'Какими методами определяют весовые коэффициенты?',
+  opts: ['Метод анализа иерархий', 'Метод расстановки приоритетов', 'Метод ранжирования', 'Метод приписывания баллов', 'Дифференциальный метод', 'Регистрационный метод'],
+  a: [0, 1, 2, 3],
+  ex: 'Весовые коэффициенты определяют экспертными методами: анализа иерархий, расстановки приоритетов, согласования по критериям, ранжирования, приписывания баллов.' },
+
+{ id: 't15c', t: 15, type: 'one',
+  q: 'В каком методе каждый эксперт расставляет критерии в порядке их важности?',
+  opts: ['Метод ранжирования', 'Метод приписывания баллов', 'Метод анализа иерархий', 'Метод согласования по критериям'],
+  a: 0,
+  ex: 'Ранжирование — расстановка по порядку важности. В методе приписывания баллов эксперты оценивают важность каждого критерия по шкале, например от 0 до 10.' },
+
+{ id: 't15d', t: 15, type: 'case',
+  q: 'Найдите нормированные весовые коэффициенты.',
+  note: 'Эксперт оценил важность трёх свойств по десятибалльной шкале.',
+  table: { head: ['Свойство', 'Балл'], rows: [['Надёжность', '10'], ['Производительность', '6'], ['Дизайн', '4']] },
+  parts: [
+    { label: '$λ_{1}$ — надёжность', kind: 'num', a: 0.5, tol: 0.005 },
+    { label: '$λ_{2}$ — производительность', kind: 'num', a: 0.3, tol: 0.005 },
+    { label: '$λ_{3}$ — дизайн', kind: 'num', a: 0.2, tol: 0.005 }
+  ],
+  ex: 'Чтобы выполнялось условие нормирования $Σ λ_{i} = 1$, каждый балл делят на сумму баллов: 10 + 6 + 4 = 20. $λ_{1}$ = 10 / 20 = 0,5; $λ_{2}$ = 6 / 20 = 0,3; $λ_{3}$ = 4 / 20 = 0,2. Проверка: 0,5 + 0,3 + 0,2 = 1.' },
+
+{ id: 't15e', t: 15, type: 'one',
+  q: 'Какому условию нормирования должны удовлетворять весовые коэффициенты?',
+  opts: ['$Σ λ_{i} = 1$', '$Σ λ_{i} = 0$', '$λ_{i} ≥ 1$ для каждого i', '$Σ λ_{i} = m$, где m — число критериев'],
+  a: 0,
+  ex: 'Сумма весовых коэффициентов равна единице. То же условие действует в комплексном ($Σ m_{i} = 1$) и смешанном ($Σ m_{ij} = 1$, $Σ α_{i} = 1$) методах.' },
+
+{ id: 't15f', t: 15, type: 'many',
+  q: 'Исходя из чего выбирают значения весовых коэффициентов?',
+  opts: ['Анализ мирового уровня развития отрасли', 'Требования к проектируемому объекту', 'Возможности реализации этих требований', 'Оптовая цена базового образца', 'Срок службы изделия'],
+  a: [0, 1, 2],
+  ex: 'Значения весовых коэффициентов выбирают исходя из анализа мирового уровня развития отрасли, требований к проектируемому объекту и возможностей реализации этих требований.' },
+
+/* ───────── 16. Интегральный метод ───────── */
+{ id: 't16a', t: 16, type: 'bank',
+  q: 'Восстановите определение интегрального показателя качества.',
+  text: 'Интегральный показатель качества — отношение суммарного {0} от эксплуатации или потребления продукции к суммарным {1} на её {2} и эксплуатацию или потребление.',
+  gaps: ['полезного эффекта', 'затратам', 'создание'],
+  extra: ['дохода производителя', 'ценам', 'сертификацию'],
+  ex: 'Интегральный показатель показывает, сколько полезного эффекта приходится на единицу затрат. Уровень качества: $У_{К} = И / И_{Б}$.' },
+
+{ id: 't16b', t: 16, type: 'one',
+  q: 'По какой формуле считают интегральный показатель для продукции со сроком службы более одного года?',
+  opts: ['$И = Э / (З_{С} · φ(t) + З_{Э})$', '$И = Э / (З_{С} + З_{Э})$', '$И = (З_{С} + З_{Э}) / Э$', '$И = Э · φ(t) / (З_{С} + З_{Э})$'],
+  a: 0,
+  ex: '$φ(t)$ — поправочный коэффициент, учитывающий срок службы; на него умножают затраты на создание. Формула без $φ(t)$ — для продукции со сроком службы не более года.' },
+
+{ id: 't16c', t: 16, type: 'case',
+  q: 'Сравните два комплекта фильтров для воды интегральным методом.',
+  note: 'Срок службы комплекта — меньше года.',
+  table: {
+    head: ['Величина', 'Объект', 'База'],
+    rows: [
+      ['Суммарный полезный эффект $Э$, тыс. л воды', '6', '5'],
+      ['Затраты на создание $З_{С}$, тыс. ₽', '1,5', '1,5'],
+      ['Затраты на эксплуатацию $З_{Э}$, тыс. ₽', '0,5', '0,5']
+    ]
+  },
+  parts: [
+    { label: '$И$ объекта', kind: 'num', a: 3, tol: 0.005 },
+    { label: '$И_{Б}$ базового образца', kind: 'num', a: 2.5, tol: 0.005 },
+    { label: 'Уровень качества $У_{К}$', kind: 'num', a: 1.2, tol: 0.005 },
+    { label: 'Вывод', kind: 'one', a: 0, opts: ['Качество объекта выше базового', 'Качество объекта ниже базового', 'Однозначного вывода нет, нужен другой метод'] }
+  ],
+  ex: 'Срок службы меньше года, поэтому $И = Э / (З_{С} + З_{Э})$. $И$ = 6 / (1,5 + 0,5) = 3,0; $И_{Б}$ = 5 / (1,5 + 0,5) = 2,5; $У_{К} = И / И_{Б}$ = 3,0 / 2,5 = 1,2 > 1.' },
+
+{ id: 't16d', t: 16, type: 'num',
+  q: 'Найдите интегральный показатель И для станка со сроком службы больше года.',
+  note: 'Суммарный полезный эффект $Э$ = 900 тыс. деталей, затраты на создание $З_{С}$ = 2 000 тыс. ₽, затраты на эксплуатацию $З_{Э}$ = 400 тыс. ₽, поправочный коэффициент $φ(t)$ = 0,25.',
+  a: 1, tol: 0.005, unit: 'дет./₽',
+  ex: '$И = Э / (З_{С} · φ(t) + З_{Э})$ = 900 / (2 000 · 0,25 + 400) = 900 / 900 = 1,0 детали на рубль затрат.' },
+
+{ id: 't16e', t: 16, type: 'grid',
+  q: 'Что обозначают величины в формуле интегрального показателя?',
+  cols: ['$Э$', '$З_{С}$', '$З_{Э}$', '$φ(t)$'],
+  rows: [
+    ['Суммарный полезный эффект от эксплуатации или потребления продукции', 0],
+    ['Суммарные затраты на создание продукции', 1],
+    ['Суммарные затраты на эксплуатацию или потребление продукции', 2],
+    ['Поправочный коэффициент, учитывающий срок службы', 3]
+  ],
+  ex: '$И = Э / (З_{С} + З_{Э})$ при сроке службы не более года и $И = Э / (З_{С} · φ(t) + З_{Э})$ при сроке службы более года.' },
+
+/* ───────── 17. Смешанный метод ───────── */
+{ id: 't17a', t: 17, type: 'one',
+  q: 'На чём основан смешанный метод оценки уровня качества?',
+  opts: [
+    'На одновременном использовании единичных и комплексных (групповых) показателей',
+    'На использовании только единичных показателей',
+    'На отношении суммарного полезного эффекта к суммарным затратам',
+    'На экономической эффективности продукции для производителя и потребителя'
+  ],
+  a: 0,
+  ex: 'Только единичные показатели использует дифференциальный метод, эффект к затратам относит интегральный, экономическую эффективность считает экономико-статистический.' },
+
+{ id: 't17b', t: 17, type: 'order',
+  q: 'Расставьте шаги смешанного метода по порядку.',
+  items: [
+    'Определить единичные показатели качества объекта $P_{1}…P_{M}$',
+    'Объединить показатели в группы',
+    'Вычислить относительные показатели $q_{ij}$ внутри групп',
+    'Рассчитать комплексный показатель каждой группы $K_{i} = Σ m_{ij} q_{ij}$',
+    'Рассчитать обобщённый показатель $Q = Σ α_{i} K_{i}$',
+    'Найти уровень качества $У_{К} = Q / Q_{Б}$'
+  ],
+  ex: 'Единичные показатели объединяют в группы, для каждой группы алгоритмом комплексного метода считают групповой показатель $K_{i}$, а затем по группам — обобщённый показатель $Q$.' },
+
+{ id: 't17c', t: 17, type: 'case',
+  q: 'Оцените станок смешанным методом.',
+  note: 'Весовые коэффициенты нормированы, поэтому $Q_{Б}$ = 1.',
+  table: {
+    head: ['Группа и её вес', 'Показатель', '$q_{ij}$', '$m_{ij}$'],
+    rows: [
+      ['Назначение, $α_{1}$ = 0,6', 'Мощность', '1,2', '0,5'],
+      ['', 'Точность', '1,0', '0,5'],
+      ['Надёжность, $α_{2}$ = 0,4', 'Наработка на отказ', '0,8', '0,5'],
+      ['', 'Ресурс', '1,0', '0,5']
+    ]
+  },
+  parts: [
+    { label: '$K_{1}$ — группа «Назначение»', kind: 'num', a: 1.1, tol: 0.005 },
+    { label: '$K_{2}$ — группа «Надёжность»', kind: 'num', a: 0.9, tol: 0.005 },
+    { label: 'Обобщённый показатель $Q$', kind: 'num', a: 1.02, tol: 0.005 },
+    { label: 'Вывод', kind: 'one', a: 0, opts: ['Качество объекта выше базового', 'Качество объекта ниже базового', 'Качество объекта равно базовому'] }
+  ],
+  ex: '$K_{1}$ = 0,5 · 1,2 + 0,5 · 1,0 = 1,1; $K_{2}$ = 0,5 · 0,8 + 0,5 · 1,0 = 0,9; $Q$ = 0,6 · 1,1 + 0,4 · 0,9 = 1,02. $У_{К} = Q / Q_{Б}$ = 1,02 > 1. При этом группа «Надёжность» отстаёт от базы ($K_{2}$ < 1) — такой вывод по группам один комплексный показатель не дал бы.' },
+
+{ id: 't17d', t: 17, type: 'many',
+  q: 'В каких случаях применяют смешанный метод?',
+  opts: [
+    'Единичных показателей много, они разнообразны, и анализ каждого не даёт обобщающего вывода',
+    'Один комплексный показатель недостаточно полно учитывает значимые свойства и не даёт выводов по группам свойств',
+    'У продукции два-три показателя, и все они лучше базовых',
+    'Известны только суммарный полезный эффект и суммарные затраты'
+  ],
+  a: [0, 1],
+  ex: 'Смешанный метод рассчитан на сложные объекты с большим числом показателей (более 20–30).' },
+
+{ id: 't17e', t: 17, type: 'grid',
+  q: 'Что обозначают величины в формулах смешанного метода?',
+  cols: ['$m_{ij}$', '$α_{i}$', '$K_{i}$', '$Q$'],
+  rows: [
+    ['Весовой коэффициент j-го свойства i-й группы', 0],
+    ['Весовой коэффициент i-й группы', 1],
+    ['Комплексный показатель i-й группы', 2],
+    ['Обобщённый показатель качества объекта', 3]
+  ],
+  ex: '$K_{i} = Σ m_{ij} q_{ij}$ при $Σ m_{ij} = 1$; $Q = Σ α_{i} K_{i}$ при $Σ α_{i} = 1$; $У_{К} = Q / Q_{Б}$.' },
+
+{ id: 't17f', t: 17, type: 'tf',
+  q: 'В смешанном методе отдельные особо важные показатели можно не включать в группы, а оставить единичными.',
+  a: true,
+  ex: 'Такие показатели сравнивают с базовыми дифференциальным методом. В этом и состоит «смешанность»: единичные и групповые показатели используются одновременно.' },
+
+/* ───────── 18. Экономико-статистический метод ───────── */
+{ id: 't18a', t: 18, type: 'one',
+  q: 'Через что оценивают уровень качества в экономико-статистическом методе?',
+  opts: [
+    'Через экономическую эффективность продукции — суммарный эффект для производителя и для потребителя',
+    'Через сопоставление единичных показателей объекта и базового образца',
+    'Через мнения специалистов-экспертов',
+    'Через долю стандартных и унифицированных частей в изделии'
+  ],
+  a: 0,
+  ex: '$У_{К} = П / П_{Б}$, где $П = П_{П} + П_{Э}$ — экономическая эффективность продукции.' },
+
+{ id: 't18b', t: 18, type: 'bank',
+  q: 'Соберите формулы экономической эффективности.',
+  text: 'Для производителя: $П_{П}$ = {0} · {1} − {2}. Для потребителя: $П_{Э}$ = {3} · {4} − {5}.',
+  gaps: ['$Ц_{ОПТ}$', '$V$', '$З_{П}$', '$Ц$', '$N$', '$Ц_{П}$'],
+  extra: ['$Э$', '$φ(t)$'],
+  sets: [[0, 1], [3, 4]],
+  ex: '$Ц_{ОПТ}$ — оптовая цена единицы продукции, $V$ — объём реализованной продукции, $З_{П}$ — затраты на производство. $Ц$ — стоимость единицы полезного эффекта, $N$ — количество изготовленной конечной продукции или выполненной работы, $Ц_{П}$ — цена потребления.' },
+
+{ id: 't18c', t: 18, type: 'grid',
+  q: 'Что обозначают величины в формулах экономико-статистического метода?',
+  cols: ['$Ц_{ОПТ}$', '$V$', '$З_{П}$', '$Ц$', '$N$', '$Ц_{П}$'],
+  rows: [
+    ['Оптовая цена единицы продукции', 0],
+    ['Объём реализованной продукции', 1],
+    ['Затраты на производство продукции', 2],
+    ['Стоимость единицы полезного эффекта от эксплуатации продукции', 3],
+    ['Количество изготовленной конечной продукции или выполненной работы', 4],
+    ['Цена потребления продукции', 5]
+  ],
+  ex: 'Первые три величины входят в эффективность для производителя: $П_{П} = Ц_{ОПТ} · V − З_{П}$. Остальные — в эффективность для потребителя: $П_{Э} = Ц · N − Ц_{П}$.' },
+
+{ id: 't18d', t: 18, type: 'case',
+  q: 'Оцените уровень качества оборудования экономико-статистическим методом.',
+  table: {
+    head: ['Величина', 'Значение'],
+    rows: [
+      ['Оптовая цена единицы $Ц_{ОПТ}$, тыс. ₽', '50'],
+      ['Объём реализации $V$, шт.', '100'],
+      ['Затраты на производство $З_{П}$, тыс. ₽', '4 000'],
+      ['Стоимость единицы полезного эффекта $Ц$, тыс. ₽', '2'],
+      ['Количество выполненной работы $N$, ед.', '1 500'],
+      ['Цена потребления $Ц_{П}$, тыс. ₽', '2 400'],
+      ['Эффективность базового образца $П_{Б}$, тыс. ₽', '1 280']
+    ]
+  },
+  parts: [
+    { label: '$П_{П}$, тыс. ₽', kind: 'num', a: 1000, tol: 0.5 },
+    { label: '$П_{Э}$, тыс. ₽', kind: 'num', a: 600, tol: 0.5 },
+    { label: '$П$, тыс. ₽', kind: 'num', a: 1600, tol: 0.5 },
+    { label: 'Уровень качества $У_{К}$', kind: 'num', a: 1.25, tol: 0.005 }
+  ],
+  ex: '$П_{П} = Ц_{ОПТ} · V − З_{П}$ = 50 · 100 − 4 000 = 1 000. $П_{Э} = Ц · N − Ц_{П}$ = 2 · 1 500 − 2 400 = 600. $П = П_{П} + П_{Э}$ = 1 600. $У_{К} = П / П_{Б}$ = 1 600 / 1 280 = 1,25.' },
+
+{ id: 't18e', t: 18, type: 'grid',
+  q: 'Какому методу принадлежит формула уровня качества?',
+  cols: ['Комплексный', 'Интегральный', 'Смешанный', 'Экономико-статистический'],
+  rows: [
+    ['$У_{К} = K / K_{Б}$', 0],
+    ['$У_{К} = И / И_{Б}$', 1],
+    ['$У_{К} = Q / Q_{Б}$', 2],
+    ['$У_{К} = П / П_{Б}$', 3]
+  ],
+  ex: '$K$ — комплексный показатель, $И$ — интегральный, $Q$ — обобщённый показатель смешанного метода, $П$ — экономическая эффективность. Во всех методах объект сравнивают с базовым образцом.' },
+
+{ id: 't18f', t: 18, type: 'tf',
+  q: 'Экономико-статистический метод учитывает экономическую эффективность только для производителя продукции.',
+  a: false,
+  ex: '$П = П_{П} + П_{Э}$: складывают эффективность для производителя ($Ц_{ОПТ} · V − З_{П}$) и для потребителя ($Ц · N − Ц_{П}$).' },
+
+/* ───────── 19. Экспертные методы ───────── */
+{ id: 't19a', t: 19, type: 'bank',
+  q: 'На чём основаны экспертные методы?',
+  text: 'Группа методов экспертной оценки основана на {0}, {1} и {2} специалистов-экспертов.',
+  gaps: ['знаниях', 'опыте', 'интуиции'],
+  extra: ['измерениях', 'расчётах', 'показаниях приборов'],
+  sets: [[0, 1, 2]],
+  ex: 'Экспертные методы применяют в слабо формализуемых ситуациях; основанием для выбора служит обобщённое мнение экспертов.' },
+
+{ id: 't19b', t: 19, type: 'many',
+  q: 'Для каких задач применяют экспертные методы?',
+  opts: ['Аттестация продукции', 'Определение номенклатуры показателей качества', 'Определение весовых коэффициентов показателей качества', 'Выбор базовых образцов и значений базовых показателей', 'Поверка средств измерений', 'Утверждение государственных эталонов'],
+  a: [0, 1, 2, 3],
+  ex: 'Пятая задача — разработка классификации оцениваемых изделий. Поверка и эталоны относятся к обеспечению единства измерений.' },
+
+{ id: 't19c', t: 19, type: 'many',
+  q: 'Какие методы входят в группу экспертных?',
+  opts: ['Метод рангов (ранжирования)', 'Метод непосредственного оценивания (балльный)', 'Метод сопоставлений', '«Дельфи»', 'Измерительный', 'Интегральный'],
+  a: [0, 1, 2, 3],
+  ex: 'В лекции к этой группе отнесены также органолептический и социологический методы.' },
+
+{ id: 't19d', t: 19, type: 'one',
+  q: 'Когда экспертный метод использовать нельзя?',
+  opts: [
+    'Когда качество можно оценить аналитическими или экспериментальными методами точнее или с меньшими затратами',
+    'Когда оценивают слабо формализуемые свойства',
+    'Когда нужно определить весовые коэффициенты',
+    'Когда выбирают базовый образец'
+  ],
+  a: 0,
+  ex: 'Экспертная оценка субъективна, поэтому её не применяют там, где другой метод даёт большую точность или обходится дешевле.' },
+
+{ id: 't19e', t: 19, type: 'tf', src: 'РД 50-149-79',
+  q: 'В экспертную группу стоит включать специалистов, которые сами проектировали и изготавливали оцениваемую продукцию.',
+  a: false,
+  ex: 'По РД 50-149-79, чтобы оценка была объективной, в экспертную группу не должны входить специалисты, имеющие отношение к созданию и изготовлению продукции. В группе должно быть не менее семи экспертов.' },
+
+/* ───────── 20. Закон «О техническом регулировании» ───────── */
+{ id: 't20a', t: 20, type: 'one',
+  q: 'Какой документ — основной в области технического регулирования в РФ?',
+  opts: ['Федеральный закон от 27.12.2002 № 184-ФЗ', 'Закон РФ от 27.04.1993 № 4871-1', 'ГОСТ Р ИСО 9001-2015', 'ГОСТ 15467-79'],
+  a: 0,
+  ex: '№ 184-ФЗ — «О техническом регулировании». Закон № 4871-1 — «Об обеспечении единства измерений», ГОСТ Р ИСО 9001-2015 — требования к системам менеджмента качества, ГОСТ 15467-79 — термины управления качеством продукции.' },
+
+{ id: 't20b', t: 20, type: 'many',
+  q: 'Какие цели ставил закон «О техническом регулировании»?',
+  opts: [
+    'Гармонизировать систему технического регулирования России с международной, прежде всего европейской',
+    'Содействовать выходу отечественных товаров на мировой рынок',
+    'Обеспечить равные условия для отечественных и зарубежных производителей на российском рынке',
+    'Исключить нормотворчество ведомств',
+    'Защитить внутренний рынок от зарубежных товаров',
+    'Сделать все стандарты обязательными'
+  ],
+  a: [0, 1, 2, 3],
+  ex: 'Гармонизация нужна, чтобы устранить технические барьеры в торговле. Стандарты по закону применяются добровольно.' },
+
+{ id: 't20c', t: 20, type: 'many',
+  q: 'Какие недостатки были у старой системы технического регулирования?',
+  opts: [
+    'Несоответствие международно признанным нормам и правилам ВТО',
+    'Дублирование процедур подтверждения соответствия продукции',
+    'Противоречивость требований разных федеральных органов',
+    'Сдерживание притока инвестиций',
+    'Слишком малое число нормативных документов',
+    'Избыточный контроль бизнеса за разработкой норм'
+  ],
+  a: [0, 1, 2, 3],
+  ex: 'Документов было, наоборот, слишком много, и они часто противоречили друг другу, а предпринимательские сообщества не контролировали разработку и изменение нормативных актов. Реформа системы была одним из обязательных условий принятия России в ВТО.' },
+
+{ id: 't20d', t: 20, type: 'many',
+  q: 'Какие положения входят в принципы технического регулирования?',
+  opts: [
+    'Независимость органов по аккредитации и сертификации от изготовителей, продавцов, исполнителей и приобретателей',
+    'Недопустимость совмещения полномочий органа государственного контроля (надзора) и органа по сертификации',
+    'Недопустимость совмещения одним органом полномочий на аккредитацию и сертификацию',
+    'Недопустимость ограничения конкуренции при аккредитации и сертификации',
+    'Финансирование государственного контроля за счёт проверяемых предприятий',
+    'Обязательность применения всех национальных стандартов'
+  ],
+  a: [0, 1, 2, 3],
+  ex: 'Внебюджетное финансирование государственного контроля за соблюдением технических регламентов, наоборот, недопустимо. Ещё принципы: единые правила установления требований, единая система и правила аккредитации, единство правил и методов испытаний и измерений.' },
+
+{ id: 't20e', t: 20, type: 'bank',
+  q: 'Восстановите определение сертификации.',
+  text: 'Сертификация — форма осуществляемого {0} подтверждения соответствия объектов требованиям {1}, положениям {2} или условиям {3}.',
+  gaps: ['органом по сертификации', 'технических регламентов', 'стандартов', 'договоров'],
+  extra: ['изготовителем продукции', 'патентов', 'рекламных материалов'],
+  sets: [[1, 2, 3]],
+  ex: 'Сертификацию проводит независимый орган по сертификации, а не сам изготовитель.' },
+
+{ id: 't20f', t: 20, type: 'grid', src: 'лекция о 184-ФЗ',
+  q: 'Добровольное или обязательное подтверждение соответствия?',
+  cols: ['Добровольное', 'Обязательное'],
+  rows: [
+    ['Добровольная сертификация', 0],
+    ['Декларирование соответствия', 1],
+    ['Обязательная сертификация', 1],
+    ['Цель — установить соответствие требованиям технического регламента', 1],
+    ['Цель — установить соответствие национальным стандартам, стандартам организаций, условиям договоров', 0]
+  ],
+  ex: 'По таблице из лекции: добровольное подтверждение — это добровольная сертификация (выдаётся сертификат соответствия). Обязательное — декларирование соответствия (декларация о соответствии) и обязательная сертификация (сертификат соответствия); обе формы подтверждают соответствие техническому регламенту.' },
+
+{ id: 't20g', t: 20, type: 'order',
+  q: 'Расположите уровни системы технического регулирования РФ сверху вниз.',
+  items: [
+    'Федеральный закон «О техническом регулировании»',
+    'Технические регламенты — общие и специальные',
+    'Стандарты — международные, национальные, организаций'
+  ],
+  ex: 'Закон задаёт систему. Технические регламенты обязательны для исполнения, стандарты применяются добровольно.' },
+
+/* ───────── 21. Технический регламент и стандарт ───────── */
+{ id: 't21a', t: 21, type: 'grid',
+  q: 'Технический регламент или стандарт?',
+  cols: ['Технический регламент', 'Стандарт'],
+  rows: [
+    ['Устанавливает обязательные для применения и исполнения требования', 0],
+    ['Применяется добровольно и рассчитан на многократное использование', 1],
+    ['Принимается международным договором РФ, федеральным законом, указом Президента или постановлением Правительства', 0],
+    ['Может содержать требования к терминологии, символике, упаковке, маркировке или этикеткам', 1]
+  ],
+  ex: 'Главное отличие: технический регламент обязателен, стандарт применяется добровольно.' },
+
+{ id: 't21b', t: 21, type: 'many',
+  q: 'Какими актами может быть принят технический регламент?',
+  opts: ['Международным договором РФ, ратифицированным в установленном порядке', 'Федеральным законом', 'Указом Президента РФ', 'Постановлением Правительства РФ', 'Приказом предприятия-изготовителя', 'Решением органа по сертификации'],
+  a: [0, 1, 2, 3],
+  ex: 'Технический регламент принимается международным договором РФ, федеральным законом, указом Президента РФ или постановлением Правительства РФ.' },
+
+{ id: 't21c', t: 21, type: 'grid',
+  q: 'Общий или специальный технический регламент?',
+  cols: ['Общий', 'Специальный'],
+  rows: [
+    ['Требования пожарной, биологической, экологической, ядерной и радиационной безопасности', 0],
+    ['Требования электромагнитной совместимости', 0],
+    ['Обязателен для любых видов продукции и процессов', 0],
+    ['Учитывает технологические и иные особенности отдельных видов продукции и процессов', 1],
+    ['Действует там, где степень риска причинения вреда выше учтённой общим регламентом', 1]
+  ],
+  ex: 'Общие регламенты охватывают также безопасную эксплуатацию и утилизацию машин и оборудования, безопасную эксплуатацию зданий, строений и сооружений. Специальные устанавливают требования только к тем видам продукции и процессам, где риск причинения вреда выше.' },
+
+{ id: 't21d', t: 21, type: 'grid',
+  q: 'По какому признаку выделен вид стандарта?',
+  cols: ['По уровню принятия', 'По объекту и содержанию требований'],
+  rows: [
+    ['Международные', 0], ['Национальные', 0], ['Стандарты организаций', 0],
+    ['Основополагающие', 1], ['На методы испытаний и контроля', 1], ['На термины и определения', 1]
+  ],
+  ex: 'По уровню принятия: международные, национальные, стандарты организаций. По объекту и содержанию требований: основополагающие, на продукцию, на услуги, на процессы (работы), на методы испытаний и контроля, на термины и определения.' },
+
+{ id: 't21e', t: 21, type: 'tf',
+  q: 'Стандарт устанавливает обязательные для применения и исполнения требования к продукции.',
+  a: false,
+  ex: 'Обязательные требования устанавливает технический регламент. Стандарт — документ для добровольного многократного использования.' },
+
+/* ───────── 22. Цена потребления ───────── */
+{ id: 't22a', t: 22, type: 'one',
+  q: 'Цена потребления — это…',
+  opts: [
+    'полные расходы потребителя на приобретение и эксплуатацию продукции за срок её службы',
+    'максимальная цена, которую потребитель считает для себя выгодным заплатить',
+    'оптовая цена единицы продукции',
+    'затраты производителя на создание продукции'
+  ],
+  a: 0,
+  ex: 'Цена потребления — сумма продажной цены и стоимости потребления товара за период эксплуатации. Максимальная выгодная цена — это потребительская ценность (вопрос 3).' },
+
+{ id: 't22b', t: 22, type: 'num',
+  q: 'Найдите цену потребления станка.',
+  note: 'Станок стоит 800 тыс. ₽. Эксплуатация обходится в 150 тыс. ₽ в год, срок службы — 6 лет.',
+  a: 1700, tol: 0.5, unit: 'тыс. ₽',
+  ex: '$Ц_{П} = Ц_{О} + Σ З_{i}(t)$ = 800 + 150 · 6 = 1 700 тыс. ₽.' },
+
+{ id: 't22c', t: 22, type: 'case',
+  q: 'Сравните холодильники А и Б по цене потребления за 5 лет службы.',
+  table: {
+    head: ['Величина', 'А', 'Б'],
+    rows: [['Цена покупки, тыс. ₽', '30', '40'], ['Затраты на эксплуатацию в год, тыс. ₽', '6', '3']]
+  },
+  parts: [
+    { label: '$Ц_{П}$ холодильника А, тыс. ₽', kind: 'num', a: 60, tol: 0.05 },
+    { label: '$Ц_{П}$ холодильника Б, тыс. ₽', kind: 'num', a: 55, tol: 0.05 },
+    { label: 'Какой выгоднее по цене потребления?', kind: 'one', a: 0, opts: ['Холодильник Б', 'Холодильник А', 'Одинаково'] }
+  ],
+  ex: 'А: 30 + 6 · 5 = 60 тыс. ₽. Б: 40 + 3 · 5 = 55 тыс. ₽. Холодильник Б дороже при покупке, но дешевле в потреблении, поэтому сравнивать товары только по продажной цене недостаточно.' },
+
+{ id: 't22d', t: 22, type: 'one',
+  q: 'В формуле какого метода оценки уровня качества используется цена потребления?',
+  opts: ['Экономико-статистического', 'Интегрального', 'Дифференциального', 'Комплексного'],
+  a: 0,
+  ex: 'Цена потребления входит в экономическую эффективность для потребителя: $П_{Э} = Ц · N − Ц_{П}$. По смыслу она близка к знаменателю интегрального показателя (затраты на создание и эксплуатацию), но как $Ц_{П}$ записана именно в экономико-статистическом методе.' },
+
+{ id: 't22e', t: 22, type: 'bank',
+  q: 'Соберите формулу цены потребления.',
+  text: '$Ц_{П}(t)$ = {0} + $Σ$ {1}',
+  gaps: ['$Ц_{О}$', '$З_{i}(t)$'],
+  extra: ['$Ц_{max}$', '$З_{П}$', '$П_{Э}$'],
+  ex: '$Ц_{О}$ — цена приобретения изделия, $З_{i}(t)$ — затраты, связанные с эксплуатацией, за время t.' },
+
+{ id: 't22f', t: 22, type: 'one',
+  q: 'К какой группе показателей качества относится цена потребления?',
+  opts: ['Экономические', 'Назначения', 'Надёжности', 'Экономного использования ресурсов'],
+  a: 0,
+  ex: 'Экономические показатели: себестоимость изготовления, цена изделия, затраты при эксплуатации, суммарные затраты за весь жизненный цикл. Цена потребления объединяет цену изделия и затраты при эксплуатации.' },
+
+/* ───────── 23. Услуга. Материальные и нематериальные услуги ───────── */
+{ id: 't23a', t: 23, type: 'bank',
+  q: 'Восстановите определение услуги по ГОСТ Р 50646-2012.',
+  text: 'Услуга — результат непосредственного {0} исполнителя и {1}, а также собственной деятельности {2} по удовлетворению {3} потребителя.',
+  gaps: ['взаимодействия', 'потребителя', 'исполнителя', 'потребности'],
+  extra: ['соперничества', 'государства', 'прибыли'],
+  ex: 'По ГОСТ ISO 9000 услуга — результат как минимум одного действия, обязательно осуществлённого при взаимодействии поставщика и потребителя; как правило, она нематериальна.' },
+
+{ id: 't23b', t: 23, type: 'grid',
+  q: 'Материальная или нематериальная (социально-культурная) услуга?',
+  cols: ['Материальная', 'Нематериальная'],
+  rows: [
+    ['Автосервис', 0], ['Химчистка', 0], ['Перевозка пассажиров', 0], ['Общественное питание', 0],
+    ['Банковские и страховые услуги', 1], ['Обучение, повышение квалификации', 1], ['Парикмахерские услуги', 1], ['Услуги связи и интернета', 1]
+  ],
+  ex: 'Материальные услуги удовлетворяют материально-бытовые потребности и связаны с материальным продуктом: ремонт, чистка, ЖКХ, транспорт, питание, гостиницы. Нематериальные — финансовые, образовательные, культура и спорт, уход и лечение (в том числе парикмахерские и медицинские услуги), прокат, связь.' },
+
+{ id: 't23c', t: 23, type: 'one',
+  q: 'Какие потребности удовлетворяет социально-культурная (нематериальная) услуга?',
+  opts: [
+    'Духовные, интеллектуальные, этические потребности и поддержание нормальной жизнедеятельности',
+    'Материально-бытовые потребности',
+    'Потребности предприятия в сырье и материалах',
+    'Потребности государства в контроле качества'
+  ],
+  a: 0,
+  ex: 'Сюда входят поддержание и восстановление здоровья, духовное и физическое развитие личности, повышение профессионализма. Материально-бытовые потребности удовлетворяет материальная услуга.' },
+
+{ id: 't23d', t: 23, type: 'one',
+  q: 'Какую услугу называют смешанной?',
+  opts: [
+    'Предусматривающую одновременное удовлетворение материально-бытовых и социально-культурных потребностей',
+    'Оказываемую одновременно несколькими исполнителями',
+    'Оказываемую и населению, и предприятиям',
+    'Частично платную, частично бесплатную'
+  ],
+  a: 0,
+  ex: 'Услуги населению делятся на материальные, нематериальные (социально-культурные) и смешанные.' },
+
+{ id: 't23e', t: 23, type: 'many',
+  q: 'Что обеспечивает материальная услуга?',
+  opts: ['Восстановление, изменение или сохранение потребительских свойств изделий', 'Изготовление продукции по заказу', 'Перемещение людей и грузов', 'Духовное и физическое развитие личности', 'Повышение профессионализма'],
+  a: [0, 1, 2],
+  ex: 'Материальная услуга включает деятельность по отношению к материальному продукту, в том числе предоставленному потребителем. Услуги с материальным результатом иногда называют работой.' },
+
+{ id: 't23f', t: 23, type: 'tf',
+  q: 'Услуга — это результат деятельности, для которого взаимодействие исполнителя и потребителя не требуется.',
+  a: false,
+  ex: 'Услуга — результат непосредственного взаимодействия исполнителя и потребителя, а также собственной деятельности исполнителя. По ГОСТ ISO 9000 хотя бы одно действие обязательно происходит при таком взаимодействии.' },
+
+/* ───────── 24. Номенклатура показателей качества услуг ───────── */
+{ id: 't24a', t: 24, type: 'many',
+  q: 'Какие группы показателей качества услуг устанавливает ГОСТ Р 52113-2014?',
+  opts: ['Назначения', 'Безопасности', 'Надёжности', 'Профессионального уровня персонала', 'Технологичности', 'Транспортабельности', 'Патентно-правовые'],
+  a: [0, 1, 2, 3],
+  ex: 'Групп четыре: назначения, безопасности, надёжности, профессионального уровня персонала. Технологичности, транспортабельности и патентно-правовые — группы показателей качества промышленной продукции.' },
+
+{ id: 't24b', t: 24, type: 'grid',
+  q: 'К какой группе относится подгруппа показателей качества услуг?',
+  cols: ['Назначения', 'Безопасности', 'Надёжности', 'Уровня персонала'],
+  rows: [
+    ['Показатели совместимости', 0],
+    ['Показатели качества предприятия', 0],
+    ['Сохранность информации и имущества потребителей', 1],
+    ['Защита окружающей среды', 1],
+    ['Помехозащищённость', 2],
+    ['Стойкость результата услуги к внешним воздействиям', 2],
+    ['Способность к руководству', 3],
+    ['Знание и соблюдение профессиональной этики', 3]
+  ],
+  ex: 'Назначения: применения, совместимости, качества предприятия, специфические. Безопасности: для жизни, здоровья и имущества потребителей; для окружающей среды; сохранности информации и имущества. Надёжности: надёжность результата, стойкость к внешним воздействиям, помехозащищённость, надёжность предоставления услуги. Уровня персонала: подготовка и квалификация, способность к руководству, профессиональная этика.' },
+
+{ id: 't24c', t: 24, type: 'one',
+  q: 'Какой стандарт устанавливает номенклатуру показателей качества услуг?',
+  opts: ['ГОСТ Р 52113-2014', 'ГОСТ Р 50646-2012', 'ГОСТ 22851-77', 'ГОСТ 15467-79'],
+  a: 0,
+  ex: 'ГОСТ Р 50646-2012 — термины и определения услуг населению, ГОСТ 22851-77 — выбор номенклатуры показателей качества промышленной продукции, ГОСТ 15467-79 — основные понятия управления качеством продукции.' },
+
+{ id: 't24d', t: 24, type: 'many',
+  q: 'На какие подгруппы делятся показатели назначения услуг?',
+  opts: ['Применения', 'Совместимости', 'Качества предприятия', 'Специфические', 'Помехозащищённости', 'Способности к руководству'],
+  a: [0, 1, 2, 3],
+  ex: 'Помехозащищённость входит в группу надёжности, способность к руководству — в группу профессионального уровня персонала.' },
+
+{ id: 't24e', t: 24, type: 'grid', src: 'ГОСТ Р 52113-2014',
+  q: 'К какой группе показателей качества услуги относится пример?',
+  cols: ['Назначения', 'Безопасности', 'Надёжности', 'Уровня персонала'],
+  rows: [
+    ['Время ожидания в очереди', 0],
+    ['Пожарная безопасность помещения', 1],
+    ['Гарантия сохранности сданных вещей', 1],
+    ['Заказ выполнен точно в срок', 2],
+    ['Вежливость и доброжелательность мастера', 3],
+    ['Квалификация и опыт работы мастера', 3]
+  ],
+  ex: 'Продолжительность ожидания и условия обслуживания — показатели качества предприятия (группа назначения). Своевременность и точность выполнения заказа — надёжность предоставления услуги. Вежливость — профессиональная этика, квалификация — уровень подготовки персонала.' }
+
+];
+
+const CHEAT = {"titles":["Понятие качества продукции. Последовательность оценки уровня качества объекта.","Понятие конкурентоспособности товара. Конкуренция. Виды конкуренции.","Потребительская ценность товара, ее связь с конкурентоспособностью.","Виды измерений. Измерительные шкалы.","Основные принципы квалиметрии.","Шкала порядка и шкала интервалов. Принцип построения, преимущества и недостатки.","Шкала отношений. Принцип построения. Сходство и отличия от шкалы интервалов.","Федеральный закон «Об обеспечении единства измерений».","Методы количественной оценки показателей качества объекта.","Классификация показателей качества.","Номенклатура показателей качества.","Дифференциальный метод оценки качества изделия.","Понятие «базовый образец». Определение группы аналогов и выбор базового образца.","Комплексный метод оценки качества объекта.","Весовые коэффициенты: назначение, способы определения.","Интегральный метод оценки качества изделия.","Смешанный метод оценки качества объекта.","Экономико-статистический метод оценки качества изделия.","Экспертные методы оценки качества.","Федеральный закон «О техническом регулировании». Система технического регулирования в РФ.","Понятия «технический регламент» и «стандарт», их виды.","Понятие «цена потребления». В каком методе оценки уровня качества используется?","Понятие «услуга». Материальные и нематериальные услуги.","Номенклатура показателей качества услуг."],"sections":["<p><strong>Качество<\/strong> – совокупность характеристик объекта, относящихся к его способности удовлетворять установленные и предполагаемые потребности; степень соответствия совокупности присущих характеристик объекта требованиям (ГОСТ Р ИСО 9000-2015).<\/p><p><strong>Качество продукции/услуги<\/strong> – совокупность свойств и характеристик продукции (услуги), которые придают ей способность удовлетворять обусловленные или предполагаемые потребности (ИСО 8402-86).<\/p><p><strong>Последовательность оценки уровня качества:<\/strong><\/p><ol><li><strong>Цель оценки<\/strong> уровня качества продукции. Основные задачи: обеспечение и управление качеством; аттестация продукции; выбор наилучшего варианта продукции; планирование показателей качества; контроль качества; анализ изменения уровня качества.<\/li><li><strong>Классификация и выбор номенклатуры показателей качества<\/strong> – решаем, какие свойства продукции будем оценивать (ГОСТ 22851-77).<\/li><li><strong>Выбор базовых образцов и определение базовых показателей качества<\/strong> – выбираем лучший аналог, с которым будем сравнивать (РД 50-451-84). Шаги 2 и 3 выполняются параллельно.<\/li><li><strong>Выбор методов и определение значений показателей качества<\/strong> – измеряем или рассчитываем значения показателей у объекта и у базового образца (РД 50-149-79).<\/li><li><strong>Выбор и обоснование метода оценки уровня качества<\/strong> – дифференциальный, комплексный, смешанный, интегральный и др. (РД 50-149-79).<\/li><li><strong>Оценка уровня качества<\/strong> – сравниваем объект с базовым образцом, получаем У<sub>К<\/sub>.<\/li><li><strong>Выработка рекомендаций.<\/strong><\/li><li><strong>Принятие управленческих решений.<\/strong><\/li><\/ol>","<p><strong>Конкурентоспособность товара<\/strong> – способность продукции быть привлекательной по сравнению с другими изделиями аналогичного вида и назначения благодаря лучшему соответствию своих характеристик требованиям данного рынка и потребительским оценкам; способность товара быть реализованным на определённом рынке в определённый момент времени.<\/p><p><strong>Конкуренция<\/strong> – элемент рыночного механизма, реализующийся в форме взаимодействия рыночных субъектов и борьбы между ними за наиболее выгодные условия приложения капитала (за максимально эффективное использование факторов производства при единых для всех правилах). Основной механизм формирования хозяйственных отношений в условиях рынка и способ оздоровления экономики.<\/p><p><strong>Виды конкуренции<\/strong> выделяют по классификационным признакам:<\/p><ul><li>этические нормы (добросовестная / недобросовестная);<\/li><li>тип рынка или конкурентной среды;<\/li><li>ценовой признак (ценовая / неценовая);<\/li><li>форма;<\/li><li>территориальный или страновой признак;<\/li><li>уровень конкуренции;<\/li><li>тип конкурентов и их роль в конкурентной борьбе;<\/li><li>субъект;<\/li><li>количество участвующих в противоборстве хозяйствующих субъектов.<\/li><\/ul>","<p><strong>Потребительская ценность товара<\/strong> – максимальная цена (Ц<sub>max<\/sub>), которую потребитель считает для себя выгодным заплатить за товар.<\/p><ul><li>Цена продавца (производителя): <strong>Ц = З + П<\/strong> (затраты + прибыль).<\/li><li>Потребительская ценность (для покупателя): <strong>Ц<sub>max<\/sub> = З<sub>п<\/sub> + П<sub>п<\/sub><\/strong>.<\/li><li><strong>К = Ц<sub>max<\/sub> – Ц<\/strong> – неоплаченная часть потребительской ценности (выгода покупателя).<\/li><\/ul><p><strong>Неоплаченная часть потребительской ценности товара (К) пропорциональна его конкурентоспособности.<\/strong> Если продавец повышает цену (П<sub>1<\/sub> &gt; П), а ценность для покупателя не меняется, К уменьшается и товар становится менее конкурентоспособным. Повысить конкурентоспособность можно, снизив цену или увеличив ценность товара в глазах покупателя.<\/p>","<p><strong>Измерение<\/strong> – получение численного значения размера. <strong>Измеряемая величина<\/strong> – некоторое свойство объекта.<\/p><p>Основное уравнение численных измерений:<\/p><p class=\"fm\">Q<sub>i<\/sub> = N<sub>i<\/sub> · [Q]<\/p><p>где N<sub>i<\/sub> – числовое значение, [Q] – единица величины.<\/p><p><strong>Виды измерений:<\/strong><\/p><ol><li><strong>Прямые<\/strong> – искомое значение получают непосредственным сравнением с мерой этой величины.<\/li><li><strong>Косвенные<\/strong> – значение вычисляют по известной зависимости от величин, полученных прямыми измерениями.<\/li><li><strong>Совокупные<\/strong> – одновременные измерения нескольких <strong>одноимённых<\/strong> величин; искомые значения находят решением системы уравнений.<\/li><li><strong>Совместные<\/strong> – одновременные измерения нескольких <strong>разноимённых<\/strong> величин для нахождения зависимости между ними.<\/li><\/ol><p><strong>Измерительные шкалы:<\/strong><\/p><ul><li><strong>Шкала порядка<\/strong> – определяет операцию упорядочения между объектами (Q<sub>3<\/sub> &lt; Q<sub>1<\/sub> &lt; Q<sub>2<\/sub> &lt; Q<sub>4<\/sub> &lt; Q<sub>5<\/sub> – возрастающего порядка; Q<sub>1<\/sub> &gt; Q<sub>4<\/sub> &gt; Q<sub>2<\/sub> &gt; Q<sub>3<\/sub> &gt; Q<sub>5<\/sub> – убывающего). (+) простота, широкое использование; (–) не даёт возможности определить, во сколько раз один размер больше или меньше другого.<\/li><li><strong>Шкала интервалов<\/strong> – фиксируются отличия сопоставляемых размеров: Q<sub>i<\/sub> – Q<sub>j<\/sub> = ΔQ<sub>ij<\/sub>, i = 1, 2, …, n, j = const. Начало отсчёта и деление шкалы на равные части – произвольные.<\/li><li><strong>Шкала отношений<\/strong> – определяется численное значение измеряемой величины: N<sub>i<\/sub> = Q<sub>i<\/sub> / [Q]. Не имеет отрицательных значений; построение не всегда возможно.<\/li><\/ul>","<p><strong>Квалиметрия<\/strong> – учение об измерении и количественной оценке качества объектов и процессов деятельности людей.<\/p><ol><li>Количественная оценка качества изделия проводится после того, как установлены <strong>условия и цель<\/strong> оценки.<\/li><li>Качество рассматривается как <strong>иерархическая совокупность свойств<\/strong>, расположенных на различных уровнях.<\/li><li>Оценка свойств объекта заканчивается вычислением <strong>относительного показателя<\/strong> качества.<\/li><li>Оценка качества проводится с точки зрения <strong>общественной потребности<\/strong>.<\/li><li>Каждое свойство качества определяется двумя параметрами – <strong>относительным показателем и весовым коэффициентом<\/strong>.<\/li><\/ol>","<p>Шкала порядка<\/p><p>Определяет операцию упорядочения между объектами (пример: уровень образования – начальное, среднее, высшее; баллы твёрдости).<\/p><p>Q<sub>3<\/sub> &lt; Q<sub>1<\/sub> &lt; Q<sub>2<\/sub> &lt; Q<sub>4<\/sub> &lt; Q<sub>5<\/sub> – шкала возрастающего порядка<\/p><p>Q<sub>1<\/sub> &gt; Q<sub>4<\/sub> &gt; Q<sub>2<\/sub> &gt; Q<sub>3<\/sub> &gt; Q<sub>5<\/sub> – шкала убывающего порядка<\/p><p>Допустимые отношения: =, ≠, &lt;, &gt;.<\/p><p><strong>Преимущества:<\/strong> простота и широкое использование на практике; позволяет упорядочить объекты по степени выраженности свойства; удобна для сравнения и классификации.<\/p><p><strong>Недостатки:<\/strong> не даёт возможности определить, на сколько и во сколько раз один размер больше или меньше другого.<\/p><p>Шкала интервалов<\/p><p>Фиксируются отличия (разности) сопоставляемых размеров. Пример: температура по Цельсию и Фаренгейту, календарные даты.<\/p><p>Q<sub>i<\/sub> – Q<sub>j<\/sub> = ΔQ<sub>ij<\/sub>, i = 1, 2, …, n, j = const<\/p><p>Начало отсчёта – произвольное (условный ноль); деление шкалы на равные части – произвольное.<\/p><p>Допустимые отношения: =, ≠, &lt;, &gt;, +, –.<\/p><p><strong>Преимущества:<\/strong> позволяет упорядочить объекты и измерить, <strong>на сколько<\/strong> один размер отличается от другого; допускает сложение и вычитание; подходит для статистического анализа.<\/p><p><strong>Недостатки:<\/strong> нет абсолютного (естественного) нуля, поэтому нельзя умножать, делить и говорить, <strong>во сколько раз<\/strong> одно значение больше другого (20 °C не «вдвое теплее» 10 °C).<\/p>","<p><strong>Шкала отношений<\/strong> – шкала с равными интервалами и <strong>абсолютным (естественным) нулём<\/strong>, обозначающим отсутствие измеряемого свойства. Определяется численное значение измеряемой величины. Примеры: масса, длина, время, возраст, температура по Кельвину.<\/p><p class=\"fm\">N<sub>i<\/sub> = Q<sub>i<\/sub> / [Q]<\/p><p><strong>Принцип построения:<\/strong> задаётся естественный ноль и единица измерения [Q]; значение величины – число единиц, содержащихся в ней. Не имеет отрицательных значений; построение не всегда возможно.<\/p><p>Допустимые отношения: =, ≠, &lt;, &gt;, +, –, ×, ÷.<\/p><p><strong>Сходство со шкалой интервалов:<\/strong> обе метрические (количественные), имеют равные интервалы, допускают упорядочение, сложение и вычитание.<\/p><p><strong>Отличие:<\/strong> у шкалы отношений ноль абсолютный, а у шкалы интервалов – условный. Поэтому только на шкале отношений допустимы умножение и деление и можно сказать, <strong>во сколько раз<\/strong> одно значение больше другого.<\/p><p><strong>Преимущества:<\/strong> наивысшая информативность; допустимы все арифметические операции и статистический анализ.<\/p><p><strong>Недостатки:<\/strong> требует естественного нуля, поэтому построение не всегда возможно; не имеет отрицательных значений.<\/p>","<p><strong>Требование единства измерений<\/strong> – это такое их осуществление, которое обеспечивает достоверность и сопоставимость результатов однородных измерений, а значения измеряемых величин при этом выражаются в узаконенных и общепринятых единицах (Закон РФ «Об обеспечении единства измерений» от 27.04.1993 № 4871-1, с изменениями от 10.01.2003).<\/p><ul><li><strong>Правовая основа<\/strong> – законодательная метрология.<\/li><li><strong>Организационное обеспечение<\/strong> – осуществляет Федеральное агентство по техническому регулированию и метрологии (Росстандарт).<\/li><li><strong>Техническая база<\/strong> – система хранения эталонов.<\/li><\/ul><p><strong>Основные задачи:<\/strong><\/p><ul><li>осуществление государственного управления деятельностью по обеспечению единства измерений;<\/li><li>утверждение и хранение государственных эталонов единиц величин;<\/li><li>аттестация методик выполнения измерений;<\/li><li>координация работ по обеспечению единства измерений времени, частоты, определения параметров вращения Земли (Гос. служба времени и частоты);<\/li><li>координация работ по разработке и внедрению стандартных справочных данных о физических константах и свойствах веществ и материалов (Гос. служба стандартных справочных данных);<\/li><li>утверждение типа средств измерений;<\/li><li>поверка средств измерений;<\/li><li>калибровка средств измерений;<\/li><li>государственный метрологический надзор за количеством товаров, отчуждаемых при совершении торговых операций;<\/li><li>контроль за количеством фасованных товаров в упаковках любого вида.<\/li><\/ul>","<p>Значения показателей качества получают, измеряя свойства на одной из шкал. Количественную оценку обеспечивают <strong>метрические шкалы<\/strong>, позволяющие выполнять математические операции с результатами измерений.<\/p><div class=\"tw\"><table><thead><tr><th><\/th><th>Шкала интервалов<\/th><th>Шкала отношений<\/th><th>Шкала абсолютных величин<\/th><\/tr><\/thead><tbody><tr><th scope=\"row\">Измеряемые характеристики<\/th><td>Количественные (дискретные и непрерывные)<\/td><td>Количественные (дискретные и непрерывные)<\/td><td>Количественные (дискретные и непрерывные)<\/td><\/tr><tr><th scope=\"row\">Определяемые отношения<\/th><td>=, ≠, &lt;, &gt;, +, –<\/td><td>=, ≠, &lt;, &gt;, +, –, ×, ÷<\/td><td>=, ≠, &lt;, &gt;, +, –, ×, ÷<\/td><\/tr><tr><th scope=\"row\">Примеры<\/th><td>Температура в °C и °F, календарные даты<\/td><td>Температура в K, возраст, время и др.<\/td><td>Доход, величины с размерностью физических единиц, количество остановок, высота и др.<\/td><\/tr><tr><th scope=\"row\">Информативность результатов<\/th><td>Высокая<\/td><td>Наивысшая<\/td><td>Наивысшая<\/td><\/tr><tr><th scope=\"row\">Чувствительность к погрешностям<\/th><td>Высокая<\/td><td>Наивысшая<\/td><td>Наивысшая<\/td><\/tr><\/tbody><\/table><\/div><p>По способу получения значений показателей выделяют методы: измерительный, регистрационный, расчётный, органолептический, экспертный, социологический.<\/p>","<ul><li><strong>По характеризуемым свойствам:<\/strong> назначения, надёжности, экономного использования ресурсов, технологичности, транспортабельности, эргономические, экологические, безопасности, эстетические, стандартизации и унификации, патентно-правовые, экономические.<\/li><li><strong>По стадии определения:<\/strong> прогнозируемые, проектные, производственные, эксплуатационные.<\/li><li><strong>По применению для оценки:<\/strong> базовые (значения у базового образца), относительные (отношение показателя объекта к базовому).<\/li><li><strong>По количеству характеризуемых свойств:<\/strong> единичные (одно свойство), комплексные – групповые, интегральные, обобщённые (несколько свойств).<\/li><\/ul><p><strong>Содержание основных видов показателей:<\/strong><\/p><ul><li><strong>Назначения<\/strong> – характеризуют свойства продукции, определяющие основные функции, для выполнения которых она предназначена, и обусловливают область её применения.<\/li><li><strong>Надёжности<\/strong> – характеризуют изменение качества изделия (объекта) во времени.<\/li><li><strong>Экономного использования ресурсов<\/strong> – отражают техническое совершенство изделия по количеству потребляемых в процессе работы ресурсов.<\/li><li><strong>Технологичности<\/strong> – характеризуют оптимальное распределение затрат материалов, средств труда и времени при подготовке производства, изготовлении, эксплуатации, ремонте и утилизации.<\/li><li><strong>Транспортабельности<\/strong> – характеризуют приспособленность продукции к перемещению (транспортированию) без её использования.<\/li><li><strong>Эргономические<\/strong> – характеризуют систему «человек – изделие» и учитывают гигиенические, антропометрические, физиологические, психофизиологические свойства человека.<\/li><li><strong>Экологические<\/strong> – характеризуют уровень вредного воздействия на окружающую среду при эксплуатации изделия.<\/li><li><strong>Безопасности<\/strong> – характеризуют безопасность персонала, пассажиров (для транспорта) и окружающих людей при эксплуатации, хранении и утилизации изделия.<\/li><li><strong>Эстетические<\/strong> – характеризуют информационную выразительность, рациональность формы, гармоничность сочетания элементов изделия между собой и с окружающей средой.<\/li><li><strong>Стандартизации и унификации<\/strong> – характеризуют насыщенность продукции стандартными, унифицированными и оригинальными частями.<\/li><li><strong>Патентно-правовые<\/strong> – характеризуют степень обновления технических решений, их патентную защиту и возможность беспрепятственной реализации в стране и за рубежом.<\/li><li><strong>Экономические<\/strong> – характеризуют затраты на разработку, изготовление и эксплуатацию изделия и экономическую эффективность его применения: себестоимость изготовления, цена изделия, затраты при эксплуатации, суммарные затраты за весь жизненный цикл (см. цену потребления, вопрос 22).<\/li><\/ul>","<p><strong>Номенклатура показателей качества<\/strong> – перечень показателей, по которым оценивают качество данного вида продукции. Её выбирают на основе классификации показателей (вопрос 10) по ГОСТ 22851-77 «Выбор номенклатуры показателей качества промышленной продукции. Основные положения».<\/p><p>Номенклатура зависит от назначения и условий использования продукции, требований потребителей и цели оценки. Для выбора номенклатуры часто применяют экспертные методы. Номенклатура показателей базового образца должна совпадать с номенклатурой показателей оцениваемой продукции.<\/p><p>Для услуг номенклатура показателей установлена ГОСТ Р 52113-2014 (см. вопрос 24).<\/p>","<p>Дифференциальный метод основан на <strong>сопоставлении значений единичных показателей качества<\/strong> оцениваемого и базового образцов. Определяют, достигнут ли уровень базового образца в целом, по каким показателям он достигнут и какие показатели существенно отличаются от базовых. Свойства условно рассматриваются как равнозначные; количество учитываемых свойств ограничено, что облегчает оценивание.<\/p><p><strong>Алгоритм:<\/strong><\/p><ol><li>Определение единичных показателей качества исследуемого объекта P<sub>1<\/sub>, P<sub>2<\/sub>, …, P<sub>n<\/sub> и базового образца P<sub>1Б<\/sub>, P<sub>2Б<\/sub>, …, P<sub>nБ<\/sub>.<\/li><li>Определение единичных относительных показателей качества:<\/li><\/ol><p class=\"fm\">q<sub>i<\/sub> = (P<sub>i<\/sub> / P<sub>iБ<\/sub>)<sup>ξ<\/sup><\/p><p>где ξ = 1, если росту P<sub>i<\/sub> соответствует повышение качества; ξ = –1, если росту P<sub>i<\/sub> соответствует снижение качества.<\/p><p><strong>Вывод:<\/strong><\/p><ul><li>все q<sub>i<\/sub> ≥ 1 → уровень качества объекта <strong>не ниже<\/strong> уровня базового образца;<\/li><li>все q<sub>i<\/sub> &lt; 1 → уровень качества объекта <strong>не выше<\/strong> уровня базового образца;<\/li><li>часть q<sub>i<\/sub> ≥ 1, часть &lt; 1 → однозначного вывода нет, <strong>выбирают другой метод<\/strong> (комплексный или смешанный).<\/li><\/ul>","<p><strong>Базовый образец<\/strong> – совокупность реально достигаемых значений показателей качества определённого типа продукции, принятых для сравнения и отражающих в среднем потребности определённой группы потребителей. Отражает требования, установленные на определённый период.<\/p><p><strong>Группы базовых образцов<\/strong> (РД 50-451-84):<\/p><ol><li><strong>Перспективные<\/strong> – прогнозируемые реально достижимые значения показателей, соответствующие передовым научно-техническим достижениям на установленный будущий период.<\/li><li><strong>Реальные мировые<\/strong> – образцы, отражающие современные мировые достижения на установленный период.<\/li><li><strong>Реальные отечественные<\/strong> – образцы, отражающие наиболее высокие отечественные научно-технические достижения на установленный период.<\/li><\/ol><p><strong>Базовыми образцами могут служить:<\/strong><\/p><ul><li><strong>на стадии разработки:<\/strong> перспективный образец; планируемая к освоению продукция, показатели которой заложены в техническом задании, техническом или рабочем проекте;<\/li><li><strong>на стадии изготовления:<\/strong> выпускаемая в России или за рубежом продукция с самыми высокими показателями, наиболее эффективная в эксплуатации; национальные, международные и прогрессивные зарубежные стандарты, технические условия с оптимальными значениями показателей.<\/li><\/ul><p><strong>Аналог<\/strong> – продукция отечественного или зарубежного производства, сходная с оцениваемой по назначению и области применения, т. е. с теми же классификационными показателями. Все аналоги в группе и оцениваемая продукция должны иметь <strong>одинаковые значения классификационных показателей<\/strong>.<\/p><p><strong>Выбор базового образца:<\/strong> из группы продукции, аналогичной по назначению, условиям изготовления и эксплуатации (потребления). В группу должна входить продукция:<\/p><ul><li>представляющая значительную часть общего объёма продукции, производимой и реализуемой в России и за рубежом;<\/li><li>пользующаяся устойчивым спросом на внутреннем рынке;<\/li><li>конкурентоспособная на международном рынке.<\/li><\/ul><p>Такая группа характеризует достигнутый уровень качества, близкий к оптимальному. Номенклатура показателей базового образца должна соответствовать номенклатуре показателей оцениваемой продукции.<\/p>","<p>Для сложной продукции учитывается много единичных показателей, что затрудняет вывод об уровне качества. Комплексный метод объединяет выбранные единичные показатели в <strong>один комплексный (обобщённый) показатель<\/strong> – уровень качества выражается одним числом.<\/p><p><strong>Алгоритм:<\/strong><\/p><ol><li>Определение единичных показателей объекта P<sub>i<\/sub> и базового образца P<sub>iБ<\/sub>.<\/li><li>Определение единичных относительных показателей q<sub>i<\/sub> = (P<sub>i<\/sub> / P<sub>iБ<\/sub>)<sup>ξ<\/sup>.<\/li><li>Определение комплексного показателя качества с учётом весовых коэффициентов:<\/li><\/ol><p class=\"fm\">K = Σ m<sub>i<\/sub> q<sub>i<\/sub> (i = 1…n), Σ m<sub>i<\/sub> = 1<\/p><p class=\"fm\">У<sub>К<\/sub> = K / K<sub>Б<\/sub><\/p><p>где m<sub>i<\/sub> – весовые коэффициенты (определяются экспертно), K<sub>Б<\/sub> – комплексный показатель базового образца. У<sub>К<\/sub> &gt; 1 – качество объекта выше базового.<\/p>","<p><strong>Назначение:<\/strong> весовые коэффициенты <strong>количественно<\/strong> отражают важность (значимость) соответствующих свойств (частных критериев). Каждое свойство качества определяется двумя параметрами – относительным показателем и весовым коэффициентом.<\/p><p>Значения весовых коэффициентов выбираются исходя из анализа мирового уровня развития отрасли, требований к проектируемому объекту и возможностей реализации этих требований. Величина λ<sub>i<\/sub> задаёт в количественном измерении предпочтение i-го критерия над другими. Условие нормирования:<\/p><p>Σ λ<sub>i<\/sub> = 1 (i = 1…m)<\/p><p><strong>Способы определения<\/strong> – группа экспертных методов:<\/p><ul><li>метод анализа иерархий;<\/li><li>метод расстановки приоритетов;<\/li><li>метод согласования по критериям;<\/li><li><strong>метод ранжирования<\/strong> – каждый эксперт расставляет критерии в порядке их важности;<\/li><li><strong>метод приписывания баллов<\/strong> – эксперты оценивают важность каждого критерия по шкале (например, 0–10).<\/li><\/ul>","<p>Используется <strong>интегральный показатель качества (И)<\/strong> – отношение суммарного полезного эффекта от эксплуатации или потребления продукции к суммарным затратам на её создание и эксплуатацию или потребление.<\/p><p class=\"fm\">У<sub>К<\/sub> = И / И<sub>Б<\/sub><\/p><p>И = Э / (З<sub>С<\/sub> + З<sub>Э<\/sub>) – для продукции со сроком службы не более одного года<\/p><p>И = Э / (З<sub>С<\/sub> · φ(t) + З<sub>Э<\/sub>) – для продукции со сроком службы более одного года<\/p><p>Э – суммарный полезный эффект от эксплуатации или потребления продукции; З<sub>С<\/sub> – суммарные затраты на создание продукции; З<sub>Э<\/sub> – суммарные затраты на эксплуатацию или потребление; φ(t) – поправочный коэффициент, учитывающий срок службы.<\/p>","<p>Основан на одновременном использовании <strong>единичных и комплексных (групповых)<\/strong> показателей. Применяется для сложных объектов с большим числом показателей (более 20–30), когда:<\/p><ul><li>единичных показателей много, они разнообразны и анализ каждого не позволяет сделать обобщающий вывод;<\/li><li>один комплексный показатель недостаточно полно учитывает значимые свойства и не даёт выводов по группам свойств.<\/li><\/ul><p><strong>Алгоритм:<\/strong> единичные показатели P<sub>1<\/sub>…P<sub>M<\/sub> объединяют в группы 1…n; для каждой группы алгоритмом комплексного метода считают групповой показатель, затем по группам – обобщённый показатель. Отдельные особо важные показатели можно оставить единичными и сравнить дифференциальным методом.<\/p><p class=\"fm\">q<sub>ij<\/sub> = (P<sub>ij<\/sub> / P<sub>ijБ<\/sub>)<sup>ξ<\/sup><\/p><p class=\"fm\">K<sub>i<\/sub> = Σ m<sub>ij<\/sub> q<sub>ij<\/sub> (j = 1…N<sub>i<\/sub>), Σ m<sub>ij<\/sub> = 1<\/p><p class=\"fm\">Q = Σ α<sub>i<\/sub> K<sub>i<\/sub> (i = 1…n), Σ α<sub>i<\/sub> = 1<\/p><p class=\"fm\">У<sub>К<\/sub> = Q / Q<sub>Б<\/sub><\/p><p>m<sub>ij<\/sub> – весовой коэффициент j-го свойства i-й группы; q<sub>ij<\/sub> – относительный показатель j-го свойства i-й группы; K<sub>i<\/sub> – комплексный показатель i-й группы; α<sub>i<\/sub> – весовой коэффициент i-й группы. При нормированных весах у базового образца K<sub>iБ<\/sub> = 1 и Q<sub>Б<\/sub> = 1, поэтому У<sub>К<\/sub> = Q.<\/p>","<p>Уровень качества оценивается через <strong>экономическую эффективность продукции<\/strong> – суммарный эффект для производителя и для потребителя – в сравнении с базовым образцом.<\/p><p class=\"fm\">У<sub>К<\/sub> = П / П<sub>Б<\/sub><\/p><p>П = П<sub>П<\/sub> + П<sub>Э<\/sub> – экономическая эффективность продукции<\/p><p class=\"fm\">П<sub>П<\/sub> = Ц<sub>ОПТ<\/sub> · V – З<sub>П<\/sub><\/p><p>П<sub>П<\/sub> – экономическая эффективность для производителя; Ц<sub>ОПТ<\/sub> – оптовая цена единицы продукции; V – объём реализованной продукции; З<sub>П<\/sub> – затраты на производство продукции.<\/p><p class=\"fm\">П<sub>Э<\/sub> = Ц · N – Ц<sub>П<\/sub><\/p><p>П<sub>Э<\/sub> – экономическая эффективность для потребителя; Ц – стоимость единицы полезного эффекта от эксплуатации (использования) продукции; N – количество изготовленной конечной продукции или выполненной работы; Ц<sub>П<\/sub> – цена потребления продукции (вопрос 22).<\/p>","<p>Группа методов экспертной оценки основана на <strong>знаниях, опыте и интуиции специалистов-экспертов<\/strong>. Применяется в слабо формализуемых ситуациях; обобщённое мнение экспертов служит основанием для выбора.<\/p><p><strong>Применяют при:<\/strong><\/p><ul><li>аттестации продукции;<\/li><li>разработке классификации оцениваемых изделий;<\/li><li>определении номенклатуры показателей качества;<\/li><li>определении весовых коэффициентов показателей качества;<\/li><li>выборе базовых образцов и значений базовых показателей качества.<\/li><\/ul><p>Метод <strong>не используется<\/strong>, если качество можно оценить аналитическими или экспериментальными методами с большей точностью или меньшими затратами.<\/p><p><strong>К группе относятся:<\/strong> метод рангов (ранжирования); метод непосредственного оценивания (балльный); метод сопоставлений; метод «Дельфи»; органолептический; социологический и др.<\/p>","<p><strong>Федеральный закон от 27.12.2002 № 184-ФЗ «О техническом регулировании»<\/strong> – основной нормативный документ, определяющий техническое регулирование в РФ.<\/p><p><strong>Недостатки старой системы:<\/strong> несоответствие международным нормам (ВТО); барьеры для экономики, сдерживание инвестиций; чрезмерная сложность и противоречивость (дублирование процедур, конфликтующие требования ведомств); низкая вовлечённость бизнеса в разработку норм.<\/p><p><strong>Цели нового закона:<\/strong><\/p><ul><li>гармонизировать систему технического регулирования России с международной (прежде всего европейской) и устранить технические барьеры в торговле;<\/li><li>содействовать выходу отечественных товаров на мировой рынок;<\/li><li>обеспечить равные условия для отечественных и зарубежных производителей на российском рынке;<\/li><li>исключить нормотворчество ведомств.<\/li><\/ul><p><strong>Ключевые понятия:<\/strong> технический регламент – обязательный документ с минимально необходимыми требованиями безопасности; стандарт – добровольный документ с характеристиками продукции и процессов; <strong>сертификация<\/strong> – подтверждение соответствия продукции требованиям регламентов, стандартов или договоров независимым органом.<\/p><p><strong>Принципы технического регулирования:<\/strong><\/p><ul><li>единые правила установления требований к продукции, процессам, работам и услугам;<\/li><li>соответствие технического регулирования уровню развития национальной экономики, материально-технической базы и науки;<\/li><li>независимость органов по аккредитации и сертификации от изготовителей, продавцов, исполнителей и приобретателей;<\/li><li>единая система и правила аккредитации;<\/li><li>единство правил и методов испытаний и измерений при обязательной оценке соответствия;<\/li><li>единство применения требований технических регламентов независимо от видов сделок;<\/li><li>недопустимость ограничения конкуренции при аккредитации и сертификации;<\/li><li>недопустимость совмещения полномочий органа госконтроля (надзора) и органа по сертификации;<\/li><li>недопустимость совмещения одним органом полномочий на аккредитацию и сертификацию;<\/li><li>недопустимость внебюджетного финансирования госконтроля за соблюдением технических регламентов.<\/li><\/ul><p><strong>Структура системы технического регулирования РФ:<\/strong><\/p><ul><li>ФЗ «О техническом регулировании»;<\/li><li>технические регламенты — общие и специальные, обязательны для исполнения;<\/li><li>стандарты — международные, национальные, стандарты организаций; применяются добровольно.<\/li><\/ul>","<p><strong>Технический регламент<\/strong> – документ, который принят международным договором РФ, ратифицированным в установленном порядке, или федеральным законом, или указом Президента РФ, или постановлением Правительства РФ, и устанавливает <strong>обязательные<\/strong> для применения и исполнения требования к объектам технического регулирования (продукции, в том числе зданиям, строениям и сооружениям, процессам производства, эксплуатации, хранения, перевозки, реализации и утилизации).<\/p><p><strong>Виды технических регламентов:<\/strong><\/p><ul><li><strong>Общие<\/strong> – по вопросам безопасной эксплуатации и утилизации машин и оборудования; безопасной эксплуатации зданий, строений, сооружений и прилегающих территорий; пожарной, биологической, экологической, ядерной и радиационной безопасности; электромагнитной совместимости. Обязательны для любых видов продукции и процессов.<\/li><li><strong>Специальные<\/strong> – учитывают технологические и иные особенности отдельных видов продукции и процессов. Устанавливают требования только к тем видам продукции и процессам, степень риска причинения вреда которыми выше степени риска, учитываемой общим техническим регламентом.<\/li><\/ul><p><strong>Стандарт<\/strong> – документ, в котором в целях <strong>добровольного<\/strong> многократного использования устанавливаются характеристики продукции, правила осуществления и характеристики процессов производства, эксплуатации, хранения, перевозки, реализации и утилизации, выполнения работ или оказания услуг. Может содержать требования к терминологии, символике, упаковке, маркировке или этикеткам и правилам их нанесения.<\/p><p><strong>Виды стандартов:<\/strong><\/p><ul><li><strong>по уровню принятия:<\/strong> международные, национальные, стандарты организаций;<\/li><li><strong>по объекту и содержанию требований:<\/strong> основополагающие; на продукцию; на услуги; на процессы (работы); на методы испытаний и контроля; на термины и определения.<\/li><\/ul><p class=\"key\"><em>Главное отличие: технический регламент обязателен, стандарт применяется добровольно.<\/em><\/p>","<p><strong>Цена потребления<\/strong> – полные расходы потребителя на приобретение и эксплуатацию продукции в течение срока её службы: сумма продажной цены и стоимости потребления (использования) товара за период эксплуатации.<\/p><p class=\"fm\">Ц<sub>П<\/sub>(t) = Ц<sub>О<\/sub> + Σ З<sub>i<\/sub>(t)<\/p><p>Ц<sub>О<\/sub> – цена приобретения изделия; З<sub>i<\/sub>(t) – затраты, связанные с эксплуатацией, за время t. Относится к экономическим показателям качества.<\/p><p><strong>Где используется:<\/strong> в <strong>экономико-статистическом методе<\/strong> – в формуле экономической эффективности для потребителя П<sub>Э<\/sub> = Ц · N – Ц<sub>П<\/sub> (см. вопрос 18). По смыслу близка к знаменателю интегрального показателя (затраты на создание и эксплуатацию).<\/p>","<p><strong>Услуга<\/strong> – результат непосредственного взаимодействия исполнителя и потребителя, а также собственной деятельности исполнителя по удовлетворению потребности потребителя. По ГОСТ ISO 9000 – результат как минимум одного действия, обязательно осуществлённого при взаимодействии поставщика и потребителя, как правило нематериальный.<\/p><p>Услуги населению подразделяются на <strong>материальные, нематериальные (социально-культурные) и смешанные<\/strong>.<\/p><p><strong>Материальные услуги<\/strong> – услуги по удовлетворению материально-бытовых потребностей; включают деятельность по отношению к материальному продукту, в том числе предоставленному потребителем. Суть: восстановление, изменение или сохранение потребительских свойств изделий, изготовление продукции по заказу, перемещение людей и грузов. Примеры: автосервис, ремонт жилья и техники, химчистка, ЖКХ, транспорт, общепит, гостиницы. Услуги с материальным результатом часто называют «работами».<\/p><p><strong>Нематериальные (социально-культурные) услуги<\/strong> – услуги по удовлетворению духовных, интеллектуальных, этических потребностей и поддержанию нормальной жизнедеятельности: поддержание и восстановление здоровья, духовное и физическое развитие личности, повышение профессионализма. Примеры: финансовые, юридические, консалтинговые услуги; образование; культура, спорт, туризм, досуг; медицинские, парикмахерские, косметические услуги; телекоммуникационные услуги.<\/p>","<p>Установлена <strong>ГОСТ Р 52113-2014<\/strong>. Четыре группы показателей:<\/p><ul><li><strong>Назначения:<\/strong> применения; совместимости; качества предприятия; специфические.<\/li><li><strong>Безопасности:<\/strong> для жизни, здоровья и имущества потребителей; для окружающей среды; сохранности информации и имущества потребителей.<\/li><li><strong>Надёжности:<\/strong> надёжность результата услуги; стойкость результата услуги к внешним воздействиям; помехозащищённость; надёжность предоставления услуги.<\/li><li><strong>Профессионального уровня персонала:<\/strong> уровень профессиональной подготовки и квалификации; способность к руководству; знание и соблюдение профессиональной этики поведения.<\/li><\/ul>"]};
+
+
+const QMAP = new Map(QUESTIONS.map(q => [q.id, q]));
+const BY_TOPIC = TOPICS.map((_, i) => QUESTIONS.filter(q => q.t === i + 1));
+const SHORT_N = 2;                       // вопросов на тему в коротком тесте
+const KEY = 'uk-rk1.v1';
+const root = document.getElementById('app');
+const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;
+
+const HINT = {
+  one: 'Один верный ответ',
+  many: 'Отметьте все верные варианты',
+  tf: 'Верно или неверно?',
+  grid: 'Выберите вариант для каждой строки',
+  order: 'Перетаскивайте за ручку слева или двигайте стрелками',
+  bank: 'Заполните пропуски словами из набора. Нажатие на пропуск очищает его',
+  input: 'Впишите ответ одним словом',
+  num: 'Впишите число',
+  case: 'Заполните все поля',
+  value: 'Двигайте ползунок цены'
+};
+
+const svg = (d, w, sw) => '<svg viewBox="0 0 24 24" width="' + (w || 20) + '" height="' + (w || 20) + '" fill="none" stroke="currentColor" stroke-width="' + (sw || 2) + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' + d + '"/></svg>';
+const ICON = {
+  back: svg('M15 5l-7 7 7 7'),
+  up: svg('M6 14l6-6 6 6', 18),
+  down: svg('M6 10l6 6 6-6', 18),
+  ok: svg('M5 12.5l4.5 4.5L19 7.5', 20, 2.6),
+  no: svg('M6 6l12 12M18 6L6 18', 20, 2.6),
+  okS: svg('M5 12.5l4.5 4.5L19 7.5', 15, 3),
+  noS: svg('M6 6l12 12M18 6L6 18', 15, 3),
+  grip: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg>'
+};
+
+/* ───────── helpers ───────── */
+function h(tag, props) {
+  const el = document.createElement(tag);
+  if (props) for (const k in props) {
+    const v = props[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'html') el.innerHTML = v;
+    else if (k.slice(0, 2) === 'on') el.addEventListener(k.slice(2), v);
+    else if (k === 'disabled' || k === 'hidden' || k === 'value' || k === 'spellcheck') el[k] = v;
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (let i = 2; i < arguments.length; i++) add(el, arguments[i]);
+  return el;
+}
+function add(el, kid) {
+  if (kid == null || kid === false) return;
+  if (Array.isArray(kid)) { for (const k of kid) add(el, k); return; }
+  el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+}
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+// Неразрывные пробелы в числах, перед ₽ и тире; затем разметка формул $…$.
+function fx(s) {
+  return esc(s)
+    .replace(/(\d) (?=\d{3}(?!\d))/g, '$1 ')
+    .replace(/ (₽|%)/g, ' $1')
+    .replace(/№ /g, '№ ')
+    .replace(/ — /g, ' — ')
+    .replace(/(тыс\.|ст\.) (?=[\d₽лдч])/g, '$1 ')
+    .replace(/\$([^$]*)\$/g, (_, m) => '<span class="f' + (m.replace(/[_^{}]/g, '').length <= 18 ? ' fn' : '') + '">' +
+      m.replace(/_\{([^}]*)\}/g, '<sub>$1</sub>').replace(/\^\{([^}]*)\}/g, '<sup>$1</sup>') + '</span>');
+}
+function fmt(v) {
+  const s = String(Math.round(v * 1000) / 1000).split('.');
+  s[0] = s[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return s[1] ? s[0] + ',' + s[1] : s[0];
+}
+function parseNum(raw) {
+  let s = String(raw).trim().replace(/[\s  ]/g, '').replace(/,/g, '.').replace(/[−–—]/g, '-');
+  s = s.replace(/[^\d.\-]+$/, '');
+  if (!/^-?(\d+\.?\d*|\.\d+)$/.test(s)) return NaN;
+  return parseFloat(s);
+}
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = a[i]; a[i] = a[j]; a[j] = t; }
+  return a;
+}
+const norm = s => String(s).toLowerCase().replace(/ё/g, 'е').replace(/[«»"'`.,;:!?()]/g, ' ').replace(/\s+/g, ' ').trim();
+function lev(a, b) {
+  const m = a.length, n = b.length;
+  if (Math.abs(m - n) > 2) return 3;
+  let prev = [];
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[n];
+}
+// 2 — точное совпадение, 1 — с опечаткой, 0 — нет
+function matchText(v, accept) {
+  const x = norm(v);
+  if (!x) return 0;
+  for (const a of accept) if (x === norm(a)) return 2;
+  for (const a of accept) { const y = norm(a); const lim = y.length >= 10 ? 2 : y.length >= 6 ? 1 : 0; if (lim && lev(x, y) <= lim) return 1; }
+  return 0;
+}
+const plural = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
+const qWord = n => plural(n, 'вопрос', 'вопроса', 'вопросов');
+
+/* ───────── состояние и хранение ───────── */
+function fresh() { return { v: 1, t: 0, test: null, bank: {}, hist: [], opt: { len: 'all', ord: 'topics' } }; }
+function sane(d) {
+  if (!d || d.v !== 1 || typeof d.t !== 'number') return null;
+  const s = fresh();
+  s.t = d.t;
+  if (d.opt && (d.opt.len === 'all' || d.opt.len === 'short')) s.opt.len = d.opt.len;
+  if (d.opt && (d.opt.ord === 'topics' || d.opt.ord === 'mix')) s.opt.ord = d.opt.ord;
+  if (d.bank && typeof d.bank === 'object') for (const k in d.bank) if (QMAP.has(k)) s.bank[k] = Math.max(1, Number(d.bank[k]) || 1);
+  if (Array.isArray(d.hist)) s.hist = d.hist.filter(x => Array.isArray(x) && x.length === 3 && x.every(n => typeof n === 'number')).slice(-8);
+  if (d.test && Array.isArray(d.test.ids)) {
+    const ids = d.test.ids.filter(id => QMAP.has(id));
+    if (ids.length) {
+      const res = {};
+      for (const id of ids) if (d.test.res && (d.test.res[id] === 0 || d.test.res[id] === 1)) res[id] = d.test.res[id];
+      s.test = { ids: ids, res: res, done: !!d.test.done, t0: Number(d.test.t0) || 0, t1: Number(d.test.t1) || 0 };
+      if (ids.every(id => id in res)) s.test.done = true;
+    }
+  }
+  return s;
+}
+
+let S = fresh();
+let loadedAt = 0;          // метка состояния на момент загрузки страницы
+let cloud = 'wait';        // wait | on | local
+let localOK = true;
+let view = 'home', mode = 'test', sess = null, ctl = null, locked = false, askReset = false;
+
+const Store = (function () {
+  let ref = null, writing = false, again = false, timer = 0, retried = false;
+  function readLocal() { try { const raw = localStorage.getItem(KEY); return raw ? sane(JSON.parse(raw)) : null; } catch (e) { localOK = false; return null; } }
+  function writeLocal() { try { localStorage.setItem(KEY, JSON.stringify(S)); localOK = true; } catch (e) { localOK = false; } }
+  function setCloud(v) { if (cloud !== v) { cloud = v; paintSync(); } }
+  function push() {
+    timer = 0;
+    if (!ref) return;
+    if (writing) { again = true; return; }
+    writing = true;
+    ref.set(JSON.parse(JSON.stringify(S))).then(function () { retried = false; setCloud('on'); }, function (e) {
+      const code = e && e.code;
+      if (code === 'unavailable' && !retried) { retried = true; again = true; }
+      else if (code !== 'unavailable' && code !== 'resource_exhausted') { ref = null; setCloud('local'); }
+    }).then(function () {
+      writing = false;
+      if (again && ref) { again = false; schedule(1500 + Math.random() * 1500); }
+    });
+  }
+  function schedule(ms) { if (!ref) return; clearTimeout(timer); timer = setTimeout(push, ms || 1200); }
+  function commit() { S.t = Math.max(Date.now(), S.t + 1); writeLocal(); schedule(); }
+  function connect() {
+    const c = window.claude;
+    if (!c || typeof c.use !== 'function') { setCloud('local'); return; }
+    Promise.all([c.use('db'), c.use('user')]).then(function (r) {
+      const db = r[0], user = r[1];
+      if (!db || !user) { setCloud('local'); return; }
+      return user.id().then(function (uid) {
+        if (!uid) { setCloud('local'); return; }
+        ref = db.doc('data/users/' + uid + '/progress');
+        let first = true;
+        ref.onSnapshot(function (snap) {
+          const remote = snap.exists ? sane(snap.data()) : null;
+          if (remote) setCloud('on');
+          // Тест начали раньше, чем успел прийти прогресс из аккаунта: незаконченный тест оттуда важнее пустого нового.
+          const race = first && remote && S.t > loadedAt && remote.test && !remote.test.done && countDone(remote.test) > 0 && !(S.test && countDone(S.test) > 0);
+          first = false;
+          if (remote && (remote.t > S.t || race)) adopt(remote);
+          else if (S.t > (remote ? remote.t : 0)) schedule(300);
+        }, function () { ref = null; setCloud('local'); });
+      });
+    }).catch(function () { ref = null; setCloud('local'); });
+  }
+  function flush() { if (timer) { clearTimeout(timer); push(); } }
+  return { readLocal: readLocal, writeLocal: writeLocal, commit: commit, connect: connect, flush: flush };
+})();
+
+// Более свежий прогресс пришёл с другого устройства.
+function adopt(remote) {
+  S = remote;
+  Store.writeLocal();
+  if (view === 'quiz' && mode === 'fix') return;
+  if (view === 'quiz') { view = 'home'; render(); toast('Прогресс обновлён с другого устройства'); return; }
+  if (view === 'results' && !(S.test && S.test.done)) view = 'home';
+  render();
+}
+
+function syncText() {
+  if (cloud === 'on') return 'Прогресс сохраняется в вашем аккаунте — тест можно продолжить с другого устройства.';
+  if (localOK) return 'Прогресс сохраняется в этом браузере.';
+  return 'Прогресс хранится, пока открыта страница.';
+}
+function paintSync() { const el = document.getElementById('sync'); if (el) el.textContent = syncText(); }
+
+let toastTimer = 0;
+function toast(msg) {
+  let el = document.querySelector('.toast');
+  if (!el) { el = h('div', { class: 'toast', role: 'status' }); document.body.append(el); }
+  el.textContent = msg;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { el.remove(); }, 3200);
+}
+
+/* ───────── рулетка прогресса ───────── */
+function ruler(n, states, done) {
+  const el = h('div', { class: 'ruler' + (n > 80 ? ' dense' : ''), role: 'img', 'aria-label': 'Пройдено ' + done + ' из ' + n });
+  const tape = h('div', { class: 'tape' + (done >= n && n ? ' full' : '') });
+  tape.style.width = (n ? done / n * 100 : 0) + '%';
+  const tks = h('div', { class: 'tks' });
+  for (let i = 0; i < n; i++) {
+    const k = i + 1;
+    let c = k % 10 === 0 ? 'm10' : k % 5 === 0 ? 'm5' : '';
+    if (i < done) c += ' d';
+    if (states[i] === 0) c += ' x';
+    const t = h('i', { class: c.trim() || null });
+    if (k % 10 === 0 && (n <= 100 || k % 20 === 0)) t.append(h('b', null, String(k)));
+    tks.append(t);
+  }
+  el.append(tape, tks);
+  return el;
+}
+
+const countOk = T => T.ids.reduce((s, id) => s + (T.res[id] === 1 ? 1 : 0), 0);
+const countDone = T => T.ids.reduce((s, id) => s + (T.res[id] !== undefined ? 1 : 0), 0);
+const bankIds = () => Object.keys(S.bank).filter(id => QMAP.has(id));
+
+function cheat(t) {
+  const body = h('div', { class: 'prose' });
+  const d = h('details', { class: 'cheat' },
+    h('summary', null, h('span', { class: 'cheat-k' }, 'Шпаргалка'), h('span', { class: 'cheat-t' }, t + '. ' + CHEAT.titles[t - 1])),
+    body);
+  d.addEventListener('toggle', function () { if (d.open && !body.firstChild) body.innerHTML = CHEAT.sections[t - 1]; });
+  return d;
+}
+
+/* ───────── типы вопросов ───────── */
+function mountChoice(opts, right, multi, fixed, host, ctx, cls) {
+  const order = fixed ? opts.map((_, i) => i) : shuffle(opts.map((_, i) => i));
+  const rightSet = new Set(multi ? right : [right]);
+  const sel = new Set();
+  const btns = order.map((oi, k) => h('button', {
+    class: 'opt', type: 'button', role: multi ? 'checkbox' : 'radio', 'aria-checked': 'false', onclick: function () { pick(k); }
+  }, cls === 'tf' ? null : h('span', { class: 'opt-k' }, String(k + 1)), h('span', { class: 'opt-t', html: fx(opts[oi]) })));
+  host.append(h('div', { class: cls === 'tf' ? 'tf' : 'opts', role: multi ? 'group' : 'radiogroup' }, btns));
+  function pick(k) {
+    if (ctx.locked) return;
+    if (multi) { if (sel.has(k)) sel.delete(k); else sel.add(k); } else { sel.clear(); sel.add(k); }
+    btns.forEach(function (b, i) { b.classList.toggle('on', sel.has(i)); b.setAttribute('aria-checked', String(sel.has(i))); });
+    ctx.change();
+  }
+  return {
+    ready: function () { return sel.size > 0; },
+    key: function (n) { if (n <= btns.length) pick(n - 1); },
+    check: function () {
+      let bad = 0;
+      btns.forEach(function (b, i) {
+        const isRight = rightSet.has(order[i]), chosen = sel.has(i), k = b.querySelector('.opt-k');
+        b.disabled = true; b.classList.remove('on');
+        if (isRight && chosen) { b.classList.add('right'); if (k) k.innerHTML = ICON.okS; }
+        else if (isRight) { bad++; b.classList.add('missed'); if (k) k.innerHTML = ICON.okS; b.append(h('span', { class: 'opt-tag' }, multi ? 'нужно отметить' : 'верный ответ')); }
+        else if (chosen) { bad++; b.classList.add('wrong'); if (k) k.innerHTML = ICON.noS; }
+      });
+      return { ok: bad === 0 };
+    }
+  };
+}
+
+function mountGrid(q, host, ctx) {
+  const idx = shuffle(q.rows.map((_, i) => i));
+  const ans = {};
+  const rows = [];
+  const wrap = h('div', { class: 'g' });
+  idx.forEach(function (ri) {
+    const row = h('div', { class: 'g-row' }, h('div', { class: 'g-t', html: fx(q.rows[ri][0]) }));
+    const rec = { ri: ri, row: row };
+    if (q.sel) {
+      const s = h('select', { class: 'sel', 'aria-label': 'Вариант для строки' },
+        h('option', { value: '' }, '— выберите —'), q.cols.map((c, ci) => h('option', { value: String(ci) }, c)));
+      s.addEventListener('change', function () { if (s.value === '') delete ans[ri]; else ans[ri] = +s.value; ctx.change(); });
+      row.append(s); rec.s = s;
+    } else {
+      const chips = q.cols.map((c, ci) => h('button', { class: 'chip', type: 'button', 'aria-pressed': 'false', html: fx(c), onclick: function () {
+        if (ctx.locked) return;
+        ans[ri] = ci;
+        chips.forEach(function (b, j) { b.classList.toggle('on', j === ci); b.setAttribute('aria-pressed', String(j === ci)); });
+        ctx.change();
+      } }));
+      row.append(h('div', { class: 'chips' }, chips)); rec.chips = chips;
+    }
+    rows.push(rec); wrap.append(row);
+  });
+  host.append(wrap);
+  return {
+    ready: function () { return idx.every(ri => ans[ri] !== undefined); },
+    check: function () {
+      let good = 0;
+      rows.forEach(function (r) {
+        const right = q.rows[r.ri][1], ok = ans[r.ri] === right;
+        if (ok) good++;
+        r.row.classList.add(ok ? 'ok' : 'no');
+        if (r.s) { r.s.disabled = true; if (!ok) r.row.append(h('div', { class: 'g-fix' }, 'Верно: ', h('b', null, q.cols[right]))); }
+        else r.chips.forEach(function (b, j) {
+          b.disabled = true; b.classList.remove('on');
+          if (j === right) b.classList.add(ok ? 'good' : 'need'); else if (j === ans[r.ri]) b.classList.add('badc');
+        });
+      });
+      return { ok: good === rows.length, note: good === rows.length ? '' : good + ' из ' + rows.length + ' строк' };
+    }
+  };
+}
+
+function mountOrder(q, host, ctx) {
+  const n = q.items.length;
+  const rank = q.rank || q.items.map((_, i) => i);
+  const sorted = a => a.every((v, i) => i === 0 || rank[a[i - 1]] <= rank[v]);
+  let order;
+  do { order = shuffle(q.items.map((_, i) => i)); } while (sorted(order));
+  const ul = h('ol', { class: 'ord' });
+  order.forEach(function (i) {
+    const grip = h('button', { class: 'grip', type: 'button', tabindex: '-1', 'aria-hidden': 'true', html: ICON.grip });
+    const li = h('li', { 'data-i': String(i) }, grip, h('span', { class: 'n' }), h('span', { class: 't', html: fx(q.items[i]) }),
+      h('span', { class: 'mv' },
+        h('button', { class: 'up', type: 'button', 'aria-label': 'Выше', html: ICON.up, onclick: function () { move(li, -1); } }),
+        h('button', { class: 'dn', type: 'button', 'aria-label': 'Ниже', html: ICON.down, onclick: function () { move(li, 1); } })));
+    grip.addEventListener('pointerdown', function (e) { startDrag(e, li, grip); });
+    ul.append(li);
+  });
+  host.append(ul);
+  renum();
+  function renum() {
+    Array.prototype.forEach.call(ul.children, function (el, k) {
+      el.querySelector('.n').textContent = k + 1;
+      el.querySelector('.up').disabled = k === 0;
+      el.querySelector('.dn').disabled = k === n - 1;
+    });
+  }
+  function move(li, d) {
+    if (ctx.locked) return;
+    const sib = d < 0 ? li.previousElementSibling : li.nextElementSibling;
+    if (!sib) return;
+    if (d < 0) ul.insertBefore(li, sib); else ul.insertBefore(sib, li);
+    renum();
+    const b = li.querySelector(d < 0 ? '.up' : '.dn');
+    (b.disabled ? li.querySelector(d < 0 ? '.dn' : '.up') : b).focus();
+    ctx.change();
+  }
+  function startDrag(e, li, grip) {
+    if (ctx.locked || (e.button != null && e.button > 0)) return;
+    e.preventDefault();
+    try { grip.setPointerCapture(e.pointerId); } catch (err) {}
+    let y0 = e.clientY;
+    li.classList.add('drag');
+    function onMove(ev) {
+      let dy = ev.clientY - y0;
+      const prev = li.previousElementSibling, next = li.nextElementSibling;
+      if (dy < 0 && prev && -dy > prev.offsetHeight / 2 + 4) { const top = li.offsetTop; ul.insertBefore(prev, li.nextElementSibling); y0 += li.offsetTop - top; dy = ev.clientY - y0; renum(); }
+      else if (dy > 0 && next && dy > next.offsetHeight / 2 + 4) { const top = li.offsetTop; ul.insertBefore(next, li); y0 += li.offsetTop - top; dy = ev.clientY - y0; renum(); }
+      li.style.transform = 'translateY(' + dy + 'px)';
+    }
+    function onUp() {
+      grip.removeEventListener('pointermove', onMove);
+      grip.removeEventListener('pointerup', onUp);
+      grip.removeEventListener('pointercancel', onUp);
+      grip.removeEventListener('lostpointercapture', onUp);
+      li.style.transform = '';
+      li.classList.remove('drag');
+      renum();
+      ctx.change();
+    }
+    grip.addEventListener('pointermove', onMove);
+    grip.addEventListener('pointerup', onUp);
+    grip.addEventListener('pointercancel', onUp);
+    grip.addEventListener('lostpointercapture', onUp);
+  }
+  return {
+    ready: function () { return true; },
+    check: function () {
+      const cur = Array.prototype.map.call(ul.children, el => +el.getAttribute('data-i'));
+      const ok = sorted(cur);
+      const target = cur.slice().sort((a, b) => rank[a] - rank[b]);
+      ul.classList.add('locked');
+      Array.prototype.forEach.call(ul.children, function (el, k) { el.classList.add(rank[cur[k]] === rank[target[k]] ? 'ok' : 'no'); });
+      if (!ok) host.append(h('div', { class: 'ord-key' }, h('p', null, 'Верный порядок:'), h('ol', null, q.items.map(t => h('li', { html: fx(t) })))));
+      return { ok: ok };
+    }
+  };
+}
+
+function mountBank(q, host, ctx) {
+  const parts = [];
+  (function () {
+    const re = /([_^]?)\{(\d+)\}/g;
+    let last = 0, m;
+    while ((m = re.exec(q.text))) { if (m[1]) continue; parts.push(q.text.slice(last, m.index), +m[2]); last = re.lastIndex; }
+    parts.push(q.text.slice(last));
+  })();
+  const tokens = shuffle(q.gaps.concat(q.extra || []).map(t => ({ t: t, used: false, el: null })));
+  const val = q.gaps.map(() => null);
+  const slots = [];
+  let cur = 0;
+  const p = h('p', { class: 'bk-text' });
+  parts.forEach(function (x) {
+    if (typeof x === 'number') { const b = h('button', { class: 'slot', type: 'button', 'aria-label': 'Пропуск ' + (x + 1), onclick: function () { tapSlot(x); } }); slots[x] = b; p.append(b); }
+    else if (x) p.append(h('span', { html: fx(x) }));
+  });
+  const bank = h('div', { class: 'bk-bank' }, tokens.map(function (tok) {
+    tok.el = h('button', { class: 'chip', type: 'button', html: fx(tok.t), onclick: function () { tapChip(tok); } });
+    return tok.el;
+  }));
+  host.append(p, bank);
+  paint();
+  function firstEmpty() { return val.findIndex(v => v === null); }
+  function tapChip(tok) {
+    if (ctx.locked || tok.used) return;
+    const k = cur >= 0 && val[cur] === null ? cur : firstEmpty();
+    if (k < 0) return;
+    val[k] = tok; tok.used = true; cur = firstEmpty();
+    paint(); ctx.change();
+  }
+  function tapSlot(k) {
+    if (ctx.locked) return;
+    if (val[k]) { val[k].used = false; val[k] = null; }
+    cur = k;
+    paint(); ctx.change();
+  }
+  function paint() {
+    slots.forEach(function (b, k) {
+      const v = val[k];
+      b.classList.toggle('full', !!v);
+      b.classList.toggle('cur', !v && k === cur);
+      b.innerHTML = v ? fx(v.t) : '&nbsp;';
+    });
+    tokens.forEach(function (tok) { tok.el.classList.toggle('used', tok.used); tok.el.disabled = tok.used; });
+  }
+  return {
+    ready: function () { return val.every(Boolean); },
+    check: function () {
+      const okSlot = q.gaps.map(() => false), fix = q.gaps.map(() => null), inSet = new Set();
+      (q.sets || []).forEach(function (set) {
+        const need = set.map(k => q.gaps[k]);
+        set.forEach(function (k) { inSet.add(k); const j = need.indexOf(val[k].t); if (j >= 0) { okSlot[k] = true; need.splice(j, 1); } });
+        set.forEach(function (k) { if (!okSlot[k]) fix[k] = need.shift(); });
+      });
+      q.gaps.forEach(function (g, k) { if (!inSet.has(k)) { okSlot[k] = val[k].t === g; if (!okSlot[k]) fix[k] = g; } });
+      slots.forEach(function (b, k) {
+        b.disabled = true; b.classList.remove('full', 'cur'); b.classList.add(okSlot[k] ? 'ok' : 'no');
+        if (!okSlot[k]) b.after(h('span', { class: 'slot-fix', html: fx(fix[k]) }));
+      });
+      tokens.forEach(function (tok) { tok.el.disabled = true; });
+      const good = okSlot.filter(Boolean).length;
+      return { ok: good === okSlot.length, note: good === okSlot.length ? '' : good + ' из ' + okSlot.length + ' пропусков' };
+    }
+  };
+}
+
+function mountInput(q, host, ctx) {
+  const inp = h('input', { class: 'inp', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: false, 'aria-label': 'Ответ', placeholder: 'Ваш ответ' });
+  inp.addEventListener('input', function () { ctx.change(); });
+  const row = h('div', { class: 'inrow' }, inp);
+  host.append(row);
+  if (finePointer) setTimeout(function () { inp.focus({ preventScroll: true }); }, 0);
+  return {
+    ready: function () { return inp.value.trim().length > 0; },
+    check: function () {
+      const m = matchText(inp.value, q.accept);
+      inp.disabled = true; inp.classList.add(m ? 'ok' : 'no');
+      if (!m) row.append(h('span', { class: 'right-val' }, 'Верно: ' + q.show));
+      return { ok: !!m, note: m === 1 ? 'проверьте написание: ' + q.show.toLowerCase() : '' };
+    }
+  };
+}
+
+function numField(spec, ctx, label) {
+  const inp = h('input', { class: 'inp num', type: 'text', inputmode: 'decimal', autocomplete: 'off', 'aria-label': label || 'Числовой ответ', placeholder: 'число' });
+  inp.addEventListener('input', function () { ctx.change(); });
+  const row = h('div', { class: 'inrow' }, inp, spec.unit ? h('span', { class: 'unit', html: fx(spec.unit) }) : null);
+  return {
+    el: row, inp: inp,
+    ready: function () { return isFinite(parseNum(inp.value)); },
+    check: function () {
+      const v = parseNum(inp.value);
+      const ok = isFinite(v) && Math.abs(v - spec.a) <= spec.tol + 1e-9;
+      inp.disabled = true; inp.classList.add(ok ? 'ok' : 'no');
+      if (!ok) row.append(h('span', { class: 'right-val' }, 'Верно: ' + fmt(spec.a)));
+      return ok;
+    }
+  };
+}
+function mountNum(q, host, ctx) {
+  const f = numField(q, ctx);
+  host.append(f.el);
+  if (finePointer) setTimeout(function () { f.inp.focus({ preventScroll: true }); }, 0);
+  return { ready: f.ready, check: function () { return { ok: f.check() }; } };
+}
+
+function buildTable(tb) {
+  const numeric = tb.head.map((_, c) => c > 0 && tb.rows.every(r => r[c] === '' || /^[\d\s.,−-]+$/.test(r[c])));
+  return h('div', { class: 'tw' }, h('table', null,
+    h('thead', null, h('tr', null, tb.head.map((c, i) => h('th', { class: numeric[i] ? 'nm' : null, html: fx(c) })))),
+    h('tbody', null, tb.rows.map(r => h('tr', null, r.map((c, i) => h(i === 0 ? 'th' : 'td', { class: numeric[i] ? 'nm' : null, scope: i === 0 ? 'row' : null, html: fx(c) })))))));
+}
+function mountCase(q, host, ctx) {
+  host.append(buildTable(q.table));
+  const box = h('div', { class: 'parts' });
+  const ctls = q.parts.map(function (p, i) {
+    if (p.kind === 'num') {
+      const f = numField(p, ctx, 'Ответ ' + (i + 1));
+      box.append(h('div', { class: 'part pn' }, h('div', { class: 'plabel', html: fx(p.label) }), f.el));
+      return { ready: f.ready, check: f.check };
+    }
+    const part = h('div', { class: 'part' }, h('div', { class: 'plabel', html: fx(p.label) }));
+    box.append(part);
+    const c = mountChoice(p.opts, p.a, false, false, part, ctx);
+    return { ready: c.ready, check: function () { return c.check().ok; } };
+  });
+  host.append(box);
+  return {
+    ready: function () { return ctls.every(c => c.ready()); },
+    check: function () {
+      const res = ctls.map(c => c.check());
+      const good = res.filter(Boolean).length;
+      return { ok: good === res.length, note: good === res.length ? '' : good + ' из ' + res.length + ' полей' };
+    }
+  };
+}
+
+function mountValue(q, host, ctx) {
+  let v = q.start, moved = false;
+  const Y0 = 190, HH = 150;
+  const y = val => Math.round((Y0 - val / q.cmax * HH) * 10) / 10;
+  const fig = h('div');
+  const out = h('output', { class: 'val-out', for: 'val-range' });
+  const leg = h('div', { class: 'val-leg' });
+  const rng = h('input', { type: 'range', id: 'val-range', min: String(q.min), max: String(q.max), step: String(q.step), value: String(v), 'aria-label': 'Цена' });
+  rng.addEventListener('input', function () { v = +rng.value; moved = true; draw(); ctx.change(); });
+  host.append(h('div', { class: 'val' }, fig, h('div', { class: 'val-ctl' }, h('label', { for: 'val-range' }, 'Цена продавца'), out, rng), leg));
+  draw();
+  function draw(reveal) {
+    const yc = y(q.cost), yp = y(v), ym = y(q.cmax);
+    fig.innerHTML = '<svg viewBox="0 0 360 236" role="img" aria-label="Столбики цены продавца и потребительской ценности">' +
+      '<rect class="sv-cost" x="62" y="' + yc + '" width="76" height="' + (Y0 - yc) + '"/>' +
+      '<rect class="sv-profit" x="62" y="' + yp + '" width="76" height="' + Math.max(0, yc - yp) + '"/>' +
+      '<rect class="sv-max" x="222" y="' + ym + '" width="76" height="' + (Y0 - ym) + '"/>' +
+      '<line class="sv-base" x1="28" y1="' + Y0 + '" x2="332" y2="' + Y0 + '"/>' +
+      '<text class="sv-ink sv-k" x="100" y="' + ((yc + Y0) / 2 + 6) + '" text-anchor="middle">З</text>' +
+      (yc - yp > 22 ? '<text class="sv-tapeink sv-k" x="100" y="' + ((yp + yc) / 2 + 6) + '" text-anchor="middle">П</text>' : '') +
+      '<text class="sv-ink sv-k" x="260" y="' + ((ym + Y0) / 2 + 6) + '" text-anchor="middle">Ц<tspan dy="4" font-size="11">max</tspan></text>' +
+      '<path class="sv-dash" d="M138 ' + yp + 'H180M222 ' + ym + 'H180"/>' +
+      (yp - ym > 14 ? '<path class="sv-line" d="M180 ' + (ym + 2) + 'V' + (yp - 2) + 'M175 ' + (ym + 8) + 'L180 ' + (ym + 2) + 'L185 ' + (ym + 8) + 'M175 ' + (yp - 8) + 'L180 ' + (yp - 2) + 'L185 ' + (yp - 8) + '"/>' : '') +
+      '<text class="sv-ink sv-k" x="190" y="' + (Math.max(ym + 16, (ym + yp) / 2 + 6)) + '">К</text>' +
+      '<text class="sv-ink sv-t" x="100" y="211" text-anchor="middle">ЦЕНА</text><text class="sv-ink2 sv-s" x="100" y="228" text-anchor="middle">продавец</text>' +
+      '<text class="sv-ink sv-t" x="260" y="211" text-anchor="middle">ЦЕННОСТЬ</text><text class="sv-ink2 sv-s" x="260" y="228" text-anchor="middle">покупатель</text>' +
+      '</svg>';
+    out.textContent = fmt(v) + ' ₽';
+    leg.innerHTML = reveal
+      ? fx('$К = Ц_{max} − Ц$ = ' + fmt(q.cmax) + ' − ' + fmt(v) + ' = ' + fmt(q.cmax - v) + ' ₽')
+      : fx('Затраты $З$ = ' + fmt(q.cost) + ' ₽ · прибыль $П$ = ' + fmt(v - q.cost) + ' ₽ · ценность $Ц_{max}$ = ' + fmt(q.cmax) + ' ₽');
+  }
+  return {
+    ready: function () { return moved; },
+    check: function () {
+      rng.disabled = true;
+      draw(true);
+      const ok = v === q.a;
+      return { ok: ok, note: ok ? '' : 'нужная цена — ' + fmt(q.a) + ' ₽' };
+    }
+  };
+}
+
+const MOUNT = {
+  one: function (q, host, ctx) { return mountChoice(q.opts, q.a, false, q.fix, host, ctx); },
+  many: function (q, host, ctx) { return mountChoice(q.opts, q.a, true, q.fix, host, ctx); },
+  tf: function (q, host, ctx) { return mountChoice(['Верно', 'Неверно'], q.a ? 0 : 1, false, true, host, ctx, 'tf'); },
+  grid: mountGrid, order: mountOrder, bank: mountBank, input: mountInput, num: mountNum, case: mountCase, value: mountValue
+};
+
+/* ───────── запуск теста и отработки ───────── */
+function buildIds(opt) {
+  let groups = BY_TOPIC.map(qs => qs.map(q => q.id));
+  if (opt.len === 'short') groups = groups.map(function (g) {
+    const pick = new Set(shuffle(g.slice()).slice(0, SHORT_N));
+    return g.filter(id => pick.has(id));
+  });
+  const ids = [].concat.apply([], groups);
+  return opt.ord === 'mix' ? shuffle(ids) : ids;
+}
+function startTest() {
+  S.test = { ids: buildIds(S.opt), res: {}, done: false, t0: Date.now(), t1: 0 };
+  Store.commit();
+  openTest();
+}
+function openTest() {
+  const T = S.test;
+  let i = 0;
+  while (i < T.ids.length && T.res[T.ids[i]] !== undefined) i++;
+  if (i >= T.ids.length) { go('results'); return; }
+  mode = 'test'; sess = { ids: T.ids, i: i };
+  go('quiz');
+}
+function startFix() {
+  const ids = shuffle(bankIds());
+  if (!ids.length) return;
+  mode = 'fix'; sess = { ids: ids, i: 0, total: ids.length, cleared: 0 };
+  go('quiz');
+}
+function go(v) { view = v; askReset = false; render(); window.scrollTo(0, 0); }
+function render() {
+  ctl = null;
+  if (view === 'quiz' && sess) renderQuiz();
+  else if (view === 'results' && S.test) renderResults();
+  else if (view === 'fixdone') renderFixDone();
+  else { view = 'home'; renderHome(); }
+}
+
+/* ───────── главная ───────── */
+function seg(label, items, cur, onPick) {
+  return h('div', { class: 'setup-row' }, h('span', { class: 'lbl' }, label),
+    h('div', { class: 'seg', role: 'group', 'aria-label': label }, items.map(it =>
+      h('button', { type: 'button', 'aria-pressed': String(it.v === cur), onclick: function () { onPick(it.v); } }, it.t, it.n != null ? h('span', { class: 'cnt' }, String(it.n)) : null))));
+}
+function renderHome() {
+  const T = S.test, inProg = !!T && !T.done, nBank = bankIds().length;
+  const nShort = TOPICS.length * SHORT_N, nAll = QUESTIONS.length;
+  const nSel = S.opt.len === 'short' ? nShort : nAll;
+
+  const mast = h('header', { class: 'mast' },
+    h('p', { class: 'eyebrow' }, 'Рубежный контроль № 1 · 24 вопроса'),
+    h('h1', null, 'Управление качеством'),
+    h('p', { class: 'lead' }, 'Один большой тест по всем вопросам контрольной: выбор ответа, сопоставление, порядок шагов, пропуски в определениях и расчётные задачи. После каждого ответа — разбор и нужный раздел шпаргалки.'));
+
+  let rl, capL, capR;
+  if (T) {
+    const done = countDone(T);
+    rl = ruler(T.ids.length, T.ids.map(id => T.res[id]), done);
+    capL = T.done ? 'Тест пройден' : 'Отвечено ' + done + ' из ' + T.ids.length;
+    capR = 'верно ' + countOk(T);
+  } else { rl = ruler(nSel, [], 0); capL = 'Старт'; capR = nSel + ' ' + qWord(nSel); }
+  const rulerBox = h('div', { class: 'home-ruler' }, rl, h('div', { class: 'ruler-cap' }, h('span', null, capL), h('span', null, capR)));
+
+  const panel = h('section', { class: 'panel' });
+  const fixBtn = nBank ? h('button', { class: 'btn', type: 'button', onclick: startFix }, 'Отработать ошибки', h('span', { class: 'cnt' }, String(nBank))) : null;
+  if (inProg && askReset) {
+    panel.append(h('h2', { class: 'panel-h' }, 'Сбросить этот тест?'),
+      h('p', null, 'Ответы незаконченного теста пропадут. Список ошибок для отработки останется.'),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn pri', type: 'button', onclick: function () { S.test = null; Store.commit(); askReset = false; render(); } }, 'Сбросить'),
+        h('button', { class: 'btn', type: 'button', onclick: function () { askReset = false; render(); } }, 'Отмена')));
+  } else if (inProg) {
+    const done = countDone(T);
+    panel.append(h('h2', { class: 'panel-h' }, 'Тест не закончен'),
+      h('p', null, 'Отвечено ' + done + ' из ' + T.ids.length + ', верно ' + countOk(T) + '. Прогресс сохранён.'),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn pri', type: 'button', onclick: openTest }, 'Продолжить', h('span', { class: 'cnt' }, 'вопрос ' + (done + 1))),
+        fixBtn,
+        h('button', { class: 'btn ghost', type: 'button', onclick: function () { askReset = true; render(); } }, 'Начать заново')));
+  } else {
+    if (T) {
+      const ok = countOk(T), n = T.ids.length;
+      panel.append(h('h2', { class: 'panel-h' }, 'Последний результат: ' + ok + ' из ' + n + ' · ' + Math.round(ok / n * 100) + ' %'));
+      if (S.hist.length > 1) panel.append(h('p', { class: 'hist' }, 'Попытки: ' + S.hist.map(x => Math.round(x[1] / x[2] * 100) + ' %').join(' → ')));
+    }
+    panel.append(h('div', { class: 'setup' },
+      seg('Объём', [{ v: 'all', t: 'Весь тест', n: nAll }, { v: 'short', t: 'Короткий', n: nShort }], S.opt.len, function (v) { S.opt.len = v; Store.commit(); render(); }),
+      seg('Порядок', [{ v: 'topics', t: 'По темам' }, { v: 'mix', t: 'Вперемешку' }], S.opt.ord, function (v) { S.opt.ord = v; Store.commit(); render(); })),
+      h('div', { class: 'actions' },
+        h('button', { class: 'btn pri', type: 'button', onclick: startTest }, T ? 'Новый тест' : 'Начать тест'),
+        fixBtn,
+        T ? h('button', { class: 'btn', type: 'button', onclick: function () { go('results'); } }, 'Разбор по темам') : null));
+  }
+
+  const list = h('div', { class: 'tl' });
+  TOPICS.forEach(function (_, i) {
+    const t = i + 1;
+    let sc = h('span', { class: 'sc' }, BY_TOPIC[i].length + ' вопр.');
+    if (T) {
+      const ids = T.ids.filter(id => QMAP.get(id).t === t && T.res[id] !== undefined);
+      if (ids.length) { const ok = ids.filter(id => T.res[id] === 1).length; sc = h('span', { class: 'sc ' + (ok === ids.length ? 'full' : 'miss') }, ok + ' / ' + ids.length); }
+    }
+    const body = h('div', { class: 'tb prose' });
+    const d = h('details', null, h('summary', null, h('span', { class: 'no' }, String(t)), h('span', { class: 'ti' }, CHEAT.titles[i]), sc), body);
+    d.addEventListener('toggle', function () { if (d.open && !body.firstChild) body.innerHTML = CHEAT.sections[i]; });
+    list.append(d);
+  });
+
+  root.replaceChildren(mast, rulerBox, panel,
+    h('h2', { class: 'sec-h' }, 'Вопросы контрольной и шпаргалка'), list,
+    h('p', { class: 'sync', id: 'sync' }, syncText()));
+}
+
+/* ───────── вопрос ───────── */
+function renderQuiz() {
+  const isTest = mode === 'test';
+  const q = QMAP.get(sess.ids[sess.i]);
+  locked = false;
+
+  function mkRuler() {
+    if (isTest) { const T = S.test; return ruler(T.ids.length, T.ids.map(id => T.res[id]), countDone(T)); }
+    return ruler(sess.total, [], sess.cleared);
+  }
+  function mkCount() {
+    if (isTest) return h('div', { class: 'qcount' }, String(sess.i + 1), h('small', null, ' / ' + sess.ids.length));
+    return h('div', { class: 'qcount', title: 'Осталось отработать' }, String(sess.total - sess.cleared), h('small', null, ' ост.'));
+  }
+  let rl = mkRuler(), cnt = mkCount();
+  const bar = h('div', { class: 'qbar' },
+    h('button', { class: 'ibtn', type: 'button', 'aria-label': 'На главную', title: 'На главную', html: ICON.back, onclick: function () { Store.flush(); go('home'); } }),
+    rl, cnt);
+  const body = h('div', { class: 'qbody' });
+  const fb = h('div', { class: 'fb', hidden: true, 'aria-live': 'polite' });
+  const card = h('article', { class: 'qcard', 'data-q': q.id },
+    h('div', { class: 'qmeta' },
+      h('span', { class: 'qtopic' }, (isTest ? '' : 'Отработка ошибок · ') + 'Тема ' + q.t + ' · ' + TOPICS[q.t - 1]),
+      q.src ? h('span', { class: 'qsrc' }, 'сверх шпаргалки · ' + q.src) : null),
+    h('h2', { class: 'qtext', html: fx(q.q) }),
+    q.note ? h('p', { class: 'qnote', html: fx(q.note) }) : null,
+    h('p', { class: 'qhint' }, HINT[q.type]),
+    body, fb);
+  const btn = h('button', { class: 'btn pri', type: 'button', disabled: true }, 'Проверить');
+  btn.addEventListener('click', function () { if (locked) next(); else check(); });
+  root.replaceChildren(h('div', { class: 'quiz' }, bar, card, h('div', { class: 'grow' }), h('div', { class: 'act' }, btn)));
+
+  const ctx = { change: function () { if (!locked && ctl) btn.disabled = !ctl.ready(); } };
+  Object.defineProperty(ctx, 'locked', { get: function () { return locked; } });
+  ctl = MOUNT[q.type](q, body, ctx);
+  btn.disabled = !ctl.ready();
+
+  function check() {
+    if (!ctl.ready()) return;
+    const r = ctl.check();
+    const ok = !!r.ok;
+    locked = true;
+    let note = r.note || '';
+    if (isTest) {
+      S.test.res[q.id] = ok ? 1 : 0;
+      if (ok) delete S.bank[q.id]; else S.bank[q.id] = (S.bank[q.id] || 0) + 1;
+    } else if (ok) { delete S.bank[q.id]; sess.cleared++; }
+    else { S.bank[q.id] = (S.bank[q.id] || 0) + 1; sess.ids.push(q.id); note = note ? note + ' · вопрос вернётся позже' : 'вопрос вернётся позже'; }
+    Store.commit();
+    const nr = mkRuler(); rl.replaceWith(nr); rl = nr;
+    if (!isTest) { const nc = mkCount(); cnt.replaceWith(nc); cnt = nc; }
+    fb.className = 'fb ' + (ok ? 'ok' : 'bad');
+    fb.append(h('div', { class: 'fb-h' }, h('span', { html: ok ? ICON.ok : ICON.no }), ok ? 'Верно' : 'Неверно', note ? h('span', { class: 'fb-n' }, note) : null),
+      h('p', { class: 'fb-t', html: fx(q.ex) }), cheat(q.t));
+    fb.hidden = false;
+    const last = sess.i + 1 >= sess.ids.length;
+    btn.textContent = last ? (isTest ? 'К результатам' : 'Готово') : 'Дальше';
+    btn.disabled = false;
+    try { btn.focus({ preventScroll: true }); } catch (e) {}
+    fb.scrollIntoView({ block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  function next() {
+    sess.i++;
+    if (sess.i < sess.ids.length) { renderQuiz(); window.scrollTo(0, 0); return; }
+    if (isTest) {
+      const T = S.test;
+      T.done = true; T.t1 = Date.now();
+      S.hist.push([T.t1, countOk(T), T.ids.length]); S.hist = S.hist.slice(-8);
+      Store.commit(); Store.flush();
+      go('results');
+    } else { Store.flush(); go('fixdone'); }
+  }
+}
+
+document.addEventListener('keydown', function (e) {
+  if (view !== 'quiz' || e.altKey || e.ctrlKey || e.metaKey) return;
+  const tag = e.target && e.target.tagName;
+  if (e.key === 'Enter') {
+    const inAnswer = tag === 'BUTTON' && e.target.matches('.qbody .opt, .qbody .chip, .qbody .slot');
+    if (!inAnswer && (tag === 'BUTTON' || tag === 'SELECT' || tag === 'SUMMARY' || tag === 'A')) return;
+    const b = root.querySelector('.act .btn');
+    if (b && !b.disabled) { e.preventDefault(); b.click(); }
+  } else if (/^[1-9]$/.test(e.key) && tag !== 'INPUT' && tag !== 'SELECT' && !locked && ctl && ctl.key) ctl.key(+e.key);
+});
+document.addEventListener('visibilitychange', function () { if (document.hidden) Store.flush(); });
+window.addEventListener('storage', function (e) {
+  if (e.key !== KEY || !e.newValue) return;
+  try { const r = sane(JSON.parse(e.newValue)); if (r && r.t > S.t) adopt(r); } catch (err) {}
+});
+
+/* ───────── результат ───────── */
+function renderResults() {
+  const T = S.test, n = T.ids.length, ok = countOk(T), nBank = bankIds().length;
+  if (!T.done) { openTest(); return; }
+  const per = TOPICS.map(function (_, i) {
+    const ids = T.ids.filter(id => QMAP.get(id).t === i + 1);
+    return { t: i + 1, ids: ids, ok: ids.filter(id => T.res[id] === 1).length };
+  }).filter(p => p.ids.length);
+  const weak = per.filter(p => p.ok < p.ids.length).sort((a, b) => a.ok / a.ids.length - b.ok / b.ids.length || a.t - b.t);
+  const fine = per.filter(p => p.ok === p.ids.length);
+
+  const head = h('header', { class: 'mast' },
+    h('p', { class: 'eyebrow' }, 'Результат теста'),
+    h('div', { class: 'score' }, h('span', { class: 'big' }, String(ok)), h('span', { class: 'of' }, 'из ' + n + ' · ' + Math.round(ok / n * 100) + ' %')),
+    h('p', { class: 'lvl', html: fx('Уровень подготовки $У = ' + ok + ' / ' + n + ' = ' + (ok / n).toFixed(2).replace('.', ',') + '$ при базовом образце 1,00.') }));
+  const rl = h('div', { class: 'res-ruler' }, ruler(n, T.ids.map(id => T.res[id]), n),
+    h('div', { class: 'ruler-cap' }, h('span', null, weak.length ? 'Красным отмечены ошибки' : 'Ни одной ошибки'), h('span', null, n + ' ' + qWord(n))));
+  const actions = h('div', { class: 'actions res-actions' },
+    nBank ? h('button', { class: 'btn pri', type: 'button', onclick: startFix }, 'Отработать ошибки', h('span', { class: 'cnt' }, String(nBank))) : null,
+    h('button', { class: 'btn' + (nBank ? '' : ' pri'), type: 'button', onclick: startTest }, 'Пройти ещё раз'),
+    h('button', { class: 'btn ghost', type: 'button', onclick: function () { go('home'); } }, 'На главную'));
+
+  const kids = [head, rl, actions];
+  if (weak.length) {
+    const list = h('div', { class: 'tl' });
+    weak.forEach(function (p) {
+      const missed = p.ids.filter(id => T.res[id] !== 1);
+      const body = h('div', { class: 'tb' },
+        h('p', { class: 'note' }, 'Вопросы с ошибкой:'),
+        h('ul', { class: 'miss-list' }, missed.map(id => h('li', { html: fx(QMAP.get(id).q) }))),
+        cheat(p.t));
+      list.append(h('details', null, h('summary', null, h('span', { class: 'no' }, String(p.t)), h('span', { class: 'ti' }, CHEAT.titles[p.t - 1]),
+        h('span', { class: 'sc miss' }, h('span', { class: 'segs', 'aria-hidden': 'true' }, p.ids.map(id => h('i', { class: T.res[id] === 1 ? null : 'x' }))), ' ' + p.ok + ' / ' + p.ids.length)), body));
+    });
+    kids.push(h('h2', { class: 'sec-h' }, 'Что повторить'), list);
+  }
+  if (fine.length) kids.push(h('h2', { class: 'sec-h' }, 'Без ошибок'),
+    h('p', { class: 'okline' }, fine.length === per.length ? 'Все темы пройдены без ошибок.' : 'Темы ' + fine.map(p => p.t).join(', ') + '.'));
+  root.replaceChildren.apply(root, kids);
+}
+
+function renderFixDone() {
+  const n = sess ? sess.total : 0;
+  root.replaceChildren(
+    h('header', { class: 'mast' },
+      h('p', { class: 'eyebrow' }, 'Отработка ошибок'),
+      h('h1', null, 'Ошибки закрыты'),
+      h('p', { class: 'lead' }, 'На ' + n + ' ' + plural(n, 'вопрос', 'вопроса', 'вопросов') + ' с ошибкой теперь дан верный ответ. Список ошибок пуст — он снова пополнится после следующего теста.')),
+    h('div', { class: 'home-ruler' }, ruler(Math.max(n, 1), [], Math.max(n, 1))),
+    h('div', { class: 'actions res-actions' },
+      h('button', { class: 'btn pri', type: 'button', onclick: startTest }, 'Новый тест'),
+      h('button', { class: 'btn', type: 'button', onclick: function () { go('home'); } }, 'На главную')));
+}
+
+/* ───────── старт ───────── */
+function start(data) {
+  const local = Store.readLocal();
+  if (local) S = local;
+  const hs = data && data.S ? sane(data.S) : null;
+  if (hs && hs.t >= S.t) S = hs;
+  loadedAt = S.t;
+  render();
+  Store.connect();
+  try { if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(function () { return { S: S }; }); } catch (e) {}
+}
+const hot = window.claude && window.claude.hot;
+if (hot && hot.ready) hot.ready(start); else start((hot && hot.data) || {});
+
+})();
+</script>
+
+</body></html>

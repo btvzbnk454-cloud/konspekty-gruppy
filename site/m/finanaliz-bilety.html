@@ -1,0 +1,1233 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Билеты по финанализу</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#F1F3F7; --surface:#FFFFFF; --surface-2:#F7F8FB; --ink:#141B2A; --ink-2:#4B566A; --ink-3:#7A8599;
+  --line:#DCE1EA; --line-2:#C9D0DC;
+  --accent:#2743A6; --accent-ink:#FFFFFF; --accent-soft:#E6EBFA; --accent-line:#B9C6F0;
+  --ok:#16804A; --ok-soft:#E1F3E8; --ok-line:#9BD3B1;
+  --bad:#BF3A2B; --bad-soft:#FBE7E3; --bad-line:#EDB1A8;
+  --star:#9A6200; --star-soft:#FFF2D3; --star-line:#EBCB82;
+  --shadow:0 1px 2px rgba(20,27,42,.06),0 4px 16px rgba(20,27,42,.05);
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --f-disp:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E131B; --surface:#161D28; --surface-2:#1B2330; --ink:#E7EBF2; --ink-2:#A3AEC0; --ink-3:#7C889B;
+    --line:#2A3444; --line-2:#364256;
+    --accent:#90A7FF; --accent-ink:#0E131B; --accent-soft:#1D2849; --accent-line:#3A4C86;
+    --ok:#55C688; --ok-soft:#12301F; --ok-line:#2C6B47;
+    --bad:#FF8070; --bad-soft:#3A1C18; --bad-line:#7A3A31;
+    --star:#F2B84B; --star-soft:#32270F; --star-line:#6D5321;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E131B; --surface:#161D28; --surface-2:#1B2330; --ink:#E7EBF2; --ink-2:#A3AEC0; --ink-3:#7C889B;
+  --line:#2A3444; --line-2:#364256;
+  --accent:#90A7FF; --accent-ink:#0E131B; --accent-soft:#1D2849; --accent-line:#3A4C86;
+  --ok:#55C688; --ok-soft:#12301F; --ok-line:#2C6B47;
+  --bad:#FF8070; --bad-soft:#3A1C18; --bad-line:#7A3A31;
+  --star:#F2B84B; --star-soft:#32270F; --star-line:#6D5321;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:20px 56px}
+@media (max-width:520px){.wrap{padding-inline:16px}}
+h1,h2,h3{text-wrap:balance;margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.muted{color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line-2);background:var(--surface);border-radius:8px;padding:9px 14px;font-weight:600;font-size:14px;line-height:1.2;transition:background .15s,border-color .15s}
+.btn:hover{border-color:var(--accent-line);background:var(--accent-soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--ink-2)}
+.btn.ghost:hover{background:var(--surface-2);color:var(--ink)}
+.btn.sm{padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.45;cursor:default}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-2);white-space:nowrap}
+.chip.star{background:var(--star-soft);border-color:var(--star-line);color:var(--star)}
+.chip.var{border-color:var(--star-line);color:var(--star)}
+.chip.calc{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent)}
+.chip.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad-line);color:var(--bad)}
+
+/* ---------- HOME ---------- */
+.hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;padding-block:8px 22px;border-bottom:1px dashed var(--line-2)}
+.hero h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(26px,5vw,40px);line-height:1.08;letter-spacing:-.01em}
+.hero h1 span{color:var(--accent)}
+.hero p{margin:10px 0 0;color:var(--ink-2);max-width:60ch}
+.hero .src{font-size:13px;color:var(--ink-3);margin-top:6px}
+.hero-cta{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:210px}
+@media (max-width:680px){.hero{grid-template-columns:1fr}.hero-cta{flex-direction:row;flex-wrap:wrap;min-width:0}}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-block:18px 8px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);overflow:hidden}
+.stat{padding:12px 14px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-family:var(--f-mono);font-size:22px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums}
+.stat b small{font-size:13px;color:var(--ink-3);font-weight:400}
+.stat span{font-size:12.5px;color:var(--ink-2)}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,1fr)}.stat{border-left:0;border-top:1px solid var(--line)}.stat:nth-child(-n+2){border-top:0}.stat:nth-child(even){border-left:1px solid var(--line)}.stat:last-child{grid-column:1/-1}}
+.storage-note{font-size:12.5px;color:var(--bad);margin:6px 0 0}
+section.blk{margin-top:34px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.sec-h h2{font-family:var(--f-disp);font-weight:500;font-size:19px;letter-spacing:-.005em}
+.sec-h .muted{font-size:13.5px}
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:860px){.plan{grid-template-columns:1fr}}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 10px;display:flex;flex-direction:column;gap:10px}
+.day.now{border-color:var(--accent-line);box-shadow:0 0 0 3px var(--accent-soft)}
+.day-h{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.day-n{font-family:var(--f-disp);font-weight:700;font-size:13px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.day-h h3{font-size:16.5px;font-weight:700;margin-top:2px}
+.day-h p{margin:2px 0 0;font-size:13px;color:var(--ink-2)}
+.day .badge{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:6px;background:var(--accent);color:var(--accent-ink);white-space:nowrap}
+.day .badge.done{background:var(--ok-soft);color:var(--ok)}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0}
+.tick{width:20px;height:20px;border-radius:5px;border:1.5px solid var(--line-2);background:var(--surface);display:grid;place-items:center;padding:0;margin-top:1px}
+.tick svg{width:12px;height:12px;opacity:0}
+.step.done .tick{background:var(--ok);border-color:var(--ok)}
+.step.done .tick svg{opacity:1;color:#fff}
+.step.done .step-l{color:var(--ink-3);text-decoration:line-through;text-decoration-color:var(--line-2)}
+.step-l{font-size:14px;font-weight:600;line-height:1.35}
+.step-l small{display:block;font-weight:400;color:var(--ink-3);font-size:12.5px;margin-top:2px;text-decoration:none}
+.step .go{padding:5px 9px;font-size:12.5px}
+.how{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.how summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.how summary::-webkit-details-marker{display:none}
+.how summary::after{content:"＋";color:var(--ink-3)}
+.how[open] summary::after{content:"－"}
+.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+@media (max-width:640px){.how-grid{grid-template-columns:1fr}}
+.how-item{padding:12px 14px;border-bottom:1px solid var(--line)}
+.how-item:nth-child(odd){border-right:1px solid var(--line)}
+@media (max-width:640px){.how-item:nth-child(odd){border-right:0}}
+.how-item b{display:block;font-size:14px;margin-bottom:3px}
+.how-item p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media (max-width:860px){.modes{grid-template-columns:repeat(2,1fr)}}
+.mode{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px;min-height:118px;transition:border-color .15s,transform .15s}
+.mode:hover{border-color:var(--accent-line);transform:translateY(-1px)}
+.mode .m-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.mode .m-ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
+.mode .m-ic svg{width:17px;height:17px}
+.mode .m-count{font-family:var(--f-mono);font-size:13px;color:var(--ink-3)}
+.mode b{font-size:15px}
+.mode span.d{font-size:12.5px;color:var(--ink-2);line-height:1.4}
+.mode.exam{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.mode.exam .m-ic{background:rgba(255,255,255,.18);color:var(--accent-ink)}
+.mode.exam span.d,.mode.exam .m-count{color:var(--accent-ink);opacity:.85}
+.mode.star .m-ic{background:var(--star-soft);color:var(--star)}
+.mode.err .m-ic{background:var(--bad-soft);color:var(--bad)}
+.tickets{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}
+@media (max-width:720px){.tickets{grid-template-columns:repeat(4,1fr)}}
+.tk{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 8px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.tk:hover{border-color:var(--accent-line)}
+.tk .n{font-family:var(--f-disp);font-weight:700;font-size:22px;line-height:1.1}
+.tk .l{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.tk .r{font-size:12px;font-weight:600;color:var(--ink-3);min-height:18px}
+.tk.pass{border-color:var(--ok-line);background:var(--ok-soft)}
+.tk.pass .r{color:var(--ok)}
+.tk.fail{border-color:var(--bad-line);background:var(--bad-soft)}
+.tk.fail .r{color:var(--bad)}
+.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:760px){.topics{grid-template-columns:1fr}}
+.tb{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tb-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.tb-h .eyebrow{display:block}
+.tb-h b{font-size:15px}
+.tr{display:grid;grid-template-columns:1fr 92px auto;gap:10px;align-items:center;padding:9px 14px;border-top:1px solid var(--line);width:100%;text-align:left;background:transparent;border-left:0;border-right:0;border-bottom:0}
+.tr:first-of-type{border-top:0}
+.tr:hover{background:var(--accent-soft)}
+.tr .nm{font-size:14px}
+.tr .ct{font-family:var(--f-mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+.bar{height:6px;border-radius:99px;background:var(--line);display:flex;overflow:hidden}
+.bar i{display:block;height:100%}
+.bar .g{background:var(--ok)}
+.bar .r{background:var(--bad)}
+.foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line-2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-3)}
+.confirm{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+
+/* ---------- QUIZ ---------- */
+.qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line)}
+.qbar .ttl{font-family:var(--f-disp);font-weight:500;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qbar .ttl small{font-family:var(--f-body);font-weight:400;color:var(--ink-3);font-size:13px;margin-left:8px}
+.qbar .rt{display:flex;gap:10px;align-items:center}
+@media (max-width:520px){.qbar .ttl small{display:none}.qbar{gap:8px}}
+.timer{font-family:var(--f-mono);font-weight:600;font-size:15px;padding:4px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.timer.low{color:var(--bad);border-color:var(--bad-line);background:var(--bad-soft)}
+.counter{font-family:var(--f-mono);font-size:14px;color:var(--ink-2)}
+.strip-wrap{overflow-x:auto;margin-top:12px;padding-bottom:4px;scrollbar-width:thin}
+.strip{display:flex;gap:4px;min-width:min-content}
+.cell{width:30px;height:30px;flex:0 0 30px;border-radius:6px;border:1px solid var(--line-2);background:var(--surface);font-family:var(--f-mono);font-size:12px;font-weight:600;display:grid;place-items:center;padding:0;color:var(--ink-2)}
+.cell.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.cell.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+.cell.ans{background:var(--ink-3);border-color:var(--ink-3);color:var(--surface)}
+.cell.cur{outline:2px solid var(--accent);outline-offset:1px}
+.cell.gap{margin-left:10px}
+.ticket{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+.ticket-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 18px;border-bottom:1.5px dashed var(--line-2);position:relative}
+.ticket-h::before,.ticket-h::after{content:"";position:absolute;bottom:-9px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:1px solid var(--line)}
+.ticket-h::before{left:-9px;clip-path:inset(0 0 0 50%)}
+.ticket-h::after{right:-9px;clip-path:inset(0 50% 0 0)}
+.ticket-h .chips{display:flex;gap:6px;flex-wrap:wrap}
+.ticket-b{padding:18px 18px 16px}
+@media (max-width:520px){.ticket-b{padding:16px 14px 14px}.ticket-h{padding:10px 14px}}
+.qtext{font-size:clamp(17px,2.4vw,19.5px);font-weight:600;line-height:1.42;max-width:70ch}
+.qhint{margin:8px 0 0;font-size:13px;color:var(--star);font-weight:600}
+.opts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.opt{width:100%;display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;text-align:left;padding:11px 12px;border:1px solid var(--line-2);border-radius:9px;background:var(--surface);font-size:15px;line-height:1.42;transition:border-color .12s,background .12s}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-soft)}
+.opt .num{width:26px;height:26px;border-radius:6px;border:1px solid var(--line-2);display:grid;place-items:center;font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--ink-2);background:var(--surface-2)}
+.opt.multi .num{border-radius:5px}
+.opt.sel{border-color:var(--accent);background:var(--accent-soft)}
+.opt.sel .num{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+.opt.correct .num{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .num{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.missed{border-color:var(--ok);border-style:dashed}
+.opt .mark{font-size:12px;font-weight:700;align-self:center;white-space:nowrap}
+.opt.correct .mark{color:var(--ok)}
+.opt.wrong .mark{color:var(--bad)}
+.opt.missed .mark{color:var(--ok)}
+.fb{margin-top:14px;border-radius:9px;padding:12px 14px;border:1px solid var(--line);background:var(--surface-2)}
+.fb .vd{font-weight:700;display:flex;align-items:center;gap:8px}
+.fb.ok .vd{color:var(--ok)}
+.fb.bad .vd{color:var(--bad)}
+.fb p{margin:6px 0 0;font-size:14.5px;max-width:75ch}
+.fb .src{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+.qnav{display:flex;justify-content:space-between;gap:10px;margin-top:16px;flex-wrap:wrap}
+.qnav .r{display:flex;gap:8px;margin-left:auto}
+.kbd{font-size:12px;color:var(--ink-3);margin-top:12px}
+.kbd kbd{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface)}
+@media (hover:none){.kbd{display:none}}
+.banner{margin-top:12px;border:1px solid var(--star-line);background:var(--star-soft);color:var(--ink);border-radius:9px;padding:10px 14px;font-size:14px}
+.banner b{color:var(--star)}
+
+/* ---------- RESULT ---------- */
+.res-top{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+@media (max-width:600px){.res-top{grid-template-columns:1fr}}
+.res-top h2{font-family:var(--f-disp);font-weight:700;font-size:clamp(22px,4vw,30px)}
+.res-top p{margin:8px 0 0;color:var(--ink-2);max-width:60ch}
+.score{font-family:var(--f-mono);font-size:15px;margin-top:10px}
+.score b{font-size:28px}
+.stamp{font-family:var(--f-disp);font-weight:700;font-size:22px;letter-spacing:.1em;text-transform:uppercase;padding:10px 18px;border:3px solid currentColor;border-radius:10px;transform:rotate(-7deg);justify-self:center;text-align:center;line-height:1.1;box-shadow:inset 0 0 0 2px var(--surface),inset 0 0 0 4px currentColor}
+.stamp small{display:block;font-size:10px;letter-spacing:.14em;margin-top:4px;font-family:var(--f-body);font-weight:700}
+.stamp.pass{color:var(--ok)}
+.stamp.fail{color:var(--bad)}
+.stamp.neutral{color:var(--accent)}
+.res-blocks{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.res-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.rev{margin-top:22px}
+.rev h3{font-size:16px;margin-bottom:10px}
+.rev-item{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--bad);border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.rev-item .q{font-weight:600}
+.rev-item .a{margin-top:6px;font-size:14px}
+.rev-item .a .y{color:var(--bad)}
+.rev-item .a .c{color:var(--ok)}
+.rev-item .e{margin-top:6px;font-size:13.5px;color:var(--ink-2)}
+.rev-item .s{margin-top:4px;font-size:12px;color:var(--ink-3)}
+
+/* ---------- CARDS ---------- */
+.card{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:18px}
+.card .cq{font-size:clamp(18px,2.6vw,21px);font-weight:700;line-height:1.35;max-width:60ch;margin-top:6px}
+.card textarea{width:100%;min-height:120px;margin-top:14px;border:1px solid var(--line-2);border-radius:9px;padding:12px;font:inherit;font-size:15px;background:var(--surface-2);color:var(--ink);resize:vertical}
+.card .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.keys{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.key{font-size:13px;padding:3px 9px;border-radius:999px;border:1px solid var(--line-2);color:var(--ink-3)}
+.key.hit{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok);font-weight:600}
+.key.miss{border-style:dashed}
+.cov{margin-top:10px;font-size:14px;font-weight:600}
+.ref{margin-top:12px;border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 8px 8px 0;font-size:15px}
+.ref .src{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.filters .btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.boxes{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
+
+/* ---------- CHEAT ---------- */
+.cheat-nav{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.cs{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.cs h2{font-family:var(--f-disp);font-weight:500;font-size:18px}
+.cs .lead{margin:6px 0 0;color:var(--ink-2);font-size:14px;max-width:70ch}
+.tbl-wrap{overflow-x:auto;margin-top:12px}
+table.t{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+table.t th{text-align:left;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1.5px solid var(--line-2)}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t td.f{font-family:var(--f-mono);font-weight:600;white-space:nowrap;color:var(--accent)}
+.rule{margin-top:14px;padding:12px 14px;border-radius:9px;background:var(--star-soft);border:1px solid var(--star-line);font-size:14.5px}
+.rule b{color:var(--star)}
+.ladder{margin-top:12px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.lr{display:grid;grid-template-columns:22px 1fr 54px 76px;gap:10px;align-items:center;padding:6px 12px;border-top:1px solid var(--line);font-size:14px}
+.lr:first-child{border-top:0}
+.lr .op{font-family:var(--f-mono);font-weight:600;color:var(--ink-3);text-align:center}
+.lr .cd{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.lr .v{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+.lr.res{background:var(--surface-2);font-weight:700}
+.lr.res .op{color:var(--accent)}
+.lr.res .nm .bar2{height:4px;margin-top:4px;border-radius:99px;background:var(--accent);opacity:.8}
+.lr .nm small{font-weight:400;color:var(--ink-3);font-size:12px;margin-left:6px}
+@media (max-width:520px){.lr{grid-template-columns:18px 1fr 64px;}.lr .cd{display:none}}
+.pairs{display:grid;gap:10px;margin-top:12px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.pair > div{padding:10px 12px;border-left:1px solid var(--line);font-size:14px}
+.pair > div:first-child{border-left:0}
+.pair > div b{display:block;font-size:13px;color:var(--accent);margin-bottom:2px}
+.lists{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+@media (max-width:720px){.lists{grid-template-columns:1fr}}
+.li{border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.li b{display:block;font-size:14px}
+.li .mn{font-family:var(--f-mono);font-weight:600;color:var(--star);font-size:13px;margin-top:2px}
+.li p{margin:4px 0 0;font-size:13.5px;color:var(--ink-2)}
+.formulas{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+@media (max-width:720px){.formulas{grid-template-columns:1fr}}
+.fm{border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+.fm .fx{font-family:var(--f-mono);font-weight:600;font-size:14px;color:var(--accent)}
+.fm p{margin:4px 0 0;font-size:13px;color:var(--ink-2)}
+.hide-mode .ans{filter:blur(6px);cursor:pointer;user-select:none;transition:filter .2s}
+.hide-mode .ans.shown{filter:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:9px;font-size:14px;font-weight:600;z-index:20;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+
+/* ---------- KR ---------- */
+.kr-box{display:grid;grid-template-columns:1fr auto;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);margin-top:26px}
+@media (max-width:760px){.kr-box{grid-template-columns:1fr}}
+.kr-main{padding:18px 18px 16px;border-left:5px solid var(--star)}
+.kr-main h2{font-family:var(--f-disp);font-weight:500;font-size:20px;margin-top:4px}
+.kr-main p{margin:8px 0 0;color:var(--ink-2);font-size:14px;max-width:72ch}
+.kr-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.kr-side{display:flex;flex-direction:column;justify-content:center;gap:0;border-left:1px solid var(--line);background:var(--surface-2);min-width:190px}
+@media (max-width:760px){.kr-side{flex-direction:row;border-left:0;border-top:1px solid var(--line);min-width:0}}
+.kr-stat{padding:10px 16px;border-top:1px solid var(--line);flex:1}
+.kr-stat:first-child{border-top:0}
+@media (max-width:760px){.kr-stat{border-top:0;border-left:1px solid var(--line)}.kr-stat:first-child{border-left:0}}
+.kr-stat b{display:block;font-size:20px;font-weight:600}
+.kr-stat b small{font-size:12px;color:var(--ink-3);font-weight:400}
+.kr-stat span{font-size:12px;color:var(--ink-2)}
+.krpart{margin:10px 0 0;font-size:13px;color:var(--ink-2)}
+.krpart b{color:var(--star)}
+.open-in{width:100%;min-height:150px;margin-top:14px;border:1px solid var(--line-2);border-radius:9px;padding:12px;font:inherit;font-size:15px;background:var(--surface-2);color:var(--ink);resize:vertical}
+.rev-item.good{border-left-color:var(--ok)}
+.rev-item.compact{padding:8px 14px}
+.rev-item.compact .q{font-weight:500;font-size:14px;color:var(--ink-2)}
+.rev-item .row{display:flex;gap:8px}
+</style>
+
+<div id="app"></div>
+<script>
+(function(){"use strict";
+const Q=[];
+// БЛОК 1 — Основы финансового анализа (40)
+Q.push(
+{b:1,t:"b1a",k:1,fix:1,q:"Внутренний и внешний анализ финансово-хозяйственной деятельности предприятия, осуществляемый на основании данных публичной отчётности и проводимый как внутри, так и за пределами предприятия заинтересованными лицами, — это…",o:["управленческий анализ","финансовый анализ","статистический анализ","анализ движения материальных ценностей на предприятии"],a:1,e:"Только финансовый анализ бывает и внешним, и внутренним и опирается на публичную (бухгалтерскую) отчётность. Управленческий анализ — только внутренний и работает с закрытыми данными.",s:"Конспект: «Выделяют два вида ФА: внешний и внутренний»; Крылов, с. 6"},
+{b:1,t:"b1a",q:"Как в конспекте определяется финансовый анализ?",o:["Составление на основе бухгалтерской, финансовой, статистической и другой отчётности аналитического обоснования управленческих решений, направленных на достижение поставленных целей","Ведение бухгалтерского учёта и составление финансовой отчётности","Проверка достоверности бухгалтерской отчётности независимым лицом","Расчёт налоговых обязательств организации"],a:0,e:"Ключевые слова определения: отчётность → аналитическое обоснование → управленческие решения → цели. Ведение учёта — бухгалтерия, проверка достоверности — аудит.",s:"Конспект, первая строка"},
+{b:1,t:"b1a",q:"Термин «анализ» означает…",o:["метод научного исследования: мысленное или фактическое разложение целого на составные части","объединение отдельных частей в единое целое","сопоставление изучаемого явления с уже известными","количественное измерение влияния факторов на результат"],a:0,e:"Анализ — разложение целого на части. Обратная операция — синтез; «единство анализа и синтеза» — один из принципов метода ФА. Сопоставление с известным — это сравнение.",s:"Конспект, определение анализа"},
+{b:1,t:"b1a",q:"«Систематизированная совокупность аналитических процедур, имеющих целью получение заключений, выводов и рекомендаций экономического характера» — это определение…",o:["экономического анализа","финансового анализа","аудита","управленческого учёта"],a:0,e:"В конспекте это определение экономического анализа (оно дано в кавычках). Финансовый анализ — его разновидность.",s:"Конспект, определение экономического анализа"},
+{b:1,t:"b1a",q:"Как соотносятся экономический и финансовый анализ?",o:["Финансовый анализ — вид экономического анализа, исследующий финансовые результаты и финансовое состояние","Экономический анализ — часть финансового","Это синонимы","Финансовый анализ относится к бухгалтерскому учёту, а не к экономическому анализу"],a:0,e:"ФА — часть (вид) экономического анализа. На схеме комплексного анализа ФА — ветвь «анализ объектов финансового управления».",s:"Крылов, с. 5; Конспект, рис. 1.2"},
+{b:1,t:"b1a",q:"На схеме комплексного анализа деятельности организации (рис. 1.2) финансовый анализ — это…",o:["анализ объектов финансового управления","анализ функциональных областей деятельности","анализ эффективности производства","анализ эффективности управления персоналом"],a:0,e:"Схема делит экономический анализ на две ветви: 1) функциональные области — маркетинг, НИОКР, производство, логистика, персонал, финансовый менеджмент; 2) объекты финансового управления = финансовый анализ: источники финансирования, основной и оборотный капитал, доходы и расходы, финансовые результаты, движение денежных средств.",s:"Конспект, рис. 1.2"},
+{b:1,t:"b1a",q:"По широте охвата сторон деятельности экономический анализ делится на…",o:["полный и тематический","ретроспективный, оперативный и перспективный","внешний и внутренний","предварительный и углублённый"],a:0,e:"Рис. 1.1: широта охвата → полный / тематический; временной аспект → ретроспективный / оперативный / перспективный. Внешний/внутренний — виды ФА, предварительный/углублённый — его этапы.",s:"Конспект, рис. 1.1"},
+{b:1,t:"b1a",q:"По временному аспекту выделяют анализ…",o:["ретроспективный, оперативный и перспективный","полный и тематический","горизонтальный и вертикальный","внешний и внутренний"],a:0,e:"Прошлое — ретроспективный, текущее — оперативный, будущее — перспективный.",s:"Конспект, рис. 1.1"},
+{b:1,t:"b1a",q:"Что НЕ является основной функцией финансового анализа?",o:["ведение бухгалтерского учёта хозяйственных операций","объективная оценка финансового состояния","выявление факторов и причин достигнутого финансового состояния","выявление и мобилизация резервов улучшения финансового состояния"],a:0,e:"Четыре функции: оценка → факторы и причины → подготовка и обоснование решений → резервы. Учёт ведёт бухгалтерия, ФА только использует его данные.",s:"Конспект, «Основными функциями ФА являются»"},
+{b:1,t:"b1a",q:"Отметьте все основные функции финансового анализа.",o:["объективная оценка финансового состояния объекта анализа","выявление факторов и причин достигнутого финансового состояния","подготовка и обоснование принимаемых финансовых решений","выявление и мобилизация резервов улучшения финансового состояния","составление бухгалтерской (финансовой) отчётности","утверждение учётной политики организации"],a:[0,1,2,3],e:"Мнемоника: «Оценил → нашёл Причины → обосновал Решение → мобилизовал Резервы». Составление отчётности и учётная политика — функции бухгалтерии.",s:"Конспект, функции ФА"},
+{b:1,t:"b1a",q:"В каком случае финансовый анализ, по конспекту, НЕ применяется?",o:["при начислении заработной платы работникам","при выявлении проблем в текущей и инвестиционной деятельности","как инструмент прогнозирования будущих финансовых условий и результатов","при оценке вариантов инвестирования капитала"],a:0,e:"ФА применяется в четырёх случаях: выявление проблем в текущей и инвестиционной деятельности; прогнозирование; управление хозяйствующим субъектом; оценка вариантов инвестирования.",s:"Конспект, «ФА в организациях применяется»"},
+{b:1,t:"b1a",q:"Основные категории метода финансового анализа — это…",o:["показатели, факторы, резервы","активы, пассивы, капитал","доходы, расходы, прибыль","план, факт, норматив"],a:0,e:"Мнемоника «ПФР»: Показатели — Факторы — Резервы.",s:"Конспект, «Основными категориями метода ФА являются…»"},
+{b:1,t:"b1a",q:"Какой подход назван одним из основных методов ФА как составной части комплексного экономического анализа?",o:["диалектический","экспертный","бухгалтерский","нормативный"],a:0,e:"Диалектический подход: финансовые потоки в постоянном движении (изучаем динамику через сравнения), исследуем систему показателей во взаимосвязи и причинно-следственных связях, количественно измеряем влияние факторов.",s:"Конспект, диалектический подход"},
+{b:1,t:"b1a",q:"Что НЕ относится к принципам метода финансового анализа?",o:["принцип двойной записи","единство анализа и синтеза","изучение явлений во взаимосвязи, в развитии от простого к сложному","переход от количественных изменений к качественным"],a:0,e:"Двойная запись — принцип бухгалтерского учёта. Принципы метода ФА: единство анализа и синтеза, взаимосвязь, развитие от простого к сложному, переход от количества к качеству, сравнение.",s:"Конспект, принципы метода"},
+{b:1,t:"b1b",k:1,q:"Что является предметом финансового анализа?",o:["финансовые результаты и финансовое состояние организации","финансовые аспекты хозяйственной деятельности организации","данные бухгалтерского учёта и финансовой отчётности","система финансовых коэффициентов"],a:0,e:"Не путай тройку: ПРЕДМЕТ — что изучаем (результаты + состояние); ОБЪЕКТ — финансовые аспекты хоз. деятельности; ИНФОБАЗА — данные учёта и отчётности. В контрольной это был открытый вопрос.",s:"Конспект; Крылов, с. 5"},
+{b:1,t:"b1b",q:"Объект финансового анализа — это…",o:["финансовые аспекты хозяйственной деятельности организации","финансовые результаты и финансовое состояние организации","бухгалтерский баланс организации","собственники и кредиторы организации"],a:0,e:"Объект — финансовые АСПЕКТЫ хозяйственной деятельности. Результаты и состояние — это предмет.",s:"Конспект; Крылов, с. 6"},
+{b:1,t:"b1b",q:"Информационная база финансового анализа — это…",o:["данные бухгалтерского учёта и финансовой отчётности организации","финансовые результаты и финансовое состояние","финансовые аспекты хозяйственной деятельности","только данные государственной статистики"],a:0,e:"Инфобаза = учёт + отчётность.",s:"Конспект; Крылов, с. 6"},
+{b:1,t:"b1b",k:1,q:"В чём заключается цель ВНЕШНЕГО финансового анализа?",o:["в оценке (внешнего) рейтинга организации, её финансовой устойчивости, платёжеспособности и надёжности, т. е. в уменьшении риска взаимодействия с ней контрагентов","в рассмотрении состояния финансовых ресурсов, внутренней оценке рейтинга и выявлении резервов","в проверке правильности ведения бухгалтерского учёта","в расчёте налоговой базы организации"],a:0,e:"Внешний анализ отвечает контрагенту на вопрос «можно ли с ними работать?» → снижение риска. Внутренний — «где резервы и как управлять ликвидностью?». В контрольной это был открытый вопрос «Назовите цель ФА».",s:"Конспект; Крылов, с. 6"},
+{b:1,t:"b1b",k:1,q:"В чём заключается цель ВНУТРЕННЕГО финансового анализа?",o:["рассмотреть состояние финансовых ресурсов, дать внутреннюю оценку рейтинга и выявить финансовые резервы — в итоге обеспечить эффективное управление ликвидностью","оценить внешний рейтинг организации и уменьшить риск взаимодействия с ней контрагентов","проверить достоверность отчётности для акционеров","определить рыночную стоимость акций организации"],a:0,e:"Цепочка внутреннего анализа: ресурсы → внутренний рейтинг → резервы → управление ЛИКВИДНОСТЬЮ.",s:"Конспект; Крылов, с. 6"},
+{b:1,t:"b1b",q:"Под финансовым состоянием организации понимается…",o:["способность организации финансировать свою деятельность","сумма чистой прибыли за период","стоимость имущества по балансу","соотношение выручки и себестоимости"],a:0,e:"Финансовое состояние характеризуется обеспеченностью финансовыми ресурсами, целесообразностью их размещения, интенсивностью и эффективностью использования.",s:"Конспект; Крылов, с. 5"},
+{b:1,t:"b1b",q:"Ключевая характеристика финансового состояния — это…",o:["платёжеспособность","рентабельность продаж","выручка","доля основных средств в имуществе"],a:0,e:"Финансовое состояние — конечный результат всей хозяйственной деятельности; его ключевая характеристика — платёжеспособность.",s:"Конспект; Крылов, с. 5"},
+{b:1,t:"b1b",q:"Что НЕ относится к финансовым результатам организации в понимании учебника?",o:["рентабельность продаж","валовая прибыль","совокупный финансовый результат","нераспределённая прибыль"],a:0,e:"Финансовые результаты — это 7 показателей ПРИБЫЛИ из отчётности: валовая, от продаж, от прочей деятельности, до налогообложения, чистая, совокупный финрезультат, нераспределённая. Рентабельность — относительный показатель.",s:"Конспект; Крылов, с. 5"},
+{b:1,t:"b1b",q:"Отметьте все показатели, которые относятся к финансовым результатам организации.",o:["валовая прибыль","прибыль от прочей деятельности","совокупный финансовый результат","нераспределённая прибыль","выручка","себестоимость продаж"],a:[0,1,2,3],e:"Выручка — доход, себестоимость — расход; финансовые результаты — это разные виды прибыли.",s:"Конспект; Крылов, с. 5"},
+{b:1,t:"b1b",q:"Какая из задач финансового анализа названа в учебнике?",o:["оценить финансовую устойчивость организации","составить бухгалтерский баланс","начислить амортизацию основных средств","утвердить учётную политику"],a:0,e:"Задачи ФА: финрезультаты, имущественное положение, финансовая устойчивость, платёжеспособность и ликвидность, деловая активность, комплексная оценка, рекомендации, прогноз.",s:"Крылов, с. 6–7"},
+{b:1,t:"b1c",q:"Пользователи с ПРЯМЫМ финансовым интересом — это…",o:["кредиторы и инвесторы","налоговые органы","работники и профсоюзы","статистические органы"],a:0,e:"Прямой интерес у тех, кто даёт (собирается дать) кредиты и займы или вкладывает капитал: их цель — максимальная прибыль на вложенные средства.",s:"Крылов, с. 6"},
+{b:1,t:"b1c",q:"Кто НЕ относится к пользователям с НЕПРЯМЫМ финансовым интересом?",o:["кредиторы","налоговые органы","деловые партнёры","статистические органы"],a:0,e:"Непрямой интерес: налоговые и финансовые органы, деловые партнёры, работники и профсоюзы, местные власти, регуляторы, покупатели, общество, консультанты, статистика. Кредиторы — прямой интерес.",s:"Крылов, с. 6"},
+{b:1,t:"b1c",q:"Кто относится к ВНУТРЕННИМ пользователям финансовой информации?",o:["собственники и топ-менеджеры","кредиторы и поставщики","государство и общество","клиенты"],a:0,e:"По таблице конспекта внутренние пользователи — собственники, топ-менеджеры, работники. У Крылова — администрация и собственники.",s:"Конспект, таблица групп пользователей; Крылов, с. 6"},
+{b:1,t:"b1c",q:"Что интересует поставщиков ресурсов как пользователей финансовой информации?",o:["ликвидность, платёжеспособность и финансовая устойчивость организации","сохранение рабочих мест и рост заработной платы","своевременные и полные налоговые поступления","надёжность поставок и стоимость товаров"],a:0,e:"Поставщикам важно, заплатят ли им, поэтому объект их анализа — финансовое положение.",s:"Конспект, таблица групп пользователей"},
+{b:1,t:"b1c",q:"Государство как пользователь финансовой информации интересуется прежде всего…",o:["своевременными и полными налоговыми поступлениями","доходностью капитала","надёжностью поставок","ликвидностью организации"],a:0,e:"Объект анализа для государства — финансовые результаты (с них платят налоги).",s:"Конспект, таблица групп пользователей"},
+{b:1,t:"b1c",q:"Какая группа пользователей анализирует всю внутрихозяйственную информацию?",o:["топ-менеджеры","собственники","работники","государство"],a:0,e:"Интерес топ-менеджеров — стабильное финансовое положение и динамичное развитие организации; объект — вся внутрихозяйственная информация.",s:"Конспект, таблица групп пользователей"},
+{b:1,t:"b1c",q:"Что интересует собственников организации?",o:["доходность капитала и финансовая устойчивость организации","сохранение рабочих мест","надёжность поставок и стоимость товаров","обеспечение занятости и охрана окружающей среды"],a:0,e:"Объекты анализа собственников — и финансовое положение, и финансовые результаты.",s:"Конспект, таблица групп пользователей"},
+{b:1,t:"b1d",k:1,fix:1,q:"Закрытая для посторонних лиц, строго засекреченная отчётность, содержащая сведения о себестоимости отдельных видов продукции, выпускаемой предприятием, — это…",o:["финансовая отчётность","управленческая отчётность","бухгалтерская отчётность"],a:1,e:"Управленческая отчётность — внутренняя, для руководства; себестоимость по видам продукции — коммерческая тайна. Финансовая и бухгалтерская отчётность — публичные, для внешних пользователей.",s:"Банк тестов к контрольной; в учебнике прямо не описано"},
+{b:1,t:"b1d",v:1,q:"Публичная отчётность, которую организация раскрывает внешним пользователям (акционерам, кредиторам), — это…",o:["финансовая (бухгалтерская) отчётность","управленческая отчётность","внутренний отчёт о себестоимости продукции","отчёт о выполнении бизнес-плана"],a:0,e:"Пара для запоминания: ПУБЛИЧНАЯ → финансовая/бухгалтерская; ЗАКРЫТАЯ → управленческая.",s:"Конспект, состав форм финансовой отчётности"},
+{b:1,t:"b1d",q:"К какому уровню информационного обеспечения ФА относятся данные бухгалтерского учёта и отчётности?",o:["системный","несистемный","методический","организационный"],a:0,e:"Пять уровней: законодательно-нормативный → методический → организационный → системный (учёт и отчётность — наиболее полно соответствуют целям ФА) → несистемный.",s:"Конспект, таблица «Структура информационного обеспечения ФА»"},
+{b:1,t:"b1d",q:"Данные аудиторских компаний, публикуемые в массовой печати, относятся к уровню информации…",o:["несистемный","системный","законодательно-нормативный","методический"],a:0,e:"Несистемный уровень — сведения различного характера и прочая информация, получаемая в ходе контактов с контрагентами.",s:"Конспект, таблица «Структура информационного обеспечения ФА»"},
+{b:1,t:"b1d",q:"Приказы и распоряжения в рамках учётной политики организации — это уровень информации…",o:["организационный","методический","системный","несистемный"],a:0,e:"Организационный уровень = организационно-распорядительная информация.",s:"Конспект, таблица «Структура информационного обеспечения ФА»"},
+{b:1,t:"b1d",q:"Федеральные законы, постановления, положения и стандарты по бухгалтерскому учёту относятся к уровню…",o:["законодательно-нормативный","методический","организационный","системный"],a:0,e:"Методический уровень — это нормативные акты и методические указания, а законы и стандарты — законодательно-нормативный.",s:"Конспект, таблица «Структура информационного обеспечения ФА»"},
+{b:1,t:"b1d",q:"Какая форма по РСБУ соответствует «Отчёту о прибылях и убытках» по МСФО?",o:["Отчёт о финансовых результатах","Бухгалтерский баланс","Отчёт об изменениях капитала","Пояснения"],a:0,e:"Пары РСБУ ↔ МСФО: баланс ↔ баланс; ОФР ↔ отчёт о прибылях и убытках; изменения капитала ↔ движение капитала; движение ДС ↔ движение ДС; пояснения ↔ учётная политика и пояснительная записка.",s:"Конспект, таблица «Состав форм финансовой отчётности»"},
+{b:1,t:"b1d",q:"Какой формы НЕТ в составе финансовой отчётности по РСБУ?",o:["Бизнес-план","Бухгалтерский баланс","Отчёт о движении денежных средств","Пояснения"],a:0,e:"5 форм РСБУ: баланс, отчёт о финансовых результатах, отчёт об изменениях капитала, отчёт о движении денежных средств, пояснения.",s:"Конспект, таблица «Состав форм финансовой отчётности»"},
+{b:1,t:"b1d",q:"Разделу «Учётная политика и пояснительная записка» по МСФО в РСБУ соответствуют…",o:["Пояснения","Отчёт об изменениях капитала","Отчёт о финансовых результатах","Бухгалтерский баланс"],a:0,e:"Последняя строка таблицы: Пояснения ↔ Учётная политика и пояснительная записка.",s:"Конспект, таблица «Состав форм финансовой отчётности»"}
+);
+
+// БЛОК 2 — Этапы и методические приёмы (40)
+Q.push(
+{b:2,t:"b2a",q:"Сколько этапов выделяют в финансовом анализе?",o:["четыре","три","два","пять"],a:0,e:"I — предварительный; II — углублённый; III — обобщение результатов → рекомендации; IV — прогнозирование. Мнемоника «ПУОП»: Посмотрел — Углубился — Обобщил — Предсказал.",s:"Конспект; Крылов, с. 7"},
+{b:2,t:"b2a",q:"Какова правильная последовательность этапов финансового анализа?",o:["предварительный → углублённый → обобщение и рекомендации → прогнозирование","углублённый → предварительный → прогнозирование → обобщение","прогнозирование → предварительный → углублённый → обобщение","предварительный → прогнозирование → углублённый → обобщение"],a:0,e:"Сначала быстро и просто, потом подробно, потом выводы и рекомендации, в конце — прогноз.",s:"Конспект; Крылов, с. 7"},
+{b:2,t:"b2a",q:"На каком этапе результаты финансового анализа переходят в разработку рекомендаций?",o:["III — обобщение результатов","I — предварительный анализ","II — углублённый анализ","IV — прогнозирование"],a:0,e:"III этап: обобщение результатов, переходящее в разработку рекомендаций по повышению финрезультатов и улучшению финсостояния.",s:"Конспект; Крылов, с. 7"},
+{b:2,t:"b2a",q:"Цель предварительного финансового анализа — это…",o:["наглядная и несложная (по времени и трудоёмкости) оценка финансового состояния","подробная характеристика финансовых результатов и состояния и возможностей их изменения","прогноз финансовых результатов на следующий год","разработка рекомендаций по улучшению финансового состояния"],a:0,e:"Предварительный = быстро и наглядно; углублённый = подробно.",s:"Крылов, с. 7"},
+{b:2,t:"b2a",q:"Цель углублённого финансового анализа — это…",o:["достаточно подробная характеристика финрезультатов и финсостояния за истекший период и возможностей их изменения на ближайшую и долгосрочную перспективу","наглядная и несложная оценка финансового состояния","проверка комплектности финансовой отчётности","построение реклассифицированного баланса"],a:0,e:"Углублённый анализ опирается на все формы отчётности и данные бухучёта и конкретизирует, расширяет, дополняет предварительный.",s:"Крылов, с. 9"},
+{b:2,t:"b2a",q:"Что НЕ входит в предварительный финансовый анализ?",o:["анализ консолидированной финансовой отчётности","подготовительный этап","предварительный обзор финансовой отчётности","расчёт и анализ важнейших аналитических показателей"],a:0,e:"Три подэтапа предварительного анализа: подготовительный → обзор отчётности → расчёт важнейших показателей. Консолидированная отчётность — специальный раздел ФА.",s:"Крылов, с. 7"},
+{b:2,t:"b2a",q:"Подготовительный этап предварительного анализа сводится к…",o:["визуальной и простейшей счётной проверке отчётности и построению аналитического (реклассифицированного) баланса","ознакомлению с аудиторским заключением и пояснительной запиской","расчёту коэффициентов ликвидности","прогнозированию финансовых результатов"],a:0,e:"Проверяют комплектность, правильность и ясность заполнения, реквизиты, арифметику и контрольные соотношения; перегруппировывают статьи баланса. Аудиторское заключение смотрят на следующем подэтапе — обзоре отчётности.",s:"Крылов, с. 7–8"},
+{b:2,t:"b2a",q:"Какие формы отчётности — главный источник для расчёта показателей в предварительном ФА?",o:["бухгалтерский баланс и отчёт о финансовых результатах","все формы отчётности и данные бухучёта","управленческая отчётность","данные государственной статистики"],a:0,e:"Предварительный анализ — по двум важнейшим формам. Все формы и данные учёта нужны углублённому анализу.",s:"Крылов, с. 8"},
+{b:2,t:"b2a",q:"В таблице показателей предварительного ФА коэффициент финансовой независимости относится к направлению…",o:["анализ финансовой устойчивости","анализ имущественного положения","анализ платёжеспособности и ликвидности","анализ деловой активности"],a:0,e:"Финустойчивость: коэффициенты финансовой независимости, обеспеченности собственными средствами, мобильности собственного капитала.",s:"Конспект, «Совокупность показателей для предварительного ФА»; Крылов, табл. 1.1"},
+{b:2,t:"b2a",q:"Рентабельность продаж, активов и собственного капитала в предварительном ФА относятся к направлению…",o:["анализ деловой активности","анализ финансовой устойчивости","анализ имущественного положения","анализ платёжеспособности и ликвидности"],a:0,e:"Деловая активность: оборачиваемость оборотных активов, оборачиваемость активов, рентабельность продаж, активов, собственного капитала.",s:"Конспект; Крылов, табл. 1.1"},
+{b:2,t:"b2a",q:"Что из перечисленного — специальный раздел ФА, а не часть анализа финансового состояния?",o:["анализ сегментной отчётности","рейтинговая оценка финансового состояния","оценка финансовой несостоятельности","анализ деловой активности"],a:0,e:"Специальные разделы: инфляция, консолидированная отчётность, сегментная отчётность, переход к МСФО, прогнозный анализ.",s:"Конспект, составляющие углублённого ФА; Крылов, с. 9"},
+{b:2,t:"b2a",q:"Отметьте все специальные разделы финансового анализа.",o:["ФА в условиях инфляции","анализ консолидированной финансовой отчётности","анализ сегментной отчётности","ФА в условиях перехода к МСФО","прогнозный финансовый анализ","оценка финансовой несостоятельности"],a:[0,1,2,3,4],e:"Оценка несостоятельности входит в анализ финансового состояния (п. 2.6), а не в специальные разделы.",s:"Конспект; Крылов, с. 9"},
+{b:2,t:"b2b",q:"Какой приём НЕ входит в перечень основных методических приёмов ФА?",o:["метод экспертных оценок","способ цепных подстановок","балансовый способ","группировка"],a:0,e:"10 приёмов: абсолютные, относительные, средние величины; сравнение; группировка; графический; табличный; балансовый; цепные подстановки; абсолютные разницы.",s:"Крылов, с. 10; Конспект"},
+{b:2,t:"b2b",q:"Как используются абсолютные величины в финансовом анализе?",o:["как информационная база для расчёта относительных и средних величин и как расчётные показатели (абсолютные показатели финустойчивости, ликвидности баланса)","только как база сравнения для темпов роста","только для прогнозирования","только в вертикальном анализе"],a:0,e:"Два направления: 1) показатели отчётности как база для расчётов; 2) самостоятельные расчётные абсолютные показатели.",s:"Конспект; Крылов, с. 10"},
+{b:2,t:"b2b",q:"Какие три вида относительных величин получили наибольшее применение в ФА?",o:["структуры, динамики и финансовые коэффициенты","абсолютные, средние и предельные","плановые, фактические и нормативные","базисные, цепные и средние"],a:0,e:"Структура → вертикальный анализ; динамика → горизонтальный и трендовый; финансовые коэффициенты — отдельный вид анализа.",s:"Конспект; Крылов, с. 10"},
+{b:2,t:"b2b",q:"Относительная величина структуры — это…",o:["доля (удельный вес) части в общем","отношение текущего уровня показателя к предыдущему","отношение показателей из разных форм отчётности","средняя величина за период"],a:0,e:"Примеры: доля оборотных активов в имуществе, доля краткосрочных обязательств в заёмных средствах. Основа вертикального анализа.",s:"Конспект; Крылов, с. 10–11"},
+{b:2,t:"b2b",k:1,fix:1,q:"Вертикальный анализ бухгалтерского баланса проводится на основе…",o:["изменения абсолютной величины показателей","структуры активов и пассивов баланса","темпов роста (снижения) показателей"],a:1,e:"Вертикальный = структурный: определение структуры итоговых показателей (удельные веса). Темпы роста — это горизонтальный анализ.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",v:1,q:"«Определение структуры итоговых финансовых показателей с выявлением влияния каждой позиции отчётности на результат в целом» — это…",o:["вертикальный (структурный) анализ","горизонтальный анализ","трендовый анализ","факторный анализ"],a:0,e:"Слово-маркер «структура» → вертикальный анализ.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",k:1,fix:1,q:"Сравнение каждой позиции отчётности с предыдущим периодом — это…",o:["анализ финансовых коэффициентов","трендовый анализ","вертикальный анализ","горизонтальный анализ","сравнительный анализ"],a:3,e:"С ОДНИМ предыдущим периодом — горизонтальный; с РЯДОМ предшествующих периодов + тренд — трендовый.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",q:"Сравнение каждой позиции отчётности с рядом предшествующих периодов и определение основной тенденции динамики — это…",o:["трендовый анализ","горизонтальный анализ","вертикальный анализ","сравнительный анализ"],a:0,e:"Тренд — основная тенденция динамики, очищенная от случайных влияний и особенностей отдельных периодов.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",q:"С помощью какого анализа ведётся перспективный, прогнозный анализ?",o:["трендового","вертикального","горизонтального","группировки"],a:0,e:"С помощью тренда формируются возможные значения показателей в будущем.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",q:"Относительные величины динамики (темпы роста) составляют основу…",o:["горизонтального и трендового анализа","вертикального анализа","анализа финансовых коэффициентов","балансового способа"],a:0,e:"Динамика → горизонтальный и трендовый; структура → вертикальный.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",q:"Базисный темп роста — это когда…",o:["каждый уровень ряда сравнивается с одним и тем же базисным периодом","каждый следующий период сравнивается с предыдущим","берётся среднее отношение за все периоды","часть делится на целое"],a:0,e:"Базисные — всё к одной базе; цепные — каждый к предыдущему («звено к звену»).",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",k:1,fix:1,q:"Выявление относительных величин, при исчислении которых одну из величин принимают за единицу, а другую выражают как отношение к единице, происходит при помощи…",o:["сравнительного анализа","вертикального анализа","анализа финансовых коэффициентов","трендового анализа","факторного анализа"],a:2,e:"Относительные величины выражаются в коэффициентах (база = 1) или процентах (база = 100). «Одна величина за единицу» → коэффициент → анализ финансовых коэффициентов.",s:"Конспект, способ относительных величин; Крылов, с. 10–11"},
+{b:2,t:"b2b",q:"Сколько финансовых коэффициентов разработано, по конспекту?",o:["более 100","около 10","около 25","ровно 50"],a:0,e:"Многие из них дублируют друг друга. Для группы ключевых коэффициентов выработаны нормативные (рекомендуемые) значения.",s:"Конспект; Крылов, с. 11"},
+{b:2,t:"b2b",q:"Какие две формы средних величин наиболее применяются в ФА?",o:["средняя арифметическая и средняя хронологическая","средняя геометрическая и гармоническая","средняя квадратическая и арифметическая","медиана и мода"],a:0,e:"Средние позволяют переходить от единичного к общему, от случайного к закономерному.",s:"Конспект; Крылов, с. 12"},
+{b:2,t:"b2c",k:1,fix:1,q:"Какой вид сравнительного анализа аудитор применяет при определении эффективности использования производственной мощности предприятия, ресурсов, финансовой устойчивости и платёжеспособности?",o:["сравнение текущих данных предприятия со среднеотраслевыми данными","сравнение фактических данных клиента с расчётами самого аудитора","сравнение текущих данных с нормативными значениями","сравнение текущих данных с данными бизнес-плана","сравнение текущих данных с данными предыдущих периодов"],a:2,e:"Эффективность, устойчивость и платёжеспособность оценивают относительно норм — рекомендуемых значений коэффициентов. В конспекте этот вид назван «сопоставление фактических показателей с нормативными (рекомендуемыми)».",s:"Банк тестов к контрольной; Конспект, виды сравнений"},
+{b:2,t:"b2c",q:"Сопоставление плановых и фактических показателей применяется, если выполняется…",o:["внутренний финансовый анализ","внешний финансовый анализ","налоговая проверка","трендовый анализ"],a:0,e:"У внешнего аналитика нет доступа к планам организации.",s:"Конспект; Крылов, с. 12"},
+{b:2,t:"b2c",q:"Что НЕ входит в основные виды сравнений в финансовом анализе?",o:["сравнение данных бухгалтерского и налогового учёта","сопоставление плановых и фактических показателей","сравнение с показателями прошлых периодов","межхозяйственные сравнения"],a:0,e:"6 видов сравнений: план–факт; факт–норматив; факт–прошлые периоды; межхозяйственные; со средними (по региону, отрасли); до и после изменения фактора.",s:"Конспект; Крылов, с. 12"},
+{b:2,t:"b2c",q:"Группировка информации — это…",o:["деление массы изучаемой совокупности на качественно однородные группы по соответствующим признакам","сопоставление изучаемого явления с уже известными","отражение соотношений двух уравновешенных групп показателей","изображение показателей с помощью геометрических знаков"],a:0,e:"Группировка помогает разъяснить смысл средних, показать роль отдельных единиц и выявить взаимосвязи.",s:"Конспект; Крылов, с. 12"},
+{b:2,t:"b2c",q:"По сложности построения группировки бывают…",o:["простые и комбинированные","типологические, структурные и аналитические","базисные и цепные","полные и тематические"],a:0,e:"Простая — один признак, комбинированная — два и более. По задачам: типологические, структурные, аналитические.",s:"Конспект; Крылов, с. 12–13"},
+{b:2,t:"b2c",q:"Группировки, которые используются для определения наличия, направления и формы связи между показателями, — это…",o:["аналитические","типологические","структурные","комбинированные"],a:0,e:"Типологические — обобщение и типизация; структурные — внутреннее строение; аналитические — связи. Чаще всего в ФА: простые структурные и аналитические.",s:"Конспект; Крылов, с. 13"},
+{b:2,t:"b2c",q:"Какое значение графика в ФА связано с построением схем внутреннего строения показателя и взаимосвязей результативного и факторных показателей?",o:["методологическое","иллюстративное","аналитическое","прогнозное"],a:0,e:"Три значения графиков: иллюстративное (доходчивость), аналитическое (видны закономерности и тенденции), методологическое (схемы строения и взаимосвязей).",s:"Конспект; Крылов, с. 13"},
+{b:2,t:"b2c",q:"Аналитическую таблицу можно определить как…",o:["систему мыслей, суждений, выраженных языком цифр","масштабное изображение показателей геометрическими знаками","деление совокупности на однородные группы","соотношение двух уравновешенных групп показателей"],a:0,e:"Таблица выразительнее словесного текста, компактнее и облегчает выявление связей.",s:"Конспект; Крылов, с. 13"},
+{b:2,t:"b2d",q:"Балансовый способ служит главным образом для…",o:["отражения соотношений двух групп взаимосвязанных и уравновешенных показателей, итоги которых должны быть тождественны","деления совокупности на однородные группы","определения тренда показателей","расчёта средних величин"],a:0,e:"Также применяется при построении аддитивных факторных моделей и для проверки правильности факторного анализа.",s:"Конспект; Крылов, с. 14"},
+{b:2,t:"b2d",q:"Способ цепных подстановок используется, если между результативным показателем и факторами существует…",o:["строгая функциональная зависимость (аддитивная, мультипликативная, кратная, смешанная)","стохастическая (вероятностная) связь","связь отсутствует","только корреляционная зависимость"],a:0,e:"Цепные подстановки работают только для детерминированных (функциональных) моделей.",s:"Конспект; Крылов, с. 14"},
+{b:2,t:"b2d",c:1,q:"Сколько расчётов (подстановок) нужно для модели y = a × b × c способом цепных подстановок?",o:["4","3","6","8"],a:0,e:"Число расчётов на единицу больше числа факторов: базисный y₀, два условных показателя и фактический y₁ → 3 + 1 = 4.",s:"Конспект; Крылов, с. 14–15"},
+{b:2,t:"b2d",q:"Как определяется влияние фактора в способе цепных подстановок?",o:["вычитанием из каждой последующей подстановки предыдущей","делением фактического значения на базисное","суммой всех подстановок","умножением прироста фактора на базисные значения всех факторов"],a:0,e:"Базисная величина одного фактора последовательно заменяется фактической, остальные неизменны; влияние = следующая подстановка − предыдущая.",s:"Конспект; Крылов, с. 14"},
+{b:2,t:"b2d",c:1,q:"y = a × b. База: a₀ = 10, b₀ = 5; факт: a₁ = 12, b₁ = 6. Каково влияние фактора a (цепные подстановки)?",o:["+10","+12","+22","+20"],a:0,e:"y₀ = 10×5 = 50; условный y = a₁×b₀ = 12×5 = 60 → Δyₐ = 60 − 50 = +10; y₁ = 12×6 = 72 → Δy_b = 72 − 60 = +12. Проверка: 10 + 12 = 22 = 72 − 50.",s:"Метод — Крылов, с. 14–15"},
+{b:2,t:"b2d",q:"Способ абсолютных разниц: влияние фактора b в модели y = a × b × c рассчитывается как…",o:["a₁ × (b₁ − b₀) × c₀","a₀ × (b₁ − b₀) × c₀","a₀ × (b₁ − b₀) × c₁","a₁ × (b₁ − b₀) × c₁"],a:0,e:"Прирост фактора × ФАКТИЧЕСКИЕ значения факторов слева × БАЗИСНЫЕ значения факторов справа. Способ проще цепных подстановок, но применяется в основном для мультипликативных моделей.",s:"Крылов, с. 15"}
+);
+
+// БЛОК 3 — Финансовые результаты (40)
+Q.push(
+{b:3,t:"b3a",k:1,fix:1,q:"Конечный финансовый результат деятельности предприятия отражает…",o:["валовой доход","прибыль (убыток) от продаж","прибыль до налогообложения","чистая нераспределённая прибыль"],a:3,e:"«Конечный» — после всех доходов, расходов и налога на прибыль: это чистая (нераспределённая) прибыль. Всё остальное — промежуточные ступени «лестницы прибыли».",s:"Банк тестов к контрольной; перечень финрезультатов — Крылов, с. 5"},
+{b:3,t:"b3a",k:1,fix:1,q:"К абсолютным показателям финансовых результатов, отражаемым в финансовой отчётности, относятся (выберите все верные):",o:["валовая прибыль","прибыль (убыток) от продаж","прибыль до налогообложения","рентабельность собственного капитала"],a:[0,1,2],e:"Абсолютные показатели — суммы в рублях (виды прибыли из ОФР). Рентабельность — относительный показатель (отношение прибыли к капиталу).",s:"Банк тестов к контрольной; Конспект — состав финансовых результатов"},
+{b:3,t:"b3a",q:"С чего начинается анализ финансовых результатов организации?",o:["с изучения объёма, состава, структуры и динамики прибыли до налогообложения в разрезе её источников — прибыли от продаж и прибыли от прочей деятельности","с расчёта рентабельности собственного капитала","с анализа чистой прибыли","с анализа совокупного финансового результата"],a:0,e:"Порядок: ПДН (табл. 2.1) → прибыль от продаж (2.2) → прочая деятельность (2.3) → чистая прибыль (2.4) → СФР (2.5) → резервы.",s:"Конспект; Крылов, с. 17"},
+{b:3,t:"b3a",q:"Прибыль (убыток) от прочей деятельности — это…",o:["сальдо всех остальных (прочих) доходов и расходов","прибыль от продаж за вычетом налога","выручка минус себестоимость продаж","чистая прибыль минус дивиденды"],a:0,e:"Всё, что не продажи: доходы от участия, проценты к получению и к уплате, прочие доходы и расходы.",s:"Конспект; Крылов, с. 17"},
+{b:3,t:"b3a",q:"Как рассчитывается прибыль до налогообложения в таблице анализа (табл. 2.1)?",o:["прибыль от продаж + прибыль (убыток) от прочей деятельности","прибыль от продаж − коммерческие расходы","чистая прибыль + дивиденды","валовая прибыль + прочие доходы"],a:0,e:"Стр. 3 = стр. 1 + стр. 2. Именно эти два источника и рассматриваются как факторы ПДН.",s:"Конспект, табл. 2.1; Крылов, с. 18"},
+{b:3,t:"b3a",q:"Чем определяется качество прибыли до налогообложения?",o:["её структурой — удельным весом прибыли от продаж","ставкой налога на прибыль","абсолютной суммой прибыли","долей прочих доходов"],a:0,e:"Прибыль от продаж — результат основной деятельности и главный источник средств. Чем больше её доля в ПДН, тем выше качество прибыли.",s:"Конспект; Крылов, с. 18"},
+{b:3,t:"b3a",q:"Какое влияние на качество прибыли до налогообложения оказывает снижение в ней удельного веса прибыли от продаж?",o:["приводит к повышению","приводит к снижению","не оказывает никакого влияния"],a:1,fix:1,e:"Снижение доли прибыли от продаж — негативное явление: ухудшается качество ПДН.",s:"Крылов, тест для самопроверки № 1; с. 18"},
+{b:3,t:"b3a",q:"Какое соотношение темпов роста прибыли от продаж (ТРпр) и прибыли до налогообложения (ТРпдн) желательно?",o:["ТРпр ≥ ТРпдн","ТРпр < ТРпдн","ТРпдн ≥ 2 × ТРпр","ТРпр = ТРвр"],a:0,e:"Тогда доля прибыли от продаж в ПДН как минимум не уменьшается — качество прибыли не ухудшается. Правило: «хорошая часть растёт не медленнее целого».",s:"Конспект (Лекция 1, табл. 1); Крылов, формула 2.1"},
+{b:3,t:"b3a",c:1,q:"Прибыль от продаж: 365 → 425 тыс. р. (темп роста 116,4 %); ПДН: 385 → 460 тыс. р. (119,5 %). Как изменилось качество прибыли до налогообложения?",o:["ухудшилось: ТРпр < ТРпдн, доля прибыли от продаж упала с 94,8 % до 92,4 %","улучшилось: прибыль от продаж выросла на 60 тыс. р.","не изменилось","улучшилось: ПДН выросла на 19,5 %"],a:0,e:"365/385 = 94,8 %; 425/460 = 92,4 % → −2,4 п. п. Причина — отставание темпа роста прибыли от продаж от темпа роста ПДН.",s:"Крылов, пример — табл. 5.1, с. 108"},
+{b:3,t:"b3b",k:1,fix:1,q:"Верно ли утверждение? Прибыль от продаж определяется вычитанием из валовой прибыли коммерческих и управленческих расходов.",o:["да","нет"],a:0,e:"ОФР: валовая прибыль (2100) − коммерческие (2210) − управленческие (2220) = прибыль от продаж (2200). Пример Крылова: 900 − 157 − 318 = 425.",s:"Крылов, Приложение, табл. П.2; Конспект, табл. 2.2"},
+{b:3,t:"b3b",k:1,fix:1,q:"Верно ли данное утверждение? Любое изменение выручки от реализации продукции порождает ещё более сильное изменение прибыли от продаж.",o:["да","нет"],a:0,e:"Это эффект операционного (производственного) рычага: из-за условно-постоянных расходов прибыль меняется в большей степени, чем выручка. В учебнике Крылова тема не раскрыта — ответ по банку тестов.",s:"Банк тестов к контрольной"},
+{b:3,t:"b3b",k:1,fix:1,q:"Если темпы роста прибыли выше темпов роста выручки, это свидетельствует о…",o:["повышении рентабельности активов","повышении рентабельности продаж","снижении рентабельности продаж","снижении фондоотдачи"],a:1,e:"Рентабельность продаж = прибыль / выручка. Числитель растёт быстрее знаменателя → доля прибыли в выручке растёт. Про активы по условию ничего не известно.",s:"Банк тестов к контрольной; формула — Конспект (рентабельность продаж)"},
+{b:3,t:"b3b",v:1,c:1,q:"Выручка выросла на 28,6 %, а прибыль от продаж — на 16,4 %. Что произошло с рентабельностью продаж?",o:["снизилась","выросла","не изменилась","по этим данным сказать нельзя"],a:0,e:"Прибыль растёт медленнее выручки → её доля в выручке падает. У Крылова: 10,4 % → 9,4 %.",s:"Крылов, табл. 5.2, с. 108"},
+{b:3,t:"b3b",q:"Какие элементы (факторы) определяют прибыль от продаж?",o:["выручка, себестоимость продаж, управленческие и коммерческие расходы","прибыль до налогообложения, налог на прибыль, отложенные налоги","доходы от участия, проценты к получению, прочие доходы","чистая прибыль, амортизация, инвестиции"],a:0,e:"Табл. 2.2: выручка − себестоимость − управленческие − коммерческие = прибыль от продаж.",s:"Конспект, табл. 2.2; Крылов, с. 18–19"},
+{b:3,t:"b3b",q:"Что принимается за 100 % при анализе структуры прибыли от продаж (табл. 2.2)?",o:["выручка — как наибольший положительный показатель","прибыль от продаж","себестоимость продаж","валовая прибыль"],a:0,e:"Все статьи выражаются в % от выручки: так видно, какая доля выручки «съедается» затратами.",s:"Конспект; Крылов, с. 19"},
+{b:3,t:"b3b",q:"В чём состоит условие оптимизации прибыли от продаж?",o:["ТРвр > ТРсп — темп роста выручки больше темпа роста полной себестоимости","ТРсп > ТРвр","выручка минус полная себестоимость больше нуля","ТРпр ≥ ТРпдн"],a:0,e:"Выручка должна расти быстрее затрат. Вариант «разность больше нуля» — просто наличие прибыли, а не условие оптимизации.",s:"Конспект (Лекция 1, табл. 2); Крылов, формула 2.2; тест № 48"},
+{b:3,t:"b3b",q:"Что входит в полную себестоимость реализованной продукции в условии оптимизации прибыли от продаж?",o:["себестоимость продаж + управленческие + коммерческие расходы","только себестоимость продаж","себестоимость продаж + прочие расходы","себестоимость продаж + проценты к уплате"],a:0,e:"ТРсп считается по сумме трёх статей расходов по обычной деятельности.",s:"Конспект; Крылов, с. 19"},
+{b:3,t:"b3b",q:"К чему ведёт выполнение условия ТРвр > ТРсп?",o:["к снижению удельного веса полной себестоимости в выручке и повышению эффективности текущей деятельности","к росту доли прочих доходов","к снижению выручки","к росту налога на прибыль"],a:0,e:"Если условие не выполняется, выявляют его причины.",s:"Конспект; Крылов, с. 19"},
+{b:3,t:"b3b",c:1,q:"Выручка: 3500 → 4500 тыс. р. (128,6 %). Полная себестоимость: 3135 → 4075 тыс. р. (130,0 %). Выполняется ли условие оптимизации прибыли от продаж?",o:["нет: темп роста полной себестоимости (130,0 %) выше темпа роста выручки (128,6 %)","да: выручка выросла на 1000 тыс. р.","да: прибыль от продаж выросла","по этим данным определить нельзя"],a:0,e:"Условие ТРвр > ТРсп нарушено → удельный вес прибыли от продаж в выручке снизился (10,4 % → 9,4 %), эффективность текущей деятельности упала.",s:"Крылов, пример — с. 109"},
+{b:3,t:"b3b",c:1,q:"Выручка — 4500, себестоимость продаж — 3600, коммерческие расходы — 157, управленческие — 318 (тыс. р.). Чему равна прибыль от продаж?",o:["425","900","582","743"],a:0,e:"4500 − 3600 = 900 (валовая прибыль); 900 − 157 − 318 = 425.",s:"Крылов, Приложение, табл. П.2"},
+{b:3,t:"b3b",c:1,q:"Прибыль от продаж — 425, выручка — 4500 тыс. р. Удельный вес прибыли от продаж в выручке (рентабельность продаж) равен…",o:["9,4 %","10,4 %","11,8 %","90,6 %"],a:0,e:"425 / 4500 × 100 = 9,4 %.",s:"Крылов, табл. 5.2"},
+{b:3,t:"b3c",q:"Как ведётся анализ прибыли от прочей деятельности?",o:["в разрезе доходов от прочей деятельности и связанных с ней расходов; их структура анализируется в отдельности","в разрезе выручки и себестоимости","только по сумме чистой прибыли","в разрезе текущего налога и отложенных налогов"],a:0,e:"В табл. 2.3 и доходы, и расходы принимаются за 100 % каждые по отдельности.",s:"Конспект, табл. 2.3; Крылов, с. 19–20"},
+{b:3,t:"b3c",q:"Что НЕ входит в доходы от прочей деятельности?",o:["проценты к уплате","доходы от участия в других организациях","проценты к получению","прочие доходы"],a:0,e:"Проценты к уплате — это расход (вместе с прочими расходами).",s:"Конспект, табл. 2.3"},
+{b:3,t:"b3c",q:"Какое влияние на прибыль от прочей деятельности оказывает снижение коммерческих расходов?",o:["приводит к увеличению","приводит к уменьшению","не оказывает никакого влияния"],a:2,fix:1,e:"Коммерческие расходы — элемент прибыли от ПРОДАЖ, а не прочей деятельности.",s:"Крылов, тест для самопроверки № 31"},
+{b:3,t:"b3c",c:1,q:"Доходы от прочей деятельности: участие — 18, проценты к получению — 22, прочие — 32. Расходы: проценты к уплате — 6, прочие — 31 (тыс. р.). Прибыль от прочей деятельности равна…",o:["35","109","72","41"],a:0,e:"Доходы: 18 + 22 + 32 = 72; расходы: 6 + 31 = 37; 72 − 37 = 35.",s:"Крылов, табл. 5.3"},
+{b:3,t:"b3c",q:"Как рассчитывается чистая прибыль в таблице анализа (табл. 2.4)?",o:["ПДН − текущий налог − изменение ОНО + изменение ОНА − прочее","ПДН + текущий налог + изменение ОНО − изменение ОНА","прибыль от продаж − налог на прибыль","выручка − все расходы − дивиденды"],a:0,e:"Отложенные налоговые обязательства (ОНО) уменьшают ЧП, отложенные налоговые активы (ОНА) — увеличивают.",s:"Конспект, табл. 2.4; Крылов, с. 21"},
+{b:3,t:"b3c",q:"Какое влияние на чистую прибыль оказывает снижение текущего налога на прибыль?",o:["приводит к увеличению","приводит к уменьшению","не оказывает никакого влияния"],a:0,fix:1,e:"Налог вычитается из ПДН → чем он меньше, тем больше ЧП. У Крылова налог снизился на 45 тыс. р. — ЧП выросла на 65 %.",s:"Крылов, тест № 38; с. 110"},
+{b:3,t:"b3c",c:1,q:"ПДН — 460, текущий налог на прибыль — 140, изменение отложенных налоговых активов — +10 тыс. р. Чистая прибыль равна…",o:["330","310","320","600"],a:0,e:"460 − 140 + 10 = 330.",s:"Крылов, Приложение, табл. П.2; табл. 5.4"},
+{b:3,t:"b3c",q:"Почему в анализе чистой прибыли удельный вес ПДН может превышать 100 % (например, 139,4 %)?",o:["за 100 % принята чистая прибыль, а ПДН больше неё на сумму налога","это ошибка в расчётах","ПДН включает выручку","за 100 % принята выручка"],a:0,e:"В табл. 2.4 база — чистая прибыль (стр. 6 = 100 %). 460 / 330 = 139,4 %.",s:"Крылов, табл. 5.4"},
+{b:3,t:"b3c",q:"Какие элементы определяют совокупный финансовый результат?",o:["чистая прибыль + результат от переоценки внеоборотных активов, не включаемый в ЧП + результат от прочих операций, не включаемый в ЧП","ПДН + налог на прибыль","чистая прибыль + амортизация","прибыль от продаж + прочие доходы"],a:0,e:"Табл. 2.5: стр. 4 = стр. 1 + стр. 2 + стр. 3. Если переоценки и прочих операций нет, СФР = ЧП и отдельно его не анализируют.",s:"Конспект, табл. 2.5; Крылов, с. 21–22"},
+{b:3,t:"b3d",q:"Чем завершается анализ финансовых результатов?",o:["выявлением резервов их повышения","расчётом прибыли до налогообложения","анализом имущественного положения","составлением прогнозного баланса"],a:0,e:"Последний пункт анализа финрезультатов — резервы + оценка способности к самофинансированию.",s:"Конспект; Крылов, с. 22"},
+{b:3,t:"b3d",q:"Что НЕ является направлением поиска резервов повышения финансовых результатов?",o:["увеличение доли долгосрочных финансовых вложений во внеоборотных активах","увеличение выручки","снижение затрат на производство и продажу","оптимизация налогообложения"],a:0,e:"Пять направлений: ↑ выручка; ↓ затраты; ↑ прочие доходы; ↓ прочие расходы; оптимизация налогообложения. Рост доли ДФВ, наоборот, оценивается негативно.",s:"Конспект; Крылов, с. 22–23"},
+{b:3,t:"b3d",q:"Отметьте все основные направления поиска резервов повышения финансовых результатов.",o:["увеличение выручки","снижение затрат на производство и продажу продукции","увеличение доходов от прочей деятельности","снижение расходов, связанных с прочей деятельностью","оптимизация налогообложения","увеличение дебиторской задолженности"],a:[0,1,2,3,4],e:"Логика «лестницы прибыли»: каждую ступень ОФР можно улучшить — выручку, затраты, прочие доходы и расходы, налог.",s:"Конспект; Крылов, с. 22–23"},
+{b:3,t:"b3d",q:"По какой формуле рассчитывается коэффициент самофинансирования?",o:["Ксф = (ЧП + Ам) / И","Ксф = ЧП / Выручка","Ксф = И / (ЧП + Ам)","Ксф = (ПДН − налог) / Активы"],a:0,e:"ЧП — чистая прибыль, Ам — амортизационные отчисления, И — потребность в инвестициях.",s:"Конспект; Крылов, формула 2.3"},
+{b:3,t:"b3d",q:"Что показывает коэффициент самофинансирования?",o:["в какой степени инвестиционные потребности могут быть удовлетворены за счёт собственных внутренних источников — чистой прибыли и амортизации","долю заёмного капитала в пассиве","сколько выручки приходится на рубль активов","долю прибыли от продаж в ПДН"],a:0,e:"Самофинансирование = финансирование из собственных внутренних источников: ЧП + амортизация.",s:"Конспект; Крылов, с. 23"},
+{b:3,t:"b3d",c:1,q:"Чистая прибыль — 330, амортизация — 70, потребность в инвестициях — 500 тыс. р. Ксф равен…",o:["0,8","0,66","1,25","0,14"],a:0,e:"(330 + 70) / 500 = 0,8 → внутренние источники покрывают 80 % инвестиционных потребностей.",s:"Формула — Крылов, 2.3"},
+{b:3,t:"b3d",q:"Рентабельность издержек (по конспекту) рассчитывается как…",o:["валовая прибыль / себестоимость проданной продукции × 100","прибыль от продаж / выручка × 100","прибыль до налогообложения / валюта баланса × 100","прибыль от продаж / (Сп + КР + УР) × 100"],a:0,e:"Показывает, сколько валовой прибыли приходится на 1 руб. себестоимости. Последний вариант — рентабельность производственной деятельности.",s:"Конспект, формулы рентабельности (1)–(4)"},
+{b:3,t:"b3d",q:"Что показывает рентабельность продаж?",o:["сколько прибыли от продаж получено с 1 руб. выручки","сколько валовой прибыли приходится на 1 руб. себестоимости","сколько прибыли приходится на 1 руб. капитала","сколько выручки даёт 1 руб. активов"],a:0,e:"Rпрод = Ппрод / Выручка × 100; характеризует эффективность предпринимательской деятельности.",s:"Конспект, формула (3)"},
+{b:3,t:"b3d",q:"Рентабельность капитала (по конспекту) определяется отношением…",o:["прибыли до налогообложения к валюте баланса","чистой прибыли к выручке","прибыли от продаж к себестоимости","валовой прибыли к собственному капиталу"],a:0,e:"Rк = Пд.нал / ВБ × 100 — сумма прибыли на 1 руб. капитала.",s:"Конспект, формула (4)"},
+{b:3,t:"b3d",c:1,q:"Валовая прибыль — 900, себестоимость проданной продукции — 3600 тыс. р. Рентабельность издержек равна…",o:["25 %","20 %","11,8 %","400 %"],a:0,e:"900 / 3600 × 100 = 25 %: на каждый рубль себестоимости — 25 копеек валовой прибыли.",s:"Формула — Конспект (1); данные — Крылов, табл. П.2"}
+);
+
+// БЛОК 4 — Имущество и капитал (40)
+Q.push(
+{b:4,t:"b4a",q:"Анализ имущественного положения организации предполагает изучение…",o:["изменений в составе и структуре, а также динамики имущества в учётной оценке","только стоимости основных средств","соотношения собственного и заёмного капитала","оборачиваемости дебиторской задолженности"],a:0,e:"Имущественное положение = состав + структура + динамика имущества (актива баланса).",s:"Конспект; Крылов, с. 24"},
+{b:4,t:"b4a",q:"Общей стоимости имущества предприятия в учётной оценке соответствует…",o:["итог актива бухгалтерского баланса (валюта баланса)","уставный капитал","сумма основных средств и НМА","чистые активы"],a:0,e:"Всё имущество = все активы = итог актива баланса.",s:"Конспект; Крылов, с. 24"},
+{b:4,t:"b4a",q:"С изучения чего начинается анализ имущества организации?",o:["объёма, состава, структуры и динамики имущества в разрезе внеоборотных и оборотных активов","соотношения собственного и заёмного капитала","долгосрочных и краткосрочных обязательств","реальных и финансовых вложений"],a:0,e:"Табл. 3.1 (Лекция 2, табл. 1): внеоборотные + оборотные = стоимость имущества (итог актива).",s:"Конспект; Крылов, табл. 3.1"},
+{b:4,t:"b4a",q:"Что из перечисленного — нематериальный элемент имущества предприятия?",o:["ноу-хау","сырьё","денежные средства","здание"],a:0,e:"Нематериальные элементы: репутация и круг клиентов, название и товарные знаки, навыки руководства, квалификация персонала, патенты, ноу-хау, авторские права, контракты. Материально-вещественные: земля, здания, машины, сырьё, полуфабрикаты, готовые изделия, денежные средства.",s:"Конспект, Лекция 2"},
+{b:4,t:"b4a",q:"К длительно мобилизованным внеоборотным активам (по схеме конспекта) относятся…",o:["основные фонды и нематериальные активы","капитальные вложения и долгосрочные финансовые вложения","сырьё и материалы","готовая продукция и дебиторская задолженность"],a:0,e:"Схема «Имущество организации»: ВнА → длительно мобилизованные (основные фонды, НМА) и временно мобилизованные (капитальные вложения, долгосрочные финансовые вложения).",s:"Конспект, схема имущества организации"},
+{b:4,t:"b4a",q:"Капитальные вложения и долгосрочные финансовые вложения на схеме имущества относятся к…",o:["временно мобилизованным внеоборотным активам","длительно мобилизованным внеоборотным активам","оборотным активам","нематериальным активам"],a:0,e:"Капвложения (строительство, монтаж оборудования) и ДФВ (акции, облигации, займы, депозиты) — временно мобилизованные.",s:"Конспект, схема имущества организации"},
+{b:4,t:"b4a",q:"Показатель динамики имущества рассчитывается как…",o:["валюта баланса на конец периода / валюта баланса на начало периода","оборотные активы / внеоборотные активы","выручка / активы","собственный капитал / валюта баланса"],a:0,e:"Значение больше 1 говорит о расширении масштабов хозяйственной деятельности и, как правило, оценивается позитивно.",s:"Крылов, табл. 3.3, с. 26–27"},
+{b:4,t:"b4a",c:1,q:"Валюта баланса: 2670 → 2950 тыс. р. Показатель динамики имущества равен…",o:["1,105","0,905","280","1,280"],a:0,e:"2950 / 2670 = 1,105 → имущество выросло на 10,5 %: масштабы деятельности расширяются.",s:"Крылов, табл. 5.5–5.6"},
+{b:4,t:"b4a",q:"Почему у финансовых коэффициентов имущественного положения нет универсальных рекомендуемых значений?",o:["они имеют отраслевую специфику","их слишком много","они не рассчитываются по отчётности","они всегда равны единице"],a:0,e:"Поэтому их анализируют в динамике, в сравнении с аналогичными предприятиями отрасли и со среднеотраслевыми показателями.",s:"Конспект; Крылов, с. 28–29"},
+{b:4,t:"b4a",q:"Какой из показателей рассчитывается делением на валюту баланса?",o:["доля реальных активов в имуществе","доля запасов в оборотных активах","доля основных средств во внеоборотных активах","доля дебиторской задолженности в оборотных активах"],a:0,e:"«…в имуществе» → знаменатель — валюта баланса; «…в оборотных активах» → оборотные активы; «…во внеоборотных» → внеоборотные.",s:"Крылов, табл. 3.3"},
+{b:4,t:"b4b",q:"Укажите рекомендуемое соотношение темпа роста оборотных активов (ТРоба) и темпа роста внеоборотных активов (ТРва).",o:["ТРоба > ТРва","ТРоба ≤ ТРва","ТРоба < ТРва"],a:0,fix:1,e:"Мобильная часть имущества должна расти быстрее.",s:"Конспект (Лекция 2, табл. 1); Крылов, формула 3.1; тест № 44"},
+{b:4,t:"b4b",q:"Что характеризует соотношение ТРоба > ТРва?",o:["тенденцию к ускорению оборачиваемости оборотных активов и условное высвобождение средств в наиболее мобильных формах","рост производственного потенциала","снижение ликвидности имущества","рост финансового риска"],a:0,e:"Высвобождаются денежные средства и краткосрочные финансовые вложения — самые мобильные формы.",s:"Конспект; Крылов, с. 25"},
+{b:4,t:"b4b",q:"Как оценивается рост доли оборотных активов и снижение доли внеоборотных активов в имуществе?",o:["положительно — повышается мобильность имущества","отрицательно — снижается производственный потенциал","отрицательно — растёт риск","нейтрально"],a:0,e:"Рост мобильности имущества в целом оценивается положительно. Но для промышленного предприятия преобладание ВнА нормально.",s:"Конспект; Крылов, с. 26"},
+{b:4,t:"b4b",c:1,q:"Внеоборотные активы: 1385 → 1510; оборотные: 1285 → 1440 тыс. р. Чему равен темп роста оборотных активов?",o:["112,1 %","109,0 %","110,5 %","12,1 %"],a:0,e:"1440 / 1285 × 100 = 112,1 %. ТРва = 1510 / 1385 = 109,0 % → ТРоба > ТРва выполняется, мобильность имущества повысилась. 12,1 % — это темп прироста.",s:"Крылов, табл. 5.5"},
+{b:4,t:"b4b",c:1,q:"Оборотные активы на конец года — 1440, валюта баланса — 2950 тыс. р. Доля оборотных активов в имуществе равна…",o:["0,488","0,512","0,481","0,953"],a:0,e:"1440 / 2950 = 0,488. На начало было 0,481 → доля выросла на 0,007.",s:"Крылов, табл. 5.6"},
+{b:4,t:"b4b",q:"Доля денежных средств и краткосрочных финансовых вложений в оборотных активах: чем выше значение, тем…",o:["выше степень ликвидности оборотных активов","ниже ликвидность оборотных активов","выше финансовый риск","выше доля запасов"],a:0,e:"Это наиболее мобильные активы.",s:"Конспект; Крылов, с. 28"},
+{b:4,t:"b4b",q:"Как обычно оценивается увеличение доли дебиторской задолженности в оборотных активах?",o:["негативно: всё большая доля оборотных активов временно отвлекается из оборота","позитивно: растут продажи","нейтрально","позитивно: растёт ликвидность"],a:0,e:"Средства «застревают» у покупателей и не участвуют в текущей деятельности.",s:"Конспект; Крылов, с. 28"},
+{b:4,t:"b4b",q:"О чём может говорить крайне низкая доля дебиторской задолженности в оборотных активах?",o:["о достаточно жёсткой кредитной политике, ведущей к снижению объёмов продаж","о высокой ликвидности без каких-либо минусов","о банкротстве организации","о росте производственного потенциала"],a:0,e:"Крайность в обе стороны плоха: слишком жёсткие условия оплаты отпугивают покупателей.",s:"Конспект; Крылов, с. 28"},
+{b:4,t:"b4b",q:"Что характеризуют реальные активы?",o:["экономический потенциал торгового предприятия","производственный потенциал промышленного предприятия","экономический потенциал организации сферы услуг"],a:1,fix:1,e:"Реальные активы = НМА (по остаточной) + ОС (по остаточной) + производственные запасы + незавершённое производство.",s:"Крылов, тест № 3; с. 25"},
+{b:4,t:"b4b",q:"Что НЕ входит в состав реальных активов?",o:["дебиторская задолженность","нематериальные активы (по остаточной стоимости)","основные средства (по остаточной стоимости)","затраты в незавершённом производстве"],a:0,e:"Реальные активы — то, что «работает» в производстве: НМА, ОС, производственные запасы, НЗП.",s:"Конспект; Крылов, с. 25"},
+{b:4,t:"b4b",q:"Как оцениваются опережающие темпы роста незавершённого производства?",o:["однозначно негативно — признак неритмичности производственного процесса","позитивно — рост объёмов производства","нейтрально","позитивно — рост производственного потенциала"],a:0,e:"Незавершёнка растёт быстрее остального → производство идёт рывками, средства замораживаются.",s:"Конспект; Крылов, с. 26"},
+{b:4,t:"b4b",q:"Как, как правило, оценивается уменьшение общей стоимости реальных активов?",o:["негативно — снижается производственный потенциал промышленного предприятия","позитивно — растёт мобильность имущества","нейтрально","позитивно — снижаются затраты"],a:0,e:"Снижение доли реальных активов в имуществе также обычно негативно — ухудшение структуры промышленного предприятия.",s:"Конспект; Крылов, с. 26"},
+{b:4,t:"b4c",q:"Как обычно оценивается рост доли результатов исследований и разработок во внеоборотных активах?",o:["позитивно — активизация инновационной деятельности","негативно — отвлечение средств","нейтрально","негативно — нулевая доходность"],a:0,e:"НИОКР → инновации → позитив.",s:"Конспект; Крылов, с. 28"},
+{b:4,t:"b4c",q:"Если наибольший удельный вес во внеоборотных активах составляют НМА и результаты исследований и разработок, стратегия развития организации…",o:["инновационная","производственная","финансово-инвестиционная","сбытовая"],a:0,e:"НМА + НИОКР → инновационная; ОС → производственная; ДФВ → финансово-инвестиционная.",s:"Конспект; Крылов, с. 29"},
+{b:4,t:"b4c",q:"Наибольший удельный вес основных средств во внеоборотных активах говорит о…",o:["производственной направленности стратегии","инновационной стратегии","финансово-инвестиционной стратегии","торговой стратегии"],a:0,e:"Основные средства = производство.",s:"Конспект; Крылов, с. 29"},
+{b:4,t:"b4c",q:"Если наибольший удельный вес во внеоборотных активах занимают долгосрочные финансовые вложения, стратегия, скорее всего…",o:["финансово-инвестиционная","производственная","инновационная","сбытовая"],a:0,e:"Вложения в чужие бизнесы и ценные бумаги → финансово-инвестиционный характер.",s:"Конспект; Крылов, с. 29"},
+{b:4,t:"b4c",q:"Как оценивается увеличение удельного веса долгосрочных финансовых вложений во внеоборотных активах?",o:["негативно: средства надолго отвлекаются из оборота, есть значительный риск → качество ВнА ухудшается","позитивно: растёт доход","нейтрально","позитивно: растёт мобильность имущества"],a:0,e:"Поэтому желательно ТРва ≥ ТРдфв.",s:"Конспект; Крылов, с. 30"},
+{b:4,t:"b4c",q:"Какое соотношение темпов роста всех внеоборотных активов (ТРва) и долгосрочных финансовых вложений (ТРдфв) желательно?",o:["ТРва ≥ ТРдфв","ТРва < ТРдфв","ТРдфв > 2 × ТРва","эти темпы не сравнивают"],a:0,e:"Тогда доля ДФВ во ВнА не растёт и качество ВнА не ухудшается. Правило: «рискованная часть растёт не быстрее целого».",s:"Конспект; Крылов, формула 3.2"},
+{b:4,t:"b4c",q:"Почему рост доли отложенных налоговых активов во внеоборотных активах оценивается негативно?",o:["ОНА — специфическая долгосрочная дебиторская задолженность с нулевой доходностью, чистая иммобилизация средств","ОНА увеличивают налог на прибыль","ОНА — это краткосрочные обязательства","ОНА снижают выручку"],a:0,e:"Желательно ТРва ≥ ТРона.",s:"Конспект; Крылов, с. 30"},
+{b:4,t:"b4c",q:"Какое соотношение темпов роста внеоборотных активов (ТРва) и отложенных налоговых активов (ТРона) желательно?",o:["ТРва ≥ ТРона","ТРона > ТРва","ТРва < ТРона","ТРона ≥ 2 × ТРва"],a:0,e:"Тогда доля ОНА во ВнА не увеличивается и качество внеоборотных активов не ухудшается.",s:"Конспект; Крылов, формула 3.3"},
+{b:4,t:"b4c",q:"Какое из соотношений темпов роста НЕ является желательным?",o:["ТРдфв > ТРва","ТРоба > ТРва","ТРвр > ТРсп","ТРпр ≥ ТРпдн"],a:0,e:"Все желательные соотношения — одно правило: хорошее (мобильное, основное) растёт быстрее целого, плохое (рискованное, иммобилизованное) — не быстрее. ДФВ быстрее ВнА — плохо.",s:"Сводка формул 2.1, 2.2, 3.1–3.3 (Крылов)"},
+{b:4,t:"b4c",c:1,q:"Долгосрочные финансовые вложения: 95 → 110 (115,8 %); внеоборотные активы: 1385 → 1510 (109,0 %). Как это оценить?",o:["негативно: ТРдфв > ТРва, доля ДФВ растёт, качество ВнА снижается","позитивно: вложения растут","нейтрально","позитивно: ВнА растут"],a:0,e:"Доля ДФВ во ВнА: 6,9 % → 7,3 %. У Крылова это прямо названо негативным явлением.",s:"Крылов, табл. 5.7, с. 115–116"},
+{b:4,t:"b4c",q:"Чем завершается анализ имущественного положения организации?",o:["обобщающим выводом о рациональности структуры имущества (наиболее / в целом / наименее рациональная), причинах её изменений и связи с инвестиционной политикой","расчётом чистой прибыли","составлением прогнозного баланса","расчётом коэффициента самофинансирования"],a:0,e:"Три градации рациональности — хороший материал для открытого вопроса.",s:"Конспект; Крылов, с. 30"},
+{b:4,t:"b4d",k:1,fix:1,q:"Какой коэффициент представляет собой отношение собственного капитала к привлечённому?",o:["финансирования","независимости","инвестирования","финансовой устойчивости"],a:0,e:"Кфин = СК / ЗК. Не путай: независимости = СК / валюта баланса; инвестирования = СК / внеоборотные активы; финансовой устойчивости = (СК + долгосрочные обязательства) / валюта баланса.",s:"Банк тестов к контрольной; близкие коэффициенты — Крылов, табл. 3.10–3.11"},
+{b:4,t:"b4d",v:1,q:"Как называется отношение заёмного капитала к собственному?",o:["коэффициент задолженности (соотношения заёмных и собственных средств)","коэффициент финансирования","коэффициент финансовой независимости","коэффициент инвестирования"],a:0,e:"ЗК / СК ≤ 1 (Крылов). Это «перевёрнутый» коэффициент финансирования.",s:"Крылов, табл. 3.10, с. 38"},
+{b:4,t:"b4d",v:1,q:"Отношение собственного капитала к валюте баланса — это…",o:["коэффициент финансовой независимости (автономии); рекомендуемое значение ≥ 0,5","коэффициент финансирования","коэффициент инвестирования","коэффициент задолженности"],a:0,e:"Показывает долю собственных источников в капитале.",s:"Крылов, табл. 3.10, с. 38"},
+{b:4,t:"b4d",v:1,q:"Отношение собственного капитала к внеоборотным активам — это…",o:["коэффициент инвестирования (≥ 1)","коэффициент финансовой независимости","коэффициент финансирования","коэффициент мобильности"],a:0,e:"Показывает, в какой степени внеоборотные активы профинансированы собственным капиталом.",s:"Крылов, табл. 3.11, с. 42"},
+{b:4,t:"b4d",v:1,c:1,q:"Собственный капитал — 2300, заёмный — 650 тыс. р. Коэффициент финансирования равен…",o:["3,54","0,28","0,78","1,28"],a:0,e:"2300 / 650 = 3,54 → на рубль заёмных средств приходится 3,54 руб. собственных. 0,28 — это коэффициент задолженности (650 / 2300), 0,78 — финансовой независимости (2300 / 2950).",s:"Данные — Крылов, табл. 5.9"},
+{b:4,t:"b4d",k:1,fix:1,q:"Если темпы роста выручки меньше темпов роста активов, это свидетельствует о…",o:["повышении отдачи активов","повышении финансовой устойчивости","снижении отдачи активов","снижении финансовой устойчивости"],a:2,e:"Отдача (оборачиваемость) активов = выручка / активы. Знаменатель растёт быстрее числителя → на каждый рубль активов приходится меньше выручки.",s:"Банк тестов к контрольной; «показатель отдачи активов» — Крылов, с. 50"},
+{b:4,t:"b4d",v:1,c:1,q:"Выручка выросла на 20 %, активы — на 10 %. Как изменилась отдача активов?",o:["повысилась","снизилась","не изменилась","по этим данным сказать нельзя"],a:0,e:"1,20 / 1,10 ≈ 1,09 → отдача выросла примерно на 9 %.",s:"Вариация вопроса из контрольной"}
+);
+
+// Открытые вопросы — карточки с проверкой по ключевым словам
+const CARDS = [
+{b:1,q:"Дайте определение финансового анализа.",a:"Составление на основе бухгалтерской, финансовой, статистической и другой отчётности аналитического обоснования управленческих решений, направленных на достижение поставленных целей.",k:[["отчетн"],["обоснован"],["решени"],["цел"]],s:"Конспект"},
+{b:1,st:1,q:"Назовите предмет финансового анализа.",a:"Финансовые результаты и финансовое состояние организации (предприятия).",k:[["результат"],["состояни"]],s:"Конспект; Крылов, с. 5 · было в контрольной"},
+{b:1,q:"Назовите объект финансового анализа.",a:"Финансовые аспекты хозяйственной деятельности организации.",k:[["аспект"],["хозяйств"]],s:"Конспект; Крылов, с. 6"},
+{b:1,q:"Что является информационной базой финансового анализа?",a:"Данные бухгалтерского учёта и финансовой отчётности организации.",k:[["учет"],["отчетн"]],s:"Конспект; Крылов, с. 6"},
+{b:1,st:1,q:"Назовите цель внешнего финансового анализа.",a:"Оценка (внешнего) рейтинга организации, её финансовой устойчивости, платёжеспособности и надёжности, т. е. уменьшение степени риска взаимодействия данной организации и её контрагентов.",k:[["рейтинг"],["устойчив"],["платеж"],["надежн"],["риск"],["контрагент"]],s:"Конспект; Крылов, с. 6 · было в контрольной"},
+{b:1,st:1,q:"Назовите цель внутреннего финансового анализа.",a:"Рассмотреть состояние финансовых ресурсов организации, дать внутреннюю оценку её рейтинга и выявить финансовые резервы — в конечном итоге обеспечить эффективное управление ликвидностью.",k:[["ресурс"],["рейтинг"],["резерв"],["ликвидн"]],s:"Конспект; Крылов, с. 6 · было в контрольной"},
+{b:1,q:"Что понимается под финансовым состоянием организации? Какова его ключевая характеристика?",a:"Способность организации финансировать свою деятельность. Характеризуется обеспеченностью финансовыми ресурсами, целесообразностью их размещения, интенсивностью и эффективностью использования. Ключевая характеристика — платёжеспособность.",k:[["финансир"],["обеспеченн"],["размещ"],["эффективн","интенсивн"],["платеж"]],s:"Конспект; Крылов, с. 5"},
+{b:1,q:"Какие показатели относятся к финансовым результатам организации? (7 штук)",a:"Валовая прибыль, прибыль от продаж, прибыль от прочей деятельности, прибыль до налогообложения, чистая прибыль, совокупный финансовый результат, нераспределённая прибыль.",k:[["валов"],["продаж"],["проч"],["налогообл"],["чист"],["совокуп"],["нераспредел"]],s:"Конспект; Крылов, с. 5"},
+{b:1,q:"Перечислите основные функции финансового анализа (4).",a:"1) объективная оценка финансового состояния; 2) выявление факторов и причин достигнутого состояния; 3) подготовка и обоснование финансовых решений; 4) выявление и мобилизация резервов улучшения финансового состояния.",k:[["оценк"],["фактор","причин"],["решени"],["резерв"]],s:"Конспект"},
+{b:1,q:"В каких случаях применяется финансовый анализ в организациях? (4)",a:"При выявлении проблем в текущей и инвестиционной деятельности; как инструмент прогнозирования будущих финансовых условий и результатов; при управлении хозяйствующим субъектом; при оценке вариантов инвестирования капитала.",k:[["проблем"],["прогноз"],["управлен"],["инвестир"]],s:"Конспект"},
+{b:1,q:"Назовите основные категории метода финансового анализа и его принципы.",a:"Категории: показатели, факторы, резервы («ПФР»). Принципы: единство анализа и синтеза, изучение явлений во взаимосвязи, в развитии от простого к сложному, в переходе от количества к качественным изменениям, в сравнении.",k:[["показател"],["фактор"],["резерв"],["синтез"],["взаимосвяз"]],s:"Конспект"},
+{b:1,q:"Кто является пользователями информации внешнего и внутреннего финансового анализа?",a:"Внешний: 1) пользователи с прямым финансовым интересом — кредиторы и инвесторы; 2) с непрямым интересом — налоговые и финансовые органы, деловые партнёры, работники и профсоюзы, местные органы власти, регуляторы, покупатели и общество, консультанты, статистические органы. Внутренний: администрация (топ-менеджеры) и собственники.",k:[["прям"],["кредитор"],["инвестор"],["налог"],["собственник"],["администрац","менеджер","руковод"]],s:"Крылов, с. 6; Конспект, таблица пользователей"},
+{b:1,q:"Назовите формы финансовой отчётности по РСБУ (5).",a:"Бухгалтерский баланс; отчёт о финансовых результатах; отчёт об изменениях капитала; отчёт о движении денежных средств; пояснения.",k:[["баланс"],["финансовых результат"],["капитал"],["денежн"],["пояснен"]],s:"Конспект, таблица форм отчётности"},
+{b:2,q:"Перечислите этапы финансового анализа.",a:"I — предварительный финансовый анализ; II — углублённый финансовый анализ; III — обобщение результатов, переходящее в разработку рекомендаций; IV — прогнозирование финансовых результатов и финансового состояния.",k:[["предварит"],["углубл"],["обобщ","рекоменд"],["прогноз"]],s:"Конспект; Крылов, с. 7"},
+{b:2,q:"Какие подэтапы выделяют в предварительном финансовом анализе?",a:"1) подготовительный этап (проверка отчётности, аналитический баланс); 2) предварительный обзор финансовой отчётности (аудиторское заключение, пояснительная записка); 3) расчёт и анализ важнейших аналитических показателей.",k:[["подготов"],["обзор"],["расчет","показател"]],s:"Крылов, с. 7–8"},
+{b:2,q:"Назовите составляющие углублённого финансового анализа (3 группы).",a:"1) Анализ финансовых результатов (ПДН, прибыль от продаж и прочей деятельности; ЧП и СФР; резервы). 2) Анализ финансового состояния (имущественное положение, финансовая устойчивость, платёжеспособность и ликвидность, деловая активность, рейтинговая оценка, несостоятельность, резервы). 3) Специальные разделы (инфляция, консолидированная и сегментная отчётность, переход к МСФО, прогнозный анализ).",k:[["результат"],["состояни"],["специальн"]],s:"Конспект; Крылов, с. 9"},
+{b:2,q:"Перечислите основные методические приёмы финансового анализа (10).",a:"Способы абсолютных, относительных и средних величин; сравнение; группировка; графический; табличный; балансовый способ; способ цепных подстановок; способ абсолютных разниц.",k:[["абсолютн"],["относительн"],["средн"],["сравнен"],["группиров"],["график","графич"],["таблиц","таблич"],["баланс"],["цепн"],["разниц"]],s:"Крылов, с. 10; Конспект"},
+{b:2,q:"Какие виды относительных величин применяются в ФА и какие виды анализа на них основаны?",a:"Относительные величины структуры → вертикальный (структурный) анализ; относительные величины динамики (темпы роста: базисные и цепные) → горизонтальный и трендовый анализ; финансовые коэффициенты → анализ финансовых коэффициентов.",k:[["структур"],["динамик"],["коэффициент"],["вертикальн"],["горизонтальн"],["трендов"]],s:"Конспект; Крылов, с. 10–11"},
+{b:2,q:"Чем горизонтальный анализ отличается от трендового?",a:"Горизонтальный — сравнение каждой позиции отчётности с предыдущим периодом. Трендовый — сравнение с рядом предшествующих периодов и определение тренда (основной тенденции, очищенной от случайностей); на нём строится прогнозный анализ.",k:[["предыдущ"],["ряд"],["тенденц","тренд"],["прогноз","перспектив"]],s:"Конспект; Крылов, с. 11"},
+{b:2,q:"Перечислите основные виды сравнений в финансовом анализе (6).",a:"План — факт (при внутреннем анализе); факт — нормативы (рекомендуемые значения); факт — прошлые периоды; межхозяйственные сравнения; со средними данными (по региону, отрасли); результаты до и после изменения фактора.",k:[["план"],["норматив","рекомендуем"],["прошл"],["межхозяйств"],["средн","отрасл"],["фактор"]],s:"Конспект; Крылов, с. 12"},
+{b:2,q:"Какие бывают группировки и какие чаще всего используются в ФА?",a:"По сложности: простые (один признак) и комбинированные (два и более). По задачам: типологические, структурные, аналитические. В ФА чаще всего — простые структурные и аналитические.",k:[["прост"],["комбинир"],["типологич"],["структурн"],["аналитич"]],s:"Конспект; Крылов, с. 12–13"},
+{b:2,q:"Какие три значения имеют графики в финансовом анализе?",a:"Иллюстративное (доходчивость), аналитическое (видны закономерности, тенденции и связи), методологическое (схемы внутреннего строения показателя и связей результата с факторами).",k:[["иллюстрат"],["аналитич"],["методолог"]],s:"Конспект; Крылов, с. 13"},
+{b:2,q:"В чём суть способа цепных подстановок?",a:"Применяется при строгой функциональной зависимости. Базисная величина одного фактора последовательно заменяется фактической, остальные остаются неизменными. Число расчётов на единицу больше числа факторов. Влияние фактора = последующая подстановка − предыдущая.",k:[["функциональн"],["замен","подстан"],["базисн"],["фактическ"],["вычит","предыдущ"],["единиц"]],s:"Конспект; Крылов, с. 14"},
+{b:3,q:"Как анализируется прибыль до налогообложения и какое соотношение темпов желательно?",a:"Изучают объём, состав, структуру и динамику ПДН в разрезе источников: прибыли от продаж и прибыли от прочей деятельности. Качество ПДН определяется долей прибыли от продаж. Желательно ТРпр ≥ ТРпдн — тогда доля прибыли от продаж не снижается.",k:[["продаж"],["проч"],["структур","удельн","дол"],["качеств"],["трпр","темп"]],s:"Конспект; Крылов, с. 17–18"},
+{b:3,q:"Сформулируйте условие оптимизации прибыли от продаж.",a:"ТРвр > ТРсп: темп роста выручки больше темпа роста полной себестоимости реализованной продукции (себестоимость продаж + коммерческие + управленческие расходы). Это снижает долю полной себестоимости в выручке и повышает эффективность текущей деятельности.",k:[["выручк"],["себестоим"],["коммерч"],["управлен"],["эффективн"]],s:"Конспект; Крылов, с. 19"},
+{b:3,q:"Из каких элементов складываются чистая прибыль и совокупный финансовый результат?",a:"ЧП = прибыль до налогообложения − текущий налог на прибыль − изменение отложенных налоговых обязательств (ОНО) + изменение отложенных налоговых активов (ОНА) − прочее. СФР = ЧП + результат от переоценки внеоборотных активов, не включаемый в ЧП + результат от прочих операций, не включаемый в ЧП.",k:[["налогообл"],["текущ"],["отложен"],["переоценк"],["прочих операц"]],s:"Конспект, табл. 2.4–2.5; Крылов, с. 20–22"},
+{b:3,q:"Назовите основные направления поиска резервов повышения финансовых результатов (5).",a:"1) увеличение выручки (рост физического объёма, изменение структуры продаж, повышение цен); 2) снижение затрат (производительность труда, материалоёмкость, непроизводительные выплаты, брак); 3) увеличение доходов от прочей деятельности; 4) снижение расходов, связанных с прочей деятельностью; 5) оптимизация налогообложения.",k:[["выручк"],["затрат"],["доход"],["расход"],["налогообл"]],s:"Конспект; Крылов, с. 22–23"},
+{b:3,q:"Коэффициент самофинансирования: формула и смысл.",a:"Ксф = (ЧП + Ам) / И, где ЧП — чистая прибыль, Ам — амортизационные отчисления, И — потребность в инвестициях. Показывает, в какой степени инвестиционные потребности могут быть удовлетворены за счёт собственных внутренних источников.",k:[["чист"],["амортиз"],["инвестиц"],["внутрен","собствен"]],s:"Конспект; Крылов, с. 23"},
+{b:4,q:"Что такое реальные активы, из чего они состоят и что характеризуют?",a:"Нематериальные активы и основные средства (по остаточной стоимости), производственные запасы (сырьё, материалы), затраты в незавершённом производстве. Характеризуют производственный потенциал промышленного предприятия.",k:[["нематериал"],["основн"],["запас"],["незаверш"],["потенциал"]],s:"Конспект; Крылов, с. 25"},
+{b:4,q:"Какие соотношения темпов роста желательны при анализе имущества и почему?",a:"ТРоба > ТРва (оборотные активы растут быстрее внеоборотных) — ускорение оборачиваемости оборотных активов, высвобождение средств в мобильных формах. ТРва ≥ ТРдфв — ДФВ отвлекают средства из оборота надолго и рискованны. ТРва ≥ ТРона — ОНА имеют нулевую доходность (иммобилизация средств).",k:[["оборотн"],["внеоборотн"],["вложен","дфв"],["отложен","она"],["оборачиваем","мобильн"],["риск"],["доходн","иммобилиз"]],s:"Конспект; Крылов, с. 25, 30"},
+{b:4,q:"Как по структуре внеоборотных активов определить стратегию развития организации?",a:"Наибольший удельный вес НМА и результатов исследований и разработок → инновационная стратегия; основных средств → производственная направленность; долгосрочных финансовых вложений → финансово-инвестиционная.",k:[["инновац"],["производств"],["инвестиц"]],s:"Конспект; Крылов, с. 29"},
+{b:1,st:1,q:"Назовите цель финансового анализа.",a:"Цель внешнего ФА — оценка (внешнего) рейтинга организации, её финансовой устойчивости, платёжеспособности и надёжности, т. е. уменьшение риска взаимодействия с ней контрагентов. Цель внутреннего ФА — рассмотреть состояние финансовых ресурсов, дать внутреннюю оценку рейтинга и выявить финансовые резервы, в итоге — обеспечить эффективное управление ликвидностью.",k:[["внешн"],["рейтинг"],["устойчив"],["платеж"],["риск"],["внутренн"],["резерв"],["ликвидн"]],s:"Вопрос контрольной; Конспект; Крылов, с. 6"},
+{b:3,q:"Сформулируйте «золотое правило экономики» предприятия.",a:"Тп > Тв > Та > 100 %: темп роста прибыли больше темпа роста выручки (рентабельность продаж растёт), темп роста выручки больше темпа роста активов (отдача активов растёт), а активы растут — больше 100 % (масштабы деятельности расширяются).",k:[["прибыл"],["выручк"],["актив"],["100"],["рентабельн"],["отдач","оборачиваем"]],s:"Банк тестов к контрольной"},
+{b:3,q:"Из чего складывается прибыль до налогообложения? Как оценить её качество?",a:"ПДН = прибыль от продаж + прибыль (убыток) от прочей деятельности (доходы от участия + проценты к получению − проценты к уплате + прочие доходы − прочие расходы). Качество определяется долей прибыли от продаж: желательно ТРпр ≥ ТРпдн.",k:[["продаж"],["проч"],["процент"],["качеств"],["дол","удельн"]],s:"Конспект, табл. 2.1; Крылов, с. 17–18"}
+];
+
+// Банк «как на контрольной»: короткие формулировки в стиле банков тестов, из которых взяты вопросы контрольной
+// g: t1 — теория и методы (как «1 тест»), t2 — финрезультаты, темпы, имущество (как «2 тест»)
+// kt: def — определение/выбор термина, tf — «верно ли», tr — темпы роста, m — несколько ответов
+const KQ = [
+// ---------- ТЕСТ 1: теория и методы ----------
+{g:"t1",kt:"def",k:1,q:"Закрытая для посторонних лиц, строго засекреченная отчётность, содержащая сведения о себестоимости отдельных видов продукции, выпускаемой предприятием, — это…",o:["финансовая отчётность","управленческая отчётность","бухгалтерская отчётность"],a:1,e:"Закрытая, для руководства → управленческая. Финансовая и бухгалтерская — публичные.",s:"Вопрос контрольной"},
+{g:"t1",kt:"def",q:"Публичная отчётность, которая публикуется в печати для акционеров и других внешних пользователей, — это…",o:["финансовая отчётность","управленческая отчётность","налоговая отчётность","внутренняя отчётность о себестоимости"],a:0,e:"Публичная → финансовая. Пара к вопросу про засекреченную (управленческую) отчётность.",s:"Банк тестов; Конспект — формы финансовой отчётности"},
+{g:"t1",kt:"def",k:1,q:"Сравнение каждой позиции отчётности с предыдущим периодом — это…",o:["анализ финансовых коэффициентов","трендовый анализ","вертикальный анализ","горизонтальный анализ","сравнительный анализ"],a:3,e:"С предыдущим периодом — горизонтальный; с рядом периодов + тренд — трендовый.",s:"Вопрос контрольной; Крылов, с. 11"},
+{g:"t1",kt:"def",q:"Определение структуры итоговых финансовых показателей с выявлением влияния каждой позиции отчётности на результат в целом — это…",o:["вертикальный анализ","горизонтальный анализ","трендовый анализ","сравнительный анализ","факторный анализ"],a:0,e:"«Структура» → вертикальный (структурный) анализ.",s:"Банк тестов; Крылов, с. 11"},
+{g:"t1",kt:"def",q:"Сравнение каждой позиции отчётности с рядом предшествующих периодов и определение тренда — это…",o:["горизонтальный анализ","вертикальный анализ","трендовый анализ","анализ финансовых коэффициентов","сравнительный анализ"],a:2,e:"Ряд периодов + основная тенденция → трендовый анализ; на нём строят прогноз.",s:"Крылов, с. 11"},
+{g:"t1",kt:"def",q:"На расчёте относительных отклонений показателей за ряд лет от уровня базисного года базируется…",o:["горизонтальный анализ","трендовый анализ","вертикальный анализ","факторный анализ"],a:1,e:"«За ряд лет» → трендовый. Относительные отклонения от базисного года — это базисные темпы роста.",s:"Банк тестов; Крылов, с. 11"},
+{g:"t1",kt:"def",k:1,q:"Внутренний и внешний анализ финансово-хозяйственной деятельности предприятия, осуществляемый на основании данных публичной отчётности и проводимый как внутри, так и за пределами предприятия заинтересованными лицами, — это…",o:["управленческий анализ","финансовый анализ","статистический анализ","анализ движения материальных ценностей на предприятии"],a:1,e:"И внешний, и внутренний, по публичной отчётности → финансовый анализ.",s:"Вопрос контрольной; Крылов, с. 6"},
+{g:"t1",kt:"def",q:"Анализ, который проводится только внутри предприятия для нужд руководства с использованием всей, в том числе закрытой, информации, — это…",o:["финансовый анализ","управленческий анализ","внешний анализ","статистический анализ"],a:1,e:"Только внутри + закрытая информация → управленческий анализ. Финансовый может быть и внешним.",s:"Банк тестов"},
+{g:"t1",kt:"def",k:1,q:"Выявление относительных величин, при исчислении которых одну из величин принимают за единицу, а другую выражают как отношение к единице, происходит при помощи…",o:["сравнительного анализа","вертикального анализа","анализа финансовых коэффициентов","трендового анализа","факторного анализа"],a:2,e:"База = 1 → коэффициент. Относительные величины выражают в коэффициентах (база 1) или процентах (база 100).",s:"Вопрос контрольной; Крылов, с. 10"},
+{g:"t1",kt:"def",q:"Расчёт отношений между отдельными позициями одного отчёта или позициями разных форм отчётности — это…",o:["анализ относительных показателей (финансовых коэффициентов)","горизонтальный анализ","трендовый анализ","балансовый способ"],a:0,e:"Финансовые коэффициенты — отношения показателей финансовой отчётности.",s:"Крылов, с. 11"},
+{g:"t1",kt:"def",k:1,q:"Какой вид сравнительного анализа аудитор применяет при определении эффективности использования производственной мощности предприятия, ресурсов, финансовой устойчивости и платёжеспособности предприятия?",o:["сравнение текущих данных предприятия со среднеотраслевыми данными","сравнение фактических данных клиента с расчётами самого аудитора","сравнение текущих данных с нормативными значениями","сравнение текущих данных с данными бизнес-плана","сравнение текущих данных с данными предыдущих периодов"],a:2,e:"Эффективность, устойчивость, платёжеспособность оценивают по нормативам (рекомендуемым значениям).",s:"Вопрос контрольной; Конспект — виды сравнений"},
+{g:"t1",kt:"def",q:"Сравнение показателей организации с показателями конкурентов — это…",o:["межхозяйственное сравнение","горизонтальный анализ","трендовый анализ","вертикальный анализ"],a:0,e:"Сравнение с другими хозяйствами → межхозяйственное. Одно из 6 видов сравнений.",s:"Конспект; Крылов, с. 12"},
+{g:"t1",kt:"def",q:"Сопоставление плановых и фактических показателей применяется при…",o:["внутреннем финансовом анализе","внешнем финансовом анализе","аудите публичной отчётности","налоговом контроле"],a:0,e:"Планы есть только у самой организации.",s:"Конспект; Крылов, с. 12"},
+{g:"t1",kt:"def",q:"Анализ влияния отдельных факторов на результативный показатель — это…",o:["факторный анализ","вертикальный анализ","горизонтальный анализ","трендовый анализ"],a:0,e:"Факторный анализ: способы цепных подстановок, абсолютных разниц, балансовый.",s:"Крылов, с. 14–15"},
+{g:"t1",kt:"def",q:"Способ цепных подстановок применяется, если между результативным показателем и факторами существует…",o:["строгая функциональная зависимость","вероятностная (стохастическая) связь","любая связь","связь отсутствует"],a:0,e:"Аддитивная, мультипликативная, кратная или смешанная модель.",s:"Крылов, с. 14"},
+{g:"t1",kt:"def",k:1,q:"Какой коэффициент представляет собой отношение собственного капитала к привлечённому?",o:["финансирования","независимости","инвестирования","финансовой устойчивости"],a:0,e:"Кфин = СК / ЗК.",s:"Вопрос контрольной"},
+{g:"t1",kt:"def",q:"Какой коэффициент определяется отношением привлечённого (заёмного) капитала к собственному?",o:["соотношения заёмных и собственных средств (задолженности)","финансирования","финансовой независимости","инвестирования"],a:0,e:"ЗК / СК — «перевёрнутый» коэффициент финансирования; рекомендуемое значение ≤ 1.",s:"Банк тестов; Крылов, табл. 3.10"},
+{g:"t1",kt:"def",q:"Удельный вес собственного капитала в валюте баланса — это коэффициент…",o:["финансовой автономии (независимости)","финансирования","инвестирования","маневренности"],a:0,e:"СК / ВБ ≥ 0,5.",s:"Банк тестов; Крылов, табл. 3.10"},
+{g:"t1",kt:"def",q:"Отношение собственного капитала к внеоборотным активам — это коэффициент…",o:["инвестирования","финансирования","автономии","мобильности"],a:0,e:"СК / ВнА ≥ 1: внеоборотные активы покрыты собственным капиталом.",s:"Крылов, табл. 3.11"},
+{g:"t1",kt:"def",q:"Основной источник информации для финансового анализа — это…",o:["бухгалтерская (финансовая) отчётность","показатели конкурентов","данные о движении персонала","статистическая отчётность отрасли"],a:0,e:"Информационная база ФА = данные бухучёта и финансовой отчётности.",s:"Банк тестов; Конспект"},
+{g:"t1",kt:"def",k:1,q:"Предмет финансового анализа — это…",o:["финансовые результаты и финансовое состояние организации","финансовые аспекты хозяйственной деятельности","данные бухгалтерской отчётности","производственный потенциал предприятия"],a:0,e:"Предмет — результаты + состояние; объект — финансовые аспекты; инфобаза — отчётность.",s:"Вопрос контрольной (открытый); Крылов, с. 5"},
+{g:"t1",kt:"def",q:"Объект финансового анализа — это…",o:["финансовые аспекты хозяйственной деятельности организации","производственный потенциал","конкурентоспособность продукции","численность персонала"],a:0,e:"Не путать с предметом (финрезультаты и финсостояние).",s:"Банк тестов; Крылов, с. 6"},
+{g:"t1",kt:"def",k:1,q:"Цель внешнего финансового анализа — это…",o:["оценка рейтинга, финансовой устойчивости, платёжеспособности и надёжности организации — уменьшение риска для контрагентов","выявление финансовых резервов и управление ликвидностью","оценка производственной мощности","расчёт налоговой базы"],a:0,e:"Внешний — риск для контрагентов; внутренний — резервы и ликвидность.",s:"Вопрос контрольной (открытый); Крылов, с. 6"},
+{g:"t1",kt:"def",q:"Задача анализа финансового состояния — это…",o:["определение имущества","определение прибыли от продаж","определение финансовой устойчивости и платёжеспособности"],a:2,e:"Финансовое состояние — способность финансировать деятельность; его ключевая характеристика — платёжеспособность.",s:"Банк тестов; Крылов, с. 5"},
+{g:"t1",kt:"def",q:"Ключевая характеристика финансового состояния организации — …",o:["платёжеспособность","рентабельность","выручка","численность персонала"],a:0,e:"Финансовое состояние — конечный результат всей хоз. деятельности; ключевая характеристика — платёжеспособность.",s:"Крылов, с. 5"},
+{g:"t1",kt:"def",q:"В финансовом анализе используются измерители…",o:["преимущественно натуральные","преимущественно стоимостные","трудовые"],a:1,e:"ФА работает с данными бухгалтерской отчётности, а они в денежной (стоимостной) оценке.",s:"Банк тестов"},
+{g:"t1",kt:"def",q:"Основными категориями метода финансового анализа являются…",o:["показатели, факторы, резервы","активы, пассивы, капитал","доходы, расходы, прибыль","план, факт, норматив"],a:0,e:"ПФР.",s:"Конспект"},
+{g:"t1",kt:"def",q:"Первый этап финансового анализа — это…",o:["предварительный анализ","углублённый анализ","обобщение результатов","прогнозирование"],a:0,e:"Предварительный → углублённый → обобщение и рекомендации → прогнозирование.",s:"Конспект; Крылов, с. 7"},
+{g:"t1",kt:"m",q:"По степени детализации выделяют следующие методики финансового анализа (выберите все верные):",o:["экспресс-анализ","детализированный анализ","ретроспективный анализ"],a:[0,1],e:"Экспресс-анализ ≈ предварительный, детализированный ≈ углублённый (у Крылова). Ретроспективный — это деление по времени, а не по детализации.",s:"Банк тестов; Крылов, с. 7–9; Конспект, рис. 1.1"},
+{g:"t1",kt:"m",q:"Потребителями информации о финансовом состоянии являются (выберите все верные):",o:["акционеры","кредитные организации","налоговые инспекции","поставщики"],a:[0,1,2,3],e:"Все перечисленные: прямой интерес — акционеры (инвесторы), банки; непрямой — налоговые, поставщики.",s:"Банк тестов; Крылов, с. 6; Конспект — таблица пользователей"},
+{g:"t1",kt:"m",q:"К пользователям с прямым финансовым интересом относятся (выберите все верные):",o:["кредиторы","инвесторы","налоговые органы","работники и профсоюзы"],a:[0,1],e:"Прямой интерес — у тех, кто вкладывает деньги: кредиторы и инвесторы.",s:"Крылов, с. 6"},
+{g:"t1",kt:"m",q:"К основным функциям финансового анализа относятся (выберите все верные):",o:["объективная оценка финансового состояния","выявление факторов и причин достигнутого состояния","подготовка и обоснование финансовых решений","выявление и мобилизация резервов","ведение бухгалтерского учёта"],a:[0,1,2,3],e:"Оценка → причины → решения → резервы.",s:"Конспект"},
+{g:"t1",kt:"m",q:"К относительным величинам, наиболее применяемым в финансовом анализе, относятся (выберите все верные):",o:["относительные величины структуры","относительные величины динамики","финансовые коэффициенты","средние хронологические величины"],a:[0,1,2],e:"Средние — отдельный способ (способ средних величин).",s:"Конспект; Крылов, с. 10"},
+{g:"t1",kt:"tf",q:"Верно ли утверждение? Трендовый анализ используется для прогнозирования значений показателей.",o:["да","нет"],a:0,e:"С помощью тренда формируются возможные значения показателей в будущем.",s:"Крылов, с. 11"},
+{g:"t1",kt:"tf",q:"Верно ли утверждение? Число расчётов в способе цепных подстановок на единицу больше числа факторов.",o:["да","нет"],a:0,e:"Модель y = a × b × c → 4 подстановки.",s:"Крылов, с. 14"},
+{g:"t1",kt:"tf",q:"Верно ли утверждение? Сопоставление плановых и фактических показателей возможно при внешнем финансовом анализе.",o:["да","нет"],a:1,e:"Только при внутреннем: у внешнего аналитика нет планов.",s:"Крылов, с. 12"},
+{g:"t1",kt:"tf",q:"Верно ли утверждение? Цепные темпы роста рассчитываются делением каждого уровня ряда на предыдущий.",o:["да","нет"],a:0,e:"Цепные — к предыдущему; базисные — к одному базисному периоду.",s:"Крылов, с. 11"},
+
+// ---------- ТЕСТ 2: финансовые результаты, темпы, имущество ----------
+{g:"t2",kt:"def",k:1,q:"Конечный финансовый результат деятельности предприятия отражает…",o:["валовой доход","прибыль (убыток) от продаж","прибыль до налогообложения","чистая нераспределённая прибыль"],a:3,e:"Конечный — после всех доходов, расходов и налога.",s:"Вопрос контрольной"},
+{g:"t2",kt:"tf",k:1,q:"Верно ли данное утверждение? Любое изменение выручки от реализации продукции порождает ещё более сильное изменение прибыли от продаж.",o:["да","нет"],a:0,e:"Эффект операционного рычага: из-за условно-постоянных расходов прибыль меняется сильнее выручки.",s:"Вопрос контрольной"},
+{g:"t2",kt:"tf",k:1,q:"Верно ли утверждение? Прибыль от продаж определяется вычитанием из валовой прибыли коммерческих и управленческих расходов.",o:["да","нет"],a:0,e:"900 − 157 − 318 = 425 (пример Крылова).",s:"Вопрос контрольной; Крылов, табл. П.2"},
+{g:"t2",kt:"def",k:1,q:"Вертикальный анализ бухгалтерского баланса проводится на основе…",o:["изменения абсолютной величины показателей","структуры активов и пассивов баланса","темпов роста (снижения) показателей"],a:1,e:"Вертикальный = структура.",s:"Вопрос контрольной"},
+{g:"t2",kt:"m",q:"Горизонтальный анализ бухгалтерского баланса проводится на основе (выберите все верные):",o:["изменения абсолютной величины показателей","структуры активов и пассивов баланса","темпов роста (снижения) показателей"],a:[0,2],e:"Горизонтальный = динамика: абсолютные изменения и темпы роста. Структура — вертикальный.",s:"Банк тестов; Крылов, с. 11"},
+{g:"t2",kt:"tr",k:1,q:"Если темпы роста выручки меньше темпов роста активов, это свидетельствует о…",o:["повышении отдачи активов","повышении финансовой устойчивости","снижении отдачи активов","снижении финансовой устойчивости"],a:2,e:"Отдача активов = выручка / активы: знаменатель растёт быстрее → отдача падает.",s:"Вопрос контрольной"},
+{g:"t2",kt:"tr",k:1,q:"Если темпы роста прибыли выше темпов роста выручки, это свидетельствует о…",o:["повышении рентабельности активов","повышении рентабельности продаж","снижении рентабельности продаж","снижении фондоотдачи"],a:1,e:"Рентабельность продаж = прибыль / выручка: числитель растёт быстрее → рентабельность растёт.",s:"Вопрос контрольной"},
+{g:"t2",kt:"tr",q:"Если темпы роста выручки выше темпов роста активов, это свидетельствует о…",o:["повышении отдачи (оборачиваемости) активов","снижении отдачи активов","снижении рентабельности продаж","снижении финансовой устойчивости"],a:0,e:"Каждый рубль активов даёт больше выручки — благоприятная тенденция.",s:"Банк тестов"},
+{g:"t2",kt:"tr",q:"Если темпы роста прибыли ниже темпов роста выручки, это свидетельствует о…",o:["повышении рентабельности продаж","снижении рентабельности продаж","повышении отдачи активов","снижении отдачи активов"],a:1,e:"Доля прибыли в выручке падает. У Крылова: выручка +28,6 %, прибыль от продаж +16,4 % → рентабельность 10,4 % → 9,4 %.",s:"Крылов, табл. 5.2"},
+{g:"t2",kt:"tr",q:"Если темпы роста выручки выше темпов роста полной себестоимости, это свидетельствует о…",o:["повышении эффективности текущей деятельности (доля затрат в выручке падает)","снижении рентабельности продаж","снижении отдачи активов","снижении качества прибыли"],a:0,e:"Это условие оптимизации прибыли от продаж: ТРвр > ТРсп.",s:"Крылов, формула 2.2"},
+{g:"t2",kt:"tr",q:"Если темп роста прибыли от продаж ниже темпа роста прибыли до налогообложения, это свидетельствует о…",o:["ухудшении качества прибыли до налогообложения","улучшении качества прибыли до налогообложения","повышении рентабельности продаж","повышении отдачи активов"],a:0,e:"Доля прибыли от основной деятельности в ПДН снижается. Желательно ТРпр ≥ ТРпдн.",s:"Крылов, формула 2.1"},
+{g:"t2",kt:"tr",q:"Если темпы роста оборотных активов выше темпов роста внеоборотных активов, это свидетельствует о…",o:["повышении мобильности имущества","снижении ликвидности","снижении производственного потенциала","росте финансового риска"],a:0,e:"ТРоба > ТРва — предпочтительное соотношение: ускорение оборачиваемости, высвобождение средств.",s:"Крылов, формула 3.1"},
+{g:"t2",kt:"tr",q:"Если темпы роста долгосрочных финансовых вложений выше темпов роста всех внеоборотных активов, это свидетельствует о…",o:["ухудшении качества внеоборотных активов","улучшении качества внеоборотных активов","повышении мобильности имущества","росте производственного потенциала"],a:0,e:"Доля рискованных ДФВ растёт, средства надолго отвлекаются из оборота. Желательно ТРва ≥ ТРдфв.",s:"Крылов, формула 3.2"},
+{g:"t2",kt:"tr",q:"Если темпы роста дебиторской задолженности выше темпов роста оборотных активов, это свидетельствует о…",o:["временном отвлечении всё большей части оборотных средств из оборота","повышении ликвидности оборотных активов","росте производственного потенциала","повышении рентабельности"],a:0,e:"Доля ДЗ в оборотных активах растёт — это оценивается негативно.",s:"Крылов, с. 28, 117"},
+{g:"t2",kt:"tr",q:"Если темп роста имущества (валюты баланса) больше 100 %, это, как правило, свидетельствует о…",o:["расширении масштабов хозяйственной деятельности","снижении отдачи активов","снижении финансовой устойчивости","росте рентабельности"],a:0,e:"Показатель динамики имущества > 1 — позитивная оценка.",s:"Крылов, с. 26"},
+{g:"t2",kt:"tr",q:"Благоприятной тенденцией является…",o:["превышение темпов роста активов над темпами роста выручки","превышение темпов роста активов над темпами роста пассивов","превышение темпов роста выручки над темпами роста активов"],a:2,e:"Выручка обгоняет активы → отдача активов растёт. Активы и пассивы всегда равны (баланс), поэтому второй вариант — ловушка.",s:"Банк тестов"},
+{g:"t2",kt:"m",q:"«Золотое правило экономики» предприятия отражает (выберите все верные):",o:["превышение темпов роста активов над темпами роста выручки","превышение темпов роста выручки над темпами роста активов","превышение темпов роста прибыли над темпами роста выручки"],a:[1,2],e:"Тп > Тв > Та > 100 %: прибыль растёт быстрее выручки (рентабельность ↑), выручка — быстрее активов (отдача ↑), активы растут (масштаб ↑).",s:"Банк тестов"},
+{g:"t2",kt:"tr",q:"Какое соотношение темпов роста соответствует «золотому правилу экономики»?",o:["Тп > Тв > Та > 100 %","Та > Тв > Тп > 100 %","Тв > Тп > Та > 100 %","Тп = Тв = Та"],a:0,e:"Прибыль > выручка > активы > 100 %.",s:"Банк тестов"},
+{g:"t2",kt:"m",k:1,q:"К абсолютным показателям финансовых результатов хозяйственной деятельности предприятия, отражаемым в финансовой отчётности, относятся:",o:["валовая прибыль","прибыль (убыток) от продаж","прибыль до налогообложения","рентабельность собственного капитала"],a:[0,1,2],e:"Рентабельность — относительный показатель.",s:"Вопрос контрольной"},
+{g:"t2",kt:"def",q:"Относительными показателями финансовых результатов являются…",o:["показатели прибыли","показатели рентабельности","показатели эффективности основных фондов"],a:1,e:"Прибыль — абсолютный показатель, рентабельность — относительный.",s:"Банк тестов"},
+{g:"t2",kt:"def",q:"Прибыль от продаж — это…",o:["выручка минус полная себестоимость (себестоимость продаж + коммерческие + управленческие расходы)","выручка минус себестоимость реализованной продукции","выручка минус управленческие расходы"],a:0,e:"Выручка минус себестоимость продаж — это валовая прибыль, а не прибыль от продаж.",s:"Банк тестов; Крылов, табл. 2.2"},
+{g:"t2",kt:"def",q:"Валовая прибыль — это…",o:["выручка минус себестоимость продаж","выручка минус все расходы","прибыль от продаж минус налог","чистая прибыль плюс амортизация"],a:0,e:"4500 − 3600 = 900 (пример Крылова, стр. 2100 ОФР).",s:"Крылов, табл. П.2"},
+{g:"t2",kt:"def",q:"Прибыль до налогообложения определяется как…",o:["прибыль от продаж + проценты к получению − проценты к уплате + доходы от участия в других организациях + прочие доходы − прочие расходы","прибыль от продаж − налог на прибыль","валовая прибыль + прочие доходы","выручка − себестоимость продаж"],a:0,e:"ПДН = прибыль от продаж + прибыль от прочей деятельности. 425 + 35 = 460.",s:"Банк тестов; Крылов, табл. 2.1, П.2"},
+{g:"t2",kt:"def",q:"Чистая прибыль определяется как…",o:["прибыль до налогообложения − текущий налог на прибыль − изменение ОНО + изменение ОНА − прочее","прибыль от продаж − налог на прибыль","выручка − полная себестоимость","прибыль до налогообложения + налог на прибыль"],a:0,e:"460 − 140 + 10 = 330 (пример Крылова).",s:"Крылов, табл. 2.4"},
+{g:"t2",kt:"def",q:"Коммерческие и управленческие расходы по характеру являются…",o:["переменными","прямыми","условно-постоянными"],a:2,e:"Поэтому при росте выручки прибыль растёт быстрее (операционный рычаг); а резерв роста прибыли — снизить их до уровня прошлого года.",s:"Банк тестов; Крылов, с. 111"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Валовая прибыль — это маржинальный доход.",o:["да","нет"],a:1,e:"Маржинальный доход = выручка − ПЕРЕМЕННЫЕ затраты. Валовая прибыль = выручка − себестоимость продаж (в ней есть и постоянные затраты).",s:"Банк тестов"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Нераспределённая чистая прибыль выражает изменение собственного капитала.",o:["да","нет"],a:0,e:"Нераспределённая прибыль остаётся в организации и увеличивает её собственный капитал (раздел III баланса).",s:"Банк тестов"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Снижение удельного веса прибыли от продаж в прибыли до налогообложения ухудшает качество прибыли.",o:["да","нет"],a:0,e:"Качество ПДН определяется долей прибыли от основной деятельности.",s:"Крылов, с. 18"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Рентабельность собственного капитала — абсолютный показатель финансовых результатов.",o:["да","нет"],a:1,e:"Рентабельность — относительный показатель.",s:"Банк тестов"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? При анализе структуры прибыли от продаж за 100 % принимается выручка.",o:["да","нет"],a:0,e:"Выручка — наибольший положительный показатель.",s:"Крылов, с. 19"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Снижение коммерческих расходов увеличивает прибыль от прочей деятельности.",o:["да","нет"],a:1,e:"Коммерческие расходы — элемент прибыли от продаж.",s:"Крылов, тест № 31"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Снижение текущего налога на прибыль увеличивает чистую прибыль.",o:["да","нет"],a:0,e:"Налог вычитается из ПДН.",s:"Крылов, тест № 38"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Опережающий рост незавершённого производства — положительное явление.",o:["да","нет"],a:1,e:"Однозначно негативно: признак неритмичности производства.",s:"Крылов, с. 26"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Рост удельного веса долгосрочных финансовых вложений во внеоборотных активах оценивается негативно.",o:["да","нет"],a:0,e:"Отвлечение средств из оборота на долгий срок и значительный риск.",s:"Крылов, с. 30"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Для промышленного предприятия больший удельный вес внеоборотных активов в имуществе целесообразен.",o:["да","нет"],a:0,e:"Крылов: у промышленного предприятия преобладание ВнА «целесообразно и оправданно». Но рост доли оборотных активов — всё равно плюс (мобильность).",s:"Крылов, с. 113"},
+{g:"t2",kt:"tf",q:"Верно ли утверждение? Рост удельного веса оборотных активов в имуществе оценивается положительно.",o:["да","нет"],a:0,e:"Повышается мобильность имущества.",s:"Крылов, с. 26"},
+{g:"t2",kt:"def",q:"Благоприятная тенденция в структуре активов — это когда удельный вес оборотных активов…",o:["остаётся неизменным","увеличивается","уменьшается"],a:1,e:"ТРоба > ТРва → доля ОбА растёт → мобильность имущества повышается.",s:"Банк тестов; Крылов, с. 25–26"},
+{g:"t2",kt:"def",q:"Условие оптимизации прибыли от продаж:",o:["темп роста выручки больше темпа роста полной себестоимости","темп роста полной себестоимости больше темпа роста выручки","разность выручки и полной себестоимости больше нуля"],a:0,e:"ТРвр > ТРсп. Третий вариант — просто наличие прибыли.",s:"Крылов, тест № 48"},
+{g:"t2",kt:"def",q:"Какое соотношение темпов роста прибыли от продаж (ТРпр) и прибыли до налогообложения (ТРпдн) желательно?",o:["ТРпр ≥ ТРпдн","ТРпр < ТРпдн","ТРпр = 0"],a:0,e:"Доля прибыли от продаж в ПДН не снижается → качество прибыли не ухудшается.",s:"Крылов, формула 2.1"},
+{g:"t2",kt:"def",q:"Рентабельность продаж рассчитывается как отношение…",o:["прибыли от продаж к выручке","выручки к активам","чистой прибыли к собственному капиталу","валовой прибыли к себестоимости"],a:0,e:"Остальные: отдача активов, ROE, рентабельность издержек.",s:"Конспект, формула (3)"},
+{g:"t2",kt:"def",q:"Рентабельность собственного капитала — это отношение…",o:["чистой прибыли к средней величине собственного капитала","прибыли от продаж к выручке","выручки к собственному капиталу","собственного капитала к валюте баланса"],a:0,e:"ROE. Выручка / СК — это оборачиваемость (отдача) собственного капитала.",s:"Банк тестов; Крылов, гл. 3.4"},
+{g:"t2",kt:"def",q:"Показатели оборачиваемости (отдачи) активов рассчитываются на основе…",o:["выручки от реализации","прибыли до налогообложения","прибыли от продаж"],a:0,e:"Отдача активов = выручка / средняя величина активов.",s:"Банк тестов; Крылов, с. 50"},
+{g:"t2",kt:"def",q:"Коэффициент самофинансирования рассчитывается как…",o:["(чистая прибыль + амортизация) / потребность в инвестициях","чистая прибыль / выручка","потребность в инвестициях / чистая прибыль","собственный капитал / заёмный капитал"],a:0,e:"Ксф = (ЧП + Ам) / И.",s:"Крылов, формула 2.3"},
+{g:"t2",kt:"def",q:"Реальные активы характеризуют…",o:["экономический потенциал торгового предприятия","производственный потенциал промышленного предприятия","экономический потенциал организации сферы услуг"],a:1,e:"НМА, ОС, производственные запасы, НЗП.",s:"Крылов, тест № 3"},
+{g:"t2",kt:"def",q:"В состав оборотных активов НЕ входят…",o:["дебиторская задолженность","запасы и затраты","краткосрочные финансовые вложения","нематериальные активы"],a:3,e:"НМА — внеоборотные активы.",s:"Банк тестов"},
+{g:"t2",kt:"m",q:"К внеоборотным активам относятся (выберите все верные):",o:["долгосрочные финансовые вложения","запасы","нематериальные активы","основные средства"],a:[0,2,3],e:"Запасы — оборотные активы.",s:"Банк тестов; Крылов, табл. 3.4"},
+{g:"t2",kt:"m",q:"В состав реальных активов входят (выберите все верные):",o:["нематериальные активы","основные средства","производственные запасы","незавершённое производство","дебиторская задолженность"],a:[0,1,2,3],e:"Дебиторская задолженность — не реальный актив.",s:"Крылов, с. 25"},
+{g:"t2",kt:"m",q:"Основные факторы, влияющие на прибыль от продаж (выберите все верные):",o:["себестоимость единицы продукции","физический объём продаж","цена за единицу продукции","численность рабочих"],a:[0,1,2],e:"Также структура продаж. Численность рабочих влияет лишь косвенно — через себестоимость.",s:"Банк тестов; Крылов, с. 22 (резервы)"},
+{g:"t2",kt:"m",q:"В состав прочих доходов входят (выберите все верные):",o:["доходы от совместной деятельности","положительные курсовые разницы","поступления от продажи основных средств","доходы от сдачи имущества в аренду"],a:[0,1,2,3],e:"Всё, что не выручка от основной деятельности (аренда — если это не основной вид деятельности).",s:"Банк тестов"},
+{g:"t2",kt:"m",q:"В состав прочих расходов входят (выберите все верные):",o:["отрицательные курсовые разницы","расходы на услуги кредитных организаций","штрафы и пени за нарушение условий договоров"],a:[0,1,2],e:"Все три — прочие расходы.",s:"Банк тестов"},
+{g:"t2",kt:"m",q:"Направления поиска резервов повышения финансовых результатов (выберите все верные):",o:["увеличение выручки","снижение затрат на производство и продажу","увеличение доходов от прочей деятельности","оптимизация налогообложения","увеличение дебиторской задолженности"],a:[0,1,2,3],e:"Ещё одно направление — снижение расходов, связанных с прочей деятельностью.",s:"Крылов, с. 22–23"}
+];
+// Открытые вопросы для варианта (id карточек CARDS, которые подходят к формулировкам «Назовите…»)
+
+/* ================= APP ================= */
+const BLOCKS={1:{name:"Основы финансового анализа",short:"Основы ФА"},2:{name:"Этапы и методические приёмы",short:"Этапы и методы"},3:{name:"Финансовые результаты",short:"Финрезультаты"},4:{name:"Имущество и капитал",short:"Имущество"}};
+const TOPICS={b1a:"Понятие и место ФА",b1b:"Предмет, объект, цели",b1c:"Пользователи информации",b1d:"Информация и отчётность",b2a:"Этапы анализа",b2b:"Абсолютные, относительные и средние величины",b2c:"Сравнение, группировка, графики, таблицы",b2d:"Балансовый способ и факторный анализ",b3a:"Прибыль до налогообложения",b3b:"Прибыль от продаж",b3c:"Прочая деятельность, чистая прибыль, СФР",b3d:"Резервы и рентабельность",b4a:"Имущество: состав и динамика",b4b:"Оборотные и реальные активы",b4c:"Внеоборотные активы и стратегия",b4d:"Капитал и отдача активов"};
+const LET="абвгдежз";
+const cnt={1:0,2:0,3:0,4:0};
+Q.forEach(q=>{cnt[q.b]++;q.id=q.b+"-"+String(cnt[q.b]).padStart(2,"0");q.multi=Array.isArray(q.a)});
+const QID={};Q.forEach(q=>QID[q.id]=q);
+const QB={1:[],2:[],3:[],4:[]};Q.forEach(q=>QB[q.b].push(q.id));
+CARDS.forEach((c,i)=>c.id="c"+String(i+1).padStart(2,"0"));
+const CID={};CARDS.forEach(c=>CID[c.id]=c);
+KQ.forEach((q,i)=>{q.id="k-"+String(i+1).padStart(2,"0");q.multi=Array.isArray(q.a);q.kr=1;q.fix=1;QID[q.id]=q});
+const KBY=(g,kt)=>KQ.filter(q=>q.g===g&&(!kt||q.kt===kt)).map(q=>q.id);
+const OPEN1=["c02","c03","c04","c07","c01"],OPEN2=["c32","c14","c09","c11","c17","c18","c20","c12"];
+function isOpen(id){return id.slice(0,2)==="o:"}
+
+function rng(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuffle(arr,r){r=r||Math.random;const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const NT=8,TICKETS=[],ORD={};
+[1,2,3,4].forEach(b=>ORD[b]=shuffle(QB[b],rng(4242+b*131)));
+for(let t=0;t<NT;t++)TICKETS.push([1,2,3,4].flatMap(b=>ORD[b].slice(t*5,t*5+5)));
+
+/* ---------- storage ---------- */
+const KEY="fa-bilety-v1";
+let storageOK=true;
+function blank(){return{q:{},err:{},cards:{},tickets:{},exams:[],plan:{},kr:[]}}
+function load(){try{const s=localStorage.getItem(KEY);return s?JSON.parse(s):null}catch(e){storageOK=false;return null}}
+try{localStorage.setItem("__fa","1");localStorage.removeItem("__fa")}catch(e){storageOK=false}
+let S=Object.assign(blank(),load()||{});
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){storageOK=false}}
+function record(id,ok){const r=S.q[id]||(S.q[id]={n:0,ok:0,bad:0,last:null});r.n++;if(ok){r.ok++;r.last=1;delete S.err[id]}else{r.bad++;r.last=0;S.err[id]=Date.now()}save()}
+function errIds(){return Object.keys(S.err).filter(id=>QID[id]).sort((a,b)=>S.err[a]-S.err[b])}
+function stats(){let seen=0,mast=0,n=0,ok=0;Q.forEach(q=>{const r=S.q[q.id];if(r&&r.n){seen++;n+=r.n;ok+=r.ok;if(r.last===1)mast++}});return{seen,mast,acc:n?Math.round(ok/n*100):null,err:errIds().length,cards:CARDS.filter(c=>((S.cards[c.id]||{}).box||0)>=2).length,examsPassed:S.exams.filter(e=>e.pass).length}}
+
+/* ---------- plan ---------- */
+const PLAN=[
+ {day:1,title:"Основы и методы",note:"Лекция 1, теория",min:70,steps:[
+  {id:"d1-cheat",label:"Шпаргалка: «Не перепутай» и «Списки»",hint:"10 минут чтения, потом перескажи вслух",act:{m:"cheat",sec:"pairs"}},
+  {id:"d1-b1",label:"Тема: основы ФА",hint:"40 вопросов с пояснениями",act:{m:"block",b:1}},
+  {id:"d1-b2",label:"Тема: этапы и методические приёмы",hint:"40 вопросов",act:{m:"block",b:2}},
+  {id:"d1-cards",label:"Карточки: открытые вопросы блоков 1–2",hint:"пиши ответ своими словами",act:{m:"cards",f:"b12"}},
+  {id:"d1-err",label:"Работа над ошибками",hint:"пока список не опустеет",act:{m:"mistakes"}}]},
+ {day:2,title:"Прибыль и имущество",note:"Лекция 1 (финрезультаты) и лекция 2",min:80,steps:[
+  {id:"d2-err",label:"Разминка: вчерашние ошибки",hint:"интервальное повторение",act:{m:"mistakes"}},
+  {id:"d2-cheat",label:"Шпаргалка: «Лестница прибыли» и «Правило темпов»",hint:"потом нарисуй обе по памяти на листке",act:{m:"cheat",sec:"ladder"}},
+  {id:"d2-b3",label:"Тема: финансовые результаты",hint:"40 вопросов, есть расчёты",act:{m:"block",b:3}},
+  {id:"d2-b4",label:"Тема: имущество и капитал",hint:"40 вопросов",act:{m:"block",b:4}},
+  {id:"d2-star",label:"Вопросы из контрольной ★",hint:"16 вопросов в исходной формулировке",act:{m:"starred"}},
+  {id:"d2-kbank",label:"Банк «как на контрольной»",hint:"короткие вопросы в стиле контрольной, с пояснениями",act:{m:"kbank"}},
+  {id:"d2-cards",label:"Карточки блоков 3–4",hint:"открытые вопросы",act:{m:"cards",f:"b34"}}]},
+ {day:3,title:"Экзамен",note:"всё вперемешку и под таймер",min:90,steps:[
+  {id:"d3-err",label:"Повторение: все накопленные ошибки",hint:"",act:{m:"mistakes"}},
+  {id:"d3-cards",label:"Карточки, которые ещё не выучены",hint:"выучено = «знаю» 2 раза",act:{m:"cards",f:"due"}},
+  {id:"d3-tickets",label:"Билеты 1–8, в каждом не больше 2 ошибок",hint:"отметится само",act:{m:"tickets"},auto:"tickets"},
+  {id:"d3-kr",label:"Вариант контрольной: 2 раза на «5»",hint:"15 вопросов, разбор после сдачи · отметится само",act:{m:"kr"},auto:"kr"},
+  {id:"d3-exam",label:"Экзамен по правилам ПДД: сдать 2 раза подряд",hint:"отметится само",act:{m:"exam"},auto:"exam"},
+  {id:"d3-cheat",label:"Перед контрольной: шпаргалка с закрытыми ответами",hint:"вспоминай и открывай по одному",act:{m:"cheat",hide:true}}]}
+];
+const STEP={};PLAN.forEach(d=>d.steps.forEach(s=>STEP[s.id]=s));
+function stepDone(st){
+ if(st.auto==="tickets")return TICKETS.every((_,i)=>S.tickets[i]&&S.tickets[i].best!=null&&S.tickets[i].best<=2);
+ if(st.auto==="exam"){const e=S.exams;return e.length>=2&&e[e.length-1].pass&&e[e.length-2].pass}
+ if(st.auto==="kr")return (S.kr||[]).filter(r=>r.grade===5).length>=2;
+ return !!S.plan[st.id]}
+
+/* ---------- helpers ---------- */
+const app=document.getElementById("app");
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function fmt(ms){ms=Math.max(0,ms);const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000);return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function toTop(){try{window.scrollTo({top:0})}catch(e){window.scrollTo(0,0)}}
+let toastT=null;
+function toast(msg){let el=document.querySelector(".toast");if(!el){el=document.createElement("div");el.className="toast";el.setAttribute("role","status");document.body.appendChild(el)}el.textContent=msg;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{el.hidden=true},2600)}
+const IC={
+ clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>',
+ ticket:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4z"/><path d="M14 6v12" stroke-dasharray="2 3"/></svg>',
+ loop:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>',
+ err:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>',
+ star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></svg>',
+ cards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>',
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 21V5M8 7h8M8 11h6"/></svg>',
+ check:'<svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.3l2.3 2.3 4.7-5"/></svg>'
+};
+
+let view="home",sess=null,cs=null,cheat={hide:false,sec:null},confirmReset=false,timerInt=null;
+function go(v){view=v;render();toTop()}
+function render(){
+ if(view==="home")renderHome();else if(view==="quiz")renderQuiz();else if(view==="result")renderResult();else if(view==="cards")renderCards();else if(view==="cheat")renderCheat();
+}
+
+/* ---------- HOME ---------- */
+function renderHome(){
+ const st=stats();
+ const nowDay=PLAN.findIndex(d=>!d.steps.every(stepDone));
+ const statCell=(v,l)=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`;
+ let h=`<div class="wrap">
+ <header class="hero"><div>
+  <div class="eyebrow">Финансовый анализ · лекции 1–2</div>
+  <h1>Билеты по <span>финанализу</span></h1>
+  <p>Тренажёр в формате ПДД: 160 вопросов — 8 билетов по 20, экзамен по правилам ГИБДД и пояснение после каждого ответа со ссылкой на учебник или конспект.</p>
+  <div class="src">Источники: С. И. Крылов «Финансовый анализ» (УрФУ, 2016), гл. 1–2 и § 3.1 · конспект лекций 1–2 · вопросы прошлой контрольной ★</div>
+ </div><div class="hero-cta">
+  <button class="btn primary" data-act="continue">${nowDay>=0?"Продолжить: день "+(nowDay+1):"План пройден — на экзамен"}</button>
+  <button class="btn" data-act="exam">${IC.clock.replace("<svg",'<svg width="16" height="16"')} Экзамен · 20 минут</button>
+ </div></header>
+ <div class="stats">
+  ${statCell(`${st.seen}<small> / ${Q.length}</small>`,"вопросов прорешано")}
+  ${statCell(`${st.mast}<small> / ${Q.length}</small>`,"последний ответ верный")}
+  ${statCell(st.acc==null?"—":st.acc+"<small> %</small>","точность ответов")}
+  ${statCell(st.err,"ошибок на исправлении")}
+  ${statCell(`${st.cards}<small> / ${CARDS.length}</small>`,"карточек выучено")}
+ </div>
+ ${storageOK?"":`<p class="storage-note">Браузер запретил хранилище: прогресс не сохранится после закрытия страницы.</p>`}`;
+
+ const kr=S.kr||[],best=kr.length?Math.max(...kr.map(r=>r.score)):null,lastK=kr[kr.length-1];
+ h+=`<section class="blk kr-box"><div class="kr-main"><div class="eyebrow">Новое · как на контрольной</div><h2>Вариант контрольной</h2>
+  <p>Вопросы в формулировках тех банков тестов, из которых взяты вопросы прошлой контрольной: варианты а–д, «Верно ли утверждение?», «Если темпы роста… то…», «Назовите…». В варианте 15 вопросов, как было: <b>тест 1</b> — 6 закрытых и 2 открытых, <b>тест 2</b> — 7 закрытых. Ответы можно менять до сдачи, разбор — после.</p>
+  <div class="kr-actions"><button class="btn primary" data-act="kr">Написать вариант · 15 вопросов</button><button class="btn" data-act="kbank">Тренировка по банку · ${KQ.length}</button><button class="btn" data-act="ktr">Только «темпы роста» · ${KQ.filter(q=>q.kt==="tr").length}</button></div></div>
+  <div class="kr-side"><div class="kr-stat"><b class="mono">${best==null?"—":best+"<small> / 15</small>"}</b><span>лучший результат</span></div><div class="kr-stat"><b class="mono">${kr.length}</b><span>вариантов написано</span></div>${lastK?`<div class="kr-stat"><b class="mono">«${lastK.grade}»</b><span>последняя оценка</span></div>`:""}</div></section>`;
+ h+=`<section class="blk"><div class="sec-h"><h2>План на 3 дня</h2><span class="muted">≈ 1–1,5 часа в день · шаги отмечаются сами, когда проходишь их до конца</span></div><div class="plan">`;
+ PLAN.forEach((d,i)=>{
+  const all=d.steps.every(stepDone);
+  const badge=all?`<span class="badge done">Готово</span>`:(i===nowDay?`<span class="badge">Сейчас</span>`:"");
+  h+=`<div class="day ${i===nowDay?"now":""}"><div class="day-h"><div><div class="day-n">День ${d.day}</div><h3>${d.title}</h3><p>${d.note} · ≈ ${d.min} мин</p></div>${badge}</div><ul class="steps">`;
+  d.steps.forEach(s=>{const dn=stepDone(s);
+   h+=`<li class="step ${dn?"done":""}"><button class="tick" data-act="tick" data-step="${s.id}" ${s.auto?'disabled title="Отметится само"':""} aria-pressed="${dn}" aria-label="Отметить шаг">${IC.check}</button><div class="step-l">${esc(s.label)}${s.hint?`<small>${esc(s.hint)}</small>`:""}</div><button class="btn sm go" data-act="step" data-step="${s.id}">${dn?"Ещё раз":"Начать"}</button></li>`});
+  h+=`</ul></div>`});
+ h+=`</div>
+ <details class="how"><summary>Почему так запоминается лучше: 6 приёмов в этом тренажёре</summary><div class="how-grid">
+  <div class="how-item"><b>Тест с пояснением, как в ПДД</b><p>После каждого ответа — объяснение и страница учебника. Ошибка сразу превращается в правило, а не просто в минус балл.</p></div>
+  <div class="how-item"><b>Активное припоминание</b><p>В контрольной были открытые вопросы («Назовите цель», «Назовите предмет»). Карточки заставляют сформулировать ответ самой, а не узнать его среди вариантов.</p></div>
+  <div class="how-item"><b>Интервальное повторение</b><p>Ошибки копятся в «Моих ошибках» и возвращаются на следующий день. Карточка считается выученной после двух «знаю» в разные подходы.</p></div>
+  <div class="how-item"><b>Чередование тем</b><p>Билеты смешивают 4 блока, как на контрольной: учишься узнавать, какое правило нужно, а не отвечать по порядку.</p></div>
+  <div class="how-item"><b>Одно правило вместо пяти</b><p>Все соотношения темпов (ТРвр &gt; ТРсп и др.) сводятся к одной логике, а 7 видов прибыли — к одной «лестнице». Нарисуй обе по памяти на бумаге.</p></div>
+  <div class="how-item"><b>Экзамен под таймер</b><p>20 минут, блоки по 5 вопросов, +5 вопросов за ошибку в блоке. Привыкаешь отвечать уверенно и без подсказок.</p></div>
+ </div></details></section>`;
+
+ const ec=st.err;
+ h+=`<section class="blk"><div class="sec-h"><h2>Режимы</h2></div><div class="modes">
+  <button class="mode exam" data-act="exam"><div class="m-top"><span class="m-ic">${IC.clock}</span><span class="m-count">20 + доп.</span></div><b>Экзамен</b><span class="d">Правила ГИБДД: 4 блока по 5 вопросов, 20 минут, не больше 2 ошибок</span></button>
+  <button class="mode" data-act="scroll-tickets"><div class="m-top"><span class="m-ic">${IC.ticket}</span><span class="m-count">8 × 20</span></div><b>Билеты</b><span class="d">Фиксированные наборы, сдан — если ошибок не больше двух</span></button>
+  <button class="mode" data-act="marathon"><div class="m-top"><span class="m-ic">${IC.loop}</span><span class="m-count">${Q.length}</span></div><b>Марафон</b><span class="d">Все вопросы вперемешку, можно остановиться в любой момент</span></button>
+  <button class="mode err" data-act="mistakes"><div class="m-top"><span class="m-ic">${IC.err}</span><span class="m-count">${ec}</span></div><b>Мои ошибки</b><span class="d">Верный ответ убирает вопрос из списка</span></button>
+  <button class="mode star" data-act="starred"><div class="m-top"><span class="m-ic">${IC.star}</span><span class="m-count">${Q.filter(q=>q.k).length}</span></div><b>Из контрольной</b><span class="d">Вопросы прошлой контрольной с ответами из учебника</span></button>
+  <button class="mode" data-act="cards"><div class="m-top"><span class="m-ic">${IC.cards}</span><span class="m-count">${CARDS.length}</span></div><b>Открытые вопросы</b><span class="d">Карточки: пишешь ответ сама, проверка по ключевым словам</span></button>
+  <button class="mode" data-act="cheat"><div class="m-top"><span class="m-ic">${IC.book}</span><span class="m-count">5 разделов</span></div><b>Шпаргалка</b><span class="d">Правило темпов, лестница прибыли, мнемоники, формулы</span></button>
+  <button class="mode" data-act="retry-last" ${sess&&sess.finished?"":"disabled"}><div class="m-top"><span class="m-ic">${IC.loop}</span><span class="m-count">${sess&&sess.finished?"":"—"}</span></div><b>Последний результат</b><span class="d">${sess&&sess.finished?"Вернуться к разбору последней попытки":"Появится после первой попытки"}</span></button>
+ </div></section>`;
+
+ h+=`<section class="blk" id="tickets"><div class="sec-h"><h2>Билеты</h2><span class="muted">в каждом по 5 вопросов из 4 блоков · зелёный — сдан (≤ 2 ошибок)</span></div><div class="tickets">`;
+ TICKETS.forEach((_,i)=>{const t=S.tickets[i];let cls="",r="не решён";if(t&&t.last!=null){cls=t.best<=2?"pass":"fail";r=t.best<=2?`✓ ${t.best} ош.`:`✕ ${t.last} ош.`}
+  h+=`<button class="tk ${cls}" data-act="ticket" data-n="${i}"><span class="l">Билет</span><span class="n">${i+1}</span><span class="r">${r}</span></button>`});
+ h+=`</div></section>`;
+
+ h+=`<section class="blk"><div class="sec-h"><h2>Темы</h2><span class="muted">вопросы по порядку с пояснениями · полоса: зелёный — верно, красный — ошибка</span></div><div class="topics">`;
+ [1,2,3,4].forEach(b=>{
+  h+=`<div class="tb"><div class="tb-h"><div><span class="eyebrow">Блок ${b} · ${QB[b].length} вопросов</span><b>${BLOCKS[b].name}</b></div><button class="btn sm" data-act="block" data-b="${b}">Весь блок</button></div>`;
+  Object.keys(TOPICS).filter(t=>t[1]==String(b)).forEach(t=>{
+   const ids=Q.filter(q=>q.t===t).map(q=>q.id);const g=ids.filter(id=>(S.q[id]||{}).last===1).length,r=ids.filter(id=>(S.q[id]||{}).last===0).length;
+   h+=`<button class="tr" data-act="topic" data-t="${t}"><span class="nm">${TOPICS[t]}</span><span class="bar" aria-hidden="true"><i class="g" style="width:${g/ids.length*100}%"></i><i class="r" style="width:${r/ids.length*100}%"></i></span><span class="ct">${g}/${ids.length}</span></button>`});
+  h+=`</div>`});
+ h+=`</div></section>`;
+
+ h+=`<footer class="foot"><span>Прогресс хранится в этом браузере на этом устройстве.</span>${confirmReset?`<span class="confirm">Удалить всю статистику и отметки плана? <button class="btn sm" data-act="reset-yes">Да, сбросить</button><button class="btn sm ghost" data-act="reset-no">Отмена</button></span>`:`<button class="btn sm ghost" data-act="reset">Сбросить прогресс</button>`}</footer></div>`;
+ app.innerHTML=h;
+}
+
+/* ---------- sessions ---------- */
+function makePerm(q){return q.fix?q.o.map((_,i)=>i):shuffle(q.o.map((_,i)=>i))}
+function startSession(o){
+ clearInterval(timerInt);
+ sess=Object.assign({idx:0,ans:{},perm:{},instant:true,finished:false},o);
+ sess.items=sess.items.slice();
+ sess.items.forEach(id=>{if(!isOpen(id))sess.perm[id]=makePerm(QID[id])});
+ go("quiz");
+}
+function pickN(a,n){return shuffle(a).slice(0,n)}
+function startVariant(step){
+ const T1=[...pickN(KBY("t1","def"),5),...pickN([...KBY("t1","m"),...KBY("t1","tf")],1)];
+ const O=["o:"+pickN(OPEN1,1)[0],"o:"+pickN(OPEN2,1)[0]];
+ const d=pickN(KBY("t2","def"),2),tf=pickN(KBY("t2","tf"),2),tr=pickN(KBY("t2","tr"),2),m=pickN(KBY("t2","m"),1);
+ startSession({mode:"kr",title:"Вариант контрольной",items:[...T1,...O,d[0],tf[0],tf[1],d[1],tr[0],tr[1],m[0]],instant:false,step,started:Date.now()});
+ startTimer();
+}
+function startKBank(step){startSession({mode:"kbank",title:"Банк «как на контрольной»",items:KQ.map(q=>q.id),step})}
+function startKTr(){startSession({mode:"kbank",title:"Темпы роста",items:shuffle(KQ.filter(q=>q.kt==="tr").map(q=>q.id))})}
+function gradeOf(sc,n){const p=sc/n;return p>=.85?5:p>=.65?4:p>=.5?3:2}
+function krScore(){const s=sess;return s.items.filter(id=>(s.ans[id]||{}).ok).length}
+function gradeVariant(){
+ const s=sess;s.finished=true;clearInterval(timerInt);s.dur=Date.now()-s.started;
+ s.items.forEach(id=>{const A=s.ans[id]||(s.ans[id]={sel:[],done:false});
+  if(isOpen(id)){const c=CID[id.slice(2)],ks=keyInfo(c,A.text||"");A.hits=ks.filter(k=>k.hit).length;A.total=ks.length;A.ok=!!(A.text||"").trim()&&A.hits/A.total>=.6}
+  else{const q=QID[id];const sel=A.done?(A.sel||[]):[];let ok;if(q.multi){const need=new Set(q.a),got=new Set(sel);ok=need.size===got.size&&[...need].every(x=>got.has(x))}else ok=sel[0]===q.a;A.ok=ok;A.sel=sel;record(id,ok)}
+  A.done=true});
+ const sc=krScore();s.krRec={t:Date.now(),score:sc,grade:gradeOf(sc,s.items.length)};
+ S.kr=(S.kr||[]).concat([s.krRec]).slice(-50);save();go("result");
+}
+function krRescore(){const s=sess,sc=krScore();s.krRec.score=sc;s.krRec.grade=gradeOf(sc,s.items.length);save()}
+function startBlock(b,step){startSession({mode:"block",block:b,title:"Блок "+b+": "+BLOCKS[b].short,items:QB[b],step})}
+function startTopic(t){startSession({mode:"topic",title:TOPICS[t],items:Q.filter(q=>q.t===t).map(q=>q.id)})}
+function startTicket(n){startSession({mode:"ticket",ticket:n,title:"Билет "+(n+1),items:TICKETS[n]})}
+function startMarathon(){startSession({mode:"marathon",title:"Марафон",items:shuffle(Q.map(q=>q.id))})}
+function startStarred(step){startSession({mode:"starred",title:"Вопросы из контрольной",items:Q.filter(q=>q.k).map(q=>q.id),step})}
+function startMistakes(step){const ids=errIds();if(!ids.length){if(step){S.plan[step]=true;save()}toast(step?"Ошибок нет — шаг отмечен":"Ошибок нет — так держать");render();return}startSession({mode:"mistakes",title:"Мои ошибки",items:ids,step})}
+function startExam(step){
+ const items=[1,2,3,4].flatMap(b=>shuffle(QB[b]).slice(0,5));
+ startSession({mode:"exam",title:"Экзамен",items,instant:false,step,exam:{phase:"main",deadline:Date.now()+20*60000,extraBlocks:[]}});
+ startTimer();
+}
+function runStep(id){const st=STEP[id],a=st.act;
+ if(a.m==="block")startBlock(a.b,id);
+ else if(a.m==="cards")startCards(a.f,id);
+ else if(a.m==="mistakes")startMistakes(id);
+ else if(a.m==="starred")startStarred(id);
+ else if(a.m==="exam")startExam(id);
+ else if(a.m==="kr")startVariant(id);
+ else if(a.m==="kbank")startKBank(id);
+ else if(a.m==="tickets"){if(view!=="home")go("home");const el=document.getElementById("tickets");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
+ else if(a.m==="cheat"){S.plan[id]=true;save();cheat={hide:!!a.hide,sec:a.sec||null};go("cheat");if(a.sec){const el=document.getElementById("cs-"+a.sec);if(el)el.scrollIntoView({block:"start"})}}
+}
+
+function curQ(){return QID[sess.items[sess.idx]]}
+function pick(orig){
+ const q=curQ();if(!q)return;const A=sess.ans[q.id];
+ if(sess.mode==="kr"){
+  if(sess.finished)return;
+  if(q.multi){const sel=new Set((A&&A.sel)||[]);sel.has(orig)?sel.delete(orig):sel.add(orig);sess.ans[q.id]={sel:[...sel],done:sel.size>0};render();return}
+  sess.ans[q.id]={sel:[orig],done:true};render();
+  setTimeout(()=>{if(view==="quiz"&&sess&&!sess.finished&&sess.mode==="kr"&&sess.items[sess.idx]===q.id)nextUnanswered()},300);return;
+ }
+ if(A&&A.done)return;
+ if(q.multi){const sel=new Set((A&&A.sel)||[]);sel.has(orig)?sel.delete(orig):sel.add(orig);sess.ans[q.id]={sel:[...sel],done:false};render();return}
+ const ok=orig===q.a;sess.ans[q.id]={sel:[orig],done:true,ok};record(q.id,ok);
+ afterAnswer();
+}
+function submitMulti(){
+ const q=curQ(),A=sess.ans[q.id];if(!A||!A.sel.length||A.done)return;
+ const need=new Set(q.a),got=new Set(A.sel);const ok=need.size===got.size&&[...need].every(x=>got.has(x));
+ A.done=true;A.ok=ok;record(q.id,ok);afterAnswer();
+}
+function afterAnswer(){
+ if(sess.instant){render();return}
+ render();
+ setTimeout(()=>{if(!sess||sess.finished||view!=="quiz")return;if(examCheck())return;nextUnanswered()},320);
+}
+function phaseRange(){if(sess.mode!=="exam")return[0,sess.items.length];return sess.exam.phase==="main"?[0,20]:[20,sess.items.length]}
+function nextUnanswered(){
+ const [lo,hi]=phaseRange(),n=hi-lo;
+ for(let k=1;k<=n;k++){const j=lo+((sess.idx-lo+k)%n);if(!(sess.ans[sess.items[j]]||{}).done){sess.idx=j;render();return true}}
+ return false;
+}
+function goNext(){if(nextUnanswered())return;if(sess.mode==="exam"){examCheck();return}finishSession()}
+function move(d){const [lo,hi]=phaseRange();const j=sess.idx+d;if(j>=lo&&j<hi){sess.idx=j;render()}}
+
+/* ---------- exam ---------- */
+function startTimer(){
+ clearInterval(timerInt);
+ timerInt=setInterval(()=>{
+  if(!sess||(sess.mode!=="exam"&&sess.mode!=="kr")||sess.finished){clearInterval(timerInt);return}
+  if(sess.mode==="kr"){const el=document.getElementById("timer");if(el)el.textContent=fmt(Date.now()-sess.started);return}
+  const left=sess.exam.deadline-Date.now();
+  if(left<=0){examEnd(false,"Время вышло — по правилам экзамен не сдан.");return}
+  const el=document.getElementById("timer");if(el){el.textContent=fmt(left);el.classList.toggle("low",left<120000)}
+ },500);
+}
+function examCheck(){
+ const s=sess,ex=s.exam,[lo,hi]=phaseRange();
+ for(let i=lo;i<hi;i++)if(!(s.ans[s.items[i]]||{}).done)return false;
+ if(ex.phase==="main"){
+  const by={};s.items.slice(0,20).forEach(id=>{if(!s.ans[id].ok){const b=QID[id].b;by[b]=(by[b]||0)+1}});
+  ex.errsBy=by;const total=Object.values(by).reduce((a,b)=>a+b,0);
+  if(total===0)return examEnd(true,"Все 20 основных вопросов — без ошибок.");
+  if(Object.values(by).some(v=>v>=2))return examEnd(false,"Две ошибки в одном тематическом блоке — по правилам экзамен не сдан.");
+  if(total>=3)return examEnd(false,"Три ошибки и больше — по правилам экзамен не сдан.");
+  const blocks=Object.keys(by).map(Number);
+  blocks.forEach(b=>{shuffle(QB[b].filter(id=>!s.items.includes(id))).slice(0,5).forEach(id=>{s.items.push(id);s.perm[id]=makePerm(QID[id])})});
+  ex.phase="extra";ex.extraBlocks=blocks;ex.deadline+=blocks.length*5*60000;s.idx=20;render();return true;
+ }
+ const bad=s.items.slice(20).filter(id=>!s.ans[id].ok).length;
+ return examEnd(bad===0,bad===0?"Ошибки в основной части исправлены: дополнительные вопросы решены без ошибок.":"Ошибка в дополнительных вопросах — по правилам экзамен не сдан.");
+}
+function examEnd(pass,reason){
+ const s=sess;s.finished=true;s.exam.pass=pass;s.exam.reason=reason;clearInterval(timerInt);
+ const errs=s.items.filter(id=>(s.ans[id]||{}).done&&!s.ans[id].ok).length;
+ S.exams.push({t:Date.now(),pass,errs});if(S.exams.length>50)S.exams=S.exams.slice(-50);save();
+ go("result");return true;
+}
+
+function finishSession(){
+ const s=sess;s.finished=true;clearInterval(timerInt);
+ const done=s.items.filter(id=>(s.ans[id]||{}).done),wrong=done.filter(id=>!s.ans[id].ok);
+ const complete=done.length===s.items.length;
+ if(s.mode==="ticket"&&complete){const t=S.tickets[s.ticket]||{};t.last=wrong.length;t.best=t.best==null?wrong.length:Math.min(t.best,wrong.length);S.tickets[s.ticket]=t}
+ if(complete){
+  if(s.step)S.plan[s.step]=true;
+  if(s.mode==="block")PLAN.forEach(d=>d.steps.forEach(st=>{if(st.act.m==="block"&&st.act.b===s.block)S.plan[st.id]=true}));
+  if(s.mode==="starred")S.plan["d2-star"]=true;
+  if(s.mode==="kbank"&&s.items.length===KQ.length)S.plan["d2-kbank"]=true;
+ }
+ save();go("result");
+}
+
+/* ---------- QUIZ VIEW ---------- */
+function optLabel(q,pos){return q.fix?LET[pos]:String(pos+1)}
+function renderQuiz(){
+ const s=sess,id=s.items[s.idx],isExam=s.mode==="exam",isKr=s.mode==="kr";
+ const answered=s.items.filter(x=>(s.ans[x]||{}).done).length;
+ let right;
+ if(isExam)right=`<span class="timer" id="timer">${fmt(s.exam.deadline-Date.now())}</span>`;
+ else if(isKr)right=`<span class="timer" id="timer" title="Прошло времени">${fmt(Date.now()-s.started)}</span><button class="btn sm primary" data-act="submit-kr">Сдать</button>`;
+ else right=`<button class="btn sm" data-act="finish">Завершить</button>`;
+ let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">${esc(s.title)}<small>${isExam?(s.exam.phase==="main"?"основная часть":"дополнительные вопросы"):answered+" из "+s.items.length+" отвечено"}</small></div><div class="rt">${right}</div></div>`;
+ h+=`<div class="strip-wrap"><div class="strip" role="list">`;
+ s.items.forEach((x,i)=>{const a=s.ans[x];let c="";if(a&&a.done)c=(isExam||isKr)?"ans":(a.ok?"ok":"bad");if(i===s.idx)c+=" cur";if((isExam&&i===20)||(isKr&&i===8))c+=" gap";
+  const lock=isExam&&((s.exam.phase==="main"&&i>=20)||(s.exam.phase==="extra"&&i<20));
+  h+=`<button class="cell ${c}" role="listitem" data-act="goto" data-i="${i}" ${lock?"disabled":""} aria-label="Вопрос ${i+1}">${i+1}</button>`});
+ h+=`</div></div>`;
+ if(isKr)h+=`<p class="krpart">${s.idx<8?"<b>Тест 1</b> · теория и методы · вопросы 1–8":"<b>Тест 2</b> · финансовые результаты, темпы роста, имущество · вопросы 9–15"}</p>`;
+ if(isExam&&s.exam.phase==="extra"&&s.idx>=20)h+=`<div class="banner"><b>Дополнительные вопросы.</b> За ошибку в блоке ${s.exam.extraBlocks.map(b=>"«"+BLOCKS[b].short+"»").join(" и ")} — ещё ${s.exam.extraBlocks.length*5} вопросов и ${s.exam.extraBlocks.length*5} минут. Здесь нельзя ошибаться.</div>`;
+ const navKr=()=>`<div class="qnav"><button class="btn ghost" data-act="prev" ${s.idx<=0?"disabled":""}>← Назад</button><div class="r">${s.idx<s.items.length-1?`<button class="btn" data-act="kmove">Далее →</button>`:`<button class="btn primary" data-act="submit-kr">Сдать работу</button>`}</div></div>`;
+ if(isOpen(id)){
+  const c=CID[id.slice(2)],A=s.ans[id]||{};
+  h+=`<article class="ticket"><header class="ticket-h"><span class="eyebrow">Вопрос ${s.idx+1} · открытый вопрос</span><span class="chips"><span class="chip">ответ своими словами</span></span></header><div class="ticket-b">
+  <h2 class="qtext">${esc(c.q)}</h2><textarea id="open-input" class="open-in" placeholder="Напиши ответ, как на контрольной: полным предложением или тезисами" aria-label="Ответ">${esc(A.text||"")}</textarea>
+  <p class="qhint" style="color:var(--ink-3)">Проверится после сдачи: по ключевым мыслям эталона. Засчитать или нет — можно будет поправить вручную.</p>${navKr()}</div></article></div>`;
+  app.innerHTML=h;
+  const ta=document.getElementById("open-input");
+  if(ta)ta.addEventListener("input",()=>{const t=ta.value;s.ans[id]={text:t,done:!!t.trim()};const cell=app.querySelector('.cell[data-i="'+s.idx+'"]');if(cell)cell.classList.toggle("ans",!!t.trim())});
+  centerStrip();return;
+ }
+ const q=QID[id],A=s.ans[id]||{sel:[],done:false},perm=s.perm[id];
+ const reveal=A.done&&s.instant;
+ const chips=[];
+ if(q.k&&!isKr)chips.push(`<span class="chip star">★ было в контрольной</span>`);
+ if(q.v)chips.push(`<span class="chip var">похож на вопрос контрольной</span>`);
+ if(q.c)chips.push(`<span class="chip calc">расчёт</span>`);
+ if(q.kr&&!isKr)chips.push(`<span class="chip">как на контрольной</span>`);
+ const eb=q.kr?`Вопрос ${s.idx+1} · ${q.g==="t1"?"тест 1: теория и методы":"тест 2: результаты и имущество"}`:`Вопрос ${s.idx+1} · Блок ${q.b} · ${esc(TOPICS[q.t])}`;
+ h+=`<article class="ticket"><header class="ticket-h"><span class="eyebrow">${eb}</span><span class="chips">${chips.join("")}</span></header><div class="ticket-b">
+  <h2 class="qtext">${esc(q.q)}</h2>${q.multi?`<p class="qhint">Несколько верных ответов — отметь все${isKr?"":" и нажми «Ответить»"}</p>`:""}<ol class="opts">`;
+ const sel=new Set(A.sel),corr=new Set(q.multi?q.a:[q.a]);
+ const lockOpts=isKr?s.finished:A.done;
+ perm.forEach((orig,pos)=>{
+  let c=q.multi?"multi":"",mark="";
+  if(reveal){if(corr.has(orig)&&sel.has(orig)){c+=" correct";mark="✓"}else if(corr.has(orig)){c+=q.multi?" missed":" correct";mark=q.multi?"нужно было отметить":"верный ответ"}else if(sel.has(orig)){c+=" wrong";mark="✕"}}
+  else if(sel.has(orig))c+=" sel";
+  h+=`<li><button class="opt ${c}" data-act="opt" data-o="${orig}" ${lockOpts?"disabled":""}><span class="num">${optLabel(q,pos)}${q.fix?")":""}</span><span>${esc(q.o[orig])}</span><span class="mark">${mark}</span></button></li>`});
+ h+=`</ol>`;
+ if(reveal){
+  const rightL=perm.map((o,p)=>corr.has(o)?optLabel(q,p):null).filter(Boolean).join(", ");
+  h+=`<div class="fb ${A.ok?"ok":"bad"}"><div class="vd">${A.ok?"Верно":"Неверно — правильный ответ: "+rightL}</div><p>${esc(q.e)}</p><div class="src">Источник: ${esc(q.s)}</div></div>`;
+ }
+ if(isKr){h+=navKr()}
+ else{
+  h+=`<div class="qnav"><button class="btn ghost" data-act="prev" ${s.idx<=phaseRange()[0]?"disabled":""}>← Назад</button><div class="r">`;
+  if(q.multi&&!A.done)h+=`<button class="btn primary" data-act="submit" ${A.sel.length?"":"disabled"}>Ответить</button>`;
+  if(!A.done)h+=`<button class="btn" data-act="skip">Пропустить</button>`;
+  else if(s.instant){const left=s.items.some(x=>!(s.ans[x]||{}).done);h+=`<button class="btn primary" data-act="next">${left?"Далее →":"Завершить и посмотреть итог"}</button>`}
+  h+=`</div></div>`;
+ }
+ h+=`<div class="kbd">Клавиши: <kbd>1</kbd>–<kbd>${q.o.length}</kbd> — ответ, <kbd>Enter</kbd> — ${q.multi&&!isKr?"ответить / ":""}далее, <kbd>←</kbd> <kbd>→</kbd> — листать</div></div></article></div>`;
+ app.innerHTML=h;centerStrip();
+}
+function centerStrip(){const cur=app.querySelector(".cell.cur"),w=app.querySelector(".strip-wrap");if(cur&&w){w.scrollLeft=Math.max(0,cur.offsetLeft-w.clientWidth/2)}}
+
+/* ---------- RESULT VIEW ---------- */
+function ansText(q,sel){return (sel||[]).map(i=>q.o[i]).join("; ")||"—"}
+function renderResult(){
+ if(sess.mode==="kr")return renderKrResult();
+ const s=sess,done=s.items.filter(id=>(s.ans[id]||{}).done),wrong=done.filter(id=>!s.ans[id].ok),okN=done.length-wrong.length;
+ const pct=done.length?Math.round(okN/done.length*100):0;
+ let stamp,title,text,extra="";
+ if(s.mode==="exam"){
+  const p=s.exam.pass;stamp=`<div class="stamp ${p?"pass":"fail"}">${p?"Сдан":"Не сдан"}<small>экзамен</small></div>`;
+  title=p?"Экзамен сдан":"Экзамен не сдан";text=s.exam.reason;
+  const by=s.exam.errsBy||{};extra=`<div class="res-blocks">${[1,2,3,4].map(b=>`<span class="chip ${by[b]?"bad":"ok"}">${BLOCKS[b].short}: ${by[b]||0} ош.</span>`).join("")}</div>`;
+  const e=S.exams;const streak=e.length>=2&&e[e.length-1].pass&&e[e.length-2].pass;
+  if(p)text+=streak?" Два экзамена подряд сданы — шаг плана выполнен.":" Для шага плана нужно сдать ещё раз подряд.";
+ }else if(s.mode==="ticket"&&done.length===s.items.length){
+  const p=wrong.length<=2;stamp=`<div class="stamp ${p?"pass":"fail"}">${p?"Сдан":"Не сдан"}<small>билет ${s.ticket+1}</small></div>`;
+  title=`Билет ${s.ticket+1}: ${wrong.length} ${plural(wrong.length,"ошибка","ошибки","ошибок")}`;text=p?"Норматив ПДД — не больше двух ошибок — выполнен.":"Больше двух ошибок. Разбери их ниже и реши билет ещё раз.";
+ }else{
+  stamp=`<div class="stamp neutral">${pct}%<small>верно</small></div>`;
+  title=done.length<s.items.length?"Остановились на полпути":"Готово";text=done.length<s.items.length?`Отвечено ${done.length} из ${s.items.length}. Засчитано только отвеченное; шаг плана отметится, когда пройдёшь всё.`:"Все вопросы пройдены.";
+ }
+ let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">${esc(s.title)}<small>итог</small></div><div></div></div>
+ <div class="res-top"><div><h2>${esc(title)}</h2><p>${esc(text)}</p><div class="score"><b>${okN}</b> верно из ${done.length} · ошибок: ${wrong.length}</div>${extra}
+ <div class="res-actions">${wrong.length?`<button class="btn primary" data-act="fix">Прорешать ошибки (${wrong.length})</button>`:""}<button class="btn" data-act="again">${s.mode==="exam"?"Новый экзамен":"Пройти ещё раз"}</button><button class="btn ghost" data-act="home">В меню</button></div></div>${stamp}</div>`;
+ if(wrong.length){h+=`<div class="rev"><h3>Разбор ошибок</h3>`;
+  wrong.forEach(id=>{const q=QID[id],a=s.ans[id];h+=`<div class="rev-item"><div class="q">${esc(q.q)}</div><div class="a"><span class="y">Твой ответ: ${esc(ansText(q,a.sel))}</span><br><span class="c">Правильно: ${esc(ansText(q,q.multi?q.a:[q.a]))}</span></div><div class="e">${esc(q.e)}</div><div class="s">${esc(q.s)}</div></div>`});
+  h+=`</div>`}
+ h+=`</div>`;app.innerHTML=h;
+}
+function renderKrResult(){
+ const s=sess,n=s.items.length,sc=krScore(),g=gradeOf(sc,n);
+ const p1=s.items.slice(0,8).filter(id=>s.ans[id].ok).length,p2=s.items.slice(8).filter(id=>s.ans[id].ok).length;
+ const cls=g>=4?"pass":g===3?"neutral":"fail";
+ const wrongClosed=s.items.filter(id=>!isOpen(id)&&!s.ans[id].ok);
+ let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">Вариант контрольной<small>итог</small></div><div></div></div>
+ <div class="res-top"><div><h2>${sc} из ${n} — оценка «${g}»</h2><p>Оценка ориентировочная: «5» — от 85 %, «4» — от 65 %, «3» — от 50 %. Время: ${fmt(s.dur||0)}. Открытые вопросы засчитаны автоматически, если раскрыто хотя бы 60 % ключевых мыслей; ниже можно поправить вручную.</p>
+ <div class="res-blocks"><span class="chip ${p1>=7?"ok":p1>=5?"":"bad"}">Тест 1: ${p1} / 8</span><span class="chip ${p2>=6?"ok":p2>=4?"":"bad"}">Тест 2: ${p2} / 7</span></div>
+ <div class="res-actions"><button class="btn primary" data-act="kr">Новый вариант</button>${wrongClosed.length?`<button class="btn" data-act="fix">Прорешать ошибки (${wrongClosed.length})</button>`:""}<button class="btn ghost" data-act="home">В меню</button></div></div>
+ <div class="stamp ${cls}">«${g}»<small>ориентир</small></div></div><div class="rev"><h3>Разбор работы</h3>`;
+ s.items.forEach((id,i)=>{
+  const A=s.ans[id];
+  if(isOpen(id)){
+   const c=CID[id.slice(2)],ks=keyInfo(c,A.text||"");
+   h+=`<div class="rev-item ${A.ok?"good":""}"><div class="q">${i+1}. ${esc(c.q)} <span class="chip ${A.ok?"ok":"bad"}">${A.ok?"засчитано":"не засчитано"}</span></div>
+   <div class="a"><span class="${A.ok?"c":"y"}">Твой ответ: ${A.text&&A.text.trim()?esc(A.text):"—"}</span></div>
+   <div class="keys">${ks.map(k=>`<span class="key ${A.text&&A.text.trim()?(k.hit?"hit":"miss"):""}">${esc(k.label)}</span>`).join("")}</div>
+   <div class="ref"><div class="eyebrow">Эталон</div>${esc(c.a)}<div class="src">Источник: ${esc(c.s)}</div></div>
+   <div class="row" style="margin-top:8px"><button class="btn sm" data-act="kr-toggle" data-id="${id}">${A.ok?"Не засчитывать":"Засчитать"}</button></div></div>`;
+  }else{
+   const q=QID[id];
+   if(A.ok)h+=`<div class="rev-item good compact"><div class="q">${i+1}. ${esc(q.q)} <span class="chip ok">верно</span></div></div>`;
+   else h+=`<div class="rev-item"><div class="q">${i+1}. ${esc(q.q)}</div><div class="a"><span class="y">Твой ответ: ${esc(ansText(q,A.sel))}</span><br><span class="c">Правильно: ${esc(ansText(q,q.multi?q.a:[q.a]))}</span></div><div class="e">${esc(q.e)}</div><div class="s">${esc(q.s)}</div></div>`;
+  }
+ });
+ h+=`</div></div>`;app.innerHTML=h;
+}
+function plural(n,a,b,c){const m=n%10,m2=n%100;if(m===1&&m2!==11)return a;if(m>=2&&m<=4&&(m2<12||m2>14))return b;return c}
+
+/* ---------- CARDS ---------- */
+function norm(s){return String(s).toLowerCase().replace(/ё/g,"е").replace(/\s+/g," ")}
+function keyInfo(c,text){
+ const nt=norm(text),nr=norm(c.a).length===c.a.length?norm(c.a):c.a.toLowerCase().replace(/ё/g,"е");
+ return c.k.map(alts=>{
+  const hit=!!text&&alts.some(a=>nt.includes(a));
+  let label=alts[0];
+  for(const a of alts){const i=nr.indexOf(a);if(i>=0){let st=i,en=i+a.length;while(st>0&&/[\wа-яё-]/i.test(c.a[st-1]))st--;while(en<c.a.length&&/[\wа-яё-]/i.test(c.a[en]))en++;label=c.a.slice(st,en);break}}
+  return{label,hit}});
+}
+function startCards(f,step){
+ f=f||"all";
+ let list=CARDS;
+ if(f==="b12")list=CARDS.filter(c=>c.b<=2);else if(f==="b34")list=CARDS.filter(c=>c.b>=3);else if(f==="due")list=CARDS.filter(c=>((S.cards[c.id]||{}).box||0)<2);else if(f==="star")list=CARDS.filter(c=>c.st);
+ cs={f,queue:list.map(c=>c.id),pos:0,stage:"ask",text:"",step,requeued:{},known:0,total:list.length};
+ if(!list.length){cs.pos=0;cs.queue=[]}
+ go("cards");
+}
+function cardBoxCounts(){let a=0,b=0,c=0;CARDS.forEach(x=>{const bx=(S.cards[x.id]||{}).box||0;if(bx>=2)c++;else if(bx===1)b++;else a++});return[a,b,c]}
+function renderCards(){
+ const c=cs.pos<cs.queue.length?CID[cs.queue[cs.pos]]:null;
+ const [n0,n1,n2]=cardBoxCounts();
+ const F=[["all","Все"],["b12","Блоки 1–2"],["b34","Блоки 3–4"],["due","Не выученные"],["star","★ Из контрольной"]];
+ let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">Открытые вопросы<small>${Math.min(cs.pos,cs.queue.length)} из ${cs.queue.length}</small></div><div></div></div>
+ <div class="filters">${F.map(([k,l])=>`<button class="btn sm ${cs.f===k?"on":""}" data-act="cfilter" data-f="${k}">${l}</button>`).join("")}</div>
+ <div class="boxes"><span class="chip">новые и на повтор: ${n0}</span><span class="chip">«знаю» 1 раз: ${n1}</span><span class="chip ok">выучено: ${n2}</span></div>`;
+ if(!c){
+  if(cs.step&&!S.plan[cs.step]){S.plan[cs.step]=true;save()}
+  h+=`<div class="card"><div class="eyebrow">Набор пройден</div><div class="cq">${cs.total?`Знаю: ${cs.known} из ${cs.total}`:"В этом наборе всё выучено"}</div><p class="muted">Карточка становится «выученной» после двух ответов «знаю». Карточки с «повторить» вернутся в набор «Не выученные».</p><div class="row"><button class="btn primary" data-act="cfilter" data-f="due">Повторить невыученные</button><button class="btn ghost" data-act="home">В меню</button></div></div></div>`;
+  app.innerHTML=h;return;
+ }
+ const ks=keyInfo(c,cs.text);const hits=ks.filter(k=>k.hit).length;
+ h+=`<div class="card"><div class="eyebrow">Блок ${c.b} · ${esc(BLOCKS[c.b].short)} ${c.st?' · <span class="chip star">★ было в контрольной</span>':""}</div><div class="cq">${esc(c.q)}</div>`;
+ if(cs.stage==="ask"){
+  h+=`<textarea id="card-input" placeholder="Напиши ответ своими словами — тезисами, как на контрольной. Потом нажми «Проверить»." aria-label="Твой ответ">${esc(cs.text)}</textarea>
+  <div class="row"><button class="btn primary" data-act="ccheck">Проверить</button><button class="btn ghost" data-act="creveal">Не помню — показать ответ</button></div>`;
+ }else{
+  if(cs.text.trim())h+=`<div class="ref" style="background:var(--surface-2);border-left-color:var(--line-2)"><div class="eyebrow">Твой ответ</div>${esc(cs.text)}</div>`;
+  h+=`<div class="keys">${ks.map(k=>`<span class="key ${cs.text.trim()?(k.hit?"hit":"miss"):""}">${esc(k.label)}</span>`).join("")}</div>`;
+  if(cs.text.trim())h+=`<div class="cov">Ключевых мыслей раскрыто: ${hits} из ${ks.length}${hits===ks.length?" — отлично":hits/ks.length>=.6?" — почти, добавь недостающее":" — перечитай эталон"}</div>`;
+  h+=`<div class="ref"><div class="eyebrow">Эталон</div>${esc(c.a)}<div class="src">Источник: ${esc(c.s)}</div></div>
+  <div class="row"><button class="btn primary" data-act="cknow">Знаю ✓</button><button class="btn" data-act="cagain">Повторить ↺</button></div>`;
+ }
+ h+=`</div></div>`;app.innerHTML=h;
+ const ta=document.getElementById("card-input");if(ta){ta.addEventListener("input",()=>{cs.text=ta.value})}
+}
+
+/* ---------- CHEAT ---------- */
+function renderCheat(){
+ const A=(t)=>`<span class="ans">${t}</span>`;
+ let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">Шпаргалка<small>лекции 1–2</small></div><div class="rt"><button class="btn sm ${cheat.hide?"primary":""}" data-act="chide" aria-pressed="${cheat.hide}">${cheat.hide?"Показать ответы":"Закрыть ответы"}</button></div></div>
+ <div class="cheat-nav">${[["rule","Правило темпов"],["ladder","Лестница прибыли"],["pairs","Не перепутай"],["lists","Списки и мнемоники"],["formulas","Формулы"]].map(([k,l])=>`<button class="btn sm" data-act="cnav" data-s="${k}">${l}</button>`).join("")}</div>
+ ${cheat.hide?`<p class="muted" style="font-size:13.5px;margin:10px 0 0">Ответы размыты: сначала вспомни, потом нажми на размытый текст, чтобы проверить.</p>`:""}
+ <div class="${cheat.hide?"hide-mode":""}">`;
+ h+=`<section class="cs" id="cs-rule"><h2>Правило темпов роста</h2><p class="lead">Пять соотношений из лекций 1–2. Все они — одна идея.</p>
+ <div class="tbl-wrap"><table class="t"><thead><tr><th>Соотношение</th><th>Что сравниваем</th><th>Если выполняется</th><th>Где</th></tr></thead><tbody>
+ <tr><td class="f">${A("ТРпр ≥ ТРпдн")}</td><td>прибыль от продаж и прибыль до налогообложения</td><td>${A("доля прибыли от продаж не падает → качество ПДН не ухудшается")}</td><td>Л1, табл. 1</td></tr>
+ <tr><td class="f">${A("ТРвр &gt; ТРсп")}</td><td>выручка и полная себестоимость (Сп + КР + УР)</td><td>${A("доля затрат в выручке падает → эффективность текущей деятельности растёт. Это условие оптимизации прибыли от продаж")}</td><td>Л1, табл. 2</td></tr>
+ <tr><td class="f">${A("ТРоба &gt; ТРва")}</td><td>оборотные и внеоборотные активы</td><td>${A("ускоряется оборачиваемость, средства высвобождаются в мобильной форме (ДС и КФВ)")}</td><td>Л2, табл. 1</td></tr>
+ <tr><td class="f">${A("ТРва ≥ ТРдфв")}</td><td>все внеоборотные активы и долгосрочные финансовые вложения</td><td>${A("доля рискованных ДФВ не растёт → качество ВнА не ухудшается")}</td><td>Л2</td></tr>
+ <tr><td class="f">${A("ТРва ≥ ТРона")}</td><td>все внеоборотные активы и отложенные налоговые активы</td><td>${A("доля ОНА (нулевая доходность) не растёт")}</td><td>Л2</td></tr>
+ <tr><td class="f">${A("Тп &gt; Тв &gt; Та &gt; 100 %")}</td><td>прибыль, выручка, активы — «золотое правило экономики»</td><td>${A("рентабельность продаж растёт (Тп &gt; Тв), отдача активов растёт (Тв &gt; Та), масштаб растёт (Та &gt; 100 %)")}</td><td>банк тестов (тест 2)</td></tr>
+ </tbody></table></div>
+ <div class="rule"><b>Одно правило:</b> «хорошее» (основная прибыль, выручка, мобильные активы) растёт <b>быстрее</b>, «плохое» (затраты, рискованные и бездоходные активы) — <b>не быстрее</b>.<br><b>Знак:</b> «&gt;» — когда сравниваем две разные величины (выручка и затраты, ОбА и ВнА); «≥» — когда сравниваем часть и целое (ПП в ПДН, ДФВ и ОНА во ВнА).</div></section>`;
+ const L=[["","Выручка","2110","4 500",0],["−","Себестоимость продаж","2120","(3 600)",0],["=","Валовая прибыль","2100","900",900],["−","Коммерческие расходы","2210","(157)",0],["−","Управленческие расходы","2220","(318)",0],["=","Прибыль от продаж","2200","425",425,"табл. 2.2"],["+","Доходы от участия в других организациях","2310","18",0],["+","Проценты к получению","2320","22",0],["−","Проценты к уплате","2330","(6)",0],["+","Прочие доходы","2340","32",0],["−","Прочие расходы","2350","(31)",0],["=","Прибыль до налогообложения","2300","460",460,"табл. 2.1 (прочая деятельность = 35, табл. 2.3)"],["−","Текущий налог на прибыль","2410","(140)",0],["±","Изменение ОНО (−) и ОНА (+)","2430/2450","10",0],["±","Прочее","2460","—",0],["=","Чистая прибыль","2400","330",330,"табл. 2.4"],["+","Переоценка ВнА и прочие операции вне ЧП","2510/2520","—",0],["=","Совокупный финансовый результат","2500","330",330,"табл. 2.5"]];
+ h+=`<section class="cs" id="cs-ladder"><h2>Лестница прибыли</h2><p class="lead">Отчёт о финансовых результатах сверху вниз: коды строк и цифры отчётного года из примера Крылова (табл. П.2), тыс. р. Полоска — доля от выручки. Нарисуй лестницу по памяти, затем сверь.</p><div class="ladder">`;
+ L.forEach(r=>{const res=r[0]==="=";h+=`<div class="lr ${res?"res":""}"><span class="op">${r[0]}</span><span class="nm">${res?A(r[1]):r[1]}${r[5]?`<small>${r[5]}</small>`:""}${res?`<div class="bar2" style="width:${Math.max(4,r[4]/4500*100*3)}%"></div>`:""}</span><span class="cd">${r[2]}</span><span class="v">${r[3]}</span></div>`});
+ h+=`</div><p class="lead" style="margin-top:10px">Полоски растянуты в 3 раза для наглядности: валовая прибыль — 20 % выручки, прибыль от продаж — 9,4 %, ПДН — 10,2 %, чистая прибыль — 7,3 %.</p></section>`;
+ const P=[
+  [["Предмет","финансовые результаты + финансовое состояние"],["Объект","финансовые аспекты хозяйственной деятельности"],["Информационная база","данные бухучёта и финансовой отчётности"]],
+  [["Горизонтальный анализ","каждая позиция vs предыдущий период"],["Трендовый анализ","vs ряд прошлых периодов + тренд → прогноз"],["Вертикальный анализ","структура: удельные веса частей в целом"]],
+  [["Цель внешнего ФА","рейтинг, устойчивость, платёжеспособность, надёжность → меньше риск для контрагентов"],["Цель внутреннего ФА","состояние ресурсов, внутренний рейтинг, резервы → управление ликвидностью"]],
+  [["Базисные темпы роста","каждый уровень ÷ один базисный период"],["Цепные темпы роста","каждый уровень ÷ предыдущий"]],
+  [["Прямой финансовый интерес","кредиторы, инвесторы"],["Непрямой интерес","налоговые и финансовые органы, партнёры, работники, общество, статистика"]],
+  [["Управленческая отчётность","закрытая: себестоимость по видам продукции"],["Финансовая (бухгалтерская)","публичная, для внешних пользователей"]],
+  [["Цепные подстановки","замена базы на факт по одному фактору; расчётов = факторов + 1"],["Абсолютные разницы","прирост фактора × факт слева × база справа"]],
+  [["Кфин = СК / ЗК","коэффициент финансирования"],["ЗК / СК ≤ 1","коэффициент задолженности"],["СК / ВБ ≥ 0,5","финансовая независимость"],["СК / ВнА ≥ 1","коэффициент инвестирования"]]
+ ];
+ h+=`<section class="cs" id="cs-pairs"><h2>Не перепутай</h2><p class="lead">Пары и тройки понятий, которые в тестах стоят рядом как «ловушки».</p><div class="pairs">`;
+ P.forEach(row=>{h+=`<div class="pair">${row.map(([k,v])=>`<div><b>${k}</b>${A(v)}</div>`).join("")}</div>`});
+ h+=`</div></section>`;
+ const LI=[
+  ["Категории метода ФА","ПФР","Показатели · Факторы · Резервы — «как Пенсионный фонд»"],
+  ["Этапы ФА","П-У-О-П","Предварительный → Углублённый → Обобщение и рекомендации → Прогнозирование. «Посмотрел, Углубился, Обобщил, Предсказал»"],
+  ["Подэтапы предварительного ФА","Проверил — Прочитал — Посчитал","подготовительный (проверка отчётности) · обзор отчётности (аудиторское заключение) · расчёт важнейших показателей"],
+  ["Функции ФА","Оценка → Причины → Решения → Резервы","объективная оценка финсостояния · факторы и причины · подготовка и обоснование решений · выявление и мобилизация резервов"],
+  ["Где применяется ФА","Проблемы · Прогноз · Управление · Инвестиции","проблемы текущей и инвестиционной деятельности · прогнозирование · управление субъектом · оценка вариантов инвестирования"],
+  ["10 методических приёмов","3 + 4 + 3","3 «величины»: абсолютные, относительные, средние · 4 «формы»: сравнение, группировка, графический, табличный · 3 «расчёта»: балансовый, цепные подстановки, абсолютные разницы"],
+  ["Виды сравнений (6)","План · Норма · Прошлое · Соседи · Среднее · До/после","план–факт (только внутренний ФА) · нормативы · прошлые периоды · межхозяйственные · средние по отрасли/региону · до и после изменения фактора"],
+  ["Значения графиков","И-А-М","иллюстративное · аналитическое · методологическое"],
+  ["Группировки","2 × 3","по сложности: простые / комбинированные · по задачам: типологические, структурные, аналитические (в ФА — простые структурные и аналитические)"],
+  ["Резервы роста финрезультатов (5)","по лестнице сверху вниз","↑ выручка · ↓ затраты · ↑ прочие доходы · ↓ прочие расходы · оптимизация налогообложения"],
+  ["Реальные активы","НМА · ОС · Запасы · НЗП","НМА и ОС по остаточной стоимости, производственные запасы, незавершённое производство → производственный потенциал"],
+  ["Стратегия по структуре ВнА","НМА → инновации, ОС → производство, ДФВ → финансы","наибольший удельный вес НМА и НИОКР — инновационная; ОС — производственная; ДФВ — финансово-инвестиционная"],
+  ["Уровни информационного обеспечения","З-М-О-С-Н","законодательно-нормативный · методический · организационный · системный (учёт и отчётность) · несистемный (пресса, контрагенты)"],
+  ["Виды экономического анализа","2 признака","широта охвата: полный / тематический · время: ретроспективный / оперативный / перспективный"]
+ ];
+ h+=`<section class="cs" id="cs-lists"><h2>Списки и мнемоники</h2><p class="lead">Для открытых вопросов «перечислите…». Сначала вспомни мнемонику, потом разверни её в полный список.</p><div class="lists">`;
+ LI.forEach(([t,m,p])=>{h+=`<div class="li"><b>${t}</b><div class="mn">${m}</div><p>${A(p)}</p></div>`});
+ h+=`</div></section>`;
+ const FM=[["Ксф = (ЧП + Ам) / И","коэффициент самофинансирования: доля инвестиционных потребностей, покрытая чистой прибылью и амортизацией"],["Rизд = Пв / Сп × 100","рентабельность издержек: валовая прибыль на 1 руб. себестоимости"],["Rпд = Ппрод / (Сп + КР + УР) × 100","рентабельность производственной деятельности"],["Rпрод = Ппрод / Выручка × 100","рентабельность продаж: прибыль с 1 руб. продаж"],["Rк = Пдн / ВБ × 100","рентабельность капитала: прибыль до налогообложения на 1 руб. капитала"],["ЧП = ПДН − ТНП − ΔОНО + ΔОНА − прочее","чистая прибыль (табл. 2.4)"],["СФР = ЧП + переоценка ВнА + прочие операции","совокупный финансовый результат (табл. 2.5)"],["Динамика имущества = ВБкон / ВБнач","больше 1 — масштабы деятельности растут"],["Отдача активов = Выручка / Активы","выручка растёт медленнее активов → отдача падает"],["Кфин = СК / ЗК","коэффициент финансирования (было в контрольной)"]];
+ h+=`<section class="cs" id="cs-formulas"><h2>Формулы</h2><div class="formulas">${FM.map(([f,p])=>`<div class="fm"><div class="fx">${A(f)}</div><p>${p}</p></div>`).join("")}</div></section></div></div>`;
+ app.innerHTML=h;
+}
+
+/* ---------- events ---------- */
+app.addEventListener("click",e=>{
+ const ans=e.target.closest(".hide-mode .ans");if(ans){ans.classList.toggle("shown");return}
+ const el=e.target.closest("[data-act]");if(!el||el.disabled)return;
+ const a=el.dataset.act;
+ switch(a){
+  case"continue":{const d=PLAN.find(d=>!d.steps.every(stepDone));if(!d){startExam();break}const st=d.steps.find(s=>!stepDone(s));runStep(st.id);break}
+  case"exam":startExam();break;
+  case"kr":startVariant();break;
+  case"kbank":startKBank();break;
+  case"ktr":startKTr();break;
+  case"kmove":move(1);break;
+  case"submit-kr":{const un=sess.items.filter(x=>!(sess.ans[x]||{}).done).length;if(un&&!(sess.confirmAt&&Date.now()-sess.confirmAt<6000)){sess.confirmAt=Date.now();toast("Без ответа: "+un+". Нажми «Сдать» ещё раз, чтобы сдать как есть");break}gradeVariant();break}
+  case"kr-toggle":{const A=sess.ans[el.dataset.id];A.ok=!A.ok;krRescore();render();break}
+  case"step":runStep(el.dataset.step);break;
+  case"tick":{const id=el.dataset.step;S.plan[id]=!S.plan[id];save();render();break}
+  case"scroll-tickets":{const t=document.getElementById("tickets");if(t)t.scrollIntoView({behavior:"smooth",block:"start"});break}
+  case"marathon":startMarathon();break;
+  case"mistakes":startMistakes();break;
+  case"starred":startStarred();break;
+  case"cards":startCards("all");break;
+  case"cheat":cheat={hide:false,sec:null};go("cheat");break;
+  case"retry-last":if(sess&&sess.finished)go("result");break;
+  case"ticket":startTicket(+el.dataset.n);break;
+  case"block":startBlock(+el.dataset.b);break;
+  case"topic":startTopic(el.dataset.t);break;
+  case"reset":confirmReset=true;render();break;
+  case"reset-no":confirmReset=false;render();break;
+  case"reset-yes":S=blank();save();confirmReset=false;sess=null;render();toast("Прогресс сброшен");break;
+  case"home":clearInterval(timerInt);if(sess&&(sess.mode==="exam"||sess.mode==="kr")&&!sess.finished){toast(sess.mode==="exam"?"Экзамен прерван и не засчитан":"Вариант не сдан и не засчитан");sess=null}confirmReset=false;go("home");break;
+  case"opt":pick(+el.dataset.o);break;
+  case"submit":submitMulti();break;
+  case"skip":{if(!nextUnanswered())move(1);break}
+  case"next":goNext();break;
+  case"prev":move(-1);break;
+  case"goto":{sess.idx=+el.dataset.i;render();break}
+  case"finish":finishSession();break;
+  case"fix":{const s=sess;const w=s.items.filter(id=>!isOpen(id)&&(s.ans[id]||{}).done&&!s.ans[id].ok);startSession({mode:"retry",title:"Ошибки попытки",items:w});break}
+  case"again":{const s=sess;if(s.mode==="exam")startExam();else if(s.mode==="kr")startVariant();else if(s.mode==="ticket")startTicket(s.ticket);else if(s.mode==="marathon")startMarathon();else if(s.mode==="mistakes")startMistakes();else startSession({mode:s.mode,block:s.block,title:s.title,items:s.items});break}
+  case"cfilter":startCards(el.dataset.f);break;
+  case"ccheck":{const ta=document.getElementById("card-input");cs.text=ta?ta.value:cs.text;if(!cs.text.trim()){toast("Сначала напиши хоть пару слов — или нажми «показать ответ»");break}cs.stage="shown";render();break}
+  case"creveal":{const ta=document.getElementById("card-input");cs.text=ta?ta.value:cs.text;cs.stage="shown";render();break}
+  case"cknow":case"cagain":{const id=cs.queue[cs.pos];const r=S.cards[id]||(S.cards[id]={box:0});if(a==="cknow"){r.box=Math.min(3,(r.box||0)+1);cs.known++}else{r.box=0;if(!cs.requeued[id]){cs.requeued[id]=1;cs.queue.push(id)}}r.t=Date.now();save();cs.pos++;cs.stage="ask";cs.text="";render();toTop();break}
+  case"chide":cheat.hide=!cheat.hide;render();break;
+  case"cnav":{const t=document.getElementById("cs-"+el.dataset.s);if(t)t.scrollIntoView({behavior:"smooth",block:"start"});break}
+ }
+});
+document.addEventListener("keydown",e=>{
+ if(view!=="quiz"||!sess||sess.finished)return;
+ if(e.target.closest&&e.target.closest("textarea,input"))return;
+ if(e.metaKey||e.ctrlKey||e.altKey)return;
+ const q=curQ(),A=q?sess.ans[q.id]:null;
+ if(q&&/^[1-9]$/.test(e.key)){const p=+e.key-1;if(p<q.o.length){pick(sess.perm[q.id][p]);e.preventDefault()}}
+ else if(e.key==="Enter"){if(e.target.closest&&e.target.closest("button"))return;if(sess.mode==="kr"){move(1)}else if(q&&q.multi&&!(A&&A.done))submitMulti();else if(A&&A.done&&sess.instant)goNext();e.preventDefault()}
+ else if(e.key==="ArrowRight"){move(1)}else if(e.key==="ArrowLeft"){move(-1)}
+});
+render();
+
+})();
+</script>
+
+</body></html>

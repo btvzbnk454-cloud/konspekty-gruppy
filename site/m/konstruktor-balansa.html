@@ -1,0 +1,358 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Конструктор баланса</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sofia+Sans:wght@400;500;700;800&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap">
+<style>
+/* Бланк баланса (форма 0710001), заполняемый под копирку: слева актив, справа пассив; блоки по одному сверху, вписанное — фиолетовым, ошибки — красным. */
+:root{
+  --paper:#F2F4F1; --sheet:#FAFBF9; --ink:#1D2025; --ink-2:#4A505A; --ink-3:#69707B;
+  --rule:#C7CCD0; --rule-2:#9AA1A9;
+  --copy:#4630A6; --copy-soft:#E6E2F5; --on-copy:#FFFFFF;
+  --storno:#BE2A22; --storno-soft:#F8E3E0;
+  --f-body:"Sofia Sans","Segoe UI",system-ui,-apple-system,Arial,sans-serif;
+  --f-cond:"Sofia Sans Extra Condensed","Arial Narrow","Roboto Condensed",Impact,sans-serif;
+  --f-type:"IBM Plex Mono","PT Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --paper:#171528; --sheet:#1F1C36; --ink:#ECE9F8; --ink-2:#B9B4D3; --ink-3:#928DAE; --rule:#37335A; --rule-2:#5A557F;
+  --copy:#B9A9FF; --copy-soft:#2B2552; --on-copy:#171528; --storno:#FF8B7B; --storno-soft:#3D1E24}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --paper:#171528; --sheet:#1F1C36; --ink:#ECE9F8; --ink-2:#B9B4D3; --ink-3:#928DAE; --rule:#37335A; --rule-2:#5A557F;
+  --copy:#B9A9FF; --copy-soft:#2B2552; --on-copy:#171528; --storno:#FF8B7B; --storno-soft:#3D1E24}
+*{box-sizing:border-box}
+html,body{background:var(--paper)}
+body{margin:0;color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:default}
+:focus-visible{outline:2px solid var(--copy);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.wrap{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 64px}
+.num{font-family:var(--f-type);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cap{font-size:13px;color:var(--ink-3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:7px 14px;border:1.5px solid var(--ink);border-radius:3px;background:transparent;font-weight:700;font-size:14.5px;line-height:1.2}
+.btn:hover:not(:disabled){background:var(--sheet)}
+.btn.main{background:var(--copy);border-color:var(--copy);color:var(--on-copy)}
+.btn.quiet{border-color:transparent;color:var(--ink-2);font-weight:500;padding-inline:8px}
+.btn:disabled{opacity:.4}
+
+/* шапка формы */
+.head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:end;padding-bottom:14px;border-bottom:3px double var(--ink)}
+.formno{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
+h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(40px,8vw,64px);line-height:.92;text-wrap:balance}
+.firm{margin-top:10px;color:var(--ink-2);font-size:15px}
+.firm b{color:var(--ink)}
+.head-r{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:640px){.head{grid-template-columns:minmax(0,1fr)}.head-r{justify-content:flex-start}}
+
+/* текущий блок */
+.deck{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);padding-block:12px 10px;border-bottom:1.5px solid var(--ink)}
+.deck-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center}
+.card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:10px 14px;border:2px solid var(--copy);border-radius:4px;background:var(--copy-soft);cursor:grab;touch-action:manipulation;min-width:0}
+.card.drag{opacity:.55}
+.card .k{grid-column:1/-1;font-size:12.5px;color:var(--copy);font-family:var(--f-type)}
+.card .n{font-weight:700;font-size:17px;line-height:1.3;min-width:0}
+.card .v{font-family:var(--f-type);font-weight:600;font-size:20px;color:var(--copy);white-space:nowrap}
+.deck .hint{font-size:13.5px;color:var(--ink-2);max-width:32ch}
+.deck .side{display:grid;gap:6px;justify-items:start}
+.done-msg{font-weight:700}
+@media (max-width:640px){.deck-in{grid-template-columns:minmax(0,1fr)}.deck .hint{max-width:none}.deck .side{grid-auto-flow:column;align-items:center;justify-content:space-between;width:100%}.card .n{font-size:15.5px}.card .v{font-size:17px}}
+.prog{height:4px;margin-top:8px;background:var(--rule);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--copy);transition:width .3s}
+
+/* бланк баланса */
+.bal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:18px}
+@media (max-width:760px){.bal{grid-template-columns:minmax(0,1fr)}}
+.side-h{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;padding-bottom:6px;border-bottom:2.5px solid var(--ink)}
+.side-h span{font-family:var(--f-body);font-weight:400;font-size:12.5px;text-transform:none;color:var(--ink-3)}
+.sec{border-bottom:1px solid var(--rule-2)}
+.sec-h{display:flex;width:100%;justify-content:space-between;align-items:baseline;gap:10px;padding:10px 0 6px;border:0;background:none;text-align:left;font-weight:800;font-size:15.5px;letter-spacing:.01em}
+.sec-h .code{font-family:var(--f-type);font-weight:500;font-size:12.5px;color:var(--ink-3)}
+.drop{display:none;width:100%;margin:2px 0 10px;padding:9px 10px;border:1.5px dashed var(--copy);border-radius:3px;background:transparent;color:var(--copy);font-weight:700;font-size:14px;text-align:left}
+.armed .drop{display:block}
+.drop:hover,.drop.over{background:var(--copy-soft)}
+.lines{display:grid}
+.ln{border-top:1px solid var(--rule)}
+.ln:first-child{border-top:0}
+.ln-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px;align-items:center;padding:6px 0}
+.ln-n{min-width:0;font-size:14.5px;line-height:1.3}
+.ln-v{font-family:var(--f-type);font-size:14.5px;color:var(--copy);white-space:nowrap;text-align:right}
+.ln-a{display:flex;gap:4px}
+.mini{min-width:32px;height:30px;padding:0 8px;border:1.5px solid var(--rule-2);border-radius:3px;background:var(--paper);font-weight:700;font-size:13px;line-height:1;color:var(--ink-2)}
+.mini.sub{border-color:var(--copy);color:var(--copy)}
+.mini.sub:hover{background:var(--copy-soft)}
+.mini:hover{color:var(--ink)}
+.ln.over .ln-row{background:var(--copy-soft)}
+.subl{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:4px 10px;align-items:center;padding:2px 0 6px 18px;font-size:13.5px;color:var(--ink-2)}
+.subl .ln-v{font-size:13.5px}
+.net{display:flex;justify-content:space-between;padding:0 0 6px 18px;font-size:12.5px;color:var(--ink-3)}
+.net .num{color:var(--ink-2)}
+.ln.ok .ln-n::before,.subl.ok span:first-child::before{content:"✓ ";color:var(--copy);font-weight:700}
+.ln.bad>.ln-row .ln-n,.subl.bad span:first-child{color:var(--storno);text-decoration:line-through;text-decoration-thickness:1.5px}
+.empty{padding:2px 0 10px;font-size:13px;color:var(--ink-3)}
+.tot{display:flex;justify-content:space-between;gap:10px;padding:7px 0;font-weight:700;font-size:14.5px}
+.tot .num{color:var(--ink-3)}
+.tot.shown .num{color:var(--copy)}
+.tot .num.bad{color:var(--storno)}
+.grand{display:flex;justify-content:space-between;gap:10px;padding:9px 0 7px;margin-top:2px;border-top:1.5px solid var(--ink);border-bottom:3px double var(--ink);font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:22px;line-height:1}
+.grand .num{font-family:var(--f-type);font-size:17px;font-weight:600;color:var(--ink-3)}
+.grand.shown .num{color:var(--copy)}
+.grand .num.bad{color:var(--storno)}
+
+.offz{margin-top:24px;border:1.5px solid var(--ink);border-radius:4px;padding:6px 14px 8px}
+.offz .sec-h{padding-top:6px}
+
+/* итог */
+.res{margin-top:28px;padding-top:14px;border-top:3px double var(--ink)}
+.res-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:center}
+.res-h h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(30px,6vw,44px);line-height:.95}
+.res-h p{margin-top:8px;color:var(--ink-2);max-width:62ch}
+.stamp{display:inline-block;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;letter-spacing:.08em;font-size:30px;line-height:1;padding:10px 16px 8px;border:3px solid currentColor;border-radius:4px;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 5px currentColor;transform:rotate(-5deg);color:var(--copy);white-space:nowrap}
+.stamp.bad{color:var(--storno)}
+.stamp small{display:block;font-size:.4em;letter-spacing:.14em;margin-top:5px;font-family:var(--f-body)}
+@media (max-width:560px){.res-h{grid-template-columns:minmax(0,1fr)}.res-h .stamp{justify-self:start}}
+.tw{overflow-x:auto;margin-top:16px}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+caption{caption-side:top;text-align:left;font-size:13px;color:var(--ink-3);padding-bottom:5px}
+th,td{padding:6px 10px;border:1px solid var(--rule-2);text-align:left;vertical-align:top}
+th{font-size:13px;background:var(--sheet)}
+td.r,th.r{text-align:right;font-family:var(--f-type);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.bad{color:var(--storno)}
+@media (max-width:480px){table{font-size:13px}th,td{padding:5px 7px}}
+td.good{color:var(--copy)}
+.errs{margin-top:20px;display:grid}
+.err{padding:10px 0;border-bottom:1px solid var(--rule)}
+.err b{display:block}
+.err .was{color:var(--storno);font-family:var(--f-type);font-size:14px;text-decoration:line-through}
+.err .now{color:var(--copy);font-family:var(--f-type);font-size:14px;font-weight:600}
+.err p{margin-top:4px;font-size:14.5px;color:var(--ink-2);max-width:72ch}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.rules{margin-top:30px;font-size:14px;color:var(--ink-2);max-width:72ch;display:grid;gap:6px}
+.rules b{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="head">
+    <div>
+      <p class="formno">Форма по ОКУД 0710001 · единица измерения: тыс. руб.</p>
+      <h1>Составь баланс</h1>
+      <p class="firm" id="firm"></p>
+    </div>
+    <div class="head-r">
+      <button class="btn" id="b-new" type="button">Новый вариант</button>
+      <button class="btn quiet" id="b-restart" type="button">Начать заново</button>
+    </div>
+  </header>
+
+  <section class="deck" id="deck" aria-live="polite"></section>
+
+  <section class="bal" id="bal" aria-label="Бухгалтерский баланс"></section>
+
+  <section class="offz" id="offz"></section>
+
+  <section class="res" id="res" hidden></section>
+
+  <div class="rules">
+    <p><b>Как переносить.</b> Нажми на раздел, куда относится блок, — или перетащи блок мышью. Если сумма уменьшает уже перенесённую статью, нажми «−» у этой статьи. Кнопка «↩» возвращает статью наверх, чтобы перенести её заново.</p>
+    <p><b>Проверка</b> запускается сама, когда распределён последний блок: итоги разделов, валюта баланса и разбор каждой ошибки.</p>
+  </div>
+</div>
+
+<script>
+(function(){"use strict";
+const SEC={1:"I. Внеоборотные активы",2:"II. Оборотные активы",3:"III. Капитал и резервы",4:"IV. Долгосрочные обязательства",5:"V. Краткосрочные обязательства",0:"Не из баланса (отчёт о финансовых результатах)"};
+const SHORT={1:"I. Внеоборотные",2:"II. Оборотные",3:"III. Капитал",4:"IV. Долгосрочные",5:"V. Краткосрочные"};
+const CODE={1:"стр. 1100",2:"стр. 1200",3:"стр. 1300",4:"стр. 1400",5:"стр. 1500"};
+// s — раздел (0 — не в балансе); base — из какой статьи вычитается; pct — доля от базы
+const POOL={
+ os:{n:"Основные средства (по первоначальной стоимости)",c:"1150",s:1,r:[1800,4200],why:"Строка 1150. В балансе основные средства показывают по остаточной стоимости — за вычетом амортизации."},
+ am_os:{n:"Амортизация основных средств",base:"os",pct:[.2,.45],why:"Отдельной строки в балансе нет: амортизацию (сч. 02) вычитают из основных средств — строка 1150 показывается нетто."},
+ nma:{n:"Нематериальные активы (по первоначальной стоимости)",c:"1110",s:1,r:[200,700],why:"Строка 1110, раздел I. Показывается за вычетом амортизации."},
+ am_nma:{n:"Амортизация нематериальных активов",base:"nma",pct:[.15,.5],why:"Сч. 05 — регулирующий: вычитается из НМА, в пассив не попадает."},
+ niokr:{n:"Результаты исследований и разработок",c:"1120",s:1,r:[60,300],why:"Строка 1120, раздел I."},
+ dvmc:{n:"Доходные вложения в материальные ценности",c:"1160",s:1,r:[150,600],why:"Строка 1160, раздел I: имущество, которое организация сдаёт в аренду."},
+ dfv:{n:"Финансовые вложения (облигации со сроком погашения через 2 года)",c:"1170",s:1,r:[80,400],why:"Срок больше 12 месяцев — долгосрочные финансовые вложения, строка 1170 в разделе I."},
+ ona:{n:"Отложенные налоговые активы",c:"1180",s:1,r:[15,90],why:"Строка 1180, раздел I."},
+ pva:{n:"Прочие внеоборотные активы",c:"1190",s:1,r:[40,250],why:"Строка 1190, раздел I. Часто здесь показывают незавершённые капитальные вложения и авансы под них."},
+
+ zap:{n:"Запасы",c:"1210",s:2,r:[250,900],why:"Строка 1210, раздел II: материалы, незавершённое производство, готовая продукция, товары."},
+ rez_zap:{n:"Резерв под снижение стоимости запасов",base:"zap",pct:[.04,.12],why:"Регулирующая величина (сч. 14): запасы показывают за вычетом резерва, в пассиве его нет."},
+ nds:{n:"Налог на добавленную стоимость по приобретённым ценностям",c:"1220",s:2,r:[15,90],why:"Строка 1220, раздел II."},
+ deb:{n:"Дебиторская задолженность",c:"1230",s:2,r:[250,900],why:"Строка 1230, раздел II: долги покупателей, выданные авансы и прочие долги организации."},
+ rsd:{n:"Резерв по сомнительным долгам",base:"deb",pct:[.04,.18],why:"Сч. 63 — регулирующий: дебиторскую задолженность показывают за вычетом резерва."},
+ kfv:{n:"Финансовые вложения (депозит в банке на 6 месяцев)",c:"1240",s:2,r:[60,300],why:"Срок до 12 месяцев — строка 1240, раздел II (финансовые вложения, за исключением денежных эквивалентов)."},
+ den:{n:"Денежные средства и денежные эквиваленты",c:"1250",s:2,r:[120,500],why:"Строка 1250, раздел II."},
+ poa:{n:"Прочие оборотные активы",c:"1260",s:2,r:[10,80],why:"Строка 1260, раздел II."},
+
+ uk:{n:"Уставный капитал",c:"1310",s:3,r:[300,1200],why:"Строка 1310, раздел III."},
+ sa:{n:"Собственные акции, выкупленные у акционеров",base:"uk",pct:[.03,.1],why:"Строка 1320 показывается в разделе III в круглых скобках: выкупленные акции уменьшают собственный капитал. Это не финансовое вложение."},
+ pereoc:{n:"Переоценка внеоборотных активов",c:"1340",s:3,r:[80,450],why:"Строка 1340, раздел III: накопленная дооценка — часть собственного капитала."},
+ dk:{n:"Добавочный капитал (без переоценки)",c:"1350",s:3,r:[50,300],why:"Строка 1350, раздел III."},
+ rk:{n:"Резервный капитал",c:"1360",s:3,r:[20,150],why:"Строка 1360, раздел III."},
+ np:{n:"Нераспределённая прибыль (непокрытый убыток)",c:"1370",s:3,why:"Строка 1370, раздел III."},
+
+ dzs:{n:"Заёмные средства (кредит банка на 3 года)",c:"1410",s:4,r:[250,1100],why:"Срок погашения больше 12 месяцев — строка 1410, раздел IV."},
+ ono:{n:"Отложенные налоговые обязательства",c:"1420",s:4,r:[15,90],why:"Строка 1420, раздел IV."},
+ doo:{n:"Оценочные обязательства (демонтаж оборудования через 10 лет)",c:"1430",s:4,r:[40,160],why:"Оценочное обязательство со сроком больше года — строка 1430, раздел IV."},
+ dpo:{n:"Прочие долгосрочные обязательства",c:"1450",s:4,r:[50,300],why:"Строка 1450, раздел IV."},
+
+ kzs:{n:"Заёмные средства (кредит банка на 9 месяцев)",c:"1510",s:5,r:[100,500],why:"Срок до 12 месяцев — строка 1510, раздел V."},
+ kz:{n:"Кредиторская задолженность",c:"1520",s:5,r:[200,800],why:"Строка 1520, раздел V: долги поставщикам, персоналу, бюджету, полученные авансы."},
+ dbp:{n:"Доходы будущих периодов",c:"1530",s:5,r:[20,150],why:"Строка 1530, раздел V."},
+ koo:{n:"Оценочные обязательства (резерв на оплату отпусков)",c:"1540",s:5,r:[30,140],why:"Краткосрочное оценочное обязательство — строка 1540, раздел V."},
+ kpo:{n:"Прочие краткосрочные обязательства",c:"1550",s:5,r:[10,90],why:"Строка 1550, раздел V."},
+
+ vyr:{n:"Выручка",c:"2110",s:0,r:[3000,9000],why:"Строка 2110 отчёта о финансовых результатах: это оборот за год, а баланс показывает положение на дату."},
+ seb:{n:"Себестоимость продаж",c:"2120",s:0,r:[2000,6000],why:"Строка 2120 отчёта о финансовых результатах, в балансе её нет."},
+ kom:{n:"Коммерческие расходы",c:"2210",s:0,r:[150,600],why:"Строка 2210 отчёта о финансовых результатах."},
+ chp:{n:"Чистая прибыль за отчётный год",c:"2400",s:0,r:[150,700],why:"Строка 2400 отчёта о финансовых результатах. В балансе она уже сидит внутри нераспределённой прибыли (1370) — отдельной строкой её не переносят."},
+ nnp:{n:"Текущий налог на прибыль",c:"2411",s:0,r:[30,150],why:"Строка 2411 отчёта о финансовых результатах. Долг по налогу в балансе входит в кредиторскую задолженность."}
+};
+const FIRMS=["ООО «Северный хлеб»","АО «Вектор-Пласт»","ООО «Тёплый дом»","АО «Ока-Металл»","ООО «Лесная полка»","АО «Сокол Принт»","ООО «Берег»","АО «Кварц»"];
+const KEY="balans-konstr-v2";
+
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const r10=x=>Math.max(10,Math.round(x/10)*10);
+const pick=(arr,k)=>shuffle(arr).slice(0,k);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function fm(n){const neg=n<0;n=Math.abs(Math.round(n));return(neg?"−":"")+String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ")}
+const kind=id=>POOL[id].base?"contra":POOL[id].s===0?"off":"item";
+
+function amount(id){const p=POOL[id];const x=rnd(p.r[0],p.r[1]);return x>100?r10(x):Math.max(1,x)}
+
+function makeVariant(){
+ const ids=["os","am_os","uk","np","den","deb","kz","zap"];
+ const add=id=>{if(!ids.includes(id))ids.push(id)};
+ if(Math.random()<.8){add("nma");if(Math.random()<.85)add("am_nma")}
+ pick(["niokr","dvmc","dfv","ona","pva"],rnd(1,2)).forEach(add);
+ if(Math.random()<.45)add("rsd");
+ if(Math.random()<.3)add("rez_zap");
+ pick(["nds","kfv","poa"],2).forEach(add);
+ pick(["pereoc","dk","rk"],rnd(1,2)).forEach(add);
+ if(Math.random()<.3)add("sa");
+ pick(["dzs","ono","doo","dpo"],rnd(1,2)).forEach(add);
+ pick(["kzs","dbp","koo","kpo"],rnd(2,3)).forEach(add);
+ pick(["vyr","seb","kom","chp","nnp"],2).forEach(add);
+ const amt={};
+ ids.forEach(id=>{if(id!=="np"&&!POOL[id].base)amt[id]=amount(id)});
+ ids.forEach(id=>{const p=POOL[id];if(p.base)amt[id]=r10(amt[p.base]*(p.pct[0]+Math.random()*(p.pct[1]-p.pct[0])))});
+ const v={firm:FIRMS[rnd(0,FIRMS.length-1)],year:2025,ids,amt};
+ let np=balanceGap(v);
+ if(np<40){amt.den+=r10(40-np+rnd(20,120));np=balanceGap(v)}
+ amt.np=np;
+ // порядок блоков: случайный, но регулирующая сумма идёт после своей статьи
+ let q=shuffle(ids);
+ ids.forEach(id=>{const b=POOL[id].base;if(!b)return;const i=q.indexOf(id),j=q.indexOf(b);if(i<j){q.splice(i,1);const k=q.indexOf(b);q.splice(rnd(k+1,q.length),0,id)}});
+ v.order=q;return v}
+function correctPlace(v){const pl={};v.ids.forEach(id=>{const p=POOL[id];pl[id]=p.base?{t:"sub",on:p.base}:{t:"sec",s:p.s}});return pl}
+function totals(v,pl){const t={1:0,2:0,3:0,4:0,5:0};
+ v.ids.forEach(id=>{const p=pl[id];if(!p)return;const a=v.amt[id];
+  if(p.t==="sec"){if(p.s)t[p.s]+=a}
+  else{const host=pl[p.on];if(host&&host.t==="sec"&&host.s)t[host.s]-=a}});
+ return t}
+function balanceGap(v){const pl=correctPlace(v);delete pl.np;const t=totals(v,pl);return t[1]+t[2]-t[3]-t[4]-t[5]}
+
+/* ---------- состояние ---------- */
+let st=load()||fresh();
+function fresh(){const v=makeVariant();return{v,place:{},queue:v.order.slice(),checked:false}}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v&&s.v.ids.every(id=>POOL[id]))return s}catch(e){}return null}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+const cur=()=>st.queue[0]||null;
+
+function placeCur(target){const id=cur();if(!id)return;
+ if(target.t==="sub"){if(target.on===id)return;const h=st.place[target.on];if(!h||h.t!=="sec"||h.s===0||kind(target.on)==="contra")return}
+ st.place[id]=target;st.queue.shift();st.checked=false;
+ if(!st.queue.length)st.checked=true;
+ save();render();if(st.checked){const r=$("res");try{r.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}}}
+function pickUp(id){
+ // статья возвращается наверх вместе со всем, что из неё вычтено
+ const back=[id];Object.keys(st.place).forEach(k=>{const p=st.place[k];if(p.t==="sub"&&p.on===id)back.push(k)});
+ back.forEach(k=>delete st.place[k]);
+ st.queue=back.concat(st.queue.filter(x=>!back.includes(x)));st.checked=false;save();render();window.scrollTo({top:0,behavior:"smooth"})}
+function later(){if(st.queue.length<2)return;const id=st.queue.shift();
+ // вместе со статьёй в конец уходят суммы, которые из неё вычитаются
+ const subs=st.queue.filter(k=>POOL[k].base===id);
+ st.queue=st.queue.filter(k=>!subs.includes(k)).concat([id],subs);save();render()}
+
+/* ---------- отрисовка ---------- */
+function render(){
+ const v=st.v,total=v.ids.length,placed=total-st.queue.length;
+ $("firm").innerHTML=`<b>${esc(v.firm)}</b>, баланс на 31 декабря ${v.year} г. Блоков: ${total}.`;
+ const id=cur();
+ let d=`<div class="deck-in">`;
+ if(id){d+=`<div class="card" id="card" draggable="true"><span class="k">Блок ${placed+1} из ${total}</span><span class="n">${esc(POOL[id].n)}</span><span class="v">${fm(v.amt[id])}</span></div>
+  <div class="side"><p class="hint">Куда перенести? Раздел — или «−» у статьи, из которой вычитаешь.</p>${st.queue.length>1?`<button class="btn quiet" type="button" id="b-later">Отложить в конец</button>`:""}</div>`}
+ else d+=`<p class="done-msg">Все ${total} блоков распределены. Итоги и разбор — под балансом.</p><div class="side"><button class="btn" type="button" id="b-res">К итогам</button></div>`;
+ d+=`</div><div class="prog" aria-hidden="true"><i style="width:${placed/total*100}%"></i></div>`;
+ $("deck").innerHTML=d;
+
+ const ok=st.checked?correctPlace(v):null,ut=totals(v,st.place),ct=st.checked?totals(v,ok):null;
+ const linesOf=s=>v.ids.filter(k=>st.place[k]&&st.place[k].t==="sec"&&st.place[k].s===s).sort((a,b)=>v.order.indexOf(a)-v.order.indexOf(b));
+ const subsOf=h=>v.ids.filter(k=>st.place[k]&&st.place[k].t==="sub"&&st.place[k].on===h);
+ const right=k=>{const a=st.place[k],b=ok[k];return a&&b&&a.t===b.t&&(a.t==="sec"?a.s===b.s:a.on===b.on)};
+ const secHTML=s=>{const ls=linesOf(s);
+  let h=`<div class="sec${id?" armed":""}" data-sec="${s}"><button class="sec-h" type="button" data-put="${s}" ${id?"":"tabindex=\"-1\""}><span>${SEC[s]}</span>${CODE[s]?`<span class="code">${CODE[s]}</span>`:""}</button>
+   <button class="drop" type="button" data-put="${s}">+ Перенести сюда</button><div class="lines">`;
+  if(!ls.length)h+=`<p class="empty">${s===0?"Сюда — показатели, которых нет в балансе.":"Пока пусто."}</p>`;
+  ls.forEach(k=>{const subs=subsOf(k),cls=ok?(right(k)?" ok":" bad"):"",canSub=id&&s!==0&&kind(k)!=="contra";
+   h+=`<div class="ln${cls}" data-line="${k}"><div class="ln-row"><span class="ln-n">${ok&&POOL[k].c?`<span class="cap num">${POOL[k].c} </span>`:""}${esc(POOL[k].n)}</span><span class="ln-v">${fm(v.amt[k])}</span><span class="ln-a">${canSub?`<button class="mini sub" type="button" data-sub="${k}" aria-label="Вычесть текущий блок из статьи">−</button>`:""}<button class="mini" type="button" data-up="${k}" aria-label="Вернуть статью наверх">↩</button></span></div>`;
+   subs.forEach(x=>{h+=`<div class="subl${ok?(right(x)?" ok":" bad"):""}"><span>− ${esc(POOL[x].n)}</span><span class="ln-v">${fm(v.amt[x])}</span><button class="mini" type="button" data-up="${x}" aria-label="Вернуть наверх">↩</button></div>`});
+   if(subs.length){const net=v.amt[k]-subs.reduce((a,x)=>a+v.amt[x],0);h+=`<div class="net"><span>в балансе</span><span class="num">${fm(net)}</span></div>`}
+   h+=`</div>`});
+  h+=`</div>`;
+  if(s)h+=`<div class="tot${ok?" shown":""}"><span>Итого по разделу ${["","I","II","III","IV","V"][s]}</span><span class="num${ok&&ut[s]!==ct[s]?" bad":""}">${ok?fm(ut[s]):"?"}</span></div>`;
+  return h+`</div>`};
+ const ua=ut[1]+ut[2],up=ut[3]+ut[4]+ut[5];
+ $("bal").innerHTML=`<div><div class="side-h">Актив<span>что есть у организации</span></div>${secHTML(1)}${secHTML(2)}<div class="grand${ok?" shown":""}"><span>Баланс <small class="cap">стр. 1600</small></span><span class="num${ok&&ua!==ct[1]+ct[2]?" bad":""}">${ok?fm(ua):"?"}</span></div></div>
+  <div><div class="side-h">Пассив<span>откуда это взялось</span></div>${secHTML(3)}${secHTML(4)}${secHTML(5)}<div class="grand${ok?" shown":""}"><span>Баланс <small class="cap">стр. 1700</small></span><span class="num${ok&&up!==ct[3]+ct[4]+ct[5]?" bad":""}">${ok?fm(up):"?"}</span></div></div>`;
+ $("offz").innerHTML=secHTML(0);
+
+ const r=$("res");
+ if(!st.checked){r.hidden=true;r.innerHTML="";bindDrag();return}
+ r.hidden=false;
+ const wrong=v.ids.filter(k=>!right(k)),ca=ct[1]+ct[2];
+ const where=(p)=>!p?"—":p.t==="sec"?SEC[p.s]:"вычесть из строки «"+POOL[p.on].n+"»";
+ let h=`<div class="res-h"><div><h2>${wrong.length?"Есть расхождения":"Баланс сведён"}</h2><p>${wrong.length?`Верно ${v.ids.length-wrong.length} из ${v.ids.length}. `:"Все блоки на своих местах. "}${ua===up?`Твой актив равен пассиву: ${fm(ua)}${ua!==ca?", но верная валюта — "+fm(ca)+": совпадение итогов ещё не значит, что статьи разнесены правильно":""}.`:`Твой баланс не сошёлся: актив ${fm(ua)}, пассив ${fm(up)}, разница ${fm(Math.abs(ua-up))}.`}</p></div>
+  <div class="stamp${wrong.length?" bad":""}">${wrong.length?"Не сходится":"Сведено"}<small>${wrong.length?"ошибок: "+wrong.length:"без ошибок"}</small></div></div>`;
+ h+=`<div class="tw"><table><caption>Сверка итогов, тыс. руб.</caption><thead><tr><th>Раздел</th><th class="r">У тебя</th><th class="r">Верно</th><th class="r">Разница</th></tr></thead><tbody>`;
+ [1,2,3,4,5].forEach(s=>{const dlt=ut[s]-ct[s];h+=`<tr><td>${SHORT[s]}</td><td class="r">${fm(ut[s])}</td><td class="r good">${fm(ct[s])}</td><td class="r${dlt?" bad":""}">${dlt?(dlt>0?"+":"")+fm(dlt):"0"}</td></tr>`});
+ h+=`<tr><td><b>Валюта баланса</b></td><td class="r"><b>${fm(ua)} / ${fm(up)}</b></td><td class="r good"><b>${fm(ca)}</b></td><td class="r${ua!==ca||up!==ca?" bad":""}">${ua!==ca||up!==ca?"≠":"0"}</td></tr></tbody></table></div>`;
+ if(wrong.length){h+=`<div class="errs">`;wrong.forEach(k=>{h+=`<div class="err"><b>${esc(POOL[k].n)} — ${fm(v.amt[k])}</b><span class="was">${esc(where(st.place[k]))}</span><br><span class="now">${esc(where(ok[k]))}</span><p>${esc(POOL[k].why)}</p></div>`});h+=`</div>`}
+ h+=`<div class="acts">${wrong.length?`<button class="btn main" type="button" id="b-fix">Исправить ошибки</button>`:""}<button class="btn${wrong.length?"":" main"}" type="button" id="b-new2">Новый вариант</button></div>`;
+ r.innerHTML=h;bindDrag();
+}
+
+/* ---------- события ---------- */
+document.addEventListener("click",e=>{
+ const t=e.target.closest("button");if(!t)return;
+ if(t.id==="b-new"||t.id==="b-new2"){st=fresh();save();render();window.scrollTo({top:0});return}
+ if(t.id==="b-restart"){st={v:st.v,place:{},queue:st.v.order.slice(),checked:false};save();render();window.scrollTo({top:0});return}
+ if(t.id==="b-later"){later();return}
+ if(t.id==="b-res"){$("res").scrollIntoView({behavior:"smooth",block:"start"});return}
+ if(t.id==="b-fix"){const ok=correctPlace(st.v);const bad=st.v.ids.filter(k=>{const a=st.place[k],b=ok[k];return!(a&&a.t===b.t&&(a.t==="sec"?a.s===b.s:a.on===b.on))});
+  // ошибочные блоки возвращаются в очередь; регулирующие — после своих статей
+  bad.forEach(k=>delete st.place[k]);Object.keys(st.place).forEach(k=>{const p=st.place[k];if(p.t==="sub"&&!st.place[p.on]){delete st.place[k];if(!bad.includes(k))bad.push(k)}});
+  st.queue=bad.sort((a,b)=>st.v.order.indexOf(a)-st.v.order.indexOf(b));st.checked=false;save();render();window.scrollTo({top:0,behavior:"smooth"});return}
+ if(t.dataset.put!=null){placeCur({t:"sec",s:+t.dataset.put});return}
+ if(t.dataset.sub){placeCur({t:"sub",on:t.dataset.sub});return}
+ if(t.dataset.up){pickUp(t.dataset.up);return}
+});
+// перетаскивание мышью (на телефоне работает нажатие)
+function bindDrag(){const c=$("card");if(!c)return;
+ c.addEventListener("dragstart",e=>{try{e.dataTransfer.setData("text/plain",cur());e.dataTransfer.effectAllowed="move"}catch(x){}c.classList.add("drag")});
+ c.addEventListener("dragend",()=>c.classList.remove("drag"))}
+const tgt=e=>{const ln=e.target.closest(".ln[data-line]");if(ln){const k=ln.dataset.line,h=st.place[k];if(h&&h.t==="sec"&&h.s!==0&&kind(k)!=="contra")return{el:ln,p:{t:"sub",on:k}}}
+ const s=e.target.closest(".sec[data-sec]");if(s)return{el:s.querySelector(".drop")||s,p:{t:"sec",s:+s.dataset.sec}};return null};
+let overEl=null;
+document.addEventListener("dragover",e=>{if(!cur())return;const t=tgt(e);if(overEl&&(!t||t.el!==overEl)){overEl.classList.remove("over");overEl=null}if(t){e.preventDefault();t.el.classList.add("over");overEl=t.el}});
+document.addEventListener("drop",e=>{const t=tgt(e);if(overEl){overEl.classList.remove("over");overEl=null}if(t){e.preventDefault();placeCur(t.p)}});
+
+render();
+})();
+</script>
+
+</body></html>
