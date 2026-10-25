@@ -13,7 +13,8 @@ A private, link-only static site where the owner shares exam-prep materials with
 ## Layout
 
 - `site/` is the only deployed directory.
-  - `site/index.html` is the home page: a self-contained page with inline CSS and JS. The `MATERIALS` array in its script is the single source of truth for what appears on the home page (subject, kind, title, file, date, note). Sections, filter chips and the "новое" badge (last 7 days) are all derived from that array.
+  - `site/index.html` is the home page: a self-contained page with inline CSS and JS. The `MATERIALS` array in its script is the single source of truth for what appears on the home page (subject, kind, title, file, date, note). The subject filter, list, detail card and the "новое" badge (last 7 days) are all derived from that array. On desktop a click in the list selects a material into the card; on phones (≤860px) it opens the material directly.
+  - `site/kalendar.html` is the calendar tab. Its `EVENTS` array (date, kind, subject, optional prep material) drives the month grid and the "upcoming" list. Subject short labels (`SHORT`) are duplicated in both pages; keep them in sync.
   - `site/m/*.html` are the materials. Each is a standalone page exported from a Claude artifact. Treat them as opaque and don't restyle them unless asked.
   - `site/robots.txt` and `site/_headers` (`X-Robots-Tag: noindex`) keep the site out of search engines.
 - `drafts/` holds design mockups for a home page redesign. It is untracked and not deployed. Draft links point to `../site/m/...`.
