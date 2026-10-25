@@ -1,10 +1,11 @@
-# Локальный предпросмотр сайта: http://localhost:8080
-$root = Join-Path $PSScriptRoot "site"
+# Local preview: http://localhost:8080 (site) or -Root . -Port 8081 (whole repo, for drafts)
+param([string]$Root = "site", [int]$Port = 8080)
+$root = (Resolve-Path (Join-Path $PSScriptRoot $Root)).Path
 $l = New-Object Net.HttpListener
-$l.Prefixes.Add("http://localhost:8080/")
+$l.Prefixes.Add("http://localhost:$Port/")
 $l.Start()
-Write-Host "Serving $root on http://localhost:8080/"
-$types = @{ ".html"="text/html; charset=utf-8"; ".txt"="text/plain; charset=utf-8"; ".css"="text/css"; ".js"="text/javascript" }
+Write-Host "Serving $root on http://localhost:$Port/"
+$types = @{ ".html"="text/html; charset=utf-8"; ".txt"="text/plain; charset=utf-8"; ".css"="text/css"; ".js"="text/javascript"; ".png"="image/png"; ".jpg"="image/jpeg" }
 while ($l.IsListening) {
   $c = $l.GetContext()
   $p = [Uri]::UnescapeDataString($c.Request.Url.AbsolutePath).TrimStart("/")
