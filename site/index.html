@@ -75,8 +75,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .th3{left:482px;top:590px;transform:rotate(-1.5deg);font-size:14px;color:#5b554b}
 
 .meet{left:745px;top:-118px;width:830px;height:515px;transform:rotate(1.2deg);z-index:4}
-.meet svg{width:100%;height:100%;overflow:visible}
-.plan{width:725px;height:330px;padding:12px 14px;mix-blend-mode:multiply;color:#1d1a16;font-family:var(--vyaz);display:flex;flex-direction:column}
+.meet-in{position:absolute;left:0;top:0;width:1028px;height:638px;transform-origin:0 0}
+.meet .layer{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.plan-box{position:absolute;left:150px;top:150px;width:725px;height:330px;mix-blend-mode:multiply}
+.plan{width:100%;height:100%;padding:12px 14px;color:#1d1a16;font-family:var(--vyaz);display:flex;flex-direction:column}
 .plan-head{display:flex;justify-content:space-between;align-items:baseline;font-size:22px;margin:0 64px 8px 64px}
 .plan-head small{font-size:15px;color:#4b443a}
 .days{flex:1;display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
@@ -121,13 +123,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 @media (max-width:860px){
   .desk{width:auto;height:auto;transform:none!important;padding:16px 12px 40px;display:flex;flex-direction:column;gap:28px}
   .desk>*{position:relative;left:auto;top:auto;transform:none}
-  .nb{width:auto;height:auto;background:var(--leather);border-radius:12px;padding:14px 12px 18px;box-shadow:0 10px 20px rgba(0,0,0,.5)}
+    .nb{width:auto;height:auto;background:var(--leather);border-radius:12px;padding:14px 6px 18px 12px;box-shadow:0 10px 20px rgba(0,0,0,.5);display:flex;align-items:stretch}
   .nb-img{display:none}
-  .tabs{position:static;width:auto;height:auto;flex-direction:row;flex-wrap:wrap;gap:4px;margin-bottom:12px}
-  .tab{flex:none;width:auto;height:auto;padding:6px 9px;border:1px solid #cbbfa9;border-radius:6px}
-  .tab span{writing-mode:horizontal-tb}
-  .tab[aria-pressed="true"]{width:auto}
-  .sheet{background:var(--page);border-radius:4px;padding:0 14px 16px;position:relative}
+  .tabs{position:static;order:2;flex:none;width:34px;height:auto;margin:22px 0 22px;gap:3px}
+  .tab{flex:1 1 auto;width:30px;min-height:44px;padding:9px 0}
+  .sheet{flex:1;min-width:0;background:var(--page);border-radius:4px 0 0 4px;padding:0 14px 16px;position:relative}
   .note{position:relative;inset:auto;height:auto;aspect-ratio:336/270;margin:0 -14px}
   .note.off{display:none}
   .note .fabric{left:2%;top:4%;width:96%}
@@ -142,7 +142,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .thoughts{position:relative;inset:auto;display:flex;flex-direction:column;gap:14px;padding-top:18px}
   .thoughts>*{position:relative;left:auto;top:auto;width:auto}
   .th2{align-self:flex-end;max-width:70%}
-  .meet{width:100%;height:auto;aspect-ratio:1028/638}
+    .meet{width:100%;overflow:hidden}
+    .plan{position:absolute;left:355px;top:161.5px;width:263px;height:650px;transform:translate(-50%,-50%) rotate(-90deg);padding:10px 4px 8px}
+  .plan-head{margin:0 0 6px;font-size:20px}
+  .plan-head small{font-size:14px}
+  .days{display:flex;flex-direction:column;gap:5px}
+    .day{flex:1 1 auto;gap:2px;padding:4px 7px}
+  .day b{justify-content:flex-start;gap:8px;font-size:15px}
+  .day .cls{display:flex;align-items:baseline;gap:6px;font-size:12px;line-height:1.3}
+  .day .cls i{display:inline;flex:none;width:80px;font-size:9.5px;white-space:nowrap}
+  .day .cls em{display:inline;font-size:12px}
   .cal{width:100%}
   .cal-photo{height:56vw}
   .cal-year{height:44px;top:4px;left:10px}
@@ -151,12 +160,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .grid .d{font-size:18px}
   .grid .d.rk{font-size:22px}
   .grid .hw{font-size:13px}
-  .mtabs{position:static;flex-direction:row;margin-top:8px}
-  .mtab{width:auto;height:auto;padding:5px 8px;border:1px solid #c9c0ad;border-radius:6px}
+    .mtabs{position:static;flex-direction:row;gap:3px;padding:0 14px}
+  .mtab{width:auto;height:26px;padding:0 10px 3px;border:1px solid #c9c0ad;border-top:0;border-radius:0 0 8px 8px;
+    background:linear-gradient(180deg,#e1dccf,#efebe1);place-items:end center}
   .mtab span{writing-mode:horizontal-tb}
-  .mtab[aria-pressed="true"]{width:auto}
-  .drawing{width:80%;align-self:flex-end;transform:rotate(94deg);margin:15% 0}
-  .pen{display:none}
+  .mtab:hover{transform:translateY(3px)}
+  .mtab[aria-pressed="true"]{width:auto;height:32px;background:linear-gradient(180deg,#f4f1ea,#f8f5ee)}
+    .desk{overflow:hidden;padding-bottom:30vw}
+  .cal{z-index:2}
+  .desk>.drawing{position:absolute;width:80vw;right:-10vw;bottom:-63vw;transform:rotate(94deg);z-index:1}
+  .desk>.pen{position:absolute;width:12vw;right:30vw;bottom:-12vw;transform:rotate(72deg);z-index:3}
 }
 @media (min-width:861px){ .sheet{display:contents} }
 </style>
@@ -196,8 +209,30 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     </div>
   </section>
 
-  <section class="meet shadow" aria-label="Неделя">
-    <svg viewBox="0 0 1028 638">
+  <section class="meet shadow" id="meet" aria-label="Неделя">
+   <div class="meet-in" id="meetIn">
+    <svg class="layer" viewBox="0 0 1028 638">
+      <defs>
+        <filter id="grain" x="0" y="0" width="100%" height="100%">
+          <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" result="n"/>
+          <feColorMatrix in="n" type="saturate" values="0" result="g0"/>
+          <feComponentTransfer in="g0" result="g"><feFuncR type="linear" slope=".3" intercept=".8"/><feFuncG type="linear" slope=".3" intercept=".8"/><feFuncB type="linear" slope=".3" intercept=".8"/><feFuncA type="linear" slope="0" intercept="1"/></feComponentTransfer>
+          <feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/>
+          <feBlend in="gi" in2="SourceGraphic" mode="multiply"/>
+        </filter>
+        <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+        <mask id="patch"><rect x="160" y="160" width="705" height="310" fill="#fff" filter="url(#soft)"/></mask>
+      </defs>
+      <image href="img/web/meeting.png" width="1028" height="638"/>
+      <g mask="url(#patch)"><rect x="140" y="140" width="745" height="350" fill="#e2e2df" filter="url(#grain)"/></g>
+    </svg>
+    <div class="plan-box">
+      <div class="plan">
+        <div class="plan-head"><span>Неделя</span><small id="weekRange"></small></div>
+        <div class="days" id="week"></div>
+      </div>
+    </div>
+    <svg class="layer" viewBox="0 0 1028 638">
       <defs>
         <clipPath id="hands">
           <polygon points="148,150 207,150 207,160 178,166 176,178 150,178"/>
@@ -212,26 +247,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
           <polygon points="784,481 787,456 801,456 801,481"/>
           <polygon points="842,481 844,460 859,460 867,481"/>
         </clipPath>
-        <filter id="grain" x="0" y="0" width="100%" height="100%">
-          <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="7" result="n"/>
-          <feColorMatrix in="n" type="saturate" values="0" result="g0"/>
-          <feComponentTransfer in="g0" result="g"><feFuncR type="linear" slope=".3" intercept=".8"/><feFuncG type="linear" slope=".3" intercept=".8"/><feFuncB type="linear" slope=".3" intercept=".8"/><feFuncA type="linear" slope="0" intercept="1"/></feComponentTransfer>
-          <feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/>
-          <feBlend in="gi" in2="SourceGraphic" mode="multiply"/>
-        </filter>
-        <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
-        <mask id="patch"><rect x="160" y="160" width="705" height="310" fill="#fff" filter="url(#soft)"/></mask>
       </defs>
-      <image href="img/web/meeting.png" width="1028" height="638"/>
-      <g mask="url(#patch)"><rect x="140" y="140" width="745" height="350" fill="#e2e2df" filter="url(#grain)"/></g>
-      <foreignObject x="150" y="150" width="725" height="330">
-        <div class="plan" xmlns="http://www.w3.org/1999/xhtml">
-          <div class="plan-head"><span>Неделя</span><small id="weekRange"></small></div>
-          <div class="days" id="week"></div>
-        </div>
-      </foreignObject>
       <image href="img/web/meeting.png" width="1028" height="638" clip-path="url(#hands)"/>
     </svg>
+   </div>
   </section>
 
   <section class="cal" aria-label="Календарь">
@@ -460,10 +479,23 @@ function plural(n, one, few, many){
 
 function fit(){
   const desk = document.getElementById("desk"), wrap = document.getElementById("wrap");
+  fitMeet();
   if(!desktop.matches){ desk.style.transform = ""; wrap.style.height = ""; return; }
   const k = innerWidth / 1600;
   desk.style.transform = "scale("+k+")";
   wrap.style.height = (900*k) + "px";
+}
+
+function fitMeet(){
+  const meet = document.getElementById("meet"), inn = document.getElementById("meetIn");
+  if(desktop.matches){
+    meet.style.height = "";
+    inn.style.transform = "scale(" + (meet.clientWidth / 1028) + ")";
+    return;
+  }
+  const W = meet.clientWidth, k = W / 360, H = 1028 * k;
+  meet.style.height = H + "px";
+  inn.style.transform = "translate(" + W/2 + "px," + H/2 + "px) rotate(90deg) scale(" + k + ") translate(-514px,-319px)";
 }
 addEventListener("resize", fit);
 desktop.addEventListener("change", fit);
