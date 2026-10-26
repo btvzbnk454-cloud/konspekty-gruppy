@@ -31,9 +31,12 @@ input{font:inherit;color:inherit}
 .shadow{filter:drop-shadow(0 10px 14px rgba(0,0,0,.45)) drop-shadow(0 2px 3px rgba(0,0,0,.35))}
 
 .nb{left:0;top:0;width:1189px;height:936px;transform-origin:0 0;z-index:3;
-  transform:translate(300px,150px) rotate(-1.5deg) scale(.64);transition:transform .7s cubic-bezier(.2,.75,.2,1)}
-body.zoom .nb{transform:translate(16px,6px) rotate(0) scale(.94)}
-.nb-img{position:absolute;inset:0;width:100%;height:100%}
+  transform:translate(300px,150px) rotate(-1.5deg) scale(.64);transition:transform .7s cubic-bezier(.2,.75,.2,1),width .7s cubic-bezier(.2,.75,.2,1)}
+.nb-img{position:absolute;inset:0}
+.nb-img>div{position:absolute;top:0;height:100%;background:url(../img/web/notebook.png) no-repeat}
+.nb-img>div,.tabs,.pg{transition-property:left,width,background-size,background-position,opacity;transition-duration:.7s,.7s,.7s,.7s,.2s;transition-timing-function:cubic-bezier(.2,.75,.2,1)}
+.calc,.timer,.sticky{transition:translate .7s cubic-bezier(.2,.75,.2,1)}
+.noanim *{transition:none!important}
 
 .tabs{position:absolute;left:1094px;top:0;width:40px;height:100%}
 .tab{position:absolute;left:0;width:40px;display:grid;place-items:center;border-radius:0 9px 9px 0;transition:transform .15s}
@@ -42,7 +45,7 @@ body.zoom .nb{transform:translate(16px,6px) rotate(0) scale(.94)}
 .tab[aria-pressed="true"] span{color:var(--red)}
 
 .pg{position:absolute;top:70px;height:778px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#cfc5b1 transparent;
-  font-size:16px;line-height:1.35;transition:opacity .2s}
+  font-size:16px;line-height:1.35}
 .pl{left:100px;width:428px;padding-right:6px}
 .pr{left:646px;width:432px;padding-right:6px}
 .pg.fade{opacity:0}
@@ -53,20 +56,20 @@ body.zoom .nb{transform:translate(16px,6px) rotate(0) scale(.94)}
 .muted{color:var(--ink2)}
 .small{font-size:13.5px}
 
-.vz{display:flex;align-items:flex-end;gap:3px;height:96px;margin:6px 0 4px}
+.vz{display:flex;align-items:flex-end;gap:3px;height:84px;margin:6px 0 4px}
 .vz img{height:100%;width:auto;display:block}
 .vz i{width:22px}
-.menu-sub{font-family:var(--vyaz);font-size:26px;margin:0 0 14px}
-.menu-what{font-size:19px;line-height:1.3}
-.menu-list{margin:10px 0 0;padding:0 0 0 30px;font-size:18px;line-height:1.45;columns:1}
+.menu-sub{font-family:var(--vyaz);font-size:22px;margin:0 0 14px}
+.menu-what{font-size:17px;line-height:1.3}
+.menu-list{margin:10px 0 0;padding:0 0 0 28px;font-size:16.5px;line-height:1.45;columns:1}
 .menu-date{font-family:var(--hand);color:var(--red);font-size:32px;font-weight:700;transform:rotate(-3deg);margin:16px 0 0 10px}
 .fmt{display:block;width:100%;text-align:left;padding:16px 4px 16px;border-bottom:1.5px solid var(--line)}
-.fmt b{display:block;font-family:var(--vyaz);font-weight:400;font-size:34px;line-height:1.1}
+.fmt b{display:block;font-family:var(--vyaz);font-weight:400;font-size:28px;line-height:1.1}
 .fmt b::before{content:attr(data-n)" ";color:var(--ink2);font-size:22px}
-.fmt span{display:block;font-family:var(--hand);font-size:25px;line-height:1.05;color:#4a4036;margin-top:4px}
+.fmt span{display:block;font-family:var(--hand);font-size:23px;line-height:1.05;color:#4a4036;margin-top:4px}
 .fmt:hover b{color:var(--red)}
-.menu-pick{font-family:var(--vyaz);font-size:26px;margin:4px 0 6px}
-.menu-foot{font-family:var(--hand);font-size:23px;color:var(--pen);margin-top:22px;transform:rotate(-1.5deg)}
+.menu-pick{font-family:var(--vyaz);font-size:22px;margin:4px 0 6px}
+.menu-foot{font-family:var(--hand);font-size:21px;color:var(--pen);margin-top:22px;transform:rotate(-1.5deg)}
 
 .rep-head{margin-bottom:8px}
 .rep-head .org{font-family:var(--vyaz);font-size:20px;line-height:1.15}
@@ -121,7 +124,11 @@ table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
 .final .big{font-family:var(--vyaz);font-size:64px;line-height:1}
 .final .hand{font-size:30px;margin:10px 0 24px}
 
-.card{padding:9px 0 10px;border-bottom:1.5px solid var(--line)}
+.card{padding:6px 0 22px}
+.card+.card{padding-top:14px;border-top:1.5px dashed var(--line)}
+.card .expl{position:relative;margin:8px 4px 0;padding:8px 12px 9px}
+.card .expl::before{content:"";position:absolute;inset:-2px -3px;pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M1.5 4C30 2.5 68 3.5 98.5 2.5M97.5 1C98.5 32 97 68 98 98.5M99 96.5C68 97.5 31 98.5 2 97M3.5 99C2 68 3 33 2 1.5' fill='none' stroke='%231f3a6b' stroke-width='1.6' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.85'/%3E%3C/svg%3E") center/100% 100% no-repeat}
 .card h4{margin:0 0 4px;font-family:var(--vyaz);font-weight:400;font-size:17px;line-height:1.15}
 .card h4 b{font-weight:400;color:var(--red);margin-right:4px}
 .card .fx{font-size:15px}
@@ -176,6 +183,8 @@ table.tb{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 8px}
   font-family:var(--hand);color:#2b2620;box-shadow:0 8px 12px rgba(0,0,0,.35)}
 .sticky .t1{font-size:25px;font-weight:700;line-height:1}
 .sticky .t2{font-size:21px;line-height:1.05;margin-top:2px}
+.sticky .tstop{display:inline-block;margin-top:7px;padding:1px 10px 2px;border:1.5px solid #2b2620;border-radius:12px 9px 13px 8px;font-family:var(--hand);font-size:20px;font-weight:700;line-height:1.1;transform:rotate(-2deg)}
+.sticky .tstop:hover{background:#2b2620;color:#f7eda6}
 .sticky .t3{font-size:16.5px;line-height:1;color:#5b554b;margin-top:10px;border-top:1px dashed #b9ab5d;padding-top:6px}
 
 .drawing{left:-150px;top:520px;width:560px;transform:rotate(76deg);z-index:1;box-shadow:0 12px 22px rgba(0,0,0,.5)}
@@ -237,7 +246,7 @@ dl.bricks{margin:0;font-size:14.5px}
   <img class="pen shadow" src="../img/web/pen.png" alt="">
 
   <section class="nb shadow" id="nb" aria-label="Блокнот">
-    <img class="nb-img" src="../img/web/notebook.png" alt="">
+    <div class="nb-img" id="nbImg"></div>
     <nav class="tabs" id="tabs" aria-label="Разделы"></nav>
     <div class="pg pl" id="pl"></div>
     <div class="pg pr" id="pr"></div>
@@ -246,6 +255,7 @@ dl.bricks{margin:0;font-size:14.5px}
   <div class="sticky" id="sticky" aria-live="polite">
     <div class="t1" id="st1"></div>
     <div class="t2" id="st2"></div>
+    <button class="tstop" id="tStop"></button>
     <div class="t3">калькулятор понимает клавиатуру, когда курсор не в поле ответа</div>
   </div>
 
@@ -508,7 +518,8 @@ function renderTabs(){
 
 function go(m){
   mode = m;
-  document.body.classList.toggle("zoom", m!=="menu");
+  document.body.classList.add("zoom");
+  fit();
   if(m!=="menu") startTimer();
   renderTabs();
   pl.classList.add("fade"); pr.classList.add("fade");
@@ -533,7 +544,7 @@ function renderMenu(){
     <button class="fmt" data-go="tests"><b data-n="I.">Тесты</b><span>12 вопросов: формулы, нормативы и расчёты по случайному отчёту</span></button>
     <button class="fmt" data-go="sheet"><b data-n="II.">Шпаргалка</b><span>все 12 формул словами, нормативы и типичные ошибки</span></button>
     <button class="fmt" data-go="rk"><b data-n="III.">Пробный РК</b><span>новый отчёт, 12 показателей за два года, проверка в конце</span></button>
-    <div class="menu-foot">калькулятор и таймер лежат справа — таймер заведётся сам, как только откроешь блокнот</div>`;
+    <div class="menu-foot">калькулятор и таймер лежат справа — таймер заведётся сам, как только откроешь любой формат</div>`;
   pr.querySelectorAll("[data-go]").forEach(b=>b.onclick = ()=>go(b.dataset.go));
 }
 
@@ -646,8 +657,8 @@ function renderFinal(){
 }
 
 const card = i => `<div class="card"><h4><b>${i.n}</b>${i.name}</h4>${fxHTML(i)}
-  <div class="nm">норматив: ${i.norm} · ${unitText(i)}</div>
-  <div class="memo">${i.memo}</div></div>`;
+  <div class="expl"><div class="nm"><b>норматив:</b> ${i.norm} · ${unitText(i)}</div>
+  <div class="memo">${i.memo}</div></div></div>`;
 const RULES = `<ul class="rules">
     <li>Баланс — данные <b>на дату</b> (31 декабря), отчёт о финансовых результатах — <b>за год</b>.</li>
     <li>Проценты: результат деления <b>×100</b>. Дни: <b>×360</b>.</li>
@@ -865,21 +876,30 @@ addEventListener("keydown", e=>{
 });
 
 const WORK = 25*60e3, REST = 5*60e3, KEY = "rk2-pomodoro";
-let tStart = null;
-try{ const v = +localStorage.getItem(KEY); if(v && Date.now() - v < 3*3600e3) tStart = v; }catch(e){}
+let tStart = null, tStopped = false;
+try{ const v = +localStorage.getItem(KEY); if(v && Date.now() - v < 3*3600e3) tStart = v; tStopped = localStorage.getItem(KEY+"-stop")==="1"; }catch(e){}
 function startTimer(){
-  if(tStart) return;
+  if(tStart || tStopped) return;
   tStart = Date.now();
   try{ localStorage.setItem(KEY, tStart); }catch(e){}
   tick();
 }
+const tBtn = document.getElementById("tStop");
+tBtn.onclick = ()=>{
+  if(tStart){ tStart = null; tStopped = true; }
+  else { tStopped = false; }
+  try{ localStorage.removeItem(KEY); tStopped ? localStorage.setItem(KEY+"-stop","1") : localStorage.removeItem(KEY+"-stop"); }catch(e){}
+  if(!tStopped) startTimer(); else tick();
+};
 function tick(){
   const needle = document.getElementById("needle"), on = document.getElementById("ledOn"), up = document.getElementById("ledUp");
   const st1 = document.getElementById("st1"), st2 = document.getElementById("st2");
+  tBtn.textContent = tStart ? "■ стоп" : "▶ запустить";
   if(!tStart){
     needle.setAttribute("transform","rotate(-135 150 175)");
     on.style.opacity = 0; up.style.opacity = 0;
-    st1.textContent = "помидор ждёт"; st2.textContent = "открой любой формат — и таймер пойдёт";
+    if(tStopped){ st1.textContent = "таймер остановлен"; st2.textContent = "запусти, когда будешь готов(а)"; }
+    else { st1.textContent = "помидор ждёт"; st2.textContent = "открой любой формат — и таймер пойдёт"; }
     return;
   }
   const t = Date.now() - tStart, el = t % (WORK+REST), n = Math.floor(t/(WORK+REST)) + 1;
@@ -912,12 +932,53 @@ function fit(){
   const desk = document.getElementById("desk"), wrap = document.getElementById("wrap");
   if(!desktop.matches){ desk.style.transform = ""; return; }
   const w = wrap.clientWidth, h = wrap.clientHeight, k = Math.min(w/1600, h/900);
-  desk.style.transform = "translate(" + (w - 1600*k)/2 + "px," + (h - 900*k)/2 + "px) scale(" + k + ")";
+  const ox = (w - 1600*k)/2, oy = (h - 900*k)/2;
+  desk.style.transform = "translate(" + ox + "px," + oy + "px) scale(" + k + ")";
+  fitNotebook(w, h, k, ox, oy);
+}
+
+const SL = [[0,90,0],[90,520,1],[520,650,0],[650,1085,1],[1085,1189,0]];
+const nb = document.getElementById("nb"), nbImg = document.getElementById("nbImg");
+SL.forEach(()=>nbImg.appendChild(document.createElement("div")));
+function mapX(x, f){
+  let out = 0;
+  for(const [a,b,st] of SL){ const s = st ? f : 1; if(x <= b) return out + (x-a)*s; out += (b-a)*s; }
+  return out;
+}
+function layoutNB(f){
+  [...nbImg.children].forEach((d,i)=>{
+    const [a,b,st] = SL[i], s = st ? f : 1;
+    Object.assign(d.style, { left:mapX(a,f)+"px", width:(b-a)*s+"px", backgroundSize:1189*s+"px 936px", backgroundPosition:-a*s+"px 0" });
+  });
+  nb.style.width = mapX(1189,f) + "px";
+  pl.style.left = mapX(100,f) + "px"; pl.style.width = mapX(528,f) - mapX(100,f) + "px";
+  pr.style.left = mapX(656,f) + "px"; pr.style.width = mapX(1078,f) - mapX(656,f) + "px";
+  document.getElementById("tabs").style.left = mapX(1094,f) + "px";
+}
+function fitNotebook(w, h, k, ox, oy){
+  const tools = ["calc","sticky"].map(id=>document.getElementById(id)).concat(document.querySelector(".timer"));
+  if(!document.body.classList.contains("zoom")){
+    layoutNB(1); nb.style.transform = ""; tools.forEach(t=>t.style.translate = "");
+    return;
+  }
+  const dx = Math.max(0, (w - ox)/k - 1592);
+  tools.forEach(t=>t.style.translate = dx + "px 0");
+  const availW = ox + (1160 + dx)*k - 18, availH = h - 6;
+  const CL = 26, CR = 12, CT = 32, CH = 876;
+  let s = availH/CH;
+  if((1189-CL-CR)*s > availW - 8) s = (availW - 8)/(1189-CL-CR);
+  const f = Math.min(1.3, Math.max(1, ((availW - 8)/s - (1189-CL-CR))/865 + 1));
+  layoutNB(f);
+  const shown = (mapX(1189,f) - CL - CR)*s;
+  const L = 8 + Math.max(0, (availW - 8 - shown)/2) - CL*s, T = (h - CH*s)/2 - CT*s;
+  nb.style.transform = "translate(" + (L-ox)/k + "px," + (T-oy)/k + "px) scale(" + s/k + ")";
 }
 addEventListener("resize", fit);
 desktop.addEventListener("change", fit);
 
+document.body.classList.add("zoom", "noanim");
 renderTabs(); renderMenu(); renderMobile(); tick(); drawCalc(); fit();
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.remove("noanim")));
 </script>
 </body>
 </html>
