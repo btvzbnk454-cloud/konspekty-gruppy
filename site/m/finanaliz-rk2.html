@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>РК-2 по финанализу</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Ruslan+Display&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b2620; --ink2:#6b6152; --page:#f1ece2; --line:#d6cdbb; --red:#a3322a; --pen:#1f3a6b; --leather:#3a201a; --ok:#2f6b3a;
+  --vyaz:"Ruslan Display","Times New Roman",serif;
+  --hand:"Caveat","Segoe Print",cursive;
+  --text:"PT Serif",Georgia,serif;
+  --mono:"PT Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100vh;color:var(--ink);font-family:var(--text);overflow:hidden;
+  background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%),url(../img/web/wood-h.jpg) center/cover,#2a1a12}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+.desk-wrap{position:relative;overflow:hidden;height:100vh;height:100dvh}
+.desk{position:relative;width:1600px;height:900px;transform-origin:0 0}
+.desk>*{position:absolute}
+.shadow{filter:drop-shadow(0 10px 14px rgba(0,0,0,.45)) drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+
+.nb{left:0;top:0;width:1189px;height:936px;transform-origin:0 0;z-index:3;
+  transform:translate(300px,150px) rotate(-1.5deg) scale(.64);transition:transform .7s cubic-bezier(.2,.75,.2,1)}
+body.zoom .nb{transform:translate(16px,6px) rotate(0) scale(.94)}
+.nb-img{position:absolute;inset:0;width:100%;height:100%}
+
+.tabs{position:absolute;left:1094px;top:0;width:40px;height:100%}
+.tab{position:absolute;left:0;width:40px;display:grid;place-items:center;border-radius:0 9px 9px 0;transition:transform .15s}
+.tab span{writing-mode:vertical-rl;font-family:var(--vyaz);font-size:15px;letter-spacing:.04em;white-space:nowrap;color:var(--ink2)}
+.tab:hover{transform:translateX(3px)}
+.tab[aria-pressed="true"] span{color:var(--red)}
+
+.pg{position:absolute;top:70px;height:778px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#cfc5b1 transparent;
+  font-size:16px;line-height:1.35;transition:opacity .2s}
+.pl{left:100px;width:428px;padding-right:6px}
+.pr{left:646px;width:432px;padding-right:6px}
+.pg.fade{opacity:0}
+.pg h2{font-family:var(--vyaz);font-weight:400;font-size:24px;line-height:1.15;margin:0 0 4px}
+.pg h3{font-family:var(--vyaz);font-weight:400;font-size:18px;margin:14px 0 6px}
+.pg p{margin:0 0 8px}
+.hand{font-family:var(--hand);color:var(--pen);font-size:21px;line-height:1.05}
+.muted{color:var(--ink2)}
+.small{font-size:13.5px}
+
+.vz{display:flex;align-items:flex-end;gap:3px;height:96px;margin:6px 0 4px}
+.vz img{height:100%;width:auto;display:block}
+.vz i{width:22px}
+.menu-sub{font-family:var(--vyaz);font-size:26px;margin:0 0 14px}
+.menu-what{font-size:19px;line-height:1.3}
+.menu-list{margin:10px 0 0;padding:0 0 0 30px;font-size:18px;line-height:1.45;columns:1}
+.menu-date{font-family:var(--hand);color:var(--red);font-size:32px;font-weight:700;transform:rotate(-3deg);margin:16px 0 0 10px}
+.fmt{display:block;width:100%;text-align:left;padding:16px 4px 16px;border-bottom:1.5px solid var(--line)}
+.fmt b{display:block;font-family:var(--vyaz);font-weight:400;font-size:34px;line-height:1.1}
+.fmt b::before{content:attr(data-n)" ";color:var(--ink2);font-size:22px}
+.fmt span{display:block;font-family:var(--hand);font-size:25px;line-height:1.05;color:#4a4036;margin-top:4px}
+.fmt:hover b{color:var(--red)}
+.menu-pick{font-family:var(--vyaz);font-size:26px;margin:4px 0 6px}
+.menu-foot{font-family:var(--hand);font-size:23px;color:var(--pen);margin-top:22px;transform:rotate(-1.5deg)}
+
+.rep-head{margin-bottom:8px}
+.rep-head .org{font-family:var(--vyaz);font-size:20px;line-height:1.15}
+.rep-head .meta{font-size:12.5px;color:var(--ink2)}
+.rep-title{font-family:var(--vyaz);font-size:16px;margin:12px 0 4px}
+table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
+.rep th{font-weight:400;font-size:11px;color:var(--ink2);text-align:right;border-bottom:1.5px solid var(--ink);padding:2px 3px;vertical-align:bottom}
+.rep th:first-child{text-align:left}
+.rep td{padding:2.5px 3px;border-bottom:1px solid var(--line);vertical-align:top}
+.rep td.v{font-family:var(--mono);font-size:12px;text-align:right;white-space:nowrap;width:82px}
+.rep tr.s td{font-style:italic;text-align:center;border-bottom:0;padding-top:7px;color:var(--ink2)}
+.rep tr.t td{font-weight:700}
+.rep tr.T td{font-weight:700;border-bottom:3px double var(--ink)}
+.rep tr.r{cursor:pointer}
+.rep tr.r:hover td{background:rgba(163,50,42,.06)}
+.rep tr.mk td{background:linear-gradient(transparent 30%,rgba(255,222,80,.65) 30%,rgba(255,222,80,.65) 90%,transparent 90%)}
+.rep-tip{font-family:var(--hand);font-size:18px;color:var(--pen);margin:8px 0 2px}
+
+.qtop{display:flex;justify-content:space-between;align-items:baseline}
+.qtop small{font-family:var(--hand);font-size:22px;color:var(--ink2)}
+.dots{display:flex;gap:4px;margin:6px 0 14px}
+.dots i{flex:1;height:5px;border-radius:3px;background:#ddd4c2}
+.dots i.cur{background:var(--ink2)}
+.dots i.ok{background:var(--ok)}
+.dots i.bad{background:var(--red)}
+.dots i.lz{background:#7b8db5}
+.q{font-size:18px;line-height:1.35;margin:0 0 12px}
+.q .what{display:block;font-family:var(--vyaz);font-size:21px;margin-top:4px}
+.opt{display:block;width:100%;text-align:left;padding:9px 10px;margin:0 0 7px;border:1.5px solid #cfc5b1;border-radius:6px;background:rgba(255,255,255,.35);font-size:15.5px;line-height:1.3}
+.opt:hover:not(:disabled){border-color:var(--ink2);background:rgba(255,255,255,.6)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:rgba(47,107,58,.1)}
+.opt.wrong{border-color:var(--red);background:rgba(163,50,42,.08)}
+.opt.dim{opacity:.55}
+.mono{font-family:var(--mono);font-size:.93em}
+.fb{margin:10px 0 0;padding:10px 12px;border-left:3px solid var(--ink2);background:rgba(255,255,255,.4);font-size:15px}
+.fb.ok{border-color:var(--ok)}
+.fb.bad{border-color:var(--red)}
+.fb.lz{border-color:#7b8db5}
+.fb b{font-weight:700}
+.fb .calcline{font-family:var(--mono);font-size:13px;line-height:1.4;margin-top:4px;word-break:break-word}
+.answer{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.answer input{width:170px;padding:7px 9px;border:1.5px solid #bfb49e;border-radius:5px;background:#fbf8f2;font-family:var(--mono);font-size:16px}
+.btn{padding:7px 14px;border:1.5px solid var(--ink);border-radius:6px;font-family:var(--vyaz);font-size:16px;background:rgba(255,255,255,.3)}
+.btn:hover{background:var(--ink);color:var(--page)}
+.btn.main{background:var(--ink);color:var(--page)}
+.btn.main:hover{background:var(--red);border-color:var(--red)}
+.lazy{font-family:var(--hand);font-size:21px;color:var(--pen);text-decoration:underline dashed 1px;text-underline-offset:4px;padding:2px 4px}
+.lazy:hover{color:var(--red)}
+.next{margin-top:14px;display:flex;justify-content:flex-end}
+.final{text-align:center;padding-top:40px}
+.final .big{font-family:var(--vyaz);font-size:64px;line-height:1}
+.final .hand{font-size:30px;margin:10px 0 24px}
+
+.card{padding:9px 0 10px;border-bottom:1.5px solid var(--line)}
+.card h4{margin:0 0 4px;font-family:var(--vyaz);font-weight:400;font-size:17px;line-height:1.15}
+.card h4 b{font-weight:400;color:var(--red);margin-right:4px}
+.card .fx{font-size:15px}
+.card .nm{font-size:13.5px;color:var(--ink2)}
+.card .memo{font-family:var(--hand);color:var(--pen);font-size:19px;line-height:1.02;margin-top:3px}
+.rules{margin:0;padding-left:20px;font-size:15px}
+.rules li{margin-bottom:5px}
+table.tb{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 8px}
+.tb td,.tb th{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;vertical-align:top}
+.tb th{font-weight:400;color:var(--ink2);font-size:12.5px;border-bottom:1.5px solid var(--ink)}
+.tb .mono{font-size:12.5px}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:var(--hand);font-size:22px;color:var(--ink2)}
+.pager button{font-family:var(--hand);font-size:24px;color:var(--pen)}
+.pager button:disabled{opacity:.3;cursor:default}
+
+.kr{padding:7px 0 8px;border-bottom:1.5px solid var(--line)}
+.kr-h{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.kr-h b{font-weight:400;font-family:var(--vyaz);font-size:15px;line-height:1.15}
+.kr-h b i{font-style:normal;color:var(--ink2);margin-right:3px}
+.kr-h .lazy{font-size:18px;white-space:nowrap;flex:none}
+.kr-in{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:5px}
+.kr-in label{display:flex;align-items:center;gap:5px;font-size:12.5px;color:var(--ink2)}
+.kr-in input{width:100%;min-width:0;padding:4px 6px;border:1.5px solid #c9bfa9;border-radius:4px;background:#fbf8f2;font-family:var(--mono);font-size:14px}
+.kr-in input.ok{border-color:var(--ok);background:#eef4ea}
+.kr-in input.bad{border-color:var(--red);background:#f8ebe7}
+.kr-in input.lz{border-color:#7b8db5;background:#eef0f6}
+.kr-fix{font-family:var(--hand);font-size:17px;line-height:1.05;color:var(--red);margin-top:3px}
+.kr-fix.okc{color:var(--ok)}
+.kr-sol{font-family:var(--mono);font-size:11.5px;line-height:1.35;color:var(--pen);margin-top:4px;word-break:break-word}
+.kr-dyn{font-size:12.5px;color:var(--ink2);margin-top:3px}
+.score{padding:10px 12px;margin:6px 0 4px;background:rgba(255,255,255,.45);border-left:3px solid var(--ink)}
+.score b{font-family:var(--vyaz);font-weight:400;font-size:26px}
+.kr-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 6px}
+
+.calc{left:1178px;top:316px;width:290px;transform:rotate(-3deg);z-index:4;user-select:none}
+.calc img{display:block;width:100%}
+.lcd{position:absolute;left:13.7%;top:14.5%;width:72.6%;height:14.8%;border-radius:2px;
+  background:linear-gradient(180deg,#5d8079,#4d726c 60%,#486a64);box-shadow:inset 0 2px 4px rgba(0,0,0,.35);
+  font-family:"VT323",var(--mono);color:#13201e;padding:4px 9px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.lcd .st{font-size:13px;line-height:1;opacity:.7;display:flex;justify-content:space-between}
+.lcd .ex{font-size:23px;line-height:1;white-space:nowrap;overflow:hidden;direction:rtl;text-align:left}
+.lcd .ex span{direction:ltr;unicode-bidi:bidi-override}
+.lcd .res{font-size:33px;line-height:1;text-align:right;white-space:nowrap}
+.key{position:absolute;border-radius:40%;transform:translate(-50%,-50%)}
+.key:active,.key.on{background:rgba(0,0,0,.22);box-shadow:inset 0 2px 5px rgba(0,0,0,.4)}
+
+.timer{left:1372px;top:30px;width:204px;transform:rotate(4deg);z-index:4;pointer-events:none}
+.timer img{display:block;width:100%}
+.timer svg{position:absolute;inset:0;width:100%;height:100%}
+.led{transition:opacity .25s}
+.sticky{left:1166px;top:66px;width:186px;padding:12px 12px 14px;z-index:4;background:linear-gradient(180deg,#f7eda6,#f1e491);transform:rotate(-4deg);
+  font-family:var(--hand);color:#2b2620;box-shadow:0 8px 12px rgba(0,0,0,.35)}
+.sticky .t1{font-size:25px;font-weight:700;line-height:1}
+.sticky .t2{font-size:21px;line-height:1.05;margin-top:2px}
+.sticky .t3{font-size:16.5px;line-height:1;color:#5b554b;margin-top:10px;border-top:1px dashed #b9ab5d;padding-top:6px}
+
+.drawing{left:-150px;top:520px;width:560px;transform:rotate(76deg);z-index:1;box-shadow:0 12px 22px rgba(0,0,0,.5)}
+.pen{left:150px;top:600px;width:70px;transform:rotate(-24deg);z-index:2}
+
+.fx{display:flex;align-items:center;flex-wrap:wrap;gap:4px 7px;margin:6px 0 4px;font-size:15px;line-height:1.2}
+.fx .ab{font-weight:700;white-space:nowrap}
+.frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle}
+.frac>span:first-child{border-bottom:1.5px solid var(--ink);padding:0 6px 3px}
+.frac>span:last-child{padding:3px 6px 0}
+.fx .mul{font-weight:700;white-space:nowrap}
+.sumf{flex:1 1 200px}
+dl.bricks{margin:0;font-size:14.5px}
+.bricks dt{font-weight:700;margin-top:6px}
+.bricks dd{margin:0 0 0 12px;color:#4a4036}
+
+#mob{display:none}
+@media (max-width:860px){
+  body{overflow:auto;background:#f3eee4}
+  .desk-wrap{display:none}
+  #mob{display:block;font-size:17px;line-height:1.45;padding-bottom:40px}
+  .m-head{padding:18px 16px 12px;background:var(--page);border-bottom:1.5px solid var(--line)}
+  .m-head a{font-family:var(--hand);font-size:21px;color:var(--pen)}
+  .m-head .vz{height:58px;margin:8px 0 6px}
+  .m-head p{margin:0;color:var(--ink2);font-size:15px}
+  .m-nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;background:rgba(243,238,228,.96);
+    border-bottom:1px solid var(--line);scrollbar-width:none}
+  .m-nav::-webkit-scrollbar{display:none}
+  .m-nav a{flex:none;padding:6px 12px;border:1.5px solid #cfc5b1;border-radius:999px;font-size:14px;background:#fbf8f2;white-space:nowrap}
+  .m-main{padding:0 16px}
+  .m-main section{scroll-margin-top:60px;padding-top:22px}
+  .m-main h2{font-family:var(--vyaz);font-weight:400;font-size:23px;line-height:1.15;margin:0 0 8px;color:var(--red)}
+  .m-main h3{font-family:var(--vyaz);font-weight:400;font-size:18px;margin:18px 0 6px}
+  .m-note{margin:0 0 12px;color:var(--ink2);font-size:15.5px}
+  .m-main .rules{font-size:16px;padding-left:20px}
+  .m-main .rules li{margin-bottom:8px}
+  .m-main dl.bricks{font-size:16px}
+  .m-main .tb{font-size:15px}
+  .m-main .hand{font-size:22px}
+  .mc{background:#fbf8f2;border:1px solid #e0d7c6;border-radius:10px;padding:14px 14px 12px;margin:0 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .mc-h{display:flex;gap:10px;align-items:flex-start}
+  .mc-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;display:grid;place-items:center;margin-top:1px}
+  .mc h3{margin:0;font-family:var(--text);font-weight:700;font-size:17.5px;line-height:1.25}
+  .mc .fx{font-size:16.5px;margin:12px 0 10px;padding:10px 8px;background:#f1ece2;border-radius:6px;flex-direction:column;gap:6px;text-align:center}
+  .mc .sumf{flex:none}
+  .mc-tags{display:flex;flex-wrap:wrap;gap:6px}
+  .mc-tags span{font-size:13.5px;padding:3px 9px;border-radius:999px;background:#ece5d6;color:#4a4036}
+  .mc-tags b{color:var(--ink)}
+  .mc-memo{margin:10px 0 0;font-style:italic;color:var(--pen);font-size:15.5px;line-height:1.4}
+}
+</style>
+</head>
+<body>
+<div id="mob"></div>
+<div class="desk-wrap" id="wrap">
+<div class="desk" id="desk">
+
+  <img class="drawing" src="../img/web/drawing.jpg" alt="">
+  <img class="pen shadow" src="../img/web/pen.png" alt="">
+
+  <section class="nb shadow" id="nb" aria-label="Блокнот">
+    <img class="nb-img" src="../img/web/notebook.png" alt="">
+    <nav class="tabs" id="tabs" aria-label="Разделы"></nav>
+    <div class="pg pl" id="pl"></div>
+    <div class="pg pr" id="pr"></div>
+  </section>
+
+  <div class="sticky" id="sticky" aria-live="polite">
+    <div class="t1" id="st1"></div>
+    <div class="t2" id="st2"></div>
+    <div class="t3">калькулятор понимает клавиатуру, когда курсор не в поле ответа</div>
+  </div>
+
+  <div class="timer shadow" aria-hidden="true">
+    <img src="../img/web/rk2/timer.webp" alt="">
+    <svg viewBox="0 0 301 375">
+      <defs>
+        <radialGradient id="glow"><stop offset="0" stop-color="#fff1c9"/><stop offset=".35" stop-color="#ff4a2a"/><stop offset="1" stop-color="#ff4a2a" stop-opacity="0"/></radialGradient>
+        <radialGradient id="glowG"><stop offset="0" stop-color="#eaffd9"/><stop offset=".35" stop-color="#46d34a"/><stop offset="1" stop-color="#46d34a" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle class="led" id="ledOn" cx="53.5" cy="43.5" r="14" fill="url(#glow)" opacity="0"/>
+      <circle class="led" id="ledUp" cx="250" cy="43.5" r="14" fill="url(#glowG)" opacity="0"/>
+      <g id="needle" transform="rotate(-135 150 175)">
+        <path d="M147.3 186 L152.7 186 L151.3 96 L150 89 L148.7 96 Z" fill="#f2581c" stroke="#a8360c" stroke-width=".8"/>
+        <path d="M149.6 180 L150.4 180 L150.2 98 L149.8 98 Z" fill="#ffb08a"/>
+      </g>
+      <circle cx="150" cy="175" r="38" fill="#e9eef2" opacity=".22"/>
+      <circle cx="150" cy="175" r="7" fill="#c9cfd4" opacity=".55"/>
+    </svg>
+  </div>
+
+  <div class="calc shadow" id="calc" aria-label="Калькулятор">
+    <img src="../img/web/rk2/calc.webp" alt="Калькулятор">
+    <div class="lcd"><div class="st"><span>D</span><span>Math</span></div><div class="ex" id="cEx"><span></span></div><div class="res" id="cRes">0</div></div>
+  </div>
+</div>
+</div>
+
+<script>
+const HOME = "../index.html";
+
+const INC = [2110,2310,2320,2340], EXP = [2120,2210,2220,2330,2350,2410];
+const sum = (r, codes) => codes.reduce((s,c)=>s+r[c],0);
+const nf = (v,d=0) => v.toLocaleString("ru-RU",{minimumFractionDigits:d,maximumFractionDigits:d});
+const n0 = v => v<0 ? "("+nf(-v)+")" : nf(v);
+const plus = (r, codes) => codes.map(c=>n0(r[c])).join(" + ");
+
+const IND = [
+  { n:1, name:"Коэффициент самофинансирования", ab:"Ксф", num:"Собственный капитал", den:"Заёмный капитал", k:"", unit:"", dec:3, norm:"≥ 1", ok:v=>v>=1,
+    memo:"Своё делю на чужое. Это №3 вверх ногами и без ×100.",
+    calc:r=>{ const b=r[1400]+r[1500]; return { v:r[1300]/b, t:`${n0(r[1300])} / (${plus(r,[1400,1500])}) = ${n0(r[1300])} / ${n0(b)}` }; } },
+  { n:2, name:"Рентабельность производственной деятельности", ab:"Рпд", num:"Прибыль от продаж", den:"Себестоимость продаж", k:"100", unit:"%", dec:2, norm:"> 0", ok:v=>v>0,
+    memo:"Прибыль всегда сверху. «Производственная» → снизу затраты на производство, то есть себестоимость.",
+    calc:r=>({ v:r[2200]/r[2120]*100, t:`${n0(r[2200])} / ${n0(r[2120])} × 100` }) },
+  { n:3, name:"Коэффициент соотношения заёмных и собственных средств", ab:"Кс", num:"Заёмный капитал", den:"Собственный капитал", k:"100", unit:"%", dec:2, norm:"≤ 100 %", ok:v=>v<=100,
+    memo:"В названии сначала «заёмных» — значит, они в числителе.",
+    calc:r=>{ const a=r[1400]+r[1500]; return { v:a/r[1300]*100, t:`(${plus(r,[1400,1500])}) / ${n0(r[1300])} × 100 = ${n0(a)} / ${n0(r[1300])} × 100` }; } },
+  { n:4, name:"Коэффициент автономии", ab:"Ка", num:"Собственный капитал", den:"Валюта баланса", k:"100", unit:"%", dec:2, norm:"≥ 50 %", ok:v=>v>=50,
+    memo:"Автономия = независимость. Какая часть всего имущества — моя?",
+    calc:r=>({ v:r[1300]/r[1700]*100, t:`${n0(r[1300])} / ${n0(r[1700])} × 100` }) },
+  { n:5, name:"Коэффициент маневренности", ab:"Км", num:"Собственный оборотный капитал", den:"Собственный капитал", k:"100", unit:"%", dec:2, norm:"50–60 %", ok:v=>v>=50&&v<=60,
+    memo:"Сначала считаю СОК (№8), потом делю его на собственный капитал: сколько своих денег свободно для манёвра.",
+    calc:r=>{ const a=r[1300]-r[1100]; return { v:a/r[1300]*100, t:`(${n0(r[1300])} − ${n0(r[1100])}) / ${n0(r[1300])} × 100 = ${n0(a)} / ${n0(r[1300])} × 100` }; } },
+  { n:6, name:"Коэффициент финансовой стабильности", ab:"Кфс", num:"Собственный капитал + Долгосрочные обязательства", den:"Валюта баланса", k:"100", unit:"%", dec:2, norm:"50–60 %", ok:v=>v>=50&&v<=60,
+    memo:"Как автономия, только к своему капиталу добавляю долгосрочные долги. Стабильные = свои + долгие.",
+    calc:r=>{ const a=r[1300]+r[1400]; return { v:a/r[1700]*100, t:`(${plus(r,[1300,1400])}) / ${n0(r[1700])} × 100 = ${n0(a)} / ${n0(r[1700])} × 100` }; } },
+  { n:7, name:"Собственный капитал", ab:"СК", sum:"Уставный капитал − Выкупленные собственные акции + Переоценка + Добавочный капитал + Резервный капитал + Нераспределённая прибыль + Доходы будущих периодов", unit:"тыс. руб.", dec:0, norm:"растёт; больше уставного капитала", ok:(v,r)=>v>r[1310],
+    memo:"Быстро: это итог раздела «Капитал и резервы». Вычитаются только выкупленные акции.",
+    calc:r=>({ v:r[1310]-r[1320]+r[1340]+r[1350]+r[1360]+r[1370]+r[1530],
+      t:`${n0(r[1310])} − ${nf(r[1320])} + ${n0(r[1340])} + ${n0(r[1350])} + ${n0(r[1360])} + ${n0(r[1370])} + ${n0(r[1530])}` }) },
+  { n:8, name:"Собственный оборотный капитал", ab:"СОК", sum:"Собственный капитал − Внеоборотные активы", unit:"тыс. руб.", dec:0, norm:"> 0", ok:v=>v>0,
+    memo:"Свои деньги минус то, что в них «заморожено» в зданиях и оборудовании.",
+    calc:r=>({ v:r[1300]-r[1100], t:`${n0(r[1300])} − ${n0(r[1100])}` }) },
+  { n:9, name:"Фондоотдача внеоборотных активов", ab:"ФО", num:"Доходы", den:"Внеоборотные активы", k:"", unit:"", dec:3, norm:"чем выше, тем лучше", ok:null,
+    memo:"«Отдача» — сколько получили (доходы) с того, что вложили. Результат в разах.",
+    calc:r=>{ const d=sum(r,INC); return { v:d/r[1100], t:`Доходы = ${plus(r,INC)} = ${n0(d)}; ${n0(d)} / ${n0(r[1100])}` }; } },
+  { n:10, name:"Рентабельность реализованной продукции", ab:"Ррп", num:"Чистая прибыль", den:"Расходы", k:"100", unit:"%", dec:2, norm:"> 0", ok:v=>v>0,
+    memo:"Расходы = всё, что в ОФР в скобках. Проверка: доходы − расходы = чистая прибыль.",
+    calc:r=>{ const e=sum(r,EXP); return { v:r[2400]/e*100, t:`Расходы = ${EXP.map(c=>nf(r[c])).join(" + ")} = ${nf(e)}; ${n0(r[2400])} / ${nf(e)} × 100` }; } },
+  { n:11, name:"Норма прибыли", ab:"НП", num:"Чистая прибыль", den:"Доходы", k:"100", unit:"%", dec:2, norm:"> 0", ok:v=>v>0,
+    memo:"Какая часть заработанного осталась. Пара к №10: там на рубль расходов, тут — на рубль доходов.",
+    calc:r=>{ const d=sum(r,INC); return { v:r[2400]/d*100, t:`Доходы = ${plus(r,INC)} = ${n0(d)}; ${n0(r[2400])} / ${n0(d)} × 100` }; } },
+  { n:12, name:"Срок погашения обязательств", ab:"Срок", num:"Заёмный капитал", den:"Доходы", k:"360", unit:"дн.", dec:2, norm:"чем меньше, тем лучше", ok:null,
+    memo:"Дни = «сколько» / «за год» × 360. Обязательства — это весь заёмный капитал.",
+    calc:r=>{ const l=r[1400]+r[1500], d=sum(r,INC); return { v:l/d*360, t:`Доходы = ${plus(r,INC)} = ${n0(d)}; (${plus(r,[1400,1500])}) / ${n0(d)} × 360 = ${n0(l)} / ${n0(d)} × 360` }; } },
+];
+const fxHTML = i => `<div class="fx"><span class="ab">${i.ab} =</span> ` + (i.sum ? `<span class="sumf">${i.sum}</span>`
+  : `<span class="frac"><span>${i.num}</span><span>${i.den}</span></span>${i.k ? `<span class="mul">× ${i.k}</span>` : ""}`) + "</div>";
+const unitText = i => i.unit==="%" ? "в процентах, 2 знака" : i.unit==="дн." ? "в днях, 2 знака" : i.unit ? "в тыс. руб." : "в долях, 3 знака";
+const fmtV = (ind, v) => nf(v, ind.dec) + (ind.unit ? " " + ind.unit : "");
+const solve = (ind, r) => { const c = ind.calc(r); return { v:c.v, line:c.t + " = " + fmtV(ind, c.v) }; };
+
+const rnd = (a,b) => a + Math.random()*(b-a);
+const pick = a => a[Math.floor(Math.random()*a.length)];
+const chance = p => Math.random() < p;
+const shuffle = a => { a = [...a]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
+function split(total, ws){
+  const s = ws.reduce((a,b)=>a+b,0), parts = ws.map(w=>Math.round(total*w/s));
+  const big = ws.indexOf(Math.max(...ws));
+  parts[big] += total - parts.reduce((a,b)=>a+b,0);
+  return parts;
+}
+const sig3 = x => { if(x<=0) return 0; const p = Math.pow(10, Math.max(0, Math.floor(Math.log10(x))-2)); return Math.round(x/p)*p; };
+
+const NAMES = ["Северный ключ","Волжская мануфактура","Ладога-Агро","Уральский профиль","Сибирская нива","Тверской картон","Бархан-Логистик",
+  "Кедровый двор","Медный берег","Ока-Полимер","Приморский хлеб","Восток-Кабель","Рязанские сады","Камский фарфор","Белая гавань","Полярный стан"];
+
+function makeOFR(R, rate, p){
+  const o = {}, rr = Math.round;
+  o[2110] = rr(R);
+  o[2120] = rr(R*(p.c + rnd(-.03,.03)));
+  o[2100] = o[2110] - o[2120];
+  o[2210] = p.com ? rr(R*p.com*rnd(.85,1.15)) : 0;
+  o[2220] = rr(R*p.man*rnd(.85,1.15));
+  o[2200] = o[2100] - o[2210] - o[2220];
+  o[2310] = p.part ? rr(R*rnd(.001,.01)) : 0;
+  o[2320] = rr(R*rnd(.0005,.008));
+  o[2330] = p.debt ? rr(R*rnd(.003,.025)) : 0;
+  o[2340] = rr(R*rnd(.004,.03));
+  o[2350] = rr(R*rnd(.008,.04));
+  o[2300] = o[2200] + o[2310] + o[2320] - o[2330] + o[2340] - o[2350];
+  o[2410] = o[2300] > 0 ? rr(o[2300]*rate*rnd(.95,1.08)) : 0;
+  o[2400] = o[2300] - o[2410];
+  return o;
+}
+
+function fillBalance(b, A, v, cap, long){
+  const rr = Math.round;
+  b[1100] = rr(A*v);
+  [b[1110],b[1150],b[1170],b[1180],b[1190]] = split(b[1100], [rnd(0,.04), rnd(.65,.9), chance(.6)?rnd(.02,.15):0, rnd(.005,.03), rnd(.01,.08)]);
+  b[1200] = A - b[1100];
+  [b[1210],b[1220],b[1230],b[1240],b[1250],b[1260]] = split(b[1200], [rnd(.25,.45), rnd(.005,.03), rnd(.25,.45), chance(.5)?rnd(.01,.1):0, rnd(.04,.15), rnd(.005,.06)]);
+  Object.assign(b, cap);
+  b[1300] = b[1310] - b[1320] + b[1340] + b[1350] + b[1360] + b[1370];
+  const L = A - b[1300];
+  b[1400] = rr(L*long);
+  [b[1410],b[1420],b[1430],b[1450]] = split(b[1400], [rnd(.6,.9), rnd(.02,.12), chance(.5)?rnd(.01,.08):0, chance(.4)?rnd(.01,.1):0]);
+  b[1500] = L - b[1400];
+  b[1530] = 0;
+  [b[1510],b[1520],b[1540],b[1550]] = split(b[1500], [chance(.8)?rnd(.1,.35):0, rnd(.5,.75), rnd(.02,.07), chance(.5)?rnd(.005,.05):0]);
+  b[1600] = b[1100] + b[1200];
+  b[1700] = b[1300] + b[1400] + b[1500];
+}
+
+function makeReport(){
+  for(;;){
+    const kind = pick(["ООО","АО","ПАО"]);
+    const p = { c:rnd(.6,.82), com:chance(.8)?rnd(.03,.11):0, man:rnd(.02,.07), part:chance(.5), debt:chance(.75) };
+    if(1-p.c-p.com-p.man < .03 && chance(.7)) p.c -= .06;
+    const R0 = Math.round(Math.pow(10, rnd(4.7, 7.1))), R1 = Math.round(R0*rnd(.9,1.28));
+    const y = [ makeOFR(R0, .2, p), makeOFR(R1, .25, p) ];
+
+    const A0 = Math.round(R0*rnd(.45,1.3)), v = rnd(.2,.62), E0 = A0*rnd(.3,.78);
+    const cap = {};
+    cap[1310] = Math.max(10, sig3(E0*rnd(.002,.07)));
+    cap[1320] = kind!=="ООО" && chance(.25) ? sig3(cap[1310]*rnd(.02,.1)) : 0;
+    cap[1340] = chance(.4) ? sig3(E0*rnd(.02,.12)) : 0;
+    cap[1350] = chance(.3) ? sig3(E0*rnd(.005,.05)) : 0;
+    cap[1360] = chance(.85) ? sig3(cap[1310]*rnd(.05,.15)) : 0;
+    cap[1370] = Math.round(E0) - cap[1310] + cap[1320] - cap[1340] - cap[1350] - cap[1360];
+    fillBalance(y[0], A0, v, cap, rnd(.03,.4));
+
+    const div = y[1][2400] > 0 && chance(.6) ? Math.round(y[1][2400]*rnd(.1,.7)) : 0;
+    const cap1 = { ...cap, 1370: cap[1370] + y[1][2400] - div };
+    if(cap1[1340] && chance(.5)) cap1[1340] = sig3(cap1[1340]*rnd(1,1.08));
+    const E1 = cap1[1310] - cap1[1320] + cap1[1340] + cap1[1350] + cap1[1360] + cap1[1370];
+    let A1 = Math.round(A0*rnd(.95,1.3));
+    if(A1 - E1 < A1*.15) A1 = Math.round(E1/rnd(.6,.85));
+    fillBalance(y[1], A1, Math.min(.8, v*rnd(.9,1.15)), cap1, rnd(.03,.4));
+
+    const okAll = y.every(r=>r[1300]>0 && r[1500]>0 && r[1100]>0 && r[2120]>0 && Object.values(r).every(Number.isFinite));
+    if(okAll) return { name: kind + " «" + pick(NAMES) + "»", kind, y, years:[2024,2025], div, variant: 100 + Math.floor(Math.random()*900) };
+  }
+}
+
+const BAL = [
+  ["h","АКТИВ"],["s","I. Внеоборотные активы"],
+  [1110,"Нематериальные активы"],[1150,"Основные средства"],[1170,"Финансовые вложения"],[1180,"Отложенные налоговые активы"],[1190,"Прочие внеоборотные активы"],
+  [1100,"Итого по разделу I","t"],
+  ["s","II. Оборотные активы"],
+  [1210,"Запасы"],[1220,"НДС по приобретённым ценностям"],[1230,"Дебиторская задолженность"],[1240,"Финансовые вложения (за исключением денежных эквивалентов)"],
+  [1250,"Денежные средства и денежные эквиваленты"],[1260,"Прочие оборотные активы"],
+  [1200,"Итого по разделу II","t"],[1600,"БАЛАНС","T"],
+  ["h","ПАССИВ"],["s","III. Капитал и резервы"],
+  [1310,"Уставный капитал (складочный капитал, уставный фонд, вклады товарищей)"],[1320,"Собственные акции, выкупленные у акционеров","neg"],
+  [1340,"Переоценка внеоборотных активов"],[1350,"Добавочный капитал (без переоценки)"],[1360,"Резервный капитал"],[1370,"Нераспределённая прибыль (непокрытый убыток)"],
+  [1300,"Итого по разделу III","t"],
+  ["s","IV. Долгосрочные обязательства"],
+  [1410,"Заёмные средства"],[1420,"Отложенные налоговые обязательства"],[1430,"Оценочные обязательства"],[1450,"Прочие обязательства"],
+  [1400,"Итого по разделу IV","t"],
+  ["s","V. Краткосрочные обязательства"],
+  [1510,"Заёмные средства"],[1520,"Кредиторская задолженность"],[1530,"Доходы будущих периодов"],[1540,"Оценочные обязательства"],[1550,"Прочие обязательства"],
+  [1500,"Итого по разделу V","t"],[1700,"БАЛАНС","T"],
+];
+const OFR = [
+  [2110,"Выручка"],[2120,"Себестоимость продаж","neg"],[2100,"Валовая прибыль (убыток)","t"],
+  [2210,"Коммерческие расходы","neg"],[2220,"Управленческие расходы","neg"],[2200,"Прибыль (убыток) от продаж","t"],
+  [2310,"Доходы от участия в других организациях"],[2320,"Проценты к получению"],[2330,"Проценты к уплате","neg"],
+  [2340,"Прочие доходы"],[2350,"Прочие расходы","neg"],[2300,"Прибыль (убыток) до налогообложения","t"],
+  [2410,"Налог на прибыль","neg"],[2400,"Чистая прибыль (убыток)","T"],
+];
+const cell = (v, neg) => v===0 ? "—" : (neg || v<0) ? "(" + nf(Math.abs(v)) + ")" : nf(v);
+
+function reportHTML(rep){
+  const [y0,y1] = rep.years;
+  const rows = (list, cols) => list.map(([c,name,cls])=>{
+    if(c==="h") return "";
+    if(c==="s") return `<tr class="s"><td colspan="3">${name}</td></tr>`;
+    return `<tr class="r ${cls==="t"||cls==="T"?cls:""}" data-c="${c}"><td>${name}</td>`
+      + cols.map(i=>`<td class="v">${cell(rep.y[i][c], cls==="neg")}</td>`).join("") + "</tr>";
+  }).join("");
+  return `<div class="rep-head"><div class="org">${rep.name}</div>
+      <div class="meta">Единица измерения: тыс. руб. · вариант № ${rep.variant}</div></div>
+    <div class="rep-title">Бухгалтерский баланс на 31 декабря ${y1} г.</div>
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>На 31 декабря ${y1} г.</th><th>На 31 декабря ${y0} г.</th></tr></thead>
+      <tbody>${rows(BAL,[1,0])}</tbody></table>
+    <div class="rep-title">Отчёт о финансовых результатах за ${y1} г.</div>
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>За ${y1} г.</th><th>За ${y0} г.</th></tr></thead>
+      <tbody>${rows(OFR,[1,0])}</tbody></table>
+    <div class="rep-tip">нажми на строку — она выделится маркером</div>`;
+}
+function bindReport(box){
+  box.querySelectorAll("tr.r").forEach(tr=>tr.onclick = ()=>tr.classList.toggle("mk"));
+}
+
+function parseNum(s){
+  s = String(s).replace(/[\s  ]/g,"").replace(/−/g,"-").replace(",",".").replace(/(%|дн\.?|дней|тыс\.?руб\.?|руб\.?|раз[а]?)$/i,"");
+  let neg = false;
+  if(/^\(.*\)$/.test(s)){ neg = true; s = s.slice(1,-1); }
+  if(s==="" || !/^[-+]?\d*\.?\d+(e[-+]?\d+)?$/i.test(s)) return null;
+  return neg ? -Number(s) : Number(s);
+}
+function judge(ind, v, raw){
+  const u = parseNum(raw);
+  if(u===null) return { ok:false, empty:String(raw).trim()==="", hint:String(raw).trim() ? "не похоже на число" : "" };
+  const tol = ind.dec ? 1.01*Math.pow(10,-ind.dec) : 1.01;
+  if(Math.abs(u - v) <= tol) return { ok:true };
+  let hint = "";
+  if(ind.unit==="%" && Math.abs(u*100 - v) <= .015 + Math.abs(v)*1e-4) hint = "похоже, забыли ×100";
+  else if(ind.unit==="" && Math.abs(u - v*100) <= .2) hint = "этот показатель в долях — без ×100";
+  else if(ind.unit==="дн." && Math.abs(u*360 - v) <= 1) hint = "забыли ×360";
+  else if(ind.unit==="дн." && Math.abs(u/365*360 - v) <= .05) hint = "в анализе год = 360 дней, не 365";
+  else if(v && Math.abs(u + v) <= tol) hint = "знак не тот";
+  else if(Math.abs(u - v) <= tol*8) hint = "почти — проверьте округление";
+  return { ok:false, hint };
+}
+
+const pl = document.getElementById("pl"), pr = document.getElementById("pr");
+const TABS = [
+  { id:"menu",  label:"Меню",       y:[65,212] },
+  { id:"tests", label:"Тесты",      y:[221,369] },
+  { id:"sheet", label:"Шпаргалка",  y:[378,527] },
+  { id:"rk",    label:"Пробный РК", y:[536,683] },
+  { id:"home",  label:"На главную", y:[691,849] },
+];
+let mode = "menu";
+
+function renderTabs(){
+  const box = document.getElementById("tabs");
+  box.innerHTML = "";
+  TABS.forEach(t=>{
+    const b = document.createElement("button");
+    b.className = "tab"; b.style.top = t.y[0] + "px"; b.style.height = (t.y[1]-t.y[0]) + "px";
+    b.setAttribute("aria-pressed", t.id===mode);
+    b.innerHTML = "<span></span>"; b.firstChild.textContent = t.label;
+    b.onclick = () => t.id==="home" ? location.href = HOME : go(t.id);
+    box.appendChild(b);
+  });
+}
+
+function go(m){
+  mode = m;
+  document.body.classList.toggle("zoom", m!=="menu");
+  if(m!=="menu") startTimer();
+  renderTabs();
+  pl.classList.add("fade"); pr.classList.add("fade");
+  setTimeout(()=>{
+    ({ menu:renderMenu, tests:renderTests, sheet:renderSheet, rk:renderRK })[m]();
+    pl.scrollTop = pr.scrollTop = 0;
+    pl.classList.remove("fade"); pr.classList.remove("fade");
+  }, 180);
+}
+
+function vyazHTML(text){
+  return [...text.toUpperCase()].map(ch => ch===" " ? "<i></i>"
+    : `<img src="../img/web/vyaz/${ch.charCodeAt(0).toString(16).padStart(4,"0")}.png" alt="">`).join("");
+}
+function renderMenu(){
+  pl.innerHTML = `<div class="vz" role="img" aria-label="РК 2">${vyazHTML("РК 2")}</div>
+    <div class="menu-sub">финансовый анализ</div>
+    <p class="menu-what">Дадут случайную бухгалтерскую отчётность — баланс и отчёт о финансовых результатах — и попросят посчитать показатели:</p>
+    <ol class="menu-list">${IND.map(i=>`<li>${i.name}</li>`).join("")}</ol>
+    <div class="menu-date">РК — 30 октября</div>`;
+  pr.innerHTML = `<div class="menu-pick">Выбери формат</div>
+    <button class="fmt" data-go="tests"><b data-n="I.">Тесты</b><span>12 вопросов: формулы, нормативы и расчёты по случайному отчёту</span></button>
+    <button class="fmt" data-go="sheet"><b data-n="II.">Шпаргалка</b><span>все 12 формул словами, нормативы и типичные ошибки</span></button>
+    <button class="fmt" data-go="rk"><b data-n="III.">Пробный РК</b><span>новый отчёт, 12 показателей за два года, проверка в конце</span></button>
+    <div class="menu-foot">калькулятор и таймер лежат справа — таймер заведётся сам, как только откроешь блокнот</div>`;
+  pr.querySelectorAll("[data-go]").forEach(b=>b.onclick = ()=>go(b.dataset.go));
+}
+
+const BANK = [
+  ["Коэффициент самофинансирования — это…", "Собственный капитал / Заёмный капитал", ["Заёмный капитал / Собственный капитал × 100","Собственный капитал / Валюта баланса × 100","(Собственный капитал + Долгосрочные обязательства) / Валюта баланса"], "Своё делим на чужое, в долях, без ×100."],
+  ["Рентабельность производственной деятельности — это…", "Прибыль от продаж / Себестоимость × 100", ["Чистая прибыль / Себестоимость × 100","Прибыль от продаж / Выручка × 100","Валовая прибыль / Себестоимость × 100"], "С выручкой в знаменателе вышла бы рентабельность продаж."],
+  ["Коэффициент соотношения заёмных и собственных средств — это…", "Заёмный капитал / Собственный капитал × 100", ["Собственный капитал / Заёмный капитал","Заёмный капитал / Валюта баланса × 100","Краткосрочные обязательства / Собственный капитал × 100"], "Заёмные — первыми в названии, значит, в числителе."],
+  ["Коэффициент автономии — это…", "Собственный капитал / Валюта баланса × 100", ["(Собственный капитал + Долгосрочные обязательства) / Валюта баланса × 100","Собственный капитал / Заёмный капитал","Собственный оборотный капитал / Собственный капитал × 100"], "Доля собственного капитала во всём имуществе."],
+  ["Коэффициент маневренности — это…", "Собственный оборотный капитал / Собственный капитал × 100", ["Собственный оборотный капитал / Валюта баланса × 100","Оборотные активы / Собственный капитал × 100","Внеоборотные активы / Собственный капитал × 100"], "СОК, делённый на собственный капитал."],
+  ["Коэффициент финансовой стабильности — это…", "(Собственный капитал + Долгосрочные обязательства) / Валюта баланса × 100", ["(Собственный капитал + Краткосрочные обязательства) / Валюта баланса × 100","Собственный капитал / Валюта баланса × 100","Заёмный капитал / Валюта баланса × 100"], "Свои + долгосрочные, делим на валюту баланса."],
+  ["Что вычитается при расчёте собственного капитала по составляющим?", "Выкупленные собственные акции", ["Переоценка внеоборотных активов","Резервный капитал","Доходы будущих периодов"], "Всё остальное складывается, минус только у выкупленных акций."],
+  ["Собственный оборотный капитал — это…", "Собственный капитал − Внеоборотные активы", ["Валюта баланса − Внеоборотные активы","Собственный капитал − Оборотные активы","Внеоборотные активы − Собственный капитал"], "Свои деньги минус то, что вложено во внеоборотные активы."],
+  ["Фондоотдача внеоборотных активов — это…", "Доходы / Внеоборотные активы", ["Выручка / Валюта баланса","Доходы / Оборотные активы","Чистая прибыль / Внеоборотные активы"], "Все доходы на внеоборотные активы, в разах."],
+  ["Рентабельность реализованной продукции — это…", "Чистая прибыль / Расходы × 100", ["Прибыль от продаж / Себестоимость × 100","Чистая прибыль / Доходы × 100","Чистая прибыль / Себестоимость × 100"], "Чистая прибыль на все расходы."],
+  ["Норма прибыли — это…", "Чистая прибыль / Доходы × 100", ["Чистая прибыль / Выручка × 100","Прибыль от продаж / Выручка × 100","Чистая прибыль / Расходы × 100"], "Чистая прибыль на все доходы, а не только на выручку."],
+  ["Срок погашения обязательств — это…", "Заёмный капитал / Доходы × 360", ["Заёмный капитал / Доходы × 100","Краткосрочные обязательства / Выручка × 365","Заёмный капитал / Чистая прибыль × 360"], "Обязательства на годовые доходы, ×360 переводит в дни."],
+  ["Норматив коэффициента автономии:", "≥ 50 %", ["50–60 %","≤ 100 %","≥ 1"], "Больше половины имущества — на свои деньги."],
+  ["Норматив коэффициента маневренности:", "50–60 %", ["≥ 50 %","≤ 100 %","> 0"], "По конспекту — 50–60 %."],
+  ["Норматив коэффициента соотношения заёмных и собственных средств:", "≤ 100 %", ["≥ 100 %","≥ 50 %","50–60 %"], "Заёмных не больше, чем собственных."],
+  ["Норматив коэффициента самофинансирования:", "≥ 1", ["≤ 1","≥ 50 %","0,5–0,6"], "То же требование, что у соотношения заёмных и собственных, только «наоборот»."],
+  ["Норматив коэффициента финансовой стабильности (по конспекту):", "50–60 %", ["≤ 100 %","≥ 1","> 0"], "В примере из конспекта 64,28 % — «выше норматива»."],
+  ["Как оценивать срок погашения обязательств?", "Чем меньше, тем лучше; рост — плохой знак", ["Чем больше, тем лучше","Норматив — не меньше 360 дней","Норматив — 50–60 дней"], "Рост срока значит, что долги растут быстрее доходов."],
+  ["В чём измеряется фондоотдача внеоборотных активов?", "В разах, три знака после запятой", ["В процентах","В днях","В тыс. руб."], "Рубли доходов на рубль внеоборотных активов."],
+  ["Зачем в сроке погашения обязательств умножают на 360?", "Доходы годовые; ×360 переводит долю года в дни", ["Так переводят в проценты","360 — число рабочих дней в году","Чтобы учесть НДС"], "В финансовом анализе год принимают за 360 дней."],
+  ["Расходы в ОФР стоят в скобках. Как их подставлять в формулы?", "По модулю, без минуса", ["Со знаком минус","Не учитывать","Брать половину"], "Скобки в форме — только способ записи."],
+  ["Из чего складываются доходы?", "Выручка + доходы от участия в других организациях + проценты к получению + прочие доходы", ["Выручка + прочие доходы","Выручка + валовая прибыль + прибыль от продаж","Выручка + проценты к получению + проценты к уплате + прочие доходы"], "Всё, что в ОФР без скобок, кроме промежуточных итогов."],
+  ["Из чего складываются расходы?", "Себестоимость + коммерческие + управленческие + проценты к уплате + прочие расходы + налог на прибыль", ["Себестоимость + коммерческие + управленческие","Себестоимость + коммерческие + управленческие + прочие расходы","Себестоимость + управленческие + проценты к уплате + прочие расходы + налог"], "Всё, что в ОФР в скобках, включая налог на прибыль."],
+  ["Доходы − Расходы = …", "Чистая прибыль", ["Прибыль от продаж","Прибыль до налогообложения","Валовая прибыль"], "Это удобная самопроверка."],
+  ["Сколько знаков после запятой оставлять?", "Доли — 3, проценты — 2", ["Доли — 2, проценты — 3","Везде 2","Везде целые"], "Так в конспекте: 1,341 и 57,29 %."],
+  ["Валюта баланса — это…", "Итог баланса (актив = пассив)", ["Собственный капитал","Внеоборотные активы + собственный капитал","Оборотные активы"], "Актив всегда равен пассиву, это и есть валюта баланса."],
+  ["Кс = 80 %. Чему равен коэффициент самофинансирования?", "1,250", ["0,800","1,800","0,200"], "Это обратные величины: 100 / 80 = 1,25."],
+  ["Ка = 45 %. Какая доля заёмных средств в валюте баланса?", "55 %", ["45 %","122 %","4,5 %"], "СК + ЗК = ВБ, поэтому 100 − 45 = 55 %."],
+  ["СК = 600, ЗК = 400. Коэффициент самофинансирования = …", "1,500", ["0,667","2,500","66,67 %"], "600 / 400 = 1,5."],
+  ["СК = 500, внеоборотные активы = 650, СОК = −150. Что это значит?", "Часть внеоборотных активов куплена на заёмные деньги", ["Организация — банкрот","Ошибка: СОК не бывает отрицательным","У организации нет оборотных активов"], "Своих денег не хватило даже на внеоборотные активы."],
+  ["Маневренность снизилась, хотя СОК вырос. Как так?", "СОК рос медленнее собственного капитала", ["Так не бывает, это ошибка","Выросли краткосрочные обязательства","Упала выручка"], "Км = СОК / СК: если знаменатель растёт быстрее, доля падает."],
+  ["Чем рентабельность производственной деятельности отличается от рентабельности реализованной продукции?", "Рпд: прибыль от продаж / себестоимость; Ррп: чистая прибыль / все расходы", ["Рпд: чистая прибыль / все расходы; Ррп: прибыль от продаж / себестоимость","Ничем, это синонимы","Рпд — в долях, Ррп — в процентах"], "Обе в процентах, но числитель и знаменатель разные."],
+  ["Второй вариант СОК, с учётом долгосрочных обязательств:", "Собственный капитал + Долгосрочные обязательства − Внеоборотные активы", ["Собственный капитал + Краткосрочные обязательства − Внеоборотные активы","Собственный капитал − Внеоборотные активы − Долгосрочные обязательства","Валюта баланса − Внеоборотные активы"], "Долгосрочные долги тоже считаются постоянным источником."],
+  ["Собственный капитал через чистые активы (Приказ Минфина № 84н):", "Активы − Обязательства + Доходы будущих периодов", ["Активы − Краткосрочные обязательства","Пассив − Собственный капитал","Активы − Обязательства − Доходы будущих периодов"], "Доходы будущих периодов возвращаем, они не настоящий долг."],
+  ["Какие показатели считаются только по пассиву баланса?", "Ксф, Кс, Ка, Кфс", ["Рпд, Ррп, НП","Фондоотдача и срок погашения","Только СОК"], "Группа «структура капитала»: свой капитал, долги и валюта баланса."],
+  ["Фондоотдача = 4,2. Как это прочитать?", "Каждый рубль внеоборотных активов принёс 4,2 руб. доходов", ["Доходы составляют 4,2 % внеоборотных активов","Внеоборотные активы окупятся за 4,2 года","На рубль доходов — 4,2 руб. внеоборотных активов"], "Отдача — сколько получили с вложенного."],
+  ["Ррп = 10,41 %. Как это прочитать?", "≈ 10 коп. чистой прибыли на каждый рубль расходов", ["10 коп. прибыли от продаж на рубль выручки","Расходы — 10 % выручки","Расходы выросли на 10 %"], "Чистая прибыль / все расходы."],
+  ["Срок погашения обязательств вырос с 88,6 до 95 дней. Это…", "Негативная тенденция: долги растут быстрее доходов", ["Хорошо: больше времени на расчёты","Ни о чём не говорит","Значит, выросла прибыль"], "Чем меньше срок, тем лучше."],
+];
+
+const T = { rep:null, qs:[], i:0 };
+function newTests(){
+  T.rep = makeReport();
+  const theory = shuffle(BANK).slice(0,7).map(([q,a,w,why])=>{ const opts = shuffle([a,...w]); return { type:"mc", q, opts, a:opts.indexOf(a), why, ans:null }; });
+  const calc = shuffle(IND).slice(0,5).map(ind=>({ type:"calc", ind, yi:Math.random()<.5?0:1, ans:null, val:"" }));
+  T.qs = shuffle([...theory, ...calc]);
+  T.i = 0;
+}
+function qState(q){ return q.ans===null ? "" : q.ans==="lazy" ? "lz" : q.ans===true || q.ans===q.a ? "ok" : "bad"; }
+
+function renderTests(){
+  if(!T.rep) newTests();
+  pl.innerHTML = reportHTML(T.rep); bindReport(pl);
+  if(T.i >= T.qs.length) return renderFinal();
+  const q = T.qs[T.i];
+  let h = `<div class="qtop"><h2>Тесты</h2><small>вопрос ${T.i+1} из ${T.qs.length}</small></div>
+    <div class="dots">${T.qs.map((x,i)=>`<i class="${qState(x) || (i===T.i?"cur":"")}"></i>`).join("")}</div>`;
+  if(q.type==="mc"){
+    h += `<p class="q">${q.q}</p>`;
+    q.opts.forEach((o,i)=>{
+      let cls = "";
+      if(q.ans!==null) cls = i===q.a ? "right" : i===q.ans ? "wrong" : "dim";
+      h += `<button class="opt ${cls}" data-i="${i}" ${q.ans!==null?"disabled":""}>${o}</button>`;
+    });
+    if(q.ans!==null) h += `<div class="fb ${q.ans===q.a?"ok":"bad"}"><b>${q.ans===q.a?"Верно.":"Неверно."}</b> ${q.why}</div>`;
+  } else {
+    const r = T.rep.y[q.yi], s = solve(q.ind, r);
+    h += `<p class="q">Посчитайте по отчёту слева:<span class="what">${q.ind.name}</span>за ${T.rep.years[q.yi]} год</p>
+      <div class="answer"><input id="qIn" inputmode="decimal" autocomplete="off" placeholder="ответ" value="${q.val}" ${q.ans!==null?"disabled":""}>
+      ${q.ans===null ? `<button class="btn main" id="qCheck">Проверить</button><button class="lazy" id="qLazy">я ленивый(ая)</button>` : ""}</div>
+      <div id="qMsg"></div>`;
+    if(q.ans!==null){
+      const cls = q.ans==="lazy" ? "lz" : q.ans ? "ok" : "bad";
+      const head = q.ans==="lazy" ? "Посчитано за тебя." : q.ans ? "Верно." : `Неверно${q.hint?": "+q.hint:""}. Правильно: ${fmtV(q.ind, s.v)}.`;
+      h += `<div class="fb ${cls}"><b>${head}</b>${fxHTML(q.ind)}<div class="calcline">${s.line}</div></div>`;
+    }
+  }
+  if(q.ans!==null) h += `<div class="next"><button class="btn main" id="qNext">${T.i===T.qs.length-1?"Итог":"Дальше →"}</button></div>`;
+  pr.innerHTML = h;
+
+  pr.querySelectorAll(".opt:not(:disabled)").forEach(b=>b.onclick = ()=>{ q.ans = +b.dataset.i; renderTests(); });
+  const inp = document.getElementById("qIn");
+  if(inp && q.ans===null){
+    inp.oninput = ()=>{ q.val = inp.value; };
+    const check = ()=>{
+      const j = judge(q.ind, solve(q.ind, T.rep.y[q.yi]).v, inp.value);
+      if(j.empty || j.hint==="не похоже на число"){ document.getElementById("qMsg").innerHTML = `<div class="hand" style="color:var(--red)">${j.empty?"сначала впиши ответ":"не похоже на число"}</div>`; return; }
+      q.ans = j.ok; q.hint = j.hint; renderTests();
+    };
+    inp.onkeydown = e=>{ if(e.key==="Enter") check(); };
+    document.getElementById("qCheck").onclick = check;
+    document.getElementById("qLazy").onclick = ()=>{ const ind=q.ind; q.val = nf(solve(ind, T.rep.y[q.yi]).v, ind.dec); q.ans = "lazy"; renderTests(); };
+  }
+  const nx = document.getElementById("qNext");
+  if(nx) nx.onclick = ()=>{ T.i++; renderTests(); pr.scrollTop = 0; };
+}
+function renderFinal(){
+  const ok = T.qs.filter(q=>qState(q)==="ok").length, lz = T.qs.filter(q=>q.ans==="lazy").length;
+  const say = ok>=11 ? "можно и не списывать" : ok>=8 ? "почти! ещё разок для верности" : "открой шпаргалку и попробуй снова";
+  pr.innerHTML = `<div class="qtop"><h2>Тесты</h2><small>готово</small></div>
+    <div class="dots">${T.qs.map(x=>`<i class="${qState(x)}"></i>`).join("")}</div>
+    <div class="final"><div class="big">${ok} / ${T.qs.length}</div>
+      <div class="hand">${say}${lz?`<br><small>за тебя посчитано: ${lz}</small>`:""}</div>
+      <button class="btn main" id="again">Ещё раз — новый отчёт</button></div>`;
+  document.getElementById("again").onclick = ()=>{ newTests(); renderTests(); pl.scrollTop = 0; };
+}
+
+const card = i => `<div class="card"><h4><b>${i.n}</b>${i.name}</h4>${fxHTML(i)}
+  <div class="nm">норматив: ${i.norm} · ${unitText(i)}</div>
+  <div class="memo">${i.memo}</div></div>`;
+const RULES = `<ul class="rules">
+    <li>Баланс — данные <b>на дату</b> (31 декабря), отчёт о финансовых результатах — <b>за год</b>.</li>
+    <li>Проценты: результат деления <b>×100</b>. Дни: <b>×360</b>.</li>
+    <li>Расходы в ОФР стоят в скобках — подставляем <b>по модулю</b>.</li>
+    <li>Актив = пассив, это и есть валюта баланса.</li>
+    <li>Доли — <b>3 знака</b> после запятой, проценты — <b>2</b>.</li>
+  </ul>`;
+const BRICKS = `<dl class="bricks">
+    <dt>Собственный капитал, СК</dt><dd>итог раздела «Капитал и резервы»</dd>
+    <dt>Заёмный капитал, ЗК</dt><dd>долгосрочные + краткосрочные обязательства</dd>
+    <dt>Валюта баланса, ВБ</dt><dd>итог баланса; ВБ = СК + ЗК</dd>
+    <dt>Внеоборотные активы, ВОА</dt><dd>итог раздела I актива</dd>
+    <dt>Доходы</dt><dd>выручка + доходы от участия в других организациях + проценты к получению + прочие доходы</dd>
+    <dt>Расходы</dt><dd>себестоимость + коммерческие + управленческие + проценты к уплате + прочие расходы + налог на прибыль</dd>
+  </dl>
+  <p class="hand">Проверка: доходы − расходы = чистая прибыль.</p>`;
+const NORMS = `<table class="tb"><tr><th>Показатель</th><th>Норматив</th></tr>
+    ${IND.map(i=>`<tr><td>${i.n}. ${i.name}</td><td>${i.norm}</td></tr>`).join("")}
+  </table>`;
+const SECOND = `<ul class="rules">
+    <li>СОК с долгосрочными: собственный капитал + долгосрочные обязательства − внеоборотные активы.</li>
+    <li>СК через чистые активы: активы − обязательства + доходы будущих периодов.</li>
+    <li>Рпд с полной себестоимостью: прибыль от продаж / (себестоимость + коммерческие + управленческие) × 100.</li>
+  </ul>`;
+const GROUPS = [
+  { id:"g1", title:"Структура капитала", note:"Только пассив баланса: делим одни источники денег на другие.", ids:[1,3,4,6] },
+  { id:"g2", title:"Собственные средства", note:"Цепочка: сначала СК, из него СОК, из СОК — маневренность.", ids:[7,8,5] },
+  { id:"g3", title:"Рентабельность", note:"Только ОФР. Прибыль всегда сверху, всегда ×100.", ids:[2,10,11] },
+  { id:"g4", title:"Отдача и сроки", note:"Доходы из ОФР и строки баланса. Фондоотдача — в разах, срок — в днях.", ids:[9,12] },
+];
+const GROUPS_LIST = `<ul class="rules">${GROUPS.map(g=>`<li><b>${g.title}</b> (№${g.ids.join(", ")}) — ${g.note.charAt(0).toLowerCase()+g.note.slice(1)}</li>`).join("")}</ul>`;
+const ERRORS = `<ul class="rules">
+    <li>Перевернуть соотношение заёмных и собственных: если долгов меньше, чем своего капитала, а вышло больше 100 % — дробь вверх ногами.</li>
+    <li>В рентабельности производственной деятельности взять чистую прибыль или выручку — получится другой показатель.</li>
+    <li>Забыть налог на прибыль в расходах или проценты к получению в доходах.</li>
+    <li>Подставить расходы с минусом.</li>
+    <li>Посчитать срок на 365 дней.</li>
+  </ul>`;
+const ANSWER = `<p class="small">Название → формула → подстановка за оба года → результат → изменение (для процентов — в п.п.) → сравнение с нормативом и короткий вывод.</p>`;
+const SHEET = [
+  [`<h2>Перед расчётом</h2>${RULES}<h3>Кирпичики</h3>${BRICKS}`, IND.slice(0,4).map(card).join("")],
+  [IND.slice(4,8).map(card).join(""), IND.slice(8,12).map(card).join("")],
+  [`<h2>Нормативы</h2>${NORMS}<h3>Вторые варианты расчёта</h3>${SECOND}`,
+   `<h2>Как не запутаться</h2>${GROUPS_LIST}<h3>Типичные ошибки</h3>${ERRORS}<h3>Как записать ответ</h3>${ANSWER}`],
+];
+
+function renderMobile(){
+  const nav = [["m-rules","Правила"],["m-bricks","Кирпичики"],...GROUPS.map(g=>["m-"+g.id,g.title]),["m-norms","Нормативы"],["m-err","Ошибки"]];
+  const mcard = i => `<article class="mc"><div class="mc-h"><span class="mc-n">${i.n}</span><h3>${i.name}</h3></div>${fxHTML(i)}
+    <div class="mc-tags"><span>норматив: <b>${i.norm}</b></span><span>${unitText(i)}</span></div>
+    <p class="mc-memo">${i.memo}</p></article>`;
+  document.getElementById("mob").innerHTML = `
+    <header class="m-head"><a href="${HOME}">← на главную</a>
+      <div class="vz" role="img" aria-label="РК 2">${vyazHTML("РК 2")}</div>
+      <p>Финансовый анализ · шпаргалка: 12 показателей по отчётности</p></header>
+    <nav class="m-nav">${nav.map(([id,t])=>`<a href="#${id}">${t}</a>`).join("")}</nav>
+    <main class="m-main">
+      <section id="m-rules"><h2>Перед расчётом</h2>${RULES}</section>
+      <section id="m-bricks"><h2>Кирпичики</h2>${BRICKS}</section>
+      ${GROUPS.map(g=>`<section id="m-${g.id}"><h2>${g.title}</h2><p class="m-note">${g.note}</p>${g.ids.map(n=>mcard(IND[n-1])).join("")}</section>`).join("")}
+      <section id="m-norms"><h2>Нормативы</h2>${NORMS}<h3>Вторые варианты расчёта</h3>${SECOND}</section>
+      <section id="m-err"><h2>Типичные ошибки</h2>${ERRORS}<h3>Как записать ответ</h3>${ANSWER}</section>
+    </main>`;
+}
+let sp = 0;
+function renderSheet(){
+  const [l, r] = SHEET[sp];
+  const pager = `<div class="pager"><button id="spPrev" ${sp?"":"disabled"}>← назад</button><span>разворот ${sp+1} из ${SHEET.length}</span><button id="spNext" ${sp<SHEET.length-1?"":"disabled"}>вперёд →</button></div>`;
+  pl.innerHTML = l; pr.innerHTML = r + pager;
+  const turn = d => { sp += d; pl.classList.add("fade"); pr.classList.add("fade");
+    setTimeout(()=>{ renderSheet(); pl.scrollTop = pr.scrollTop = 0; pl.classList.remove("fade"); pr.classList.remove("fade"); }, 160); };
+  document.getElementById("spPrev").onclick = ()=>turn(-1);
+  document.getElementById("spNext").onclick = ()=>turn(1);
+}
+
+const K = { rep:null, val:{}, lazy:{}, checked:false };
+function newRK(){ K.rep = makeReport(); K.val = {}; K.lazy = {}; K.checked = false; }
+const YI = [1,0];
+
+function renderRK(){
+  if(!K.rep) newRK();
+  const rep = K.rep;
+  pl.innerHTML = reportHTML(rep); bindReport(pl);
+  let ok = 0;
+  const html = IND.map(ind=>{
+    const sols = YI.map(i=>solve(ind, rep.y[i]));
+    const cells = YI.map((yi,j)=>{
+      const k = ind.n+"-"+yi, v = K.val[k] ?? "";
+      let cls = "", fix = "";
+      if(K.lazy[ind.n]) cls = "lz";
+      else if(K.checked){
+        const jd = judge(ind, sols[j].v, v);
+        if(jd.ok){ cls = "ok"; ok++; fix = `<div class="kr-fix okc">верно</div>`; }
+        else { cls = "bad"; fix = `<div class="kr-fix">${fmtV(ind, sols[j].v)}${jd.hint?" — "+jd.hint:""}</div>`; }
+      }
+      return `<div><label>${rep.years[yi]}<input data-k="${k}" class="${cls}" inputmode="decimal" autocomplete="off" value="${String(v).replace(/"/g,"&quot;")}" ${K.lazy[ind.n]||K.checked?"readonly":""}></label>${fix}</div>`;
+    }).join("");
+    let extra = "";
+    if(K.lazy[ind.n]) extra += `<div class="kr-sol">${YI.map((yi,j)=>rep.years[yi]+": "+sols[j].line).join("<br>")}</div>`;
+    if(K.checked || K.lazy[ind.n]){
+      const d = sols[0].v - sols[1].v, sign = d>0?"+":d<0?"−":"±";
+      const du = ind.unit==="%" ? " п.п." : ind.unit ? " "+ind.unit : "";
+      const nOk = ind.ok ? (ind.ok(sols[0].v, rep.y[1]) ? "выполняется" : "не выполняется") : "";
+      extra += `<div class="kr-dyn">изменение: ${sign}${nf(Math.abs(d), ind.dec)}${du} · норматив ${ind.norm}${nOk?" — "+nOk+" в "+rep.years[1]:""}</div>`;
+    }
+    return `<div class="kr"><div class="kr-h"><b><i>${ind.n}.</i>${ind.name}</b>${K.lazy[ind.n]||K.checked?"":`<button class="lazy" data-lazy="${ind.n}">я ленивый(ая)</button>`}</div>
+      <div class="kr-in">${cells}</div>${extra}</div>`;
+  }).join("");
+  const lazyN = Object.keys(K.lazy).length, total = (IND.length - lazyN)*2;
+  const score = K.checked ? `<div class="score"><b>${ok} / ${total}</b> ${lazyN?`<span class="muted">· за тебя посчитано показателей: ${lazyN}</span>`:""}
+      <div class="hand">${total && ok===total ? "идеально, можно идти на РК" : ok >= total*.75 ? "хорошо! посмотри, где ошибки" : "загляни в шпаргалку и возьми новый отчёт"}</div></div>` : "";
+  pr.innerHTML = `<div class="qtop"><h2>Пробный РК</h2><small>вариант № ${rep.variant}</small></div>
+    <p class="small muted">Посчитай показатели по отчёту слева за оба года. Доли — 3 знака, проценты — 2, суммы — в тыс. руб.</p>
+    ${score}${html}
+    <div class="kr-btns">
+      ${K.checked ? "" : `<button class="btn main" id="kCheck">Сдать на проверку</button><button class="lazy" id="kAll">я ленивый(ая): посчитать всё</button>`}
+      <button class="btn" id="kNew">Новый отчёт</button>
+    </div>`;
+  pr.querySelectorAll("input[data-k]").forEach(inp=>inp.oninput = ()=>{ K.val[inp.dataset.k] = inp.value; });
+  pr.querySelectorAll("[data-lazy]").forEach(b=>b.onclick = ()=>lazyRK(+b.dataset.lazy));
+  const ck = document.getElementById("kCheck");
+  if(ck) ck.onclick = ()=>{ K.checked = true; renderRK(); pr.scrollTop = 0; };
+  const all = document.getElementById("kAll");
+  if(all) all.onclick = ()=>{ IND.forEach(i=>lazyRK(i.n, true)); renderRK(); };
+  document.getElementById("kNew").onclick = ()=>{
+    if(!K.checked && Object.values(K.val).some(v=>String(v).trim()) && !confirm("Начать заново? Введённые ответы пропадут.")) return;
+    newRK(); renderRK(); pl.scrollTop = pr.scrollTop = 0;
+  };
+}
+function lazyRK(n, quiet){
+  const ind = IND[n-1];
+  K.lazy[n] = true;
+  YI.forEach(yi=>{ K.val[n+"-"+yi] = nf(solve(ind, K.rep.y[yi]).v, ind.dec); });
+  if(!quiet){ const top = pr.scrollTop; renderRK(); pr.scrollTop = top; }
+}
+
+const KEYS = [
+  ["on",428,375,62,40],
+  ["√",157,518,60,36],["²",226,518,60,36],
+  ["neg",89,577,60,36],
+  ["(",226,632,60,36],[")",295,632,60,36],
+  ["7",95,700,70,46],["8",177,700,70,46],["9",258,700,70,46],["del",340,700,70,46],["ac",421,700,70,46],
+  ["4",95,773,70,46],["5",177,773,70,46],["6",258,773,70,46],["×",340,773,70,46],["÷",421,773,70,46],
+  ["1",95,846,70,46],["2",177,846,70,46],["3",258,846,70,46],["+",340,846,70,46],["−",421,846,70,46],
+  ["0",95,916,70,46],[".",177,916,70,46],["ans",340,916,70,46],["=",421,916,70,46],
+];
+const C = { toks:[], res:"0", ans:0, done:false };
+const calcEl = document.getElementById("calc");
+KEYS.forEach(([k,x,y,w,h])=>{
+  const b = document.createElement("button");
+  b.className = "key"; b.dataset.k = k;
+  b.setAttribute("aria-label", { on:"Включить", neg:"Минус числа", del:"Стереть", ac:"Сбросить", ans:"Ответ", "√":"Корень", "²":"Квадрат" }[k] || k);
+  Object.assign(b.style, { left:x/517*100+"%", top:y/1010*100+"%", width:w/517*100+"%", height:h/1010*100+"%" });
+  b.onmousedown = e => e.preventDefault();
+  b.onclick = () => press(k);
+  calcEl.appendChild(b);
+});
+const SHOW = { neg:"−", ans:"Ans", "√":"√(" };
+function press(k){
+  if(k==="on" || k==="ac"){ C.toks = []; C.res = "0"; C.done = false; return drawCalc(); }
+  if(k==="del"){ if(C.done){ C.done = false; } else C.toks.pop(); return drawCalc(); }
+  if(k==="="){ evalCalc(); return drawCalc(); }
+  if(C.done){
+    C.toks = /[+−×÷²]/.test(k) ? ["Ans"] : [];
+    C.done = false;
+  }
+  C.toks.push(SHOW[k] || k);
+  drawCalc();
+}
+function evalCalc(){
+  const s = C.toks.join("");
+  if(!s) return;
+  let i = 0;
+  const peek = () => s[i];
+  const num = () => { const m = /^\d*\.?\d+|^\d+\.?/.exec(s.slice(i)); if(!m) throw 0; i += m[0].length; return parseFloat(m[0]); };
+  function expr(){ let v = term(); while(peek()==="+" || peek()==="−"){ const o = s[i++]; const t = term(); v = o==="+" ? v+t : v-t; } return v; }
+  function term(){ let v = unary(); while(peek()==="×" || peek()==="÷"){ const o = s[i++]; const t = unary(); v = o==="×" ? v*t : v/t; } return v; }
+  function unary(){ if(peek()==="−"){ i++; return -unary(); } if(peek()==="+"){ i++; return unary(); } return post(); }
+  function post(){ let v = prim(); while(peek()==="²"){ i++; v = v*v; } return v; }
+  function prim(){
+    if(s.startsWith("Ans", i)){ i += 3; return C.ans; }
+    if(peek()==="√"){ i += 2; const v = expr(); if(peek()===")") i++; return Math.sqrt(v); }
+    if(peek()==="("){ i++; const v = expr(); if(peek()===")") i++; return v; }
+    return num();
+  }
+  try{
+    const v = expr();
+    if(i < s.length) throw 0;
+    if(!isFinite(v)){ C.res = "Math ERROR"; C.done = true; return; }
+    C.ans = v; C.res = fmtCalc(v); C.done = true;
+  } catch(e){ C.res = "Syntax ERROR"; C.done = true; }
+}
+function fmtCalc(v){
+  if(v===0) return "0";
+  const a = Math.abs(v);
+  if(a >= 1e10 || a < 1e-9) return v.toExponential(6).replace("e+","×10^").replace("e-","×10^-");
+  return String(Number(v.toPrecision(10)));
+}
+function drawCalc(){
+  document.querySelector("#cEx span").textContent = C.toks.join("");
+  document.getElementById("cRes").textContent = C.done || !C.toks.length ? C.res : "";
+}
+const KB = { "*":"×", "/":"÷", "-":"−", "+":"+", ",":".", ".":".", "(":"(", ")":")", "Enter":"=", "=":"=", "Backspace":"del", "Escape":"ac", "Delete":"ac", "^":"²" };
+addEventListener("keydown", e=>{
+  if(e.ctrlKey || e.metaKey || e.altKey) return;
+  const t = e.target;
+  if(t && (t.tagName==="INPUT" || t.tagName==="TEXTAREA")) return;
+  const k = /^\d$/.test(e.key) ? e.key : KB[e.key];
+  if(!k) return;
+  if(k==="=" && t && t.tagName==="BUTTON") return;
+  e.preventDefault();
+  press(k);
+  const b = calcEl.querySelector(`.key[data-k="${CSS.escape(k)}"]`);
+  if(b){ b.classList.add("on"); setTimeout(()=>b.classList.remove("on"), 120); }
+});
+
+const WORK = 25*60e3, REST = 5*60e3, KEY = "rk2-pomodoro";
+let tStart = null;
+try{ const v = +localStorage.getItem(KEY); if(v && Date.now() - v < 3*3600e3) tStart = v; }catch(e){}
+function startTimer(){
+  if(tStart) return;
+  tStart = Date.now();
+  try{ localStorage.setItem(KEY, tStart); }catch(e){}
+  tick();
+}
+function tick(){
+  const needle = document.getElementById("needle"), on = document.getElementById("ledOn"), up = document.getElementById("ledUp");
+  const st1 = document.getElementById("st1"), st2 = document.getElementById("st2");
+  if(!tStart){
+    needle.setAttribute("transform","rotate(-135 150 175)");
+    on.style.opacity = 0; up.style.opacity = 0;
+    st1.textContent = "помидор ждёт"; st2.textContent = "открой любой формат — и таймер пойдёт";
+    return;
+  }
+  const t = Date.now() - tStart, el = t % (WORK+REST), n = Math.floor(t/(WORK+REST)) + 1;
+  let a;
+  if(el < WORK){
+    a = -135 + 270*el/WORK;
+    on.style.opacity = 1; up.style.opacity = 0;
+    st1.textContent = "помидор № " + n;
+    const m = Math.ceil((WORK-el)/60e3);
+    st2.textContent = "до перерыва " + m + " " + plural(m,"минута","минуты","минут");
+  } else {
+    a = 135 - 270*(el-WORK)/REST;
+    on.style.opacity = 0; up.style.opacity = Math.floor(Date.now()/700)%2 ? 1 : .25;
+    st1.textContent = "перерыв!";
+    const m = Math.ceil((WORK+REST-el)/60e3);
+    st2.textContent = "встань, потянись · ещё " + m + " " + plural(m,"минута","минуты","минут");
+  }
+  needle.setAttribute("transform", `rotate(${a.toFixed(2)} 150 175)`);
+}
+function plural(n, one, few, many){
+  const a = n % 10, b = n % 100;
+  if(a===1 && b!==11) return one;
+  if(a>=2 && a<=4 && (b<12 || b>14)) return few;
+  return many;
+}
+setInterval(tick, 350);
+
+const desktop = matchMedia("(min-width:861px)");
+function fit(){
+  const desk = document.getElementById("desk"), wrap = document.getElementById("wrap");
+  if(!desktop.matches){ desk.style.transform = ""; return; }
+  const w = wrap.clientWidth, h = wrap.clientHeight, k = Math.min(w/1600, h/900);
+  desk.style.transform = "translate(" + (w - 1600*k)/2 + "px," + (h - 900*k)/2 + "px) scale(" + k + ")";
+}
+addEventListener("resize", fit);
+desktop.addEventListener("change", fit);
+
+renderTabs(); renderMenu(); renderMobile(); tick(); drawCalc(); fit();
+</script>
+</body>
+</html>
