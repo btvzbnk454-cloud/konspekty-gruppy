@@ -13,11 +13,11 @@ A private, link-only static site where the owner shares exam-prep materials with
 ## Layout
 
 - `site/` is the only deployed directory.
-  - `site/index.html` is the home page: a self-contained page with inline CSS and JS. The `MATERIALS` array in its script is the single source of truth for what appears on the home page (subject, kind, title, file, date, note). The subject filter, list, detail card and the "новое" badge (last 7 days) are all derived from that array. On desktop a click in the list selects a material into the card; on phones (≤860px) it opens the material directly.
-  - `site/kalendar.html` is the calendar tab. Its `EVENTS` array (date, kind, subject, optional prep material) drives the month grid and the "upcoming" list. Subject short labels (`SHORT`) are duplicated in both pages; keep them in sync.
+  - `site/index.html` is the home page, a "desk" (1600×900 layout scaled to the window; stacked on phones ≤860px) with a notebook, a weekly planner and a calendar. Inline CSS and JS, images in `site/img/web/`. In its script, `MATERIALS` (subject, kind, title, file, date, note) drives the notebook tabs, the "Обновления" note and the per-subject lists; `EVENTS` (date, kind, subject) drives РК marks in the planner and calendar; `WEEKS`/`TERM` hold the class schedule. Month and year are set from per-letter PNGs in `img/web/vyaz/<hex code>.png`.
+  - `site/index.html` is generated from `drafts/stol.html` with comments stripped and `BASE` set to `m/`. Edit the draft, then regenerate with `drafts/build_site.py` (untracked; it replaces `BASE`, adds the old favicon, strips `/* */`, `//` and `<!-- -->` comments and copies `drafts/img/web` minus `vyaz-old`).
   - `site/m/*.html` are the materials. Each is a standalone page exported from a Claude artifact. Treat them as opaque and don't restyle them unless asked.
   - `site/robots.txt` and `site/_headers` (`X-Robots-Tag: noindex`) keep the site out of search engines.
-- `drafts/` holds design mockups for a home page redesign. It is untracked and not deployed. Draft links point to `../site/m/...`.
+- `drafts/` holds design mockups and `stol.html`, the commented source of the home page. It is untracked and not deployed. Draft links point to `../site/m/...`.
 - `КАК-ОПУБЛИКОВАТЬ.md` is the owner-facing guide, in Russian.
 
 ## Adding a material
@@ -44,5 +44,5 @@ powershell -NoProfile -ExecutionPolicy Bypass -File serve.ps1 -Root . -Port 8081
 
 - Windows PowerShell 5.1 reads BOM-less `.ps1` files as ANSI, so **keep PowerShell scripts ASCII-only**. Cyrillic in a script breaks parsing.
 - Git and the GitHub CLI were installed via winget and may be missing from PATH in the Bash tool. Prepend `/c/Program Files/Git/cmd:/c/Program Files/GitHub CLI` if needed.
-- `python` on this machine is the Microsoft Store stub and doesn't work. That's why the preview server is a PowerShell `HttpListener`.
+- `python` on PATH is the Microsoft Store stub and doesn't work, which is why the preview server is a PowerShell `HttpListener`. A real Python 3.12 with Pillow and numpy is at `C:\Users\zapas\AppData\Local\Programs\Python\Python312\python.exe`; `drafts/seg.py` and `drafts/cut.py` used it to cut the vyaz glyphs.
 - Pixel fonts often lack proper Cyrillic. Pixelify Sans renders it wrongly. Press Start 2P, IBM Plex Mono and PT Mono are safe.
