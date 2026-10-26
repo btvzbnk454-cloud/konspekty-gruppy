@@ -2,7 +2,6 @@
 <title>Билеты по учёту и анализу</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sofia+Sans:wght@400;500;700;800&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap">
 <style>
-/* Бланк, заполненный под копирку: одна колонка, линейки вместо карточек; печатный текст — графит, всё вписанное — фиолетовая копирка, исправления — красным; прогресс — на счётах. */
 :root{
   --paper:#F2F4F1; --sheet:#FAFBF9; --ink:#1D2025; --ink-2:#4A505A; --ink-3:#69707B;
   --rule:#C7CCD0; --rule-2:#9AA1A9;
@@ -43,7 +42,6 @@ h1,h2,h3{text-wrap:balance}
 .typed{font-family:var(--f-type);color:var(--copy);font-variant-numeric:tabular-nums}
 .cap{font-size:13px;color:var(--ink-3);line-height:1.35}
 
-/* ---------- кнопки ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:8px 16px;border:1.5px solid var(--ink);border-radius:3px;background:transparent;font-weight:700;font-size:15px;line-height:1.2;text-align:center}
 .btn:hover:not(:disabled){background:var(--sheet)}
 .btn.main{background:var(--copy);border-color:var(--copy);color:var(--on-copy)}
@@ -53,13 +51,11 @@ h1,h2,h3{text-wrap:balance}
 .btn.sm{min-height:34px;padding:5px 12px;font-size:14px}
 .btn:disabled{opacity:.4}
 
-/* ---------- штамп ---------- */
 .stamp{display:inline-block;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;letter-spacing:.09em;font-size:19px;line-height:1;padding:5px 10px 4px;border:2px solid currentColor;border-radius:4px;box-shadow:inset 0 0 0 2px var(--paper),inset 0 0 0 3px currentColor;transform:rotate(-3deg);color:var(--copy);white-space:nowrap}
 .stamp.bad{color:var(--storno)}
 .stamp.big{font-size:34px;padding:12px 18px 9px;border-width:3px;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 5px currentColor;transform:rotate(-6deg)}
 .stamp small{display:block;font-size:.42em;letter-spacing:.14em;margin-top:5px;font-family:var(--f-body);font-weight:700}
 
-/* ---------- шапка бланка ---------- */
 .head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px 32px;align-items:end;padding-bottom:22px;border-bottom:3px double var(--ink)}
 .formno{font-size:12.5px;color:var(--ink-3);line-height:1.3;margin-bottom:10px}
 .head h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(46px,10.5vw,84px);line-height:.9;letter-spacing:.004em}
@@ -75,13 +71,11 @@ h1,h2,h3{text-wrap:balance}
 .resume p{min-width:0;flex:1 1 260px}
 .resume div{display:flex;gap:8px;flex-wrap:wrap}
 
-/* ---------- разделы главной ---------- */
 .sec{margin-top:40px}
 .sec-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 16px;padding-bottom:8px;border-bottom:1.5px solid var(--ink);margin-bottom:4px}
 .sec-h h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:30px;line-height:1;letter-spacing:.01em}
 .sec-h p{font-size:14px;color:var(--ink-2);min-width:0}
 
-/* ---------- счёты ---------- */
 .abacus{margin-top:26px;border:2.5px solid var(--ink);border-radius:5px;overflow:hidden}
 .wire{--st:21px;display:grid;grid-template-columns:54px minmax(0,1fr) 76px;align-items:center;width:100%;padding:0 14px 0 0;border:0;background:none;text-align:left}
 .wire:hover{background:var(--sheet)}
@@ -101,7 +95,6 @@ h1,h2,h3{text-wrap:balance}
 @media (max-width:480px){.wire{--st:19px;grid-template-columns:42px minmax(0,1fr) 62px;padding-right:10px}.w-no{font-size:23px}.w-mid{padding-left:10px}.bead{width:16px}.w-name small{display:none}.w-val small .lg{display:none}.w-val small .sm{display:inline}}
 @media (prefers-reduced-motion:reduce){.bead{transition:none}}
 
-/* ---------- план ---------- */
 .days{display:flex;flex-wrap:wrap;gap:0;margin-top:14px;border:1.5px solid var(--ink);border-radius:3px;overflow:hidden;width:fit-content;max-width:100%}
 .day-tab{border:0;border-right:1.5px solid var(--ink);background:none;padding:7px 14px;font-weight:700;font-size:14.5px;line-height:1.2;display:flex;align-items:center;gap:6px}
 .day-tab:last-child{border-right:0}
@@ -120,7 +113,6 @@ h1,h2,h3{text-wrap:balance}
 .step.done .step-l b{color:var(--ink-3);font-weight:500}
 .step-l b{font-weight:700}
 
-/* ---------- билеты: отрывные талоны ---------- */
 .tickets{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));margin-top:14px;border:1.5px solid var(--ink);border-radius:4px}
 .tk{border:0;border-right:1.5px dashed var(--rule-2);background:none;padding:10px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}
 .tk:last-child{border-right:0}
@@ -132,7 +124,6 @@ h1,h2,h3{text-wrap:balance}
 .tk.fail span,.tk.fail small{color:var(--storno)}
 @media (max-width:640px){.tickets{grid-template-columns:repeat(5,minmax(0,1fr))}.tk:nth-child(5){border-right:0}.tk:nth-child(n+6){border-top:1.5px dashed var(--rule-2)}}
 
-/* ---------- реестр: режимы, задачи, темы ---------- */
 .reg-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;align-items:baseline;width:100%;padding:11px 0;border:0;border-bottom:1px solid var(--rule);background:none;text-align:left}
 .reg-row:hover:not(:disabled){background:var(--sheet)}
 .reg-row b{font-size:17px;font-weight:700}
@@ -162,7 +153,6 @@ h1,h2,h3{text-wrap:balance}
 .foot p{min-width:0;flex:1 1 300px}
 .foot .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-/* ---------- панель попытки ---------- */
 .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding-block:10px;border-bottom:1.5px solid var(--ink)}
 .bar-t{min-width:0;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bar-r{display:flex;gap:10px;align-items:center}
@@ -180,7 +170,6 @@ h1,h2,h3{text-wrap:balance}
 .note{margin-top:12px;padding:10px 14px;border:1.5px dashed var(--storno);border-radius:3px;font-size:15px}
 .note b{color:var(--storno)}
 
-/* ---------- лист задания ---------- */
 .task{margin-top:16px}
 .task-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 20px;align-items:end;padding-bottom:10px;border-bottom:1px solid var(--rule)}
 .task-no{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1;letter-spacing:.01em}
@@ -215,7 +204,6 @@ h1,h2,h3{text-wrap:balance}
 @media (max-width:700px){.tbl-2{grid-template-columns:minmax(0,1fr)}.tbl-2 .tbl-w + .tbl-w{margin-top:0}.tbl-2 .tbl-w + .tbl-w thead{display:none}.tbl-2 .tbl-w + .tbl-w tr:first-child td{border-top:0}}
 .work{margin-top:14px}
 
-/* варианты */
 .opts{border-top:1px solid var(--rule)}
 .opt{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:start;width:100%;padding:11px 4px 11px 0;border:0;border-bottom:1px solid var(--rule);background:none;text-align:left;line-height:1.42}
 .opt:hover:not(:disabled){background:var(--sheet)}
@@ -233,7 +221,6 @@ h1,h2,h3{text-wrap:balance}
 .opt.wrong .opt-m{color:var(--storno)}
 @media (max-width:480px){.opt-m{display:none}}
 
-/* поля ввода */
 .flds{display:grid;gap:14px;max-width:520px}
 .fld{display:grid;gap:3px}
 .fld-l{font-size:15px;font-weight:700}
@@ -249,7 +236,6 @@ h1,h2,h3{text-wrap:balance}
 .fld.wrong .fld-in{border-bottom-color:var(--storno)}
 .fld .corr{font-family:var(--f-type);color:var(--copy);font-weight:600;font-size:15px}
 
-/* проводка: счёт буквой «Т» */
 .post{display:grid;gap:12px;max-width:560px}
 .pl{display:grid;grid-template-columns:22px minmax(0,1fr) minmax(0,1fr);align-items:stretch}
 .pl.one{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
@@ -279,7 +265,6 @@ h1,h2,h3{text-wrap:balance}
 .seg button.wrong{background:var(--storno);color:var(--paper);text-decoration:line-through}
 .seg button.missed{box-shadow:inset 0 0 0 2px var(--copy);color:var(--copy)}
 
-/* строки: соответствие, классификация, порядок, утверждения */
 .rows{border-top:1px solid var(--rule)}
 .rw{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
 .rw-t{min-width:0;line-height:1.4}
@@ -320,7 +305,6 @@ button.ord:hover:not(:disabled){background:var(--sheet)}
 .pick-tr.right td{background:var(--copy-soft);font-weight:700}
 .pick-tr.wrong td{background:var(--storno-soft);text-decoration:line-through;text-decoration-color:var(--storno)}
 
-/* разбор ответа */
 .fb{margin-top:18px;padding-top:12px;border-top:3px double var(--ink)}
 .fb-h{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .fb-h b{font-size:19px}
@@ -339,7 +323,6 @@ button.ord:hover:not(:disabled){background:var(--sheet)}
 .keys kbd{font-family:var(--f-type);font-size:11.5px;border:1px solid var(--rule-2);border-bottom-width:2px;border-radius:3px;padding:0 5px}
 @media (hover:none){.keys{display:none}}
 
-/* ---------- итог ---------- */
 .res{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 28px;align-items:center;margin-top:22px}
 .res h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(34px,7vw,52px);line-height:.95}
 .res p{margin-top:10px;color:var(--ink-2);max-width:60ch}
@@ -353,7 +336,6 @@ button.ord:hover:not(:disabled){background:var(--sheet)}
 .rev-i .rq{font-weight:700;max-width:70ch}
 .rev-i .cap{margin-bottom:3px}
 
-/* ---------- устные ответы ---------- */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .filters .btn.on{background:var(--ink);color:var(--paper)}
 .card-q{margin-top:18px;font-size:clamp(20px,3vw,24px);font-weight:700;line-height:1.35;max-width:60ch}
@@ -365,7 +347,6 @@ button.ord:hover:not(:disabled){background:var(--sheet)}
 .ref{margin-top:14px;padding-top:10px;border-top:1px solid var(--rule);max-width:75ch}
 .ref.mine{font-family:var(--f-type);color:var(--copy);font-size:15px}
 
-/* ---------- шпаргалка ---------- */
 .cnav{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .cs{margin-top:34px}
 .cs h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:32px;line-height:1;padding-bottom:6px;border-bottom:1.5px solid var(--ink)}
@@ -396,8 +377,6 @@ button.ord:hover:not(:disabled){background:var(--sheet)}
 <script>
 (function(){"use strict";
 const Q=[],GEN={},CASES=[],CARDS=[],CHEAT=[];
-/* shared.js */
-// Общие справочники и таблицы условий
 const BLOCKS={
  1:{r:"I",n:"Учёт как система",sh:"Учёт как система",src:"лекция 1, практики 1 и 1.1"},
  2:{r:"II",n:"Бухгалтерский баланс",sh:"Баланс",src:"лекция 2, практика 2"},
@@ -414,7 +393,6 @@ const TOPICS={
  "5a":"Амортизация","5b":"Ремонт и модернизация","5c":"Аренда, переоценка, обесценение","5d":"Инвентаризация",
  "6a":"Признание НМА","6b":"Оценка и НИОКР","6c":"Амортизация и выбытие НМА"
 };
-// Счета для составления проводок: номер → короткое название
 const ACC={
  "01":"Основные средства","01.В":"Выбытие ОС (субсчёт 01)","02":"Амортизация ОС","04":"Нематериальные активы","05":"Амортизация НМА",
  "08":"Вложения во внеоборотные активы","10":"Материалы","10.3":"Топливо","10.5":"Запасные части","10.8":"Строительные материалы",
@@ -474,8 +452,6 @@ const TB_VED={cap:"Оборотная ведомость из лекции: на
  ["Расчётные счета","29 000","—","—","10 000"],["Уставный капитал","—","60 000","—","—"],
  ["Краткосрочные кредиты и займы","—","20 000","—","5 000"],["Расчёты с поставщиками","—","10 000","5 000","20 000"],
  ["Расчёты с персоналом по оплате труда","—","10 000","10 000","—"]]};
-/* b1.js */
-// РАЗДЕЛ I — Учёт как система (лекция 1, практики 1 и 1.1) — 30 заданий
 Q.push(
 {b:1,t:"1a",k:"cloze",q:"Восстанови определение из лекции.",
  tx:"Бухгалтерский учёт — это {0}, {1} и взаимосвязанное отражение на {2} фактов хозяйственной деятельности на основании {3}.",
@@ -685,8 +661,6 @@ Q.push(
  e:"Лицензия, расходы будущих периодов и незавершённое производство контролируются организацией и принесут выгоды. Полученные гарантии — обеспечение, его учитывают за балансом (счёт 008). Работники активом не признаются: организация не контролирует их, работник вправе уволиться. Полученный аванс — обязательство.",
  s:"Практика 1.1, задание 4; лекция 3, слайд 70"}
 );
-/* b2.js */
-// РАЗДЕЛ II — Бухгалтерский баланс (лекция 2, § 1.2.1–1.2.2; практика 2) — 30 заданий
 Q.push(
 {b:2,t:"2a",k:"one",q:"Как в лекции дословно переводится термин «баланс»?",
  o:["«двучашие»","«равновесие»","«равенство»","«уравнивание»"],a:0,
@@ -858,8 +832,6 @@ Q.push(
  e:"Не изменяют валюту пермутации; модификации её увеличивают или уменьшают. Равенство актива и пассива сохраняется при операциях любого типа.",
  s:"Лекция 2, слайды 13–18"}
 );
-/* b3.js */
-// РАЗДЕЛ III — Счета и двойная запись (лекция 2, § 1.2.3–1.2.5; План счетов; «Счета и двойная запись»; практика 3) — 30 заданий
 Q.push(
 {b:3,t:"3a",k:"gen",g:"saldoA",kk:"num"},
 {b:3,t:"3a",k:"gen",g:"saldoP",kk:"num"},
@@ -1015,8 +987,6 @@ Q.push(
  e:"Счёт 60 затронут трижды. Операция 2: поступили материалы — кредит 50 000. Операция 3: оплата поставщику — дебет 60 000. Операция 8: долг переоформлен в заём — дебет 10 000.\nСк = 40 000 + 50 000 − (60 000 + 10 000) = 20 000, сальдо кредитовое.",
  s:"Практика 3, таблицы 1–2"}
 );
-/* b4.js */
-// РАЗДЕЛ IV — Основные средства: признание и движение (лекция 3, вопрос 1) — 30 заданий
 Q.push(
 {b:4,t:"4a",k:"multi",q:"Какие признаки основного средства установлены ФСБУ 6/2020? Отметь все четыре.",
  o:["материально-вещественная форма","использование в обычной деятельности","срок использования более 12 месяцев","способность приносить экономические выгоды",
@@ -1189,8 +1159,6 @@ Q.push(
  e:"Если принято решение продать объект в ближайшие 12 месяцев, его переклассифицируют в долгосрочные активы к продаже и учитывают по отдельному стандарту. Списание через счёт 91 делают позже — в момент фактического выбытия.",
  s:"Лекция 3, слайд 37"}
 );
-/* b5.js */
-// РАЗДЕЛ V — Основные средства: амортизация, ремонт, аренда, переоценка, инвентаризация (лекция 3, вопрос 2) — 30 заданий
 Q.push(
 {b:5,t:"5a",k:"cloze",q:"Восстанови ключевое правило расчёта амортизации по ФСБУ 6/2020.",
  tx:"Амортизируемая величина = {0} стоимость − {1} стоимость. К концу срока амортизации {2} стоимость должна стать равной {3}.",
@@ -1328,8 +1296,6 @@ Q.push(
  e:"Излишки приходуют по справедливой стоимости на дату инвентаризации с отнесением на прочие доходы: Д 01 К 91.1. Счёт 08 здесь не используют — вложений не было; счёт 98 применяют при безвозмездном получении.",
  s:"Лекция 3, слайды 31, 65–66"}
 );
-/* b6.js */
-// РАЗДЕЛ VI — Нематериальные активы (лекция 3, вопрос 3) — 30 заданий
 Q.push(
 {b:6,t:"6a",k:"multi",q:"Какие признаки нематериального актива установлены ФСБУ 14/2022? Отметь все названные.",
  o:["отсутствие материально-вещественной формы","идентифицируемость: актив можно выделить из других","право на выгоды и способность ограничить доступ других лиц","срок использования более 12 месяцев",
@@ -1488,9 +1454,6 @@ Q.push(
  e:"Затраты сначала накапливают на счёте 08, затем актив переводят на счёт 04 и амортизируют через счёт 05. При выбытии амортизацию списывают в уменьшение стоимости, остаток — в прочие расходы, результат закрывают на счёт 99.",
  s:"Лекция 3, слайды 78–80, таблица 17"}
 );
-/* gens.js */
-// Генераторы расчётных заданий: при каждой попытке — новые числа.
-// R: {pick(arr), chance(p), shuffle(arr)}
 function fm(n){const neg=n<0;n=Math.abs(Math.round(n));const s=String(n).replace(/\B(?=(\d{3})+(?!\d))/g," ");return(neg?"−":"")+s}
 function fd(x,d){const neg=x<0;x=Math.abs(x);const p=x.toFixed(d).split(".");return(neg?"−":"")+p[0].replace(/\B(?=(\d{3})+(?!\d))/g," ")+(d?","+p[1]:"")}
 const K=1000;
@@ -1738,8 +1701,6 @@ GEN.umnma=function(R){
   e:`Год 1: ${fm(PS)} × ${k} % = ${fm(a1)}; остаток ${fm(PS-a1)}.\nГод 2: ${fm(PS-a1)} × ${k} % = ${fm(a2)}; остаток ${fm(PS-a1-a2)} руб.\nКоэффициент организация определяет самостоятельно: прежнего ограничения «не выше трёх» в ФСБУ 14/2022 нет.`,
   s:"Лекция 3, слайд 85"};
 };
-/* cases.js */
-// СКВОЗНЫЕ ЗАДАЧИ: шаги выполняются по порядку, условие доступно на каждом шаге
 const ROM_POOL=["01","10","50","51","60","62","66","68","70","80","84"];
 CASES.push({id:"rom1",b:3,n:"«Ромашка»: октябрь",d:"Пекарня из практики 3: десять операций, счета, оборотная ведомость и баланс на конец месяца",src:"Практика 3, разделы 1–6",
  ctx:[{tb:TB_ROM_BAL},{tb:TB_ROM_J},{tx:"Типы изменений баланса: I — рост одной статьи актива и уменьшение другой; II — рост одной статьи пассива и уменьшение другой; III — одновременный рост актива и пассива; IV — одновременное уменьшение актива и пассива."}],
@@ -1862,8 +1823,6 @@ CASES.push({id:"prog",b:6,n:"Программа: от покупки до про
  {k:"post",q:"Отрази продажную стоимость с НДС, начисление НДС и закрытие прибыли. Три проводки.",ln:[["62","91"],["91","68"],["91","99"]],pool:PR_POOL,
   e:"Д 62 К 91 — 1 464 000; Д 91 К 68 — 264 000; Д 91.9 К 99 — 180 000."}
  ]});
-/* cards.js */
-// УСТНЫЕ ОТВЕТЫ: открытые вопросы. k — ключевые мысли: [подпись, основа1, основа2…] (основы в нижнем регистре, «ё» = «е»)
 CARDS.push(
 {b:1,q:"Дай определение бухгалтерского учёта.",
  a:"Бухгалтерский учёт — это сплошное, непрерывное и взаимосвязанное отражение на счетах фактов хозяйственной деятельности на основании первичных документов. Ведётся непрерывно с момента регистрации юридического лица до реорганизации или ликвидации.",
@@ -1963,8 +1922,6 @@ CARDS.push(
  a:"Срок определяют по сроку действия прав и ожидаемому использованию; он не может превышать срок действия прав. Объекты с неопределённым сроком не амортизируют и ежегодно проверяют. Ликвидационная стоимость, как правило, равна нулю. Способы те же, что у основных средств; по выручке — только если выгоды юридически обусловлены ею. Амортизацию копят на счёте 05.",
  k:[["срок действия прав","действия прав","срок"],["неопределённый срок — не амортизируют","неопределен"],["ликвидационная стоимость — ноль","ликвидацион","нул"],["способы как у основных средств","способ","линейн"],["счёт 05","05"]],s:"Лекция 3, слайды 83–86"}
 );
-/* cheat.js */
-// ШПАРГАЛКА. Типы блоков: tbl (h, r, ans — номера столбцов, которые закрываются), pairs, fm, li, note
 CHEAT.push(
 {id:"bal",t:"Баланс",lead:"Строение, равенства и типы изменений. Лекция 2, слайды 2–19.",items:[
  {type:"tbl",cap:"Разделы и статьи",h:["Раздел","Что входит"],ans:[1],r:[
@@ -2108,8 +2065,6 @@ CHEAT.push(
   ["Лекция 3 и учебное пособие","Лекция сама отмечает расхождения с пособием: приостановка амортизации при консервации, способ по сумме чисел лет, гудвил в составе НМА, Методические указания по инвентаризации. В тренажёре везде действующий порядок."],
   ["Целевое финансирование","В плане счетов счёт 86 стоит в разделе «Капитал», поэтому в задаче про АО «Первокурсник» оно отнесено к собственным источникам."]]}]}
 );
-/* app1.js */
-/* ================= ЯДРО: банк, хранение, проверка ответов ================= */
 const KIND={one:"Выбор ответа",multi:"Несколько ответов",tf:"Верно или неверно",num:"Расчёт",grid:"Расчёт по шагам",post:"Проводка",match:"Соответствие",bucket:"Классификация",order:"Порядок",cloze:"Пропуски",rows:"Поиск ошибки"};
 const GROUPS=[["calc","Расчёты",["num","grid"]],["post","Проводки",["post"]],["sort","Классификация",["bucket"]],["link","Соответствия, порядок, пропуски",["match","order","cloze"]],["judge","Утверждения и поиск ошибок",["tf","rows"]],["pick","Выбор ответа",["one","multi"]]];
 const HINT={one:"",multi:"Верных ответов несколько. Отметь все и нажми «Ответить».",tf:"Отметь каждое утверждение: верно или неверно.",num:"Впиши число. Пробелы и единицы измерения не обязательны.",grid:"Впиши все значения.",
@@ -2129,13 +2084,11 @@ const byKinds=ks=>BANK.filter(id=>ks.includes(TASK[id].kk));
 function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 const RND={pick:a=>a[Math.floor(Math.random()*a.length)],chance:p=>Math.random()<p,shuffle};
 const idx=n=>Array.from({length:n},(_,i)=>i);
-// Билеты: в каждом по три задания из каждого раздела, типы заданий перемешаны
 const TICKETS=(function(){const tk=idx(NT).map(()=>[]);
  for(let b=1;b<=NB;b++){const ord=QB[b].slice().sort((x,y)=>{const a=TASK[x].kk,c=TASK[y].kk;return a<c?-1:a>c?1:x<y?-1:1});
   for(let k=0;k<NT;k++)for(let j=0;j<PER;j++)tk[k].push(ord[(k*7+b*3)%NT+j*NT])}
  return tk})();
 
-/* ---------- хранение ---------- */
 const KEY="uia-bilety-v1",SKEY="uia-bilety-sess-v1";
 let storageOK=true;
 function lsGet(k){try{return localStorage.getItem(k)}catch(e){storageOK=false;return null}}
@@ -2159,7 +2112,6 @@ function errIds(){return Object.keys(S.q).filter(id=>TASK[id]&&S.q[id].last===0)
 function stats(){let seen=0,mast=0,n=0,ok=0;BANK.forEach(id=>{const r=S.q[id];if(r&&r.n){seen++;if(r.last===1)mast++}});Object.keys(S.q).forEach(id=>{if(TASK[id]){n+=S.q[id].n;ok+=S.q[id].ok}});
  return{seen,mast,acc:n?Math.round(ok/n*100):null,err:errIds().length,exams:S.exams.filter(e=>e.pass).length}}
 
-/* ---------- синхронизация прогресса с аккаунтом (если страница открыта в Claude) ---------- */
 const cloud={state:"off",ref:null,busy:false,dirty:false,timer:null,sent:0,fails:0};
 async function cloudInit(manual){
  try{
@@ -2167,7 +2119,6 @@ async function cloudInit(manual){
   const got=await Promise.all([window.claude.use("db"),window.claude.use("user"),window.claude.use("permissions")]);
   const db=got[0],user=got[1],perm=got[2];
   if(!db||!user){cloud.state="off";if(manual)toast("Синхронизация здесь недоступна");return}
-  // без нажатия кнопки согласие не запрашиваем: только читаем состояние
   let st=manual?"granted":"prompt";
   if(perm){try{st=manual?((await perm.request(["db","user"]))||{}).db||"unavailable":await perm.state("db")}catch(e){}}
   if(st!=="granted"){cloud.state=st==="prompt"?"ask":"off";if(manual)toast("Синхронизация не подключена");if(view==="home")render();return}
@@ -2176,11 +2127,10 @@ async function cloudInit(manual){
   const snap=await cloud.ref.get();
   let need=Object.keys(S.q).length>0||Object.keys(S.cards).length>0||Object.keys(S.plan).length>0||S.exams.length>0||S.resetAt>0||!!manual;
   if(snap.exists){const remote=clone(snap.data()),merged=mergeState(S,remote);need=JSON.stringify(merged)!==JSON.stringify(mergeState(blank(),remote));S=merged;lsSet(KEY,JSON.stringify(S))}
-  // первая запись сразу показывает, разрешено ли этой учётной записи сохранять: отказ уходит в catch
   if(need){if(!S.rev)S.rev=Date.now();const body=clone(S);cloud.sent=body.rev;await cloud.ref.set(body)}else cloud.sent=S.rev;
   cloud.state="on";cloud.dirty=false;
   cloud.ref.onSnapshot(function(s){if(!s.exists||s.metadata.hasPendingWrites)return;const r=clone(s.data());if(r.rev===cloud.sent||r.rev===S.rev)return;S=mergeState(S,r);lsSet(KEY,JSON.stringify(S));if(view==="home")render()},function(){cloud.state="off";if(view==="home")render()});
-  if(S.rev!==cloud.sent)cloudPush(); // ответы, данные за время подключения
+  if(S.rev!==cloud.sent)cloudPush();
   if(manual)toast("Синхронизация включена");
   if(view==="home")render();
  }catch(e){cloud.state="off";if(manual)toast("Синхронизация не подключена");if(view==="home")try{render()}catch(e2){}}
@@ -2192,7 +2142,6 @@ async function cloudFlush(){
  try{await cloud.ref.set(body);cloud.fails=0}catch(e){if(e&&e.code==="unavailable"&&cloud.fails<1){cloud.fails++;cloud.dirty=true}else{cloud.state="off";if(view==="home")render()}}
  cloud.busy=false;if(cloud.dirty)cloudPush()}
 
-/* ---------- текст и числа ---------- */
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function T(s){return esc(s).replace(/(\d) (?=\d{3}(?!\d))/g,"$1\u00a0").replace(/ (—|–|руб\.|тыс\.|млн|%)/g,"\u00a0$1").replace(/(\d) (?=[а-яё]{1,6}(?![а-яё]))/g,"$1\u00a0").replace(/(№|Д|К|слайд|слайды|счёт|счёта|счёте|счета|сч\.) (?=[\d«])/g,"$1\u00a0").replace(/\n/g,"<br>")}
 function fnum(a,dec){return dec?fd(a,dec):fm(a)}
@@ -2200,7 +2149,6 @@ function parseNum(s){if(s==null)return NaN;s=String(s).trim();if(/^\(.*\)$/.test
 function fmtT(ms){ms=Math.max(0,ms);const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000);return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
 const accCmp=(a,b)=>{const x=a.length===3&&a[0]==="0"&&a[1]==="0"?"z"+a:a,y=b.length===3&&b[0]==="0"&&b[1]==="0"?"z"+b:b;return x<y?-1:x>y?1:0};
 
-/* ---------- экземпляр задания: числа генератора и порядок вариантов ---------- */
 function makeInst(t){
  const c=t.k==="gen"?Object.assign(GEN[t.g](RND),{id:t.id,b:t.b,t:t.t,gen:1}):t,I={t:c};
  switch(c.k){
@@ -2239,7 +2187,6 @@ function grade(I,v){const c=I.t;let parts;switch(c.k){
  return{ok:parts.every(Boolean),parts}}
 const dk=(a)=>a?"Д "+a[0]+" К "+a[1]:"—";
 const altFirst=s=>s.split("|")[0];
-// Позиции ответа для разбора: [подпись, твой ответ, верный ответ, верно ли]
 function partsOf(I,A){const c=I.t,v=A.v,g=A.g||grade(I,v),P=[];switch(c.k){
  case"one":P.push(["Ответ",v==null?"—":c.o[v],c.o[c.a],g.ok]);break;
  case"rows":P.push(["Строка с ошибкой",v==null?"—":c.r[v][0],c.r[c.a][0],g.ok]);break;
@@ -2254,12 +2201,9 @@ function partsOf(I,A){const c=I.t,v=A.v,g=A.g||grade(I,v),P=[];switch(c.k){
  case"order":c.seq.forEach((s,i)=>P.push(["Шаг "+(i+1),v[i]==null?"—":c.seq[v[i]],s,g.parts[i]]));break;
  case"cloze":c.g.forEach((w,i)=>P.push(["Пропуск "+(i+1),v[i]==null?"—":I.bank[v[i]],w,g.parts[i]]));break}
  return P}
-/* app2.js */
-/* ================= ИНТЕРФЕЙС ================= */
 const app=document.getElementById("app");
 try{document.documentElement.lang="ru"}catch(e){}
 let view="home",sess=null,cs=null,cheat={hide:false},confirmReset=false,timerInt=null,planDay=null,prevBeads=null,toastT=null;
-// Незавершённая попытка: тексты постоянных заданий в хранилище не дублируются, сохраняются только задания с новыми числами
 let pending=(function(){const p=parse(lsGet(SKEY));if(!p||p.finished||!Array.isArray(p.items)||!p.items.length||!p.inst||!p.ans)return null;
  try{for(const id of p.items){const I=p.inst[id];if(!TASK[id]||!I)return null;if(!I.t)I.t=TASK[id];if(I.t.k==="gen"||!KIND[I.t.k])return null}}catch(e){return null}
  if(p.mode==="exam"&&!(p.exam&&p.exam.deadline))return null;return p})();
@@ -2279,7 +2223,6 @@ function tblHTML(tb){const isNum=x=>/^[−-]?[\d\s\u00a0]+([.,]\d+)?$/.test(x)||
   return`${tb.cap?`<p class="cap tbl-cap">${T(tb.cap)}</p>`:""}<div class="tbl-2"><div class="tbl-w">${one(tb.r.slice(0,m))}</div><div class="tbl-w">${one(tb.r.slice(m))}</div></div>`}
  return`<div class="tbl-w">${one(tb.r,tb.cap,true)}</div>`}
 
-/* ---------- план ---------- */
 const PLAN=[
  {t:"Учёт и баланс",n:"разделы I и II",steps:[
   {id:"d1-cheat",l:"Шпаргалка: баланс",h:"перескажи строение баланса и четыре типа изменений",a:{m:"cheat",sec:"bal"}},
@@ -2324,7 +2267,6 @@ function runStep(id){const a=STEP[id].a;
  else if(a.m==="tickets"){if(view!=="home")go("home");const el=document.getElementById("tickets");if(el)el.scrollIntoView({behavior:"smooth",block:"start"})}
  else if(a.m==="cheat"){markStep(id);cheat={hide:!!a.hide};go("cheat");if(a.sec){const el=document.getElementById("cs-"+a.sec);if(el)el.scrollIntoView({block:"start"})}}}
 
-/* ---------- главная ---------- */
 function beadCount(m,total){if(!m)return 0;if(m>=total)return 10;return Math.max(1,Math.min(9,Math.round(m/total*10)))}
 function renderHome(){
  const st=stats(),nowDay=PLAN.findIndex(d=>!d.steps.every(stepDone));
@@ -2398,7 +2340,6 @@ function renderHome(){
  prevBeads=beads;
 }
 
-/* ---------- попытки ---------- */
 function startSession(o){clearInterval(timerInt);pending=null;
  sess=Object.assign({idx:0,ans:{},inst:{},instant:true,finished:false},o);sess.items=sess.items.slice();
  sess.items.forEach(id=>{sess.inst[id]=makeInst(TASK[id])});saveSess();go("quiz")}
@@ -2429,7 +2370,6 @@ function commit(){if(!sess||sess.finished)return;const id=sess.items[sess.idx],I
  else{const at=sess.idx;setTimeout(()=>{if(!sess||sess.finished||view!=="quiz")return;if(sess.mode==="exam"&&examCheck())return;if(sess.idx===at)nextUnanswered()},350)}}
 function nextEmpty(arr,from){const n=arr.length;for(let k=1;k<=n;k++){const j=(from+k)%n;if(arr[j]==null)return j}return-1}
 
-/* ---------- экзамен ---------- */
 function startTimer(){clearInterval(timerInt);timerInt=setInterval(()=>{
  if(!sess||sess.mode!=="exam"||sess.finished){clearInterval(timerInt);return}
  const left=sess.exam.deadline-Date.now();if(left<=0){examEnd(false,"Время вышло: экзамен не сдан.");return}
@@ -2459,7 +2399,6 @@ function finishSession(){const s=sess;s.finished=true;clearInterval(timerInt);
   if(s.mode==="kind")PLAN.forEach(d=>d.steps.forEach(st=>{if(st.a.m==="kind"&&st.a.g===s.kind)S.plan[st.id]={v:1,t:now}}))}
  save();saveSess();go("result")}
 
-/* ---------- виджеты заданий ---------- */
 function segBtn(state,attrs,label,lock){return`<button class="${state}" ${attrs} ${lock?"disabled":""}>${label}</button>`}
 function st3(chosen,correct,rev){if(rev){if(chosen&&correct)return"right";if(chosen)return"wrong";if(correct)return"missed";return""}return chosen?"on":""}
 const W={
@@ -2530,7 +2469,6 @@ function renderQuiz(){
  const cx=document.getElementById("ctx");if(cx)cx.addEventListener("toggle",()=>{if(sess)sess.ctxOpen=cx.open});
 }
 
-/* ---------- итог ---------- */
 function fixesHTML(I,A){const P=partsOf(I,A),bad=P.filter(p=>!p[3]);return`<div class="fixes">${bad.map(p=>`<div><span class="lb">${T(p[0])}</span><span class="was">${T(p[1])}</span><span class="now">${T(p[2])}</span></div>`).join("")}</div>`}
 function renderResult(){
  const s=sess,done=s.items.filter(id=>(s.ans[id]||{}).done),wrong=done.filter(id=>!s.ans[id].ok),okN=done.length-wrong.length,full=done.length===s.items.length,pct=done.length?Math.round(okN/done.length*100):0;
@@ -2557,7 +2495,6 @@ function renderResult(){
  app.innerHTML=h+`</div>`;
 }
 
-/* ---------- устные ответы ---------- */
 function normK(s){return String(s).toLowerCase().replace(/ё/g,"е").replace(/[–—−]/g,"-").replace(/\s+/g,"")}
 function keyInfo(c,text){const nt=normK(text);return c.k.map(k=>({label:k[0],hit:!!text.trim()&&k.slice(1).some(a=>nt.includes(normK(a)))}))}
 function cardList(f){if(f==="b12")return CARDS.filter(c=>c.b<=2);if(f==="b36")return CARDS.filter(c=>c.b>=3);if(f==="due")return CARDS.filter(c=>((S.cards[c.id]||{}).box||0)<2);return CARDS}
@@ -2581,7 +2518,6 @@ function renderCards(){
  const ta=document.getElementById("card-in");if(ta)ta.addEventListener("input",()=>{cs.text=ta.value});
 }
 
-/* ---------- шпаргалка ---------- */
 function renderCheat(){
  const a=t=>`<span class="a">${t}</span>`;
  let h=`<div class="sheet"><div class="bar"><button class="btn sm quiet" data-act="home">Меню</button><div class="bar-t">Шпаргалка</div><div class="bar-r"><button class="btn sm${cheat.hide?" main":""}" data-act="chide" aria-pressed="${cheat.hide}">${cheat.hide?"Открыть ответы":"Закрыть ответы"}</button></div></div>
@@ -2598,7 +2534,6 @@ function renderCheat(){
  app.innerHTML=h+`</div></div>`;
 }
 
-/* ---------- события ---------- */
 function act(a,el){
  const A=sess&&view==="quiz"?curA():null,I=A?curI():null,c=I?I.t:null,free=A&&!A.done&&!sess.finished;
  switch(a){

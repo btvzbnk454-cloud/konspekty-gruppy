@@ -4,7 +4,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap">
 <style>
-/* Layout: one narrow column, like a page of a tax form. The question is the only raised sheet; everything else lies flat on the paper. Form cells carry the numbers, a stamp gives the verdict. */
 :root {
   --paper: #EEF2F0;
   --sheet: #FFFFFF;
@@ -124,7 +123,6 @@ svg { display: block; }
 @supports not (overflow: clip) { .app { overflow-x: hidden; } }
 @media (min-width: 700px) { .app { padding-inline: 32px; padding-block: 36px 72px; } }
 
-/* ---------- buttons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -161,7 +159,6 @@ svg { display: block; }
 .btn .n { font-variant-numeric: tabular-nums; opacity: .8; font-weight: 500; }
 .btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
-/* ---------- form cells ---------- */
 .cells { display: inline-flex; gap: 3px; vertical-align: middle; }
 .cell {
   display: inline-grid;
@@ -177,7 +174,6 @@ svg { display: block; }
   line-height: 1;
 }
 
-/* ---------- home ---------- */
 .masthead { display: grid; gap: 14px; padding-block: 0 26px; }
 .form-strip {
   display: flex;
@@ -317,7 +313,6 @@ svg { display: block; }
   .opt { grid-template-columns: 20px .9em minmax(0, 1fr); gap: 9px; padding: 11px 12px; }
 }
 
-/* ---------- run header ---------- */
 .runbar {
   position: sticky;
   top: env(safe-area-inset-top, 0px);
@@ -348,7 +343,6 @@ svg { display: block; }
 .progress { grid-column: 1 / -1; height: 3px; background: var(--rule); margin-top: 6px; }
 .progress i { display: block; height: 100%; background: var(--pen); transition: width .25s; }
 
-/* ---------- question sheet ---------- */
 .sheet {
   position: relative;
   background: var(--sheet);
@@ -387,7 +381,6 @@ svg { display: block; }
 .hint { margin-top: 6px; font-size: var(--fs-s); color: var(--ink-2); }
 .answer { margin-top: 16px; }
 
-/* single / multi */
 .opts { display: grid; gap: 8px; }
 .opt {
   display: grid;
@@ -427,7 +420,6 @@ svg { display: block; }
 .opt.is-miss .box { border-color: var(--ok); color: var(--ok); }
 .opt.is-dim { opacity: .62; }
 
-/* true / false */
 .tf { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .tfb {
   min-height: 64px;
@@ -444,7 +436,6 @@ svg { display: block; }
 .tfb.is-bad { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); }
 .tfb:disabled { cursor: default; }
 
-/* match */
 .match { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .mrow { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 6px 12px; align-items: center; }
 @media (max-width: 620px) { .mrow { grid-template-columns: 1fr; } }
@@ -472,7 +463,6 @@ svg { display: block; }
 .fix { grid-column: 1 / -1; font-size: var(--fs-s); color: var(--ok); font-weight: 500; }
 @media (min-width: 621px) { .fix { grid-column: 2; } }
 
-/* picker dialog */
 .scrim {
   position: fixed;
   inset: 0;
@@ -517,7 +507,6 @@ svg { display: block; }
 .icon-btn { display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 auto; border: 0; border-radius: 8px; background: transparent; color: var(--ink-2); }
 .icon-btn:hover { background: var(--pen-soft); color: var(--ink); }
 
-/* sort: pills on phones, a form table with tick boxes on wider screens */
 .sort { display: grid; border-top: 1px solid var(--rule); }
 .sort-head { display: none; }
 .srow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding-block: 11px; border-bottom: 1px solid var(--rule); }
@@ -576,7 +565,6 @@ svg { display: block; }
   .pill.is-miss .pbox { border-color: var(--ok); border-style: dashed; color: var(--ok); }
 }
 
-/* order */
 .seq { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
 .seq-item, .slot {
   display: grid;
@@ -614,7 +602,6 @@ svg { display: block; }
 .right-order { margin-top: 12px; padding: 12px 14px; border-radius: 10px; background: var(--ok-soft); }
 .right-order ol { margin: 6px 0 0; padding-left: 1.4em; }
 
-/* fill */
 .fill-text { font-size: var(--fs-l); line-height: 2.25; }
 .blank {
   display: inline-block;
@@ -648,7 +635,6 @@ svg { display: block; }
 }
 .chip:disabled { opacity: .25; cursor: default; }
 
-/* define */
 .def-input {
   display: block;
   width: 100%;
@@ -675,7 +661,6 @@ svg { display: block; }
 .rate { margin-top: 14px; display: grid; gap: 10px; }
 .rate-q { font-weight: 600; }
 
-/* hotspot */
 .figure { border: 1px solid var(--rule); border-radius: 8px; padding: 10px 8px 6px; background: var(--paper); overflow-x: auto; }
 .figure svg { width: 100%; max-width: 520px; height: auto; margin: 0 auto; }
 .fig-axis { stroke: var(--ink); stroke-width: 1.4; fill: none; }
@@ -697,7 +682,6 @@ svg { display: block; }
 .fig-zone-label { fill: var(--ink); font-family: var(--f-text); font-size: 14px; font-weight: 600; pointer-events: none; }
 .fig-legend { margin-top: 8px; font-size: var(--fs-s); color: var(--ink-2); }
 
-/* feedback */
 .feedback { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--rule); display: grid; gap: 12px; }
 .verdict { font-weight: 600; }
 .verdict.ok { color: var(--ok); }
@@ -745,7 +729,6 @@ svg { display: block; }
 .kbd-hint { font-size: var(--fs-xs); color: var(--ink-2); }
 @media (hover: none), (max-width: 600px) { .kbd-hint { display: none; } }
 
-/* stamp */
 .stamp {
   position: absolute;
   top: -16px;
@@ -775,7 +758,6 @@ svg { display: block; }
 }
 @media (min-width: 700px) { .stamp { right: 26px; font-size: 19px; } }
 
-/* ---------- results ---------- */
 .result-head { position: relative; display: grid; gap: 14px; padding-block: 10px 24px; }
 .result-head .stamp { position: static; justify-self: start; transform: rotate(-5deg); font-size: 22px; margin-bottom: 4px; }
 .result-head .stamp.anim { animation-name: stamp-static; }
@@ -799,7 +781,6 @@ svg { display: block; }
 .status { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: var(--on-ok); background: var(--ok); flex: 0 0 auto; }
 .status.bad { background: var(--bad); color: var(--on-bad); }
 
-/* ---------- notes ---------- */
 .notes-top { display: grid; gap: 10px; padding-block: 0 10px; }
 .notes-nav { display: flex; gap: 6px; overflow-x: auto; padding-block: 6px 12px; scrollbar-width: thin; }
 .notes-nav button { flex: 0 0 auto; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--rule); background: var(--sheet); font-size: var(--fs-s); white-space: nowrap; }
@@ -814,7 +795,6 @@ svg { display: block; }
 .changes { margin-top: 26px; padding: 18px; border: 1.5px solid var(--ink); border-radius: 8px; background: var(--sheet); scroll-margin-top: 72px; }
 .changes ul { margin: 10px 0 0; padding-left: 1.15em; display: grid; gap: 8px; line-height: 1.55; }
 
-/* empty / misc */
 .empty { padding: 26px 0; color: var(--ink-2); }
 .toast { margin-top: 10px; font-size: var(--fs-s); color: var(--ink-2); }
 
@@ -822,7 +802,6 @@ svg { display: block; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
-/* ---------- pomodoro plan ---------- */
 .plan-rule { color: var(--ink-2); max-width: 40em; margin-bottom: 16px; }
 .pomo {
   display: grid;
@@ -877,7 +856,6 @@ svg { display: block; }
 </style>
 <main id="app" class="app"><noscript><p>Для тренажёра нужен JavaScript.</p></noscript></main>
 <script>
-/* Банк вопросов к РК по налогам. Источники: конспекты лекций НиНП 1–3 и файл «Тесты-2» (тесты 1–3). */
 window.NALOG_DATA = (function () {
   'use strict';
 
@@ -897,7 +875,6 @@ window.NALOG_DATA = (function () {
     { id: 'otv', n: 'Ответственность, пени, штрафы', src: 'Конспект 3' }
   ];
 
-  /* Выдержки из конспектов: показываются в разборе и в шпаргалке. **текст** — выделение маркером, строка с «• » — пункт списка. */
   var notes = [
     { id: 'nal-def', t: 'nal', h: 'Налог', src: 'НК РФ (ст. 8), тест 2',
       x: '**Налог** — обязательный, индивидуально безвозмездный платёж, взимаемый с организаций и физических лиц в форме отчуждения принадлежащих им денежных средств в целях финансового обеспечения деятельности государства и (или) муниципальных образований.\nКороткая форма из теста: «обязательный, индивидуальный, безвозмездный **платёж**, взимаемый с **организаций и физических лиц**».' },
@@ -1029,10 +1006,8 @@ window.NALOG_DATA = (function () {
       x: '• Нарушение срока подачи заявления о постановке на учёт — **10 000 ₽** (п. 1 ст. 116 НК)\n• Деятельность без постановки на учёт — **10 % от доходов**, но не менее **40 000 ₽** (п. 2 ст. 116)\n• Нарушение способа подачи декларации в электронной форме — **200 ₽** (ст. 119.1)\n• Об излишней уплате налоговый орган сообщает **в течение 10 дней** со дня обнаружения; заявление о возврате — **в течение 3 лет** со дня уплаты\nДве последние нормы — классическая редакция ст. 78 НК. С 2023 г. переплата формирует сальдо единого налогового счёта, и ст. 78–79 переписаны.' }
   ];
 
-  /* Типы: single, multi, tf, match, sort, order, fill, define, hotspot.
-     rk — вопрос из файла с тестами; keep — не перемешивать варианты (как в тесте). */
+
   var questions = [
-    /* ---------- Налог и сбор ---------- */
     { id: 'nal1', t: 'nal', type: 'single', rk: 'Тест 1, вопрос 1', keep: 1, ref: 'nal-def',
       q: 'Налог — это:',
       o: ['обязательный, индивидуальный, безвозмездный или возмездный платеж, взимаемый с организаций и физических лиц',
@@ -1095,7 +1070,6 @@ window.NALOG_DATA = (function () {
       keys: [['обязательн', 'обязательный'], ['взнос', 'взнос'], ['организац', 'организаций'], ['физическ', 'физических лиц'], ['юридическ', 'юридически значимых'], ['действ', 'действий']],
       e: 'Опорные слова: **обязательный взнос**, **организации и физлица**, **юридически значимые действия**.' },
 
-    /* ---------- Принципы ---------- */
     { id: 'pri1', t: 'pri', type: 'single', ref: 'pri-turgenev',
       q: 'Кто из русских экономистов пропагандировал принципы А. Смита и требовал, чтобы доход казны был «сколь возможно менее обременителен для народа»?',
       o: ['Н. Тургенев', 'Б. Г. Мильгаузен', 'А. Н. Радищев', 'С. Ю. Витте'],
@@ -1149,7 +1123,6 @@ window.NALOG_DATA = (function () {
       a: 0,
       e: 'Четыре классических принципа Смита: **справедливость, определённость, удобство, экономичность**. Второй вариант смешивает правила Вагнера, третий — принципы НК РФ, четвёртый — функции налогов.' },
 
-    /* ---------- Элементы налогообложения ---------- */
     { id: 'elm1', t: 'elm', type: 'single', rk: 'Тест 1, вопрос 4 и тест 2', keep: 1, ref: 'elm-rate',
       q: 'Налоговая ставка — это:',
       o: ['величина налоговых начислений на единицу налоговой базы, определяемой только в денежном выражении',
@@ -1224,7 +1197,6 @@ window.NALOG_DATA = (function () {
       keys: [['величин', 'величина'], ['начислен', 'налоговых начислений'], ['единиц', 'на единицу'], ['измерен', 'измерения'], ['баз', 'налоговой базы']],
       e: 'Формула из ст. 53 НК: **величина начислений на единицу измерения базы**.' },
 
-    /* ---------- Система налогов и сборов РФ ---------- */
     { id: 'sys1', t: 'sys', type: 'single', rk: 'Тест 1, вопрос 5', keep: 1, ref: 'sys-levels',
       q: 'К региональным налогам относятся:',
       o: ['водный налог', 'земельный налог', 'налог на имущество организаций', 'налог на добавленную стоимость'],
@@ -1299,7 +1271,6 @@ window.NALOG_DATA = (function () {
       items: [['Налог на прибыль организаций', 0], ['НДПИ', 0], ['Налог на имущество организаций', 0], ['НДФЛ', 1], ['Налог на имущество физических лиц', 1], ['Налог на профессиональный доход', 1], ['Патентная система налогообложения', 1], ['Транспортный налог', 2], ['Земельный налог', 2], ['Государственная пошлина', 2], ['УСН', 2], ['ЕСХН', 2]],
       e: 'По таблице «Классификация налогов по субъекту уплаты»: патент и НПД — **только физлица** (включая ИП), а УСН, ЕСХН, госпошлина, транспортный и земельный налоги — **и те, и другие**.' },
 
-    /* ---------- Налоговый механизм ---------- */
     { id: 'mex1', t: 'mex', type: 'order', ref: 'mex-scheme',
       q: 'Собери схему управления налогообложением в порядке стрелок.',
       steps: ['Субъект управления — государственные органы власти и управления', 'Формы и методы — налоговый механизм', 'Объект управления — совокупность налоговых отношений', 'Результат управления — налоговая политика'],
@@ -1354,7 +1325,6 @@ window.NALOG_DATA = (function () {
       a: true,
       e: 'Верно. Выбор и установление ставок — особый метод регулирования: **повышение** ставок дестимулирует, **понижение** даёт обратный эффект.' },
 
-    /* ---------- Налоговые системы разных стран ---------- */
     { id: 'mir1', t: 'mir', type: 'match', ref: 'mir-load',
       q: 'Где находится Россия в межстрановом анализе налоговых систем?',
       pairs: [['По уровню налоговой нагрузки', 'Фискально-умеренная'],
@@ -1395,7 +1365,6 @@ window.NALOG_DATA = (function () {
       items: [['Австрия', 0], ['Франция', 0], ['Индия', 1], ['Германия', 1], ['Канада', 2], ['США', 2]],
       e: 'Централизованные: **Россия, Австрия, Франция**. Умеренно централизованные: **Индия, Австралия, Германия**. Децентрализованные: **Канада, Дания, США**.' },
 
-    /* ---------- Функции налогообложения ---------- */
     { id: 'fun1', t: 'fun', type: 'single', ref: 'fun-list',
       q: 'Какая функция налогообложения основная, а остальные — производные от неё?',
       o: ['Фискальная', 'Регулирующая', 'Распределительная', 'Контрольная'],
@@ -1434,7 +1403,6 @@ window.NALOG_DATA = (function () {
       a: 0,
       e: '**Воспроизводственная (экологическая)** подфункция: средства от пользования ресурсами идут на их восстановление.' },
 
-    /* ---------- Классификация налогов ---------- */
     { id: 'cls1', t: 'cls', type: 'single', ref: 'cls-pk',
       q: 'Главное отличие прямых налогов от косвенных — по:',
       o: ['месту формирования источника выплаты налога', 'уровню бюджета, в который зачисляется налог', 'органу, который вводит налог', 'размеру налоговой ставки'],
@@ -1492,7 +1460,6 @@ window.NALOG_DATA = (function () {
       a: true,
       e: 'Верно, это **смешанные** налоги и сборы в классификации по субъекту.' },
 
-    /* ---------- Налоговая политика ---------- */
     { id: 'pol1', t: 'pol', type: 'single', rk: 'Тест 1, вопрос 10', keep: 1, ref: 'pol-fiscal',
       q: 'Политика в сфере налогообложения называется:',
       o: ['монетарной', 'деловым циклом', 'фискальной', 'государственных расходов', 'распределения доходов'],
@@ -1567,7 +1534,6 @@ window.NALOG_DATA = (function () {
       a: 0,
       e: 'Методы налоговой политики — **нагрузка, дифференциация ставок, льготы**. Эмиссия и ключевая ставка — инструменты денежно-кредитной политики.' },
 
-    /* ---------- Теории, Лаффер, бремя ---------- */
     { id: 'teo1', t: 'teo', type: 'match', ref: 'teo-list',
       q: 'Сопоставь теорию налогов и её авторов.',
       pairs: [['Теория публичного договора', 'Спиноза, Гоббс, Руссо, Радищев'], ['Атомистическая теория', 'Монтескье, Вобан'], ['Теория удобств', 'Сисмонди'], ['Теория страхования', 'Тьер, Жирарден, Мак-Куллох'], ['Теория налогового нейтралитета', 'А. Смит, Д. Рикардо'], ['Кейнсианская теория', 'Дж. Кейнс'], ['Теория жертвы', 'Б. Г. Мильгаузен']],
@@ -1636,7 +1602,6 @@ window.NALOG_DATA = (function () {
       a: false,
       e: 'Неверно: кроме НДФЛ, физлицо платит налоги на **имущество, землю и транспорт**.' },
 
-    /* ---------- Налоговый контроль ---------- */
     { id: 'ctl1', t: 'ctl', type: 'single', rk: 'Тест 3, вопрос 5', keep: 1, ref: 'ctl-def',
       q: 'К формам проведения налогового контроля не относятся:',
       o: ['проведение налоговых проверок', 'взыскание штрафов', 'получение объяснений налогоплательщика', 'проверки данных учета и отчетности', 'осмотр помещений, используемых для получения доходов'],
@@ -1716,7 +1681,6 @@ window.NALOG_DATA = (function () {
       a: false,
       e: 'Неверно: отклонение больше 20 %, но его причина — **истечение срока годности**, а это допустимое основание по ст. 40.' },
 
-    /* ---------- Изменение сроков уплаты ---------- */
     { id: 'srk1', t: 'srk', type: 'multi', ref: 'srk-main',
       q: 'В каких формах изменяется срок уплаты налога?',
       o: ['Отсрочка', 'Рассрочка', 'Инвестиционный налоговый кредит', 'Налоговая амнистия', 'Налоговые каникулы'],
@@ -1771,7 +1735,6 @@ window.NALOG_DATA = (function () {
       a: true,
       e: 'Верно: срок меняют для **всей суммы или её части**, с начислением процентов на неуплаченную сумму.' },
 
-    /* ---------- Ответственность ---------- */
     { id: 'otv1', t: 'otv', type: 'single', rk: 'Тест 3, вопрос 1', keep: 1, ref: 'otv-pena',
       q: 'Пеня начисляется на сумму неуплаченного в срок налога, начиная:',
       o: ['с установленного законодательством для уплаты налога или сбора дня', 'со следующего за установленным законодательством для уплаты налога и сбора дня'],
@@ -1871,7 +1834,6 @@ window.NALOG_DATA = (function () {
       e: 'По НК налоговая санкция — только **штраф** в размерах гл. 16. Пеня по НК — способ обеспечения уплаты налога (ст. 75), хотя в конспекте 1 пени названы среди санкций как сферы налогового регулирования.' }
   ];
 
-  /* Порядок вопросов из файла с тестами */
   var rkOrder = ['nal1', 'nal2', 'nal3', 'elm1', 'sys1', 'sys2', 'sys3', 'sys5', 'pri6', 'pol1',
                  'nal9', 'sys9', 'sys10', 'pol3', 'elm2', 'sys4', 'pol2', 'otv5',
                  'otv1', 'otv2', 'otv3', 'otv4', 'ctl1', 'ctl2', 'ctl3', 'ctl4', 'otv6', 'otv7', 'otv8'];
@@ -1897,7 +1859,6 @@ window.NALOG_DATA = (function () {
 (function () {
   'use strict';
 
-  /* ================= data ================= */
   var D = window.NALOG_DATA;
   var Q = {}, NOTE = {}, TOPIC = {};
   D.questions.forEach(function (q) { Q[q.id] = q; });
@@ -1908,7 +1869,6 @@ window.NALOG_DATA = (function () {
   var LET = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'];
   var RM = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ================= utils ================= */
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -1990,7 +1950,6 @@ window.NALOG_DATA = (function () {
     return '<svg class="barcode" width="94" height="22" viewBox="0 0 94 22" aria-hidden="true" fill="currentColor">' + h + '</svg>';
   }
 
-  /* ================= state ================= */
   var LS_KEY = 'nalogi-rk-v1';
   function blank() { return { v: 1, t: 0, reset: 0, q: {}, runs: {}, exams: [], prefs: { shuf: true, t: 0 }, pomo: { done: {} } }; }
   function normalize(s) {
@@ -2017,7 +1976,7 @@ window.NALOG_DATA = (function () {
     try {
       var raw = window.localStorage.getItem(LS_KEY);
       if (raw) return normalize(JSON.parse(raw));
-    } catch (e) { /* storage unavailable */ }
+    } catch (e) { }
     return blank();
   }
   var S = loadLocal();
@@ -2055,11 +2014,10 @@ window.NALOG_DATA = (function () {
 
   function persist() {
     S.t = now();
-    try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { /* storage unavailable */ }
+    try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { }
     cloudSave();
   }
 
-  /* ---------- account sync (db capability) ---------- */
   var cloud = { ref: null, busy: false, again: false, timer: 0, state: 'local' };
   function setSync(st) {
     cloud.state = st;
@@ -2111,7 +2069,7 @@ window.NALOG_DATA = (function () {
           if (snap && snap.exists) {
             var remote = normalize(clone(snap.data()));
             S = merge(S, remote);
-            try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { /* ignore */ }
+            try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { }
             if (JSON.stringify(S) !== before) refreshAfterSync();
             if (JSON.stringify(S) !== JSON.stringify(remote)) cloudSave();
           } else if (S.t) {
@@ -2133,7 +2091,6 @@ window.NALOG_DATA = (function () {
     if (document.visibilityState === 'hidden' && cloud.ref) { clearTimeout(cloud.timer); cloudFlush(); }
   });
 
-  /* ================= stats ================= */
   function stat(id) { return S.q[id]; }
   function record(id, ok) {
     var r = S.q[id] || { n: 0, c: 0 };
@@ -2149,7 +2106,6 @@ window.NALOG_DATA = (function () {
     return { ok: ok, bad: bad, seen: ok + bad, n: ids.length };
   }
 
-  /* ================= runs ================= */
   var MODE_TITLE = { rk: 'Вопросы с прошлых тестов', all: 'Весь тест', defs: 'Определения', err: 'Работа над ошибками', exam: 'Пробный РК' };
   function runKey(mode, topic) { return mode === 'topic' ? 'topic_' + topic : mode === 'topics' ? 'topics_' + topic : mode; }
   function runTitle(run) {
@@ -2184,7 +2140,6 @@ window.NALOG_DATA = (function () {
   }
   function activeRun(key) { var r = S.runs[key]; return r && !r.done && r.ids.length && r.i < r.ids.length ? r : null; }
 
-  /* ================= view state ================= */
   var app = document.getElementById('app');
   var view = { name: 'home', key: null, notesTopic: null, confirmReset: false };
   var cur = fresh(null);
@@ -2220,7 +2175,6 @@ window.NALOG_DATA = (function () {
     }
   }
 
-  /* ================= answer logic ================= */
   function parseFill(q) {
     var parts = q.text.split(/\{([^}]+)\}/), blanks = [];
     for (var k = 1; k < parts.length; k += 2) blanks.push(parts[k]);
@@ -2283,7 +2237,6 @@ window.NALOG_DATA = (function () {
     return shuffle(idx, hash(q.id + ':' + run.seed));
   }
 
-  /* ================= renderers: answers ================= */
   function rOpts(q, c, run) {
     var order = optOrder(q, run), multi = q.type === 'multi', sel = c.sel;
     var h = '<div class="opts' + (multi ? ' multi' : '') + '" role="group" aria-label="Варианты ответа">';
@@ -2503,7 +2456,6 @@ window.NALOG_DATA = (function () {
     return '<details class="refnote"><summary>' + I.chevR + '<span>Шпаргалка: ' + esc(n.h) + '</span></summary><div class="note-body">' + rich(n.x) + '<p class="note-src">' + esc(n.src) + '</p></div></details>';
   }
 
-  /* ================= views ================= */
   function render(scrollTop) {
     var active = document.activeElement;
     var fk = pendingFocus || (active && active.dataset ? active.dataset.fk : null);
@@ -2554,7 +2506,6 @@ window.NALOG_DATA = (function () {
       '<p class="lede">Подготовка к рубежному контролю по трём конспектам лекций и тестам 1–3. Задач на расчёт нет, после каждого ответа есть разбор.</p></header>';
     h += tallyHTML();
 
-    // незаконченный прогон
     var open = Object.keys(S.runs).map(function (k) { return S.runs[k]; }).filter(function (r) { return r && !r.done && r.ids.length && r.i < r.ids.length && r.i > 0; })
       .sort(function (a, b) { return b.t - a.t; })[0];
     if (open) {
@@ -2739,7 +2690,6 @@ window.NALOG_DATA = (function () {
     return h;
   }
 
-  /* ================= actions ================= */
   function curRun() { return S.runs[view.key]; }
   function curQ() { var run = curRun(); return run ? Q[run.ids[run.i]] : null; }
 
@@ -2787,7 +2737,7 @@ window.NALOG_DATA = (function () {
     pendingFocus = '__none';
     render(true);
     var p = document.getElementById('prompt');
-    if (p) { try { p.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+    if (p) { try { p.focus({ preventScroll: true }); } catch (e) { } }
   }
   function examNext() {
     var run = curRun(), q = curQ();
@@ -2817,7 +2767,7 @@ window.NALOG_DATA = (function () {
     loadCur(run);
     render(true);
     var p = document.getElementById('prompt');
-    if (p) { try { p.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+    if (p) { try { p.focus({ preventScroll: true }); } catch (e) { } }
   }
 
   var handlers = {
@@ -3008,7 +2958,6 @@ window.NALOG_DATA = (function () {
     }
     if (typing) return;
     if (e.altKey || e.ctrlKey || e.metaKey) return;
-    // SVG-зоны: Enter и пробел
     if ((e.key === 'Enter' || e.key === ' ') && t && t.getAttribute && t.getAttribute('data-act') === 'zone') {
       e.preventDefault();
       handlers.zone(t);
@@ -3037,7 +2986,6 @@ window.NALOG_DATA = (function () {
     }
   });
 
-  /* ================= pomodoro ================= */
   var PLAN = [
     { day: 'Вечер, 12 октября', note: '6 помидоров, около 3 часов', rows: [
       { id: 'e1', mode: 'rk', t: 'Вопросы с прошлых тестов', d: 'Первый проход по 29 вопросам. Не подглядывай в шпаргалку, просто отвечай и читай разбор: так видно, где пробелы.' },
@@ -3065,10 +3013,10 @@ window.NALOG_DATA = (function () {
   var FOCUS = 25 * 60000, SHORT = 5 * 60000, LONG = 15 * 60000;
   var POMO_KEY = 'nalogi-pomo-v1';
   var P = (function () {
-    try { var p = JSON.parse(window.localStorage.getItem(POMO_KEY)); if (p && p.phase) return p; } catch (e) { /* ignore */ }
+    try { var p = JSON.parse(window.localStorage.getItem(POMO_KEY)); if (p && p.phase) return p; } catch (e) { }
     return { phase: 'idle', endAt: 0, left: 0, paused: false, row: null, count: 0 };
   })();
-  function savePomo() { try { window.localStorage.setItem(POMO_KEY, JSON.stringify(P)); } catch (e) { /* ignore */ } }
+  function savePomo() { try { window.localStorage.setItem(POMO_KEY, JSON.stringify(P)); } catch (e) { } }
   function pomoLeft() {
     if (P.phase === 'idle') return FOCUS;
     return P.paused ? P.left : Math.max(0, P.endAt - now());
@@ -3103,7 +3051,7 @@ window.NALOG_DATA = (function () {
         o.connect(g); g.connect(actx.destination);
         o.start(at); o.stop(at + 0.28);
       });
-    } catch (e) { /* ignore */ }
+    } catch (e) { }
   }
   function toast(text) {
     var el = document.getElementById('pomo-toast');
@@ -3197,11 +3145,9 @@ window.NALOG_DATA = (function () {
   };
   setInterval(tick, 1000);
 
-  /* ================= boot ================= */
   render();
   cloudInit();
 
-  // Для автотестов
   window.__nalogi = {
     state: function () { return S; },
     view: function () { return view; },

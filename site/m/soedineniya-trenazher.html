@@ -5,7 +5,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:ital,wght@1,500;1,600;1,700&family=IBM+Plex+Serif:wght@400;600&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: a single drafting sheet. The page is whatman paper; the working card is a sheet inside an ESKD frame, progress lives in a title block. Blue pencil marks the screw and the answer, red marks the nut and the mistakes. */
 :root {
   --paper: #ECEFEE;
   --sheet: #FBFCFB;
@@ -116,7 +115,6 @@ svg { display: block; }
 }
 @media (min-width: 720px) { .app { padding-block: 34px 80px; } }
 
-/* buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5em;
   min-height: 44px; padding: 9px 18px;
@@ -135,13 +133,11 @@ svg { display: block; }
 .btn:disabled { opacity: .4; }
 .btns { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
-/* home: masthead */
 .mast { display: grid; gap: 14px; padding-bottom: 22px; }
 .eyebrow { font-family: var(--f-display); font-style: italic; font-weight: 600; font-size: var(--fs-s); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
 .title { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: var(--fs-title); line-height: 1; letter-spacing: -.01em; }
 .lede { color: var(--ink-2); font-size: var(--fs-l); max-width: 38em; }
 
-/* title block (основная надпись) */
 .stamp-block {
   display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
   border: 2px solid var(--ink); background: var(--sheet);
@@ -169,7 +165,6 @@ svg { display: block; }
 .h2 { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: var(--fs-xl); }
 .h2 .no { color: var(--pen); margin-right: .35em; }
 
-/* sections grid */
 .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; }
 .tool { display: grid; gap: 4px; align-content: start; text-align: left; padding: 14px 16px 15px; border: 1.5px solid var(--line); border-radius: 4px; background: var(--sheet); }
 .tool:hover { border-color: var(--pen); }
@@ -178,7 +173,6 @@ svg { display: block; }
 .tool.alert { border-color: var(--nut); }
 .tool.alert .tool-s { color: var(--nut); font-weight: 600; }
 
-/* pomodoro plan */
 .pomo { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px 18px; align-items: center; padding: 14px 16px; border: 2px solid var(--ink); border-radius: 4px; background: var(--sheet); }
 @media (max-width: 620px) { .pomo { grid-template-columns: auto minmax(0, 1fr); } .pomo .btns { grid-column: 1 / -1; } }
 .clock { font-family: var(--f-mono); font-weight: 500; font-size: 30px; font-variant-numeric: tabular-nums; letter-spacing: .02em; padding: 2px 10px; border: 1.5px solid var(--line); border-radius: 3px; }
@@ -207,7 +201,6 @@ svg { display: block; }
 .pnow { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 3px; background: var(--nut-soft); color: var(--nut); font-size: var(--fs-xs); font-weight: 700; text-decoration: none; }
 .pbreak { padding: 7px 0 7px 46px; font-size: var(--fs-s); color: var(--ok); font-weight: 600; border-bottom: 1px dashed var(--line); }
 
-/* topics */
 .topics { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .topic { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 2px 12px; align-items: center; width: 100%; padding: 11px 4px 11px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; text-align: left; }
 .topic:hover .topic-n { color: var(--pen); }
@@ -224,7 +217,6 @@ svg { display: block; }
 .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; justify-content: space-between; font-size: var(--fs-s); color: var(--ink-2); }
 .confirm { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; border: 1.5px solid var(--nut); border-radius: 4px; background: var(--nut-soft); }
 
-/* run header */
 .runbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 6px 12px; margin: -20px calc(-1 * max(16px, env(safe-area-inset-left, 0px))) 18px; padding: 10px max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px)); background: var(--paper); }
 @media (min-width: 720px) { .runbar { margin-top: -34px; padding-top: 14px; } }
 .back { display: inline-flex; align-items: center; gap: 4px; min-height: 40px; padding: 4px 10px 4px 4px; border: 0; border-radius: 4px; background: transparent; font-weight: 700; }
@@ -237,7 +229,6 @@ svg { display: block; }
 .progress { grid-column: 1 / -1; height: 3px; background: var(--line); margin-top: 4px; }
 .progress i { display: block; height: 100%; background: var(--pen); transition: width .25s; }
 
-/* the sheet with an ESKD frame */
 .sheet { position: relative; background: var(--sheet); border: 1px solid var(--ink); box-shadow: var(--shadow); padding: 5px; }
 .sheet-in { border: 2px solid var(--ink); padding: 14px 14px 0; }
 @media (min-width: 720px) { .sheet { padding: 6px 6px 6px 22px; } .sheet-in { padding: 20px 26px 0; } }
@@ -250,7 +241,6 @@ svg { display: block; }
 .hint { margin-top: 6px; font-size: var(--fs-s); color: var(--ink-2); }
 .answer { margin-top: 16px; }
 
-/* options */
 .opts { display: grid; gap: 8px; }
 .opt { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; width: 100%; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 4px; background: transparent; text-align: left; line-height: 1.45; }
 .opt:hover:not(:disabled) { border-color: var(--ink-2); }
@@ -274,7 +264,6 @@ svg { display: block; }
 .tfb.is-ok { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
 .tfb.is-bad { border-color: var(--nut); background: var(--nut-soft); color: var(--nut); }
 
-/* match */
 .match { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .mrow { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 6px 12px; align-items: center; }
 @media (max-width: 620px) { .mrow { grid-template-columns: 1fr; } }
@@ -288,7 +277,6 @@ svg { display: block; }
 .fix { grid-column: 1 / -1; font-size: var(--fs-s); color: var(--ok); font-weight: 600; }
 @media (min-width: 621px) { .fix { grid-column: 2; } }
 
-/* sort */
 .srow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding-block: 10px; border-bottom: 1px solid var(--line); }
 .srow:first-child { border-top: 1px solid var(--line); }
 .stext { flex: 1 1 180px; min-width: 0; font-weight: 600; }
@@ -300,7 +288,6 @@ svg { display: block; }
 .pill.is-bad { border-color: var(--nut); background: var(--nut); color: var(--on-nut); text-decoration: line-through; }
 .pill.is-miss { border-color: var(--ok); border-style: dashed; color: var(--ok); }
 
-/* order */
 .seq { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 6px; }
 .seq-item, .slot { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; align-items: center; width: 100%; min-height: 44px; padding: 8px 12px; border-radius: 4px; text-align: left; line-height: 1.4; }
 .seq-item { border: 1.5px solid var(--pen); background: var(--pen-soft); }
@@ -317,7 +304,6 @@ svg { display: block; }
 .right-order { margin-top: 12px; padding: 12px 14px; border-radius: 4px; background: var(--ok-soft); }
 .right-order ol { margin: 6px 0 0; padding-left: 1.4em; }
 
-/* fill */
 .fill-text { font-family: var(--f-formula); font-size: var(--fs-l); line-height: 2.3; }
 .blank { display: inline-block; min-width: 4.5em; margin: 0 3px; padding: 0 8px; border: 0; border-bottom: 2px solid var(--ink-2); border-radius: 3px 3px 0 0; background: transparent; color: var(--pen); font-family: var(--f-formula); font-weight: 700; line-height: 1.55; text-align: center; }
 .blank.active { border-bottom-color: var(--pen); background: var(--pen-soft); }
@@ -328,7 +314,6 @@ svg { display: block; }
 .chip { min-height: 40px; padding: 5px 14px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--sheet); font-family: var(--f-formula); font-weight: 700; }
 .chip:disabled { opacity: .25; cursor: default; }
 
-/* numeric */
 .numrow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .numin { width: 11em; max-width: 100%; min-height: 46px; padding: 8px 12px; border: 1.5px solid var(--ink-2); border-radius: 4px; background: var(--sheet); font-family: var(--f-mono); font-size: var(--fs-l); }
 .numin:focus { border-color: var(--pen); outline: none; }
@@ -336,7 +321,6 @@ svg { display: block; }
 .numin.is-bad { border-color: var(--nut); background: var(--nut-soft); }
 .unit { font-family: var(--f-formula); color: var(--ink-2); }
 
-/* figures */
 .figure { border: 1px solid var(--line); border-radius: 4px; padding: 8px; background: var(--paper); overflow-x: auto; }
 .figure svg { width: 100%; max-width: 560px; height: auto; margin: 0 auto; }
 .fg-ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
@@ -371,7 +355,6 @@ svg { display: block; }
 @media (max-width: 620px) { .eps4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .ep-let { font-family: var(--f-mono); font-size: var(--fs-s); color: var(--ink-2); }
 
-/* feedback */
 .feedback { margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); display: grid; gap: 10px; }
 .verdict { font-weight: 700; }
 .verdict.ok { color: var(--ok); }
@@ -382,14 +365,12 @@ svg { display: block; }
 .kbd { font-size: var(--fs-xs); color: var(--ink-2); }
 @media (hover: none), (max-width: 620px) { .kbd { display: none; } }
 
-/* stamp: a round inspection mark */
 .mark-ok, .mark-bad { position: absolute; top: -14px; right: 18px; z-index: 3; padding: 6px 12px 5px; border: 2.5px solid currentColor; border-radius: 3px; background: var(--sheet); font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; line-height: 1; transform: rotate(-6deg); pointer-events: none; }
 .mark-ok { color: var(--ok); }
 .mark-bad { color: var(--nut); }
 .mark-anim { animation: stampin .32s cubic-bezier(.2, .9, .3, 1.25) both; }
 @keyframes stampin { 0% { opacity: 0; transform: rotate(-6deg) scale(1.5); } 100% { opacity: 1; transform: rotate(-6deg) scale(1); } }
 
-/* task */
 .given { margin-top: 12px; line-height: 1.6; }
 .steps { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
 .step { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px 12px; padding-block: 14px; border-bottom: 1px solid var(--line); }
@@ -402,7 +383,6 @@ svg { display: block; }
 .yn { display: flex; gap: 8px; flex-wrap: wrap; }
 .picks { display: grid; gap: 6px; }
 
-/* card */
 .card-a { margin-top: 14px; padding: 14px 16px; border: 2px solid var(--ink); border-radius: 2px; background: var(--sheet); line-height: 1.6; }
 .card-a .cap { font-family: var(--f-display); font-style: italic; font-size: var(--fs-xs); color: var(--ink-2); margin-bottom: 6px; letter-spacing: .04em; text-transform: uppercase; }
 .card-a b { background: linear-gradient(transparent 55%, var(--mark) 55%); }
@@ -413,7 +393,6 @@ svg { display: block; }
 .key { padding: 2px 9px; border: 1px solid var(--line); border-radius: 3px; font-size: var(--fs-xs); color: var(--ink-2); }
 .key.hit { border-color: var(--ok); background: var(--ok-soft); color: var(--ink); }
 
-/* results */
 .result-head { display: grid; gap: 12px; padding-block: 6px 22px; }
 .score { font-family: var(--f-display); font-style: italic; font-weight: 700; font-size: clamp(34px, 8vw, 56px); line-height: 1; font-variant-numeric: tabular-nums; }
 .score small { font-size: .4em; color: var(--ink-2); font-weight: 600; }
@@ -425,7 +404,6 @@ svg { display: block; }
 .review-q { font-weight: 600; line-height: 1.4; }
 .review-x { font-size: var(--fs-s); color: var(--ink-2); grid-column: 2; }
 
-/* tasks list */
 .tlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .trow { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; padding-block: 12px; border-bottom: 1px solid var(--line); }
 @media (max-width: 620px) { .trow { grid-template-columns: 34px minmax(0, 1fr); } .trow > .btns { grid-column: 2; } }
@@ -435,7 +413,6 @@ svg { display: block; }
 .ts .okc { color: var(--ok); font-weight: 600; }
 .ts .badc { color: var(--nut); font-weight: 600; }
 
-/* notes */
 .notes-nav { display: flex; gap: 6px; overflow-x: auto; padding-block: 4px 12px; scrollbar-width: thin; }
 .notes-nav button { flex: 0 0 auto; padding: 6px 12px; border: 1px solid var(--line); border-radius: 3px; background: var(--sheet); font-size: var(--fs-s); font-weight: 600; white-space: nowrap; }
 .notes-nav button:hover { border-color: var(--pen); }
@@ -454,7 +431,6 @@ svg { display: block; }
 .tbl th, .tbl td { border: 1px solid var(--ink-2); padding: 6px 9px; text-align: left; vertical-align: top; }
 .tbl th { font-family: var(--f-display); font-style: italic; font-weight: 600; background: var(--paper); }
 
-/* toast */
 .toast { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 50; width: min(520px, calc(100% - 32px)); display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 13px 16px; border: 2px solid var(--ink); border-radius: 4px; background: var(--sheet); box-shadow: var(--shadow); }
 .toast p { flex: 1 1 220px; }
 .empty { padding: 22px 0; color: var(--ink-2); }
@@ -464,7 +440,6 @@ svg { display: block; }
 </style>
 <main id="app" class="app"><noscript><p>Для тренажёра нужен JavaScript.</p></noscript></main>
 <script>
-/* Банк вопросов к РК-1 «Соединения». Источники: конспект лекций и лабораторных, список тем, типовых задач и вопросов на защиту. */
 window.OPKD = (function () {
   'use strict';
 
@@ -489,7 +464,6 @@ window.OPKD = (function () {
     { id: 'shp', n: 'Шпоночные соединения', no: 18 }
   ];
 
-  /* Типы: single, multi, tf, match, sort, order, fill, num, hot (клик по рисунку), epure (выбор эпюры). */
   var Q = [];
   function add(t, list) { list.forEach(function (q, k) { q.t = t; q.id = t + '-' + (k + 1); Q.push(q); }); }
 
@@ -1007,7 +981,6 @@ window.OPKD = (function () {
       x: 'Скруглённые концы (полукруги радиусом b/2) в передаче нагрузки почти не участвуют.' }
   ]);
 
-  /* Карточки: вопросы на защиту и ключевые определения. */
   var cards = [
     { id: 'c1', g: 'Защита', q: 'Где применяют упорную резьбу и почему?',
       a: 'При большой **односторонней** осевой нагрузке: домкраты, прессы, нажимные винты, винтовые грузоподъёмные механизмы. Рабочая сторона наклонена на **3°** — трение почти как у прямоугольной резьбы, **КПД высокий**. Нерабочая сторона 30° даёт широкое основание витка — резьба **прочнее и технологичнее** прямоугольной.',
@@ -1079,7 +1052,6 @@ window.OPKD = (function () {
 
 </script>
 <script>
-/* Типовые задачи РК-1: пошаговое решение, исходные числа из списка задач и генератор новых чисел. */
 window.OPKD_TASKS = (function () {
   'use strict';
   var PI = Math.PI;
@@ -1326,7 +1298,6 @@ window.OPKD_TASKS = (function () {
 
 </script>
 <script>
-/* Рисунки: профиль резьбы, диаграмма растяжения, эпюры. Все цвета — из токенов темы. */
 window.OPKD_FIGS = (function () {
   'use strict';
   var DEFS = '<defs>' +
@@ -1342,7 +1313,6 @@ window.OPKD_FIGS = (function () {
     return '<rect class="' + cls + '" data-z="' + id + '" tabindex="0" role="button" ' + attrs + '/>';
   }
 
-  /* Профиль метрической резьбы: гайка сверху, винт снизу. */
   function thread(labels, st) {
     var yC = 92, yR = 172, x0 = 30, per = 120, s = '';
     var pts = [];
@@ -1365,12 +1335,10 @@ window.OPKD_FIGS = (function () {
       s += '<line x1="20" x2="540" y1="' + L[0] + '" y2="' + L[0] + '" class="fg-line"/>';
       if (labels) s += '<text x="526" y="' + (L[0] - 5) + '" class="fg-txt b" text-anchor="end">' + (L[1] === 'd' ? 'd' : L[1] === 'd2' ? 'd₂' : 'd₃') + '</text>';
     });
-    /* шаг P между вершинами двух соседних витков */
     var c1 = x0 + 60, c2 = c1 + per;
     s += '<line x1="' + c1 + '" x2="' + c1 + '" y1="' + (yC - 4) + '" y2="252" class="fg-thin"/><line x1="' + c2 + '" x2="' + c2 + '" y1="' + (yC - 4) + '" y2="252" class="fg-thin"/>';
     s += '<line x1="' + c1 + '" x2="' + c2 + '" y1="248" y2="248" style="stroke:var(--ink);stroke-width:1.3" marker-start="url(#arr)" marker-end="url(#arr)"/>';
     if (labels) s += '<text x="' + ((c1 + c2) / 2) + '" y="242" class="fg-txt b" text-anchor="middle">P</text>';
-    /* угол профиля α на третьем витке */
     var tb = x0 + 2 * per, ax = tb + 60, ay = yC - 46;
     s += '<line x1="' + ax + '" y1="' + ay + '" x2="' + (tb + 14 - 8) + '" y2="' + (yR + 22) + '" class="fg-thin"/><line x1="' + ax + '" y1="' + ay + '" x2="' + (tb + 106 + 8) + '" y2="' + (yR + 22) + '" class="fg-thin"/>';
     s += '<path d="M' + (ax - 12) + ' ' + (ay + 24) + ' Q' + ax + ' ' + (ay + 32) + ' ' + (ax + 12) + ' ' + (ay + 24) + '" style="stroke:var(--ink);stroke-width:1.3;fill:none"/>';
@@ -1385,7 +1353,6 @@ window.OPKD_FIGS = (function () {
     return s + '</svg>';
   }
 
-  /* Диаграмма растяжения пластичного материала. */
   function tension(labels, st, axes) {
     var s = '<svg viewBox="0 0 560 300" role="img" aria-label="Диаграмма растяжения">' + DEFS;
     var X0 = 56, Y0 = 262;
@@ -1411,7 +1378,6 @@ window.OPKD_FIGS = (function () {
     return s + '</svg>';
   }
 
-  /* Эпюры по сечению: 0 — равномерная, 1 — кручение (от нуля в центре), 2 — парабола с максимумом в центре, 3 — изгиб. */
   function section(k) {
     var s = '<svg viewBox="0 0 200 140" role="img" aria-hidden="true">' + DEFS;
     if (k === 1) {
@@ -1440,7 +1406,6 @@ window.OPKD_FIGS = (function () {
     return s + '</svg>';
   }
 
-  /* Давление на цилиндрический стержень при смятии: 0 — равномерно, 1 — максимум посередине, 2 — максимум по краям, 3 — сосредоточенная сила. */
   function bearing(k) {
     var cx = 100, cy = 54, r = 34, s = '<svg viewBox="0 0 200 140" role="img" aria-hidden="true">' + DEFS;
     s += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" style="fill:var(--pen-soft);stroke:var(--pen);stroke-width:1.8"/>';
@@ -1472,7 +1437,6 @@ window.OPKD_FIGS = (function () {
   D.cards.forEach(function (c) { CARD[c.id] = c; });
   var LS_KEY = 'opkd-rk1-v1', POMO_KEY = 'opkd-rk1-pomo-v1';
 
-  /* ================= helpers ================= */
   function now() { return Date.now(); }
   function clone(x) { return JSON.parse(JSON.stringify(x)); }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -1505,7 +1469,6 @@ window.OPKD_FIGS = (function () {
     cross: '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3.5 3.5l7 7M10.5 3.5l-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>'
   };
 
-  /* ================= state ================= */
   function blank() { return { v: 1, t: 0, reset: 0, q: {}, tk: {}, cd: {}, runs: {}, exams: [], pomo: { done: {} } }; }
   function normalize(s) {
     var b = blank();
@@ -1523,7 +1486,7 @@ window.OPKD_FIGS = (function () {
     });
     return b;
   }
-  function loadLocal() { try { var raw = window.localStorage.getItem(LS_KEY); if (raw) return normalize(JSON.parse(raw)); } catch (e) { /* storage unavailable */ } return blank(); }
+  function loadLocal() { try { var raw = window.localStorage.getItem(LS_KEY); if (raw) return normalize(JSON.parse(raw)); } catch (e) { } return blank(); }
   var S = loadLocal();
   function pickNewer(x, y) { return !x ? y : !y ? x : ((y.t || 0) > (x.t || 0) ? y : x); }
   function mergeMap(a, b, reset) { var out = {}; Object.keys(a || {}).concat(Object.keys(b || {})).forEach(function (k) { var p = pickNewer((a || {})[k], (b || {})[k]); if (p && (p.t || 0) > reset) out[k] = p; }); return out; }
@@ -1538,9 +1501,8 @@ window.OPKD_FIGS = (function () {
     out.exams = Object.keys(ex).map(function (k) { return ex[k]; }).sort(function (p, q) { return q.at - p.at; }).slice(0, 20);
     return normalize(out);
   }
-  function persist() { S.t = now(); try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } cloudSave(); }
+  function persist() { S.t = now(); try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { } cloudSave(); }
 
-  /* account sync through the db capability */
   var cloud = { ref: null, busy: false, again: false, timer: 0, state: 'local' };
   function syncText() {
     if (cloud.state === 'cloud') return 'Прогресс сохраняется в аккаунте: можно продолжить на телефоне или другом компьютере.';
@@ -1574,7 +1536,7 @@ window.OPKD_FIGS = (function () {
           if (snap && snap.exists) {
             var remote = normalize(clone(snap.data()));
             S = merge(S, remote);
-            try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { /* ignore */ }
+            try { window.localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch (e) { }
             if (JSON.stringify(S) !== before) refreshAfterSync();
             if (JSON.stringify(S) !== JSON.stringify(remote)) cloudSave();
           } else if (S.t) cloudSave();
@@ -1586,7 +1548,6 @@ window.OPKD_FIGS = (function () {
   function refreshAfterSync() { if (view.name === 'home' || view.name === 'tasks' || view.name === 'notes') render(); }
   document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && cloud.ref) { clearTimeout(cloud.timer); cloudFlush(); } });
 
-  /* ================= stats ================= */
   function rec(map, id, ok) { var r = map[id] || { n: 0, c: 0 }; map[id] = { n: (r.n || 0) + 1, c: (r.c || 0) + (ok ? 1 : 0), l: ok ? 1 : 0, t: now() }; }
   function qTotals(ids) { var ok = 0, bad = 0; ids.forEach(function (id) { var s = S.q[id]; if (s) { if (s.l === 1) ok++; else bad++; } }); return { ok: ok, bad: bad, n: ids.length }; }
   function topicIds(t) { return D.questions.filter(function (q) { return q.t === t; }).map(function (q) { return q.id; }); }
@@ -1598,7 +1559,6 @@ window.OPKD_FIGS = (function () {
     return a;
   }
 
-  /* ================= plan (5 days × pomodoros) ================= */
   var PLAN = [
     { d: 1, t: 'Резьбы и материалы', note: 'Темы 1–6. Цель дня — уверенно читать обозначения резьб и диаграмму растяжения.', p: [
       { id: 'd1p1', h: 'Шпаргалка: резьбы, диаграмма, класс прочности', x: 'Прочитать разделы 1–2, перерисовать профиль резьбы и диаграмму в тетрадь.', go: { m: 'notes', a: 'rez' } },
@@ -1652,19 +1612,18 @@ window.OPKD_FIGS = (function () {
   function setPomoDone(id, v) { S.pomo.done[id] = { v: v ? 1 : 0, t: now() }; persist(); }
   function nextPomo() { for (var d = 0; d < PLAN.length; d++) for (var k = 0; k < PLAN[d].p.length; k++) if (!pomoDone(PLAN[d].p[k].id)) return PLAN[d].p[k]; return null; }
 
-  /* timer (per device) */
   var FOCUS = 25 * 60 * 1000, BREAK = 5 * 60 * 1000, LONG = 15 * 60 * 1000;
-  var P = (function () { try { var r = JSON.parse(window.localStorage.getItem(POMO_KEY) || 'null'); if (r && typeof r === 'object') return r; } catch (e) { /* ignore */ } return { phase: 'idle', end: 0, left: 0, id: null, streak: 0 }; })();
-  function savePomo() { try { window.localStorage.setItem(POMO_KEY, JSON.stringify(P)); } catch (e) { /* ignore */ } }
+  var P = (function () { try { var r = JSON.parse(window.localStorage.getItem(POMO_KEY) || 'null'); if (r && typeof r === 'object') return r; } catch (e) { } return { phase: 'idle', end: 0, left: 0, id: null, streak: 0 }; })();
+  function savePomo() { try { window.localStorage.setItem(POMO_KEY, JSON.stringify(P)); } catch (e) { } }
   var actx = null;
   function beep() {
     try {
       if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (C) actx = new C(); }
       if (!actx) return;
       [0, .25, .5].forEach(function (d) { var o = actx.createOscillator(), g = actx.createGain(); o.frequency.value = 880; o.connect(g); g.connect(actx.destination); g.gain.setValueAtTime(.0001, actx.currentTime + d); g.gain.exponentialRampToValueAtTime(.2, actx.currentTime + d + .02); g.gain.exponentialRampToValueAtTime(.0001, actx.currentTime + d + .2); o.start(actx.currentTime + d); o.stop(actx.currentTime + d + .22); });
-    } catch (e) { /* ignore */ }
+    } catch (e) { }
   }
-  function unlockAudio() { try { if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (C) actx = new C(); } if (actx && actx.state === 'suspended') actx.resume(); } catch (e) { /* ignore */ } }
+  function unlockAudio() { try { if (!actx) { var C = window.AudioContext || window.webkitAudioContext; if (C) actx = new C(); } if (actx && actx.state === 'suspended') actx.resume(); } catch (e) { } }
   function remaining() { if (P.phase === 'idle') return 0; if (P.left) return P.left; return Math.max(0, P.end - now()); }
   function mmss(ms) { var s = Math.ceil(ms / 1000), m = Math.floor(s / 60); s = s % 60; return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s; }
   function startFocus(id) { unlockAudio(); P = { phase: 'focus', end: now() + FOCUS, left: 0, id: id, streak: P.streak || 0 }; savePomo(); }
@@ -1701,7 +1660,6 @@ window.OPKD_FIGS = (function () {
     document.body.appendChild(d);
   }
 
-  /* ================= runs ================= */
   var TITLE = { err: 'Работа над ошибками', mix: 'Случайные вопросы', exam: 'Пробный РК', all: 'Все вопросы' };
   function makeItems(mode, arg, seed) {
     var r = rng(seed), list;
@@ -1751,7 +1709,6 @@ window.OPKD_FIGS = (function () {
   }
   function examLeft(run) { var left = run.started + run.limit - now(); return left > 0 ? mmss(left) : 'время вышло'; }
 
-  /* current item UI state */
   var view = { name: 'home', day: null, confirm: false };
   var cur = null;
   function fresh(it, idx) { return { it: it, idx: idx, sel: null, checked: false, ok: null, ui: { blank: 0, text: '', reveal: false, steps: [], stepOk: [] } }; }
@@ -1771,7 +1728,6 @@ window.OPKD_FIGS = (function () {
   function taskParams(it) { var t = TASK[it.id]; return it.v ? t.gen(rng(it.v)) : t.orig; }
   function itemRng(run, idx) { return rng((run.seed || 1) + idx * 7919); }
 
-  /* ================= checking ================= */
   function fillParts(q) { var parts = q.text.split(/\[\[(.+?)\]\]/), blanks = []; for (var k = 1; k < parts.length; k += 2) blanks.push(parts[k]); return { parts: parts, blanks: blanks }; }
   function emptySel(q) {
     if (q.type === 'multi') return [];
@@ -1858,7 +1814,6 @@ window.OPKD_FIGS = (function () {
     return { q: q, qn: qn, s: s, sn: sn, c: c, cn: cn };
   }
 
-  /* ================= render: shared ================= */
   var app = document.getElementById('app');
   function focusTop() { var el = document.getElementById('prompt'); if (el) { try { el.focus({ preventScroll: true }); } catch (e) { el.focus(); } } }
   function render(scrollTop) {
@@ -1877,7 +1832,6 @@ window.OPKD_FIGS = (function () {
       (pct != null ? '<div class="progress"><i style="width:' + pct + '%"></i></div>' : '') + '</div>';
   }
 
-  /* ================= home ================= */
   function homeView() {
     var allQ = D.questions.map(function (q) { return q.id; });
     var tq = qTotals(allQ);
@@ -1907,7 +1861,6 @@ window.OPKD_FIGS = (function () {
     var res = Object.keys(S.runs).map(function (k) { return S.runs[k]; }).filter(function (r) { return !r.done && r.i > 0 && r.i < r.items.length && r.mode !== 'err' && r.mode !== 'mix'; }).sort(function (a, b) { return b.t - a.t; })[0];
     if (res) h += '<div class="resume"><p><b>Продолжить:</b> ' + esc(runTitle(res)) + ', ' + res.i + ' из ' + res.items.length + '</p><button class="btn primary" data-a="resume" data-k="' + esc(res.key) + '">Продолжить</button></div>';
 
-    /* pomodoro */
     h += '<section class="block"><div class="block-head"><h2 class="h2"><span class="no">01</span>План по помидорам</h2><span class="muted">25 минут работы, 5 перерыв, после каждого 4-го — 15</span></div>';
     var cls = P.phase === 'focus' ? 'focus' : P.phase === 'break' ? 'brk' : '';
     if (P.left) cls += ' paused';
@@ -1936,7 +1889,6 @@ window.OPKD_FIGS = (function () {
     });
     h += '</ol></section>';
 
-    /* tools */
     h += '<section class="block"><div class="block-head"><h2 class="h2"><span class="no">02</span>Режимы</h2></div><div class="tools">' +
       tool('tasks', 'Типовые задачи', TK.tasks.length + ' задач: исходные числа или новые') +
       tool('cards', 'Вопросы на защиту', '13 вопросов, ответ своими словами и сверка') +
@@ -1946,7 +1898,6 @@ window.OPKD_FIGS = (function () {
       (errN ? '<button class="tool alert" data-a="err"><span class="tool-t">Работа над ошибками</span><span class="tool-s">' + errN + ' ' + plural(errN, 'пункт', 'пункта', 'пунктов') + ' ждут исправления</span></button>' : '<button class="tool" data-a="err" disabled><span class="tool-t">Работа над ошибками</span><span class="tool-s">Ошибок пока нет</span></button>') +
       '</div></section>';
 
-    /* topics */
     h += '<section class="block"><div class="block-head"><h2 class="h2"><span class="no">03</span>Темы РК</h2><span class="muted">зелёное — верно в последний раз, красное — ошибка</span></div><ul class="topics">';
     D.topics.forEach(function (t) {
       var ids = topicIds(t.id), st = qTotals(ids);
@@ -1972,7 +1923,6 @@ window.OPKD_FIGS = (function () {
   function sb(l, v) { return '<div class="sb-cell"><span class="sb-lbl">' + l + '</span><span class="sb-val">' + v + '</span></div>'; }
   function tool(a, t, s) { return '<button class="tool" data-a="' + a + '"><span class="tool-t">' + t + '</span><span class="tool-s">' + s + '</span></button>'; }
 
-  /* ================= run view ================= */
   function runView() {
     var run = S.runs[view.key];
     if (!run) { view = { name: 'home' }; return homeView(); }
@@ -2107,7 +2057,6 @@ window.OPKD_FIGS = (function () {
     return h + '</div>';
   }
 
-  /* task view */
   function taskView(run, it) {
     var t = TASK[it.id], p = taskParams(it), steps = t.steps(p), exam = run.mode === 'exam', chk = cur.checked && !exam;
     var h = head(['<span class="tag pen">Задача ' + t.no + '</span>', '<span class="tag">Тема ' + TOPIC[t.t].no + '</span>', it.v ? '<span class="tag">новые числа</span>' : '<span class="tag">' + (t.lec ? 'пример с лекции' : 'исходные числа') + '</span>'], 'Лист ' + (run.i + 1));
@@ -2137,7 +2086,6 @@ window.OPKD_FIGS = (function () {
     return h;
   }
 
-  /* card view */
   function cardView(run, c) {
     var h = head(['<span class="tag pen">' + (c.g === 'Защита' ? 'Вопрос на защиту' : 'Формулы') + '</span>'], 'Карточка ' + (run.i + 1));
     h += '<h2 class="prompt" id="prompt" tabindex="-1">' + fmt(c.q) + '</h2>';
@@ -2164,7 +2112,6 @@ window.OPKD_FIGS = (function () {
     return '';
   }
 
-  /* results */
   function resultView(run) {
     var h = runbar(runTitle(run), null, 100);
     var r = summarize(run);
@@ -2196,7 +2143,6 @@ window.OPKD_FIGS = (function () {
     return h;
   }
 
-  /* ================= tasks list ================= */
   function tasksView() {
     var h = runbar('Типовые задачи');
     h += '<header class="mast"><h1 class="title" style="font-size:clamp(28px,6vw,42px)">Типовые задачи</h1><p class="lede">Каждую задачу можно решить с исходными числами из списка или с новыми. Ответ вводится по шагам, допуск 1,5 %. Задачи 15 и 16 разобраны на лекции.</p></header>';
@@ -2210,7 +2156,6 @@ window.OPKD_FIGS = (function () {
     return h + '</ul>';
   }
 
-  /* ================= notes ================= */
   var NOTES = [
     { id: 'rez', h: 'Резьбы и резьбовые соединения', it: [
       { h: 'Классификация', li: ['Соединения: **разъёмные** (резьбовые, шпоночные) и **неразъёмные** (сварные, с натягом — условно).', 'Резьбовые: болтовое, винтовое, шпилечное. Минимум две детали: винт (наружная резьба) и гайка (внутренняя).', 'Резьбы: **крепёжные** (метрическая), **крепёжно-уплотнительные** (трубная), **ходовые** (трапецеидальная, упорная, прямоугольная).'] },
@@ -2288,7 +2233,6 @@ window.OPKD_FIGS = (function () {
     return h;
   }
 
-  /* ================= events ================= */
   function openGo(go) {
     if (go.m === 'notes') { view = { name: 'notes' }; render(true); setTimeout(function () { var el = document.getElementById('n-' + go.a); if (el) el.scrollIntoView(); }, 30); return; }
     startMode(go.m, go.a || '');

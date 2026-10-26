@@ -65,7 +65,6 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .chip.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
 .chip.bad{background:var(--bad-soft);border-color:var(--bad-line);color:var(--bad)}
 
-/* ---------- HOME ---------- */
 .hero{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:end;padding-block:8px 22px;border-bottom:1px dashed var(--line-2)}
 .hero h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(26px,5vw,40px);line-height:1.08;letter-spacing:-.01em}
 .hero h1 span{color:var(--accent)}
@@ -162,7 +161,6 @@ section.blk{margin-top:34px}
 .foot{margin-top:40px;padding-top:16px;border-top:1px dashed var(--line-2);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--ink-3)}
 .confirm{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-/* ---------- QUIZ ---------- */
 .qbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line)}
 .qbar .ttl{font-family:var(--f-disp);font-weight:500;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .qbar .ttl small{font-family:var(--f-body);font-weight:400;color:var(--ink-3);font-size:13px;margin-left:8px}
@@ -220,7 +218,6 @@ section.blk{margin-top:34px}
 .banner{margin-top:12px;border:1px solid var(--star-line);background:var(--star-soft);color:var(--ink);border-radius:9px;padding:10px 14px;font-size:14px}
 .banner b{color:var(--star)}
 
-/* ---------- RESULT ---------- */
 .res-top{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
 @media (max-width:600px){.res-top{grid-template-columns:1fr}}
 .res-top h2{font-family:var(--f-disp);font-weight:700;font-size:clamp(22px,4vw,30px)}
@@ -244,7 +241,6 @@ section.blk{margin-top:34px}
 .rev-item .e{margin-top:6px;font-size:13.5px;color:var(--ink-2)}
 .rev-item .s{margin-top:4px;font-size:12px;color:var(--ink-3)}
 
-/* ---------- CARDS ---------- */
 .card{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:18px}
 .card .cq{font-size:clamp(18px,2.6vw,21px);font-weight:700;line-height:1.35;max-width:60ch;margin-top:6px}
 .card textarea{width:100%;min-height:120px;margin-top:14px;border:1px solid var(--line-2);border-radius:9px;padding:12px;font:inherit;font-size:15px;background:var(--surface-2);color:var(--ink);resize:vertical}
@@ -260,7 +256,6 @@ section.blk{margin-top:34px}
 .filters .btn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .boxes{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;font-size:12.5px;color:var(--ink-2)}
 
-/* ---------- CHEAT ---------- */
 .cheat-nav{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
 .cs{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
 .cs h2{font-family:var(--f-disp);font-weight:500;font-size:18px}
@@ -304,7 +299,6 @@ table.t td.f{font-family:var(--f-mono);font-weight:600;white-space:nowrap;color:
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:9px;font-size:14px;font-weight:600;z-index:20;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
 
-/* ---------- KR ---------- */
 .kr-box{display:grid;grid-template-columns:1fr auto;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);margin-top:26px}
 @media (max-width:760px){.kr-box{grid-template-columns:1fr}}
 .kr-main{padding:18px 18px 16px;border-left:5px solid var(--star)}
@@ -332,7 +326,6 @@ table.t td.f{font-family:var(--f-mono);font-weight:600;white-space:nowrap;color:
 <script>
 (function(){"use strict";
 const Q=[];
-// БЛОК 1 — Основы финансового анализа (40)
 Q.push(
 {b:1,t:"b1a",k:1,fix:1,q:"Внутренний и внешний анализ финансово-хозяйственной деятельности предприятия, осуществляемый на основании данных публичной отчётности и проводимый как внутри, так и за пределами предприятия заинтересованными лицами, — это…",o:["управленческий анализ","финансовый анализ","статистический анализ","анализ движения материальных ценностей на предприятии"],a:1,e:"Только финансовый анализ бывает и внешним, и внутренним и опирается на публичную (бухгалтерскую) отчётность. Управленческий анализ — только внутренний и работает с закрытыми данными.",s:"Конспект: «Выделяют два вида ФА: внешний и внутренний»; Крылов, с. 6"},
 {b:1,t:"b1a",q:"Как в конспекте определяется финансовый анализ?",o:["Составление на основе бухгалтерской, финансовой, статистической и другой отчётности аналитического обоснования управленческих решений, направленных на достижение поставленных целей","Ведение бухгалтерского учёта и составление финансовой отчётности","Проверка достоверности бухгалтерской отчётности независимым лицом","Расчёт налоговых обязательств организации"],a:0,e:"Ключевые слова определения: отчётность → аналитическое обоснование → управленческие решения → цели. Ведение учёта — бухгалтерия, проверка достоверности — аудит.",s:"Конспект, первая строка"},
@@ -376,7 +369,6 @@ Q.push(
 {b:1,t:"b1d",q:"Разделу «Учётная политика и пояснительная записка» по МСФО в РСБУ соответствуют…",o:["Пояснения","Отчёт об изменениях капитала","Отчёт о финансовых результатах","Бухгалтерский баланс"],a:0,e:"Последняя строка таблицы: Пояснения ↔ Учётная политика и пояснительная записка.",s:"Конспект, таблица «Состав форм финансовой отчётности»"}
 );
 
-// БЛОК 2 — Этапы и методические приёмы (40)
 Q.push(
 {b:2,t:"b2a",q:"Сколько этапов выделяют в финансовом анализе?",o:["четыре","три","два","пять"],a:0,e:"I — предварительный; II — углублённый; III — обобщение результатов → рекомендации; IV — прогнозирование. Мнемоника «ПУОП»: Посмотрел — Углубился — Обобщил — Предсказал.",s:"Конспект; Крылов, с. 7"},
 {b:2,t:"b2a",q:"Какова правильная последовательность этапов финансового анализа?",o:["предварительный → углублённый → обобщение и рекомендации → прогнозирование","углублённый → предварительный → прогнозирование → обобщение","прогнозирование → предварительный → углублённый → обобщение","предварительный → прогнозирование → углублённый → обобщение"],a:0,e:"Сначала быстро и просто, потом подробно, потом выводы и рекомендации, в конце — прогноз.",s:"Конспект; Крылов, с. 7"},
@@ -420,7 +412,6 @@ Q.push(
 {b:2,t:"b2d",q:"Способ абсолютных разниц: влияние фактора b в модели y = a × b × c рассчитывается как…",o:["a₁ × (b₁ − b₀) × c₀","a₀ × (b₁ − b₀) × c₀","a₀ × (b₁ − b₀) × c₁","a₁ × (b₁ − b₀) × c₁"],a:0,e:"Прирост фактора × ФАКТИЧЕСКИЕ значения факторов слева × БАЗИСНЫЕ значения факторов справа. Способ проще цепных подстановок, но применяется в основном для мультипликативных моделей.",s:"Крылов, с. 15"}
 );
 
-// БЛОК 3 — Финансовые результаты (40)
 Q.push(
 {b:3,t:"b3a",k:1,fix:1,q:"Конечный финансовый результат деятельности предприятия отражает…",o:["валовой доход","прибыль (убыток) от продаж","прибыль до налогообложения","чистая нераспределённая прибыль"],a:3,e:"«Конечный» — после всех доходов, расходов и налога на прибыль: это чистая (нераспределённая) прибыль. Всё остальное — промежуточные ступени «лестницы прибыли».",s:"Банк тестов к контрольной; перечень финрезультатов — Крылов, с. 5"},
 {b:3,t:"b3a",k:1,fix:1,q:"К абсолютным показателям финансовых результатов, отражаемым в финансовой отчётности, относятся (выберите все верные):",o:["валовая прибыль","прибыль (убыток) от продаж","прибыль до налогообложения","рентабельность собственного капитала"],a:[0,1,2],e:"Абсолютные показатели — суммы в рублях (виды прибыли из ОФР). Рентабельность — относительный показатель (отношение прибыли к капиталу).",s:"Банк тестов к контрольной; Конспект — состав финансовых результатов"},
@@ -464,7 +455,6 @@ Q.push(
 {b:3,t:"b3d",c:1,q:"Валовая прибыль — 900, себестоимость проданной продукции — 3600 тыс. р. Рентабельность издержек равна…",o:["25 %","20 %","11,8 %","400 %"],a:0,e:"900 / 3600 × 100 = 25 %: на каждый рубль себестоимости — 25 копеек валовой прибыли.",s:"Формула — Конспект (1); данные — Крылов, табл. П.2"}
 );
 
-// БЛОК 4 — Имущество и капитал (40)
 Q.push(
 {b:4,t:"b4a",q:"Анализ имущественного положения организации предполагает изучение…",o:["изменений в составе и структуре, а также динамики имущества в учётной оценке","только стоимости основных средств","соотношения собственного и заёмного капитала","оборачиваемости дебиторской задолженности"],a:0,e:"Имущественное положение = состав + структура + динамика имущества (актива баланса).",s:"Конспект; Крылов, с. 24"},
 {b:4,t:"b4a",q:"Общей стоимости имущества предприятия в учётной оценке соответствует…",o:["итог актива бухгалтерского баланса (валюта баланса)","уставный капитал","сумма основных средств и НМА","чистые активы"],a:0,e:"Всё имущество = все активы = итог актива баланса.",s:"Конспект; Крылов, с. 24"},
@@ -508,7 +498,6 @@ Q.push(
 {b:4,t:"b4d",v:1,c:1,q:"Выручка выросла на 20 %, активы — на 10 %. Как изменилась отдача активов?",o:["повысилась","снизилась","не изменилась","по этим данным сказать нельзя"],a:0,e:"1,20 / 1,10 ≈ 1,09 → отдача выросла примерно на 9 %.",s:"Вариация вопроса из контрольной"}
 );
 
-// Открытые вопросы — карточки с проверкой по ключевым словам
 const CARDS = [
 {b:1,q:"Дайте определение финансового анализа.",a:"Составление на основе бухгалтерской, финансовой, статистической и другой отчётности аналитического обоснования управленческих решений, направленных на достижение поставленных целей.",k:[["отчетн"],["обоснован"],["решени"],["цел"]],s:"Конспект"},
 {b:1,st:1,q:"Назовите предмет финансового анализа.",a:"Финансовые результаты и финансовое состояние организации (предприятия).",k:[["результат"],["состояни"]],s:"Конспект; Крылов, с. 5 · было в контрольной"},
@@ -546,11 +535,7 @@ const CARDS = [
 {b:3,q:"Из чего складывается прибыль до налогообложения? Как оценить её качество?",a:"ПДН = прибыль от продаж + прибыль (убыток) от прочей деятельности (доходы от участия + проценты к получению − проценты к уплате + прочие доходы − прочие расходы). Качество определяется долей прибыли от продаж: желательно ТРпр ≥ ТРпдн.",k:[["продаж"],["проч"],["процент"],["качеств"],["дол","удельн"]],s:"Конспект, табл. 2.1; Крылов, с. 17–18"}
 ];
 
-// Банк «как на контрольной»: короткие формулировки в стиле банков тестов, из которых взяты вопросы контрольной
-// g: t1 — теория и методы (как «1 тест»), t2 — финрезультаты, темпы, имущество (как «2 тест»)
-// kt: def — определение/выбор термина, tf — «верно ли», tr — темпы роста, m — несколько ответов
 const KQ = [
-// ---------- ТЕСТ 1: теория и методы ----------
 {g:"t1",kt:"def",k:1,q:"Закрытая для посторонних лиц, строго засекреченная отчётность, содержащая сведения о себестоимости отдельных видов продукции, выпускаемой предприятием, — это…",o:["финансовая отчётность","управленческая отчётность","бухгалтерская отчётность"],a:1,e:"Закрытая, для руководства → управленческая. Финансовая и бухгалтерская — публичные.",s:"Вопрос контрольной"},
 {g:"t1",kt:"def",q:"Публичная отчётность, которая публикуется в печати для акционеров и других внешних пользователей, — это…",o:["финансовая отчётность","управленческая отчётность","налоговая отчётность","внутренняя отчётность о себестоимости"],a:0,e:"Публичная → финансовая. Пара к вопросу про засекреченную (управленческую) отчётность.",s:"Банк тестов; Конспект — формы финансовой отчётности"},
 {g:"t1",kt:"def",k:1,q:"Сравнение каждой позиции отчётности с предыдущим периодом — это…",o:["анализ финансовых коэффициентов","трендовый анализ","вертикальный анализ","горизонтальный анализ","сравнительный анализ"],a:3,e:"С предыдущим периодом — горизонтальный; с рядом периодов + тренд — трендовый.",s:"Вопрос контрольной; Крылов, с. 11"},
@@ -589,7 +574,6 @@ const KQ = [
 {g:"t1",kt:"tf",q:"Верно ли утверждение? Сопоставление плановых и фактических показателей возможно при внешнем финансовом анализе.",o:["да","нет"],a:1,e:"Только при внутреннем: у внешнего аналитика нет планов.",s:"Крылов, с. 12"},
 {g:"t1",kt:"tf",q:"Верно ли утверждение? Цепные темпы роста рассчитываются делением каждого уровня ряда на предыдущий.",o:["да","нет"],a:0,e:"Цепные — к предыдущему; базисные — к одному базисному периоду.",s:"Крылов, с. 11"},
 
-// ---------- ТЕСТ 2: финансовые результаты, темпы, имущество ----------
 {g:"t2",kt:"def",k:1,q:"Конечный финансовый результат деятельности предприятия отражает…",o:["валовой доход","прибыль (убыток) от продаж","прибыль до налогообложения","чистая нераспределённая прибыль"],a:3,e:"Конечный — после всех доходов, расходов и налога.",s:"Вопрос контрольной"},
 {g:"t2",kt:"tf",k:1,q:"Верно ли данное утверждение? Любое изменение выручки от реализации продукции порождает ещё более сильное изменение прибыли от продаж.",o:["да","нет"],a:0,e:"Эффект операционного рычага: из-за условно-постоянных расходов прибыль меняется сильнее выручки.",s:"Вопрос контрольной"},
 {g:"t2",kt:"tf",k:1,q:"Верно ли утверждение? Прибыль от продаж определяется вычитанием из валовой прибыли коммерческих и управленческих расходов.",o:["да","нет"],a:0,e:"900 − 157 − 318 = 425 (пример Крылова).",s:"Вопрос контрольной; Крылов, табл. П.2"},
@@ -642,9 +626,7 @@ const KQ = [
 {g:"t2",kt:"m",q:"В состав прочих расходов входят (выберите все верные):",o:["отрицательные курсовые разницы","расходы на услуги кредитных организаций","штрафы и пени за нарушение условий договоров"],a:[0,1,2],e:"Все три — прочие расходы.",s:"Банк тестов"},
 {g:"t2",kt:"m",q:"Направления поиска резервов повышения финансовых результатов (выберите все верные):",o:["увеличение выручки","снижение затрат на производство и продажу","увеличение доходов от прочей деятельности","оптимизация налогообложения","увеличение дебиторской задолженности"],a:[0,1,2,3],e:"Ещё одно направление — снижение расходов, связанных с прочей деятельностью.",s:"Крылов, с. 22–23"}
 ];
-// Открытые вопросы для варианта (id карточек CARDS, которые подходят к формулировкам «Назовите…»)
 
-/* ================= APP ================= */
 const BLOCKS={1:{name:"Основы финансового анализа",short:"Основы ФА"},2:{name:"Этапы и методические приёмы",short:"Этапы и методы"},3:{name:"Финансовые результаты",short:"Финрезультаты"},4:{name:"Имущество и капитал",short:"Имущество"}};
 const TOPICS={b1a:"Понятие и место ФА",b1b:"Предмет, объект, цели",b1c:"Пользователи информации",b1d:"Информация и отчётность",b2a:"Этапы анализа",b2b:"Абсолютные, относительные и средние величины",b2c:"Сравнение, группировка, графики, таблицы",b2d:"Балансовый способ и факторный анализ",b3a:"Прибыль до налогообложения",b3b:"Прибыль от продаж",b3c:"Прочая деятельность, чистая прибыль, СФР",b3d:"Резервы и рентабельность",b4a:"Имущество: состав и динамика",b4b:"Оборотные и реальные активы",b4c:"Внеоборотные активы и стратегия",b4d:"Капитал и отдача активов"};
 const LET="абвгдежз";
@@ -665,7 +647,6 @@ const NT=8,TICKETS=[],ORD={};
 [1,2,3,4].forEach(b=>ORD[b]=shuffle(QB[b],rng(4242+b*131)));
 for(let t=0;t<NT;t++)TICKETS.push([1,2,3,4].flatMap(b=>ORD[b].slice(t*5,t*5+5)));
 
-/* ---------- storage ---------- */
 const KEY="fa-bilety-v1";
 let storageOK=true;
 function blank(){return{q:{},err:{},cards:{},tickets:{},exams:[],plan:{},kr:[]}}
@@ -677,7 +658,6 @@ function record(id,ok){const r=S.q[id]||(S.q[id]={n:0,ok:0,bad:0,last:null});r.n
 function errIds(){return Object.keys(S.err).filter(id=>QID[id]).sort((a,b)=>S.err[a]-S.err[b])}
 function stats(){let seen=0,mast=0,n=0,ok=0;Q.forEach(q=>{const r=S.q[q.id];if(r&&r.n){seen++;n+=r.n;ok+=r.ok;if(r.last===1)mast++}});return{seen,mast,acc:n?Math.round(ok/n*100):null,err:errIds().length,cards:CARDS.filter(c=>((S.cards[c.id]||{}).box||0)>=2).length,examsPassed:S.exams.filter(e=>e.pass).length}}
 
-/* ---------- plan ---------- */
 const PLAN=[
  {day:1,title:"Основы и методы",note:"Лекция 1, теория",min:70,steps:[
   {id:"d1-cheat",label:"Шпаргалка: «Не перепутай» и «Списки»",hint:"10 минут чтения, потом перескажи вслух",act:{m:"cheat",sec:"pairs"}},
@@ -708,7 +688,6 @@ function stepDone(st){
  if(st.auto==="kr")return (S.kr||[]).filter(r=>r.grade===5).length>=2;
  return !!S.plan[st.id]}
 
-/* ---------- helpers ---------- */
 const app=document.getElementById("app");
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function fmt(ms){ms=Math.max(0,ms);const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000);return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
@@ -732,7 +711,6 @@ function render(){
  if(view==="home")renderHome();else if(view==="quiz")renderQuiz();else if(view==="result")renderResult();else if(view==="cards")renderCards();else if(view==="cheat")renderCheat();
 }
 
-/* ---------- HOME ---------- */
 function renderHome(){
  const st=stats();
  const nowDay=PLAN.findIndex(d=>!d.steps.every(stepDone));
@@ -809,7 +787,6 @@ function renderHome(){
  app.innerHTML=h;
 }
 
-/* ---------- sessions ---------- */
 function makePerm(q){return q.fix?q.o.map((_,i)=>i):shuffle(q.o.map((_,i)=>i))}
 function startSession(o){
  clearInterval(timerInt);
@@ -896,7 +873,6 @@ function nextUnanswered(){
 function goNext(){if(nextUnanswered())return;if(sess.mode==="exam"){examCheck();return}finishSession()}
 function move(d){const [lo,hi]=phaseRange();const j=sess.idx+d;if(j>=lo&&j<hi){sess.idx=j;render()}}
 
-/* ---------- exam ---------- */
 function startTimer(){
  clearInterval(timerInt);
  timerInt=setInterval(()=>{
@@ -944,7 +920,6 @@ function finishSession(){
  save();go("result");
 }
 
-/* ---------- QUIZ VIEW ---------- */
 function optLabel(q,pos){return q.fix?LET[pos]:String(pos+1)}
 function renderQuiz(){
  const s=sess,id=s.items[s.idx],isExam=s.mode==="exam",isKr=s.mode==="kr";
@@ -1007,7 +982,6 @@ function renderQuiz(){
 }
 function centerStrip(){const cur=app.querySelector(".cell.cur"),w=app.querySelector(".strip-wrap");if(cur&&w){w.scrollLeft=Math.max(0,cur.offsetLeft-w.clientWidth/2)}}
 
-/* ---------- RESULT VIEW ---------- */
 function ansText(q,sel){return (sel||[]).map(i=>q.o[i]).join("; ")||"—"}
 function renderResult(){
  if(sess.mode==="kr")return renderKrResult();
@@ -1064,7 +1038,6 @@ function renderKrResult(){
 }
 function plural(n,a,b,c){const m=n%10,m2=n%100;if(m===1&&m2!==11)return a;if(m>=2&&m<=4&&(m2<12||m2>14))return b;return c}
 
-/* ---------- CARDS ---------- */
 function norm(s){return String(s).toLowerCase().replace(/ё/g,"е").replace(/\s+/g," ")}
 function keyInfo(c,text){
  const nt=norm(text),nr=norm(c.a).length===c.a.length?norm(c.a):c.a.toLowerCase().replace(/ё/g,"е");
@@ -1111,7 +1084,6 @@ function renderCards(){
  const ta=document.getElementById("card-input");if(ta){ta.addEventListener("input",()=>{cs.text=ta.value})}
 }
 
-/* ---------- CHEAT ---------- */
 function renderCheat(){
  const A=(t)=>`<span class="ans">${t}</span>`;
  let h=`<div class="wrap"><div class="qbar"><button class="btn sm ghost" data-act="home">← Меню</button><div class="ttl">Шпаргалка<small>лекции 1–2</small></div><div class="rt"><button class="btn sm ${cheat.hide?"primary":""}" data-act="chide" aria-pressed="${cheat.hide}">${cheat.hide?"Показать ответы":"Закрыть ответы"}</button></div></div>
@@ -1169,7 +1141,6 @@ function renderCheat(){
  app.innerHTML=h;
 }
 
-/* ---------- events ---------- */
 app.addEventListener("click",e=>{
  const ans=e.target.closest(".hide-mode .ans");if(ans){ans.classList.toggle("shown");return}
  const el=e.target.closest("[data-act]");if(!el||el.disabled)return;

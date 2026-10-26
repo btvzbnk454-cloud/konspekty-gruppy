@@ -2,7 +2,6 @@
 <title>Тренажёр по управлению качеством</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500;600;700&family=Golos+Text:wght@400;500;600&family=Literata:wght@400;500&display=swap">
 <style>
-/* Layout: одна колонка-лист до 720px; сверху липкая «рулетка» прогресса, снизу закреплённая кнопка действия. */
 :root{
   --bg:#EDF0F3; --sheet:#FFFFFF; --sunk:#F4F6F8;
   --ink:#11151B; --ink-2:#55606E; --ink-3:#7C8794;
@@ -47,14 +46,12 @@ button{cursor:pointer;-webkit-tap-highlight-color:transparent}
 .f sub,.f sup,.prose sub,.prose sup{font-size:.72em;line-height:0}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 
-/* ── типографика ── */
 .eyebrow{font:600 13px/1.2 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:0}
 h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;margin:8px 0 0;text-wrap:balance}
 .lead{font-size:17px;line-height:1.5;color:var(--ink-2);max-width:60ch;margin:14px 0 0}
 .sec-h{font:600 13px/1.2 var(--f-display);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin:32px 0 8px}
 .note{font-size:14px;color:var(--ink-2);margin:0}
 
-/* ── кнопки ── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:8px;border:1.5px solid var(--line-2);background:var(--sheet);color:var(--ink);font:600 17px/1 var(--f-display);letter-spacing:.05em;text-transform:uppercase;transition:transform .08s,background .15s,border-color .15s}
 .btn:hover:not(:disabled){border-color:var(--ink-2)}
 .btn:active:not(:disabled){transform:translateY(1px)}
@@ -72,7 +69,6 @@ h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--sheet)}
 .seg .cnt{font-variant-numeric:tabular-nums;opacity:.7;margin-left:4px}
 
-/* ── рулетка ── */
 .ruler{position:relative;height:32px;border-radius:5px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line-2);overflow:hidden;flex:1 1 auto;min-width:0}
 .ruler .tape{position:absolute;inset:0 auto 0 0;width:0;background:var(--tape);box-shadow:inset 0 0 0 1px var(--tape-edge);border-radius:5px 0 0 5px;transition:width .35s ease}
 .ruler .tape.full{border-radius:5px}
@@ -89,7 +85,6 @@ h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;
 .ruler-cap{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--ink-2);margin-top:6px}
 .ruler-cap span:last-child{white-space:nowrap}
 
-/* ── главная ── */
 .mast{padding:6px 0 0}
 .home-ruler{margin-top:24px}
 .panel{background:var(--sheet);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:18px;display:grid;gap:16px}
@@ -117,7 +112,6 @@ h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;
 @media(max-width:560px){.tl .tb{padding-left:2px}}
 .sync{margin:22px 0 0;font-size:13.5px;color:var(--ink-2)}
 
-/* ── тест ── */
 .quiz{display:flex;flex-direction:column;min-height:calc(100dvh - 48px)}
 .quiz .grow{flex:1 1 auto}
 @media(min-width:720px) and (min-height:760px){.quiz{min-height:0}.quiz .grow{display:none}}
@@ -137,7 +131,6 @@ h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;
 .act .btn{width:100%}
 @media(min-width:720px){.act .btn{width:auto;min-width:240px}}
 
-/* варианты ответа */
 .opts{display:grid;gap:8px}
 .opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;padding:12px 14px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet);line-height:1.4;transition:border-color .12s,background .12s}
 .opt-k{flex:none;width:26px;height:26px;display:grid;place-items:center;border-radius:6px;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line);font:600 14px/1 var(--f-display);color:var(--ink-2)}
@@ -156,7 +149,6 @@ h1{font:700 clamp(40px,10.5vw,60px)/.94 var(--f-display);letter-spacing:-.005em;
 .tf .opt{justify-content:center;align-items:center;padding:16px 10px;font-weight:600}
 .tf .opt-t{flex:0 1 auto;padding:0}
 
-/* сопоставление */
 .g{display:grid;gap:10px}
 .g-row{border:1.5px solid var(--line);border-radius:var(--r);padding:12px 14px;display:grid;gap:10px;background:var(--sheet)}
 .g-t{line-height:1.4}
@@ -176,7 +168,6 @@ select.sel:disabled{opacity:1;color:var(--ink)}
 .g-fix{font-size:14.5px}
 .g-fix b{color:var(--ok)}
 
-/* порядок */
 .ord{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .ord li{display:flex;align-items:center;gap:6px;padding:6px 8px 6px 2px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet)}
 .ord .grip{flex:none;width:34px;height:44px;display:grid;place-items:center;color:var(--ink-3);cursor:grab;touch-action:none;border:0;background:none;border-radius:6px}
@@ -203,7 +194,6 @@ select.sel:disabled{opacity:1;color:var(--ink)}
 .ord-key ol{margin:0;padding-left:1.5em}
 .ord-key li{margin:3px 0}
 
-/* пропуски */
 .bk-text{font-size:17.5px;line-height:2.3;margin:0}
 .slot{display:inline-flex;align-items:center;justify-content:center;min-width:5.5em;min-height:34px;padding:1px 10px;margin:0 2px;border:1.5px dashed var(--line-2);border-radius:8px;background:var(--sunk);vertical-align:middle;font:500 16px/1.25 var(--f-body);color:var(--ink)}
 .slot.cur{border-color:var(--ink);border-style:solid}
@@ -216,7 +206,6 @@ select.sel:disabled{opacity:1;color:var(--ink)}
 .bk-bank .chip{border-radius:8px;font-size:15.5px;min-height:42px}
 .bk-bank .chip.used{opacity:.25}
 
-/* ввод */
 .inrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .inp{width:100%;max-width:22em;min-height:48px;padding:10px 14px;border:1.5px solid var(--line-2);border-radius:var(--r);background:var(--sheet);font-size:18px}
 .inp.num{max-width:9em;font-variant-numeric:tabular-nums}
@@ -226,7 +215,6 @@ select.sel:disabled{opacity:1;color:var(--ink)}
 .unit{color:var(--ink-2)}
 .right-val{font-weight:600;color:var(--ok)}
 
-/* расчётная задача */
 .tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);border-radius:var(--r)}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -242,7 +230,6 @@ th.nm{text-align:right}
 .plabel{font-weight:500}
 @media(min-width:600px){.part.pn{grid-template-columns:1fr auto;align-items:center;gap:14px}.part.pn .inrow{justify-content:flex-end}}
 
-/* ползунок потребительской ценности */
 .val{display:grid;gap:12px}
 .val svg{width:100%;max-width:440px;height:auto;display:block;margin-inline:auto}
 .val-ctl{display:grid;gap:4px}
@@ -255,7 +242,6 @@ th.nm{text-align:right}
 .sv-t{font:600 14px var(--f-display);letter-spacing:.04em} .sv-s{font:400 12px var(--f-body)} .sv-k{font:500 17px var(--f-math)}
 .sv-tapeink{fill:var(--tape-ink)}
 
-/* разбор */
 .fb{margin-top:18px;border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;scroll-margin:76px 0 96px}
 .fb.ok{background:var(--ok-soft)}
 .fb.bad{background:var(--bad-soft)}
@@ -280,7 +266,6 @@ details[open] > summary .cheat-k::before{content:"▾"}
 .prose .tw{margin:.8em 0}
 .prose table{font-size:14px;min-width:520px}
 
-/* результат */
 .score{display:flex;align-items:baseline;gap:8px 14px;flex-wrap:wrap;margin-top:8px}
 .score .big{font:700 clamp(64px,19vw,104px)/.86 var(--f-display);font-variant-numeric:tabular-nums}
 .score .of{font:600 26px/1 var(--f-display);color:var(--ink-2);font-variant-numeric:tabular-nums}
@@ -332,7 +317,6 @@ const TOPICS = [
 
 const QUESTIONS = [
 
-/* ───────── 1. Качество. Последовательность оценки уровня качества ───────── */
 { id: 't01a', t: 1, type: 'bank',
   q: 'Восстановите определение качества.',
   text: 'Качество — совокупность {0} объекта, относящихся к его {1} удовлетворять {2} и {3} потребности.',
@@ -390,7 +374,6 @@ const QUESTIONS = [
   a: true,
   ex: 'На схеме из лекции от цели оценки идут две параллельные ветви: номенклатура показателей (ГОСТ 22851-77) и базовые образцы (РД 50-451-84). Обе нужны, чтобы перейти к определению значений показателей.' },
 
-/* ───────── 2. Конкурентоспособность. Конкуренция ───────── */
 { id: 't02a', t: 2, type: 'one',
   q: 'Конкурентоспособность товара — это…',
   opts: [
@@ -448,7 +431,6 @@ const QUESTIONS = [
   ],
   ex: 'Определения со слайда лекции «Анализ конкурентоспособности объектов». Основные объекты оценки конкурентоспособности: товар, услуга, персонал, предприятие, регион, государство.' },
 
-/* ───────── 3. Потребительская ценность товара ───────── */
 { id: 't03a', t: 3, type: 'one',
   q: 'Потребительская ценность товара — это…',
   opts: [
@@ -497,7 +479,6 @@ const QUESTIONS = [
   sets: [[0, 1], [2, 3]],
   ex: 'З и П — затраты и прибыль продавца; $З_{п}$ и $П_{п}$ — составляющие ценности для покупателя; К — выгода покупателя, неоплаченная часть ценности.' },
 
-/* ───────── 4. Виды измерений. Измерительные шкалы ───────── */
 { id: 't04a', t: 4, type: 'grid',
   q: 'Определите вид измерения.',
   cols: ['Прямое', 'Косвенное', 'Совокупное', 'Совместное'],
@@ -546,7 +527,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Так описывается прямое измерение. При косвенном значение вычисляют по известной зависимости от величин, полученных прямыми измерениями.' },
 
-/* ───────── 5. Основные принципы квалиметрии ───────── */
 { id: 't05a', t: 5, type: 'input',
   q: 'Как называется учение об измерении и количественной оценке качества объектов и процессов деятельности людей?',
   accept: ['квалиметрия', 'квалиметрии', 'квалиметрией'], show: 'Квалиметрия',
@@ -584,7 +564,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'Четвёртый принцип квалиметрии: оценка качества проводится с точки зрения общественной потребности.' },
 
-/* ───────── 6. Шкала порядка и шкала интервалов ───────── */
 { id: 't06a', t: 6, type: 'grid',
   q: 'По какой шкале измеряют эти характеристики?',
   cols: ['Порядка', 'Интервалов', 'Отношений'],
@@ -642,7 +621,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Шкала Цельсия — шкала интервалов, ноль на ней условный. Можно сказать, что стало теплее на 10 градусов, но не «в два раза»: в кельвинах это 283 К и 293 К.' },
 
-/* ───────── 7. Шкала отношений ───────── */
 { id: 't07a', t: 7, type: 'one',
   q: 'Что отличает шкалу отношений от шкалы интервалов?',
   opts: ['Абсолютный (естественный) ноль', 'Равные интервалы между делениями', 'Возможность упорядочить объекты', 'Возможность складывать и вычитать значения'],
@@ -682,7 +660,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'Отношение значений имеет смысл, только когда ноль шкалы означает отсутствие свойства. У шкалы Цельсия ноль условный.' },
 
-/* ───────── 8. Закон «Об обеспечении единства измерений» ───────── */
 { id: 't08a', t: 8, type: 'bank',
   q: 'Восстановите требование единства измерений.',
   text: 'Единство измерений — такое их осуществление, которое обеспечивает {0} и {1} результатов однородных измерений, а значения измеряемых величин выражаются в {2} и общепринятых единицах.',
@@ -730,7 +707,6 @@ const QUESTIONS = [
   accept: ['росстандарт', 'росстандартом'], show: 'Росстандарт',
   ex: 'Росстандарт — Федеральное агентство по техническому регулированию и метрологии.' },
 
-/* ───────── 9. Методы количественной оценки показателей качества ───────── */
 { id: 't09a', t: 9, type: 'grid', sel: true, src: 'ГОСТ 15467-79',
   q: 'Определите метод получения значений показателей качества по его описанию.',
   cols: ['Измерительный', 'Регистрационный', 'Расчётный', 'Органолептический', 'Экспертный', 'Социологический'],
@@ -776,7 +752,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Наоборот: по таблице из лекции чувствительность к погрешностям растёт вместе с информативностью — высокая у шкалы интервалов, наивысшая у шкал отношений и абсолютных величин.' },
 
-/* ───────── 10. Классификация показателей качества ───────── */
 { id: 't10a', t: 10, type: 'grid', sel: true,
   q: 'По какому признаку классификации выделены эти показатели качества?',
   cols: ['По характеризуемым свойствам', 'По стадии определения', 'По применению для оценки', 'По количеству характеризуемых свойств'],
@@ -844,7 +819,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'Базовые показатели — значения у базового образца. Относительные — отношение показателя оцениваемого объекта к базовому. Это деление по применению для оценки.' },
 
-/* ───────── 11. Номенклатура показателей качества ───────── */
 { id: 't11a', t: 11, type: 'one',
   q: 'Номенклатура показателей качества — это…',
   opts: [
@@ -879,7 +853,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'В стандарте сказано прямо: основным методом определения исходной номенклатуры показателей качества является экспертный. В шпаргалке: для выбора номенклатуры часто применяют экспертные методы.' },
 
-/* ───────── 12. Дифференциальный метод ───────── */
 { id: 't12a', t: 12, type: 'one',
   q: 'В формуле $q_{i} = (P_{i} / P_{iБ})^{ξ}$ чему равен показатель степени $ξ$, если рост $P_{i}$ означает снижение качества (например, расход топлива)?',
   opts: ['−1', '1', '0', '2'],
@@ -937,7 +910,6 @@ const QUESTIONS = [
   a: true,
   ex: 'Дифференциальный метод сопоставляет единичные показатели объекта и базы один к одному. Важность свойств начинает учитываться в комплексном методе.' },
 
-/* ───────── 13. Базовый образец. Аналоги ───────── */
 { id: 't13a', t: 13, type: 'bank',
   q: 'Восстановите определение базового образца.',
   text: 'Базовый образец — совокупность реально достигаемых значений {0} определённого типа продукции, принятых для {1} и отражающих в среднем {2} определённой группы {3}.',
@@ -988,7 +960,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Все аналоги в группе и оцениваемая продукция должны иметь одинаковые значения классификационных показателей, иначе сравнение некорректно.' },
 
-/* ───────── 14. Комплексный метод ───────── */
 { id: 't14a', t: 14, type: 'one',
   q: 'В чём суть комплексного метода оценки уровня качества?',
   opts: [
@@ -1051,7 +1022,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'Для сложной продукции учитывается много единичных показателей, и вывод по каждому в отдельности затруднён. Комплексный показатель сводит их в одно число с учётом важности каждого свойства.' },
 
-/* ───────── 15. Весовые коэффициенты ───────── */
 { id: 't15a', t: 15, type: 'one',
   q: 'Что отражают весовые коэффициенты?',
   opts: ['Важность (значимость) соответствующих свойств в количественном выражении', 'Отношение показателя объекта к базовому значению', 'Затраты на обеспечение каждого свойства', 'Точность измерения каждого показателя'],
@@ -1093,7 +1063,6 @@ const QUESTIONS = [
   a: [0, 1, 2],
   ex: 'Значения весовых коэффициентов выбирают исходя из анализа мирового уровня развития отрасли, требований к проектируемому объекту и возможностей реализации этих требований.' },
 
-/* ───────── 16. Интегральный метод ───────── */
 { id: 't16a', t: 16, type: 'bank',
   q: 'Восстановите определение интегрального показателя качества.',
   text: 'Интегральный показатель качества — отношение суммарного {0} от эксплуатации или потребления продукции к суммарным {1} на её {2} и эксплуатацию или потребление.',
@@ -1143,7 +1112,6 @@ const QUESTIONS = [
   ],
   ex: '$И = Э / (З_{С} + З_{Э})$ при сроке службы не более года и $И = Э / (З_{С} · φ(t) + З_{Э})$ при сроке службы более года.' },
 
-/* ───────── 17. Смешанный метод ───────── */
 { id: 't17a', t: 17, type: 'one',
   q: 'На чём основан смешанный метод оценки уровня качества?',
   opts: [
@@ -1214,7 +1182,6 @@ const QUESTIONS = [
   a: true,
   ex: 'Такие показатели сравнивают с базовыми дифференциальным методом. В этом и состоит «смешанность»: единичные и групповые показатели используются одновременно.' },
 
-/* ───────── 18. Экономико-статистический метод ───────── */
 { id: 't18a', t: 18, type: 'one',
   q: 'Через что оценивают уровень качества в экономико-статистическом методе?',
   opts: [
@@ -1285,7 +1252,6 @@ const QUESTIONS = [
   a: false,
   ex: '$П = П_{П} + П_{Э}$: складывают эффективность для производителя ($Ц_{ОПТ} · V − З_{П}$) и для потребителя ($Ц · N − Ц_{П}$).' },
 
-/* ───────── 19. Экспертные методы ───────── */
 { id: 't19a', t: 19, type: 'bank',
   q: 'На чём основаны экспертные методы?',
   text: 'Группа методов экспертной оценки основана на {0}, {1} и {2} специалистов-экспертов.',
@@ -1322,7 +1288,6 @@ const QUESTIONS = [
   a: false,
   ex: 'По РД 50-149-79, чтобы оценка была объективной, в экспертную группу не должны входить специалисты, имеющие отношение к созданию и изготовлению продукции. В группе должно быть не менее семи экспертов.' },
 
-/* ───────── 20. Закон «О техническом регулировании» ───────── */
 { id: 't20a', t: 20, type: 'one',
   q: 'Какой документ — основной в области технического регулирования в РФ?',
   opts: ['Федеральный закон от 27.12.2002 № 184-ФЗ', 'Закон РФ от 27.04.1993 № 4871-1', 'ГОСТ Р ИСО 9001-2015', 'ГОСТ 15467-79'],
@@ -1397,7 +1362,6 @@ const QUESTIONS = [
   ],
   ex: 'Закон задаёт систему. Технические регламенты обязательны для исполнения, стандарты применяются добровольно.' },
 
-/* ───────── 21. Технический регламент и стандарт ───────── */
 { id: 't21a', t: 21, type: 'grid',
   q: 'Технический регламент или стандарт?',
   cols: ['Технический регламент', 'Стандарт'],
@@ -1441,7 +1405,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Обязательные требования устанавливает технический регламент. Стандарт — документ для добровольного многократного использования.' },
 
-/* ───────── 22. Цена потребления ───────── */
 { id: 't22a', t: 22, type: 'one',
   q: 'Цена потребления — это…',
   opts: [
@@ -1491,7 +1454,6 @@ const QUESTIONS = [
   a: 0,
   ex: 'Экономические показатели: себестоимость изготовления, цена изделия, затраты при эксплуатации, суммарные затраты за весь жизненный цикл. Цена потребления объединяет цену изделия и затраты при эксплуатации.' },
 
-/* ───────── 23. Услуга. Материальные и нематериальные услуги ───────── */
 { id: 't23a', t: 23, type: 'bank',
   q: 'Восстановите определение услуги по ГОСТ Р 50646-2012.',
   text: 'Услуга — результат непосредственного {0} исполнителя и {1}, а также собственной деятельности {2} по удовлетворению {3} потребителя.',
@@ -1541,7 +1503,6 @@ const QUESTIONS = [
   a: false,
   ex: 'Услуга — результат непосредственного взаимодействия исполнителя и потребителя, а также собственной деятельности исполнителя. По ГОСТ ISO 9000 хотя бы одно действие обязательно происходит при таком взаимодействии.' },
 
-/* ───────── 24. Номенклатура показателей качества услуг ───────── */
 { id: 't24a', t: 24, type: 'many',
   q: 'Какие группы показателей качества услуг устанавливает ГОСТ Р 52113-2014?',
   opts: ['Назначения', 'Безопасности', 'Надёжности', 'Профессионального уровня персонала', 'Технологичности', 'Транспортабельности', 'Патентно-правовые'],
@@ -1595,7 +1556,7 @@ const CHEAT = {"titles":["Понятие качества продукции. П
 
 const QMAP = new Map(QUESTIONS.map(q => [q.id, q]));
 const BY_TOPIC = TOPICS.map((_, i) => QUESTIONS.filter(q => q.t === i + 1));
-const SHORT_N = 2;                       // вопросов на тему в коротком тесте
+const SHORT_N = 2;
 const KEY = 'uk-rk1.v1';
 const root = document.getElementById('app');
 const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1626,7 +1587,6 @@ const ICON = {
   grip: '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.7"/><circle cx="15" cy="6" r="1.7"/><circle cx="9" cy="12" r="1.7"/><circle cx="15" cy="12" r="1.7"/><circle cx="9" cy="18" r="1.7"/><circle cx="15" cy="18" r="1.7"/></svg>'
 };
 
-/* ───────── helpers ───────── */
 function h(tag, props) {
   const el = document.createElement(tag);
   if (props) for (const k in props) {
@@ -1647,7 +1607,6 @@ function add(el, kid) {
   el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
 }
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-// Неразрывные пробелы в числах, перед ₽ и тире; затем разметка формул $…$.
 function fx(s) {
   return esc(s)
     .replace(/(\d) (?=\d{3}(?!\d))/g, '$1 ')
@@ -1686,7 +1645,6 @@ function lev(a, b) {
   }
   return prev[n];
 }
-// 2 — точное совпадение, 1 — с опечаткой, 0 — нет
 function matchText(v, accept) {
   const x = norm(v);
   if (!x) return 0;
@@ -1697,7 +1655,6 @@ function matchText(v, accept) {
 const plural = (n, one, few, many) => { const a = n % 10, b = n % 100; return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many; };
 const qWord = n => plural(n, 'вопрос', 'вопроса', 'вопросов');
 
-/* ───────── состояние и хранение ───────── */
 function fresh() { return { v: 1, t: 0, test: null, bank: {}, hist: [], opt: { len: 'all', ord: 'topics' } }; }
 function sane(d) {
   if (!d || d.v !== 1 || typeof d.t !== 'number') return null;
@@ -1720,8 +1677,8 @@ function sane(d) {
 }
 
 let S = fresh();
-let loadedAt = 0;          // метка состояния на момент загрузки страницы
-let cloud = 'wait';        // wait | on | local
+let loadedAt = 0;
+let cloud = 'wait';
 let localOK = true;
 let view = 'home', mode = 'test', sess = null, ctl = null, locked = false, askReset = false;
 
@@ -1759,7 +1716,6 @@ const Store = (function () {
         ref.onSnapshot(function (snap) {
           const remote = snap.exists ? sane(snap.data()) : null;
           if (remote) setCloud('on');
-          // Тест начали раньше, чем успел прийти прогресс из аккаунта: незаконченный тест оттуда важнее пустого нового.
           const race = first && remote && S.t > loadedAt && remote.test && !remote.test.done && countDone(remote.test) > 0 && !(S.test && countDone(S.test) > 0);
           first = false;
           if (remote && (remote.t > S.t || race)) adopt(remote);
@@ -1772,7 +1728,6 @@ const Store = (function () {
   return { readLocal: readLocal, writeLocal: writeLocal, commit: commit, connect: connect, flush: flush };
 })();
 
-// Более свежий прогресс пришёл с другого устройства.
 function adopt(remote) {
   S = remote;
   Store.writeLocal();
@@ -1798,7 +1753,6 @@ function toast(msg) {
   toastTimer = setTimeout(function () { el.remove(); }, 3200);
 }
 
-/* ───────── рулетка прогресса ───────── */
 function ruler(n, states, done) {
   const el = h('div', { class: 'ruler' + (n > 80 ? ' dense' : ''), role: 'img', 'aria-label': 'Пройдено ' + done + ' из ' + n });
   const tape = h('div', { class: 'tape' + (done >= n && n ? ' full' : '') });
@@ -1830,7 +1784,6 @@ function cheat(t) {
   return d;
 }
 
-/* ───────── типы вопросов ───────── */
 function mountChoice(opts, right, multi, fixed, host, ctx, cls) {
   const order = fixed ? opts.map((_, i) => i) : shuffle(opts.map((_, i) => i));
   const rightSet = new Set(multi ? right : [right]);
@@ -2171,7 +2124,6 @@ const MOUNT = {
   grid: mountGrid, order: mountOrder, bank: mountBank, input: mountInput, num: mountNum, case: mountCase, value: mountValue
 };
 
-/* ───────── запуск теста и отработки ───────── */
 function buildIds(opt) {
   let groups = BY_TOPIC.map(qs => qs.map(q => q.id));
   if (opt.len === 'short') groups = groups.map(function (g) {
@@ -2209,7 +2161,6 @@ function render() {
   else { view = 'home'; renderHome(); }
 }
 
-/* ───────── главная ───────── */
 function seg(label, items, cur, onPick) {
   return h('div', { class: 'setup-row' }, h('span', { class: 'lbl' }, label),
     h('div', { class: 'seg', role: 'group', 'aria-label': label }, items.map(it =>
@@ -2284,7 +2235,6 @@ function renderHome() {
     h('p', { class: 'sync', id: 'sync' }, syncText()));
 }
 
-/* ───────── вопрос ───────── */
 function renderQuiz() {
   const isTest = mode === 'test';
   const q = QMAP.get(sess.ids[sess.i]);
@@ -2374,7 +2324,6 @@ window.addEventListener('storage', function (e) {
   try { const r = sane(JSON.parse(e.newValue)); if (r && r.t > S.t) adopt(r); } catch (err) {}
 });
 
-/* ───────── результат ───────── */
 function renderResults() {
   const T = S.test, n = T.ids.length, ok = countOk(T), nBank = bankIds().length;
   if (!T.done) { openTest(); return; }
@@ -2428,7 +2377,6 @@ function renderFixDone() {
       h('button', { class: 'btn', type: 'button', onclick: function () { go('home'); } }, 'На главную')));
 }
 
-/* ───────── старт ───────── */
 function start(data) {
   const local = Store.readLocal();
   if (local) S = local;

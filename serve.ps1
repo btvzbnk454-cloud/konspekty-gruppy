@@ -1,4 +1,3 @@
-# Local preview: http://localhost:8080 (site) or -Root . -Port 8081 (whole repo, for drafts)
 param([string]$Root = "site", [int]$Port = 8080)
 $root = (Resolve-Path (Join-Path $PSScriptRoot $Root)).Path
 $l = New-Object Net.HttpListener

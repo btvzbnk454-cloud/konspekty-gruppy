@@ -3,20 +3,19 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap">
 <style>
-/* Глиняный стайлгайд: светлая доска с линейкой и сеткой, мягкие объёмные плашки; актив и пассив — две колонки, счёт — объёмная фишка, мятная = прибавить, серая = вычесть. Одна светлая тема — так задумано. */
 :root{
   color-scheme:light;
-  --room:#E4E5E1;      /* фон за доской */
-  --board:#F4F4F1;     /* доска */
-  --clay:#FBFBF9;      /* светлая плашка */
-  --ink:#2C2D2B;       /* текст */
+  --room:#E4E5E1;
+  --board:#F4F4F1;
+  --clay:#FBFBF9;
+  --ink:#2C2D2B;
   --ink-2:#5E605C;
   --ink-3:#8C8E89;
   --grid:#DCDDD8;
-  --mint:#BDEDD8;      /* основной акцент */
+  --mint:#BDEDD8;
   --mint-deep:#7FD8B4;
   --mint-ink:#1E5E47;
-  --stone:#D6D7D3;     /* серая плашка */
+  --stone:#D6D7D3;
   --stone-deep:#B9BAB5;
   --sun:#F2E3A0;  --sun-ink:#6B5A12;
   --rose:#F1A9A3; --rose-ink:#7C2A24;
@@ -35,7 +34,6 @@ button,input{font:inherit;color:inherit}
 h1,h2,h3,p{margin:0}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 48px}
 
-/* доска с линейкой */
 .board{position:relative;background:var(--board);border-radius:22px;box-shadow:var(--lift-hi);padding:46px 52px 52px;
   background-image:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),var(--grid) calc(100%/12 - 1px) calc(100%/12));background-origin:content-box;background-clip:content-box}
 .ruler{position:absolute;left:52px;right:52px;display:grid;grid-template-columns:repeat(12,1fr);font-family:var(--f-num);font-size:10px;color:var(--ink-3);pointer-events:none}
@@ -51,7 +49,6 @@ h1{font-weight:800;font-size:clamp(34px,6.2vw,64px);line-height:1;letter-spacing
 .lbl{font-weight:600;font-size:18px;letter-spacing:-.005em}
 .small{font-size:12.5px;color:var(--ink-3)}
 
-/* токены-легенда и поиск */
 .top{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px 40px;margin-top:30px;align-items:start}
 @media (max-width:860px){.top{grid-template-columns:minmax(0,1fr)}}
 .tokens{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 14px;margin-top:14px}
@@ -82,7 +79,6 @@ h1{font-weight:800;font-size:clamp(34px,6.2vw,64px);line-height:1;letter-spacing
 .pill.P{background:var(--sun);color:var(--sun-ink)}
 .pill.AP{background:var(--stone);color:var(--ink)}
 
-/* баланс */
 .cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 40px;margin-top:40px}
 @media (max-width:860px){.cols{grid-template-columns:minmax(0,1fr)}}
 .side-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
@@ -108,7 +104,6 @@ h1{font-weight:800;font-size:clamp(34px,6.2vw,64px);line-height:1;letter-spacing
 .total{display:flex;justify-content:space-between;gap:10px;margin-top:14px;padding:12px 18px;border-radius:16px;background:var(--stone);box-shadow:var(--lift);font-weight:700}
 .total span:last-child{font-family:var(--f-num);font-weight:600}
 
-/* алерты */
 .alerts{display:grid;gap:12px;margin-top:40px}
 .alert{display:grid;grid-template-columns:28px minmax(0,1fr);gap:4px 12px;align-items:start;padding:14px 18px;border-radius:999px;box-shadow:var(--lift)}
 .alert svg{margin-top:1px}
@@ -119,7 +114,6 @@ h1{font-weight:800;font-size:clamp(34px,6.2vw,64px);line-height:1;letter-spacing
 .alert.err{background:var(--rose);color:var(--rose-ink)}
 @media (max-width:700px){.alert{border-radius:20px}}
 
-/* стопка «нет в балансе» */
 .stack{margin-top:40px}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-top:14px}
 .card{padding:14px 16px;border-radius:18px;background:var(--clay);box-shadow:var(--lift),0 7px 0 -2px var(--stone),0 13px 0 -4px var(--stone-deep)}

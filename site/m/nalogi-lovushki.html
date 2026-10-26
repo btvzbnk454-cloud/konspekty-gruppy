@@ -4,7 +4,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700;800&display=swap">
 <style>
-/* Layout: same tax-form sheet as the main trainer; here the paper answer grid of the real test is the memorable element. */
 :root {
   --paper: #EEF2F0; --sheet: #FFFFFF; --ink: #16203A; --ink-2: #59647A; --rule: #D5DCE2; --cell: #9FAABB;
   --pen: #2B50DE; --pen-ink: #FFFFFF; --pen-soft: #E3E9FF; --marker: #EDF46A; --marker-ink: #16203A;
@@ -137,7 +136,6 @@ mark { background: linear-gradient(transparent 10%, var(--marker) 10%, var(--mar
 .stamp.anim { animation: stamp .34s cubic-bezier(.2, .9, .3, 1.25) both; }
 @keyframes stamp { 0% { opacity: 0; transform: rotate(-7deg) scale(1.5); } 60% { opacity: 1; transform: rotate(-7deg) scale(.94); } 100% { transform: rotate(-7deg) scale(1); } }
 
-/* answer grid like the paper blank */
 .blank { border: 1.5px solid var(--ink); border-radius: 6px; background: var(--sheet); padding: 14px; }
 .blank-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
 .blank-title { font-family: var(--f-display); font-weight: 600; font-size: 15px; }
@@ -175,7 +173,6 @@ mark { background: linear-gradient(transparent 10%, var(--marker) 10%, var(--mar
 </style>
 <main id="app" class="app"><noscript><p>Для тренажёра нужен JavaScript.</p></noscript></main>
 <script>
-/* Сложные вопросы по налогам в стиле реального РК. a — индексы верных вариантов; alt — допустимый альтернативный набор. */
 window.HARD = (function () {
   'use strict';
   var traps = [
@@ -549,18 +546,16 @@ window.HARD = (function () {
     return '<svg width="94" height="22" viewBox="0 0 94 22" aria-hidden="true" fill="currentColor" style="opacity:.75">' + h + '</svg>';
   }
 
-  /* ---------- state ---------- */
   var KEY = 'nalogi-hard-v1';
   function blank() { return { q: {}, train: null, sheet: null }; }
-  var S = (function () { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.q) return s; } catch (e) { /* ignore */ } return blank(); })();
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* ignore */ } }
+  var S = (function () { try { var s = JSON.parse(localStorage.getItem(KEY)); if (s && s.q) return s; } catch (e) { } return blank(); })();
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
   function record(i, ok) { S.q[i] = { l: ok ? 1 : 0, t: now() }; }
   function errIds() { return QS.map(function (_, i) { return i; }).filter(function (i) { return S.q[i] && S.q[i].l === 0; }); }
 
   var view = { name: 'home' };
   var cur = { sel: [], checked: false, anim: false };
 
-  /* ---------- home ---------- */
   function vHome() {
     var seen = 0, ok = 0;
     Object.keys(S.q).forEach(function (k) { seen++; if (S.q[k].l === 1) ok++; });
@@ -597,7 +592,6 @@ window.HARD = (function () {
     return h + '</section>';
   }
 
-  /* ---------- train ---------- */
   function startTrain(set) {
     var ids;
     if (set === 'all') ids = shuffle(QS.map(function (_, i) { return i; }));
@@ -652,7 +646,6 @@ window.HARD = (function () {
     return h + '</article>';
   }
 
-  /* ---------- sheet (как на РК) ---------- */
   function newSheet() {
     S.sheet = { ids: shuffle(QS.map(function (_, i) { return i; })), ans: {}, done: false, started: now() };
     save();
@@ -711,7 +704,6 @@ window.HARD = (function () {
     return h + '</ol></section>';
   }
 
-  /* ---------- render & events ---------- */
   function render(top) {
     app.innerHTML = view.name === 'train' ? vTrain() : view.name === 'sheet' ? vSheet() : vHome();
     if (top) window.scrollTo(0, 0);

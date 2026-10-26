@@ -3,7 +3,6 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Sofia+Sans:wght@400;500;700;800&family=Sofia+Sans+Extra+Condensed:wght@700;800&display=swap">
 <style>
-/* Бланк баланса (форма 0710001), заполняемый под копирку: слева актив, справа пассив; блоки по одному сверху, вписанное — фиолетовым, ошибки — красным. */
 :root{
   --paper:#F2F4F1; --sheet:#FAFBF9; --ink:#1D2025; --ink-2:#4A505A; --ink-3:#69707B;
   --rule:#C7CCD0; --rule-2:#9AA1A9;
@@ -36,7 +35,6 @@ h1,h2,h3,p{margin:0}
 .btn.quiet{border-color:transparent;color:var(--ink-2);font-weight:500;padding-inline:8px}
 .btn:disabled{opacity:.4}
 
-/* шапка формы */
 .head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:end;padding-bottom:14px;border-bottom:3px double var(--ink)}
 .formno{font-size:12.5px;color:var(--ink-3);margin-bottom:6px}
 h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(40px,8vw,64px);line-height:.92;text-wrap:balance}
@@ -45,7 +43,6 @@ h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:
 .head-r{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 @media (max-width:640px){.head{grid-template-columns:minmax(0,1fr)}.head-r{justify-content:flex-start}}
 
-/* текущий блок */
 .deck{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);padding-block:12px 10px;border-bottom:1.5px solid var(--ink)}
 .deck-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 18px;align-items:center}
 .card{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:10px 14px;border:2px solid var(--copy);border-radius:4px;background:var(--copy-soft);cursor:grab;touch-action:manipulation;min-width:0}
@@ -60,7 +57,6 @@ h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:
 .prog{height:4px;margin-top:8px;background:var(--rule);border-radius:2px;overflow:hidden}
 .prog i{display:block;height:100%;background:var(--copy);transition:width .3s}
 
-/* бланк баланса */
 .bal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:18px}
 @media (max-width:760px){.bal{grid-template-columns:minmax(0,1fr)}}
 .side-h{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:28px;line-height:1;padding-bottom:6px;border-bottom:2.5px solid var(--ink)}
@@ -102,7 +98,6 @@ h1{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:
 .offz{margin-top:24px;border:1.5px solid var(--ink);border-radius:4px;padding:6px 14px 8px}
 .offz .sec-h{padding-top:6px}
 
-/* итог */
 .res{margin-top:28px;padding-top:14px;border-top:3px double var(--ink)}
 .res-h{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;align-items:center}
 .res-h h2{font-family:var(--f-cond);font-weight:800;text-transform:uppercase;font-size:clamp(30px,6vw,44px);line-height:.95}
@@ -164,7 +159,6 @@ td.good{color:var(--copy)}
 const SEC={1:"I. Внеоборотные активы",2:"II. Оборотные активы",3:"III. Капитал и резервы",4:"IV. Долгосрочные обязательства",5:"V. Краткосрочные обязательства",0:"Не из баланса (отчёт о финансовых результатах)"};
 const SHORT={1:"I. Внеоборотные",2:"II. Оборотные",3:"III. Капитал",4:"IV. Долгосрочные",5:"V. Краткосрочные"};
 const CODE={1:"стр. 1100",2:"стр. 1200",3:"стр. 1300",4:"стр. 1400",5:"стр. 1500"};
-// s — раздел (0 — не в балансе); base — из какой статьи вычитается; pct — доля от базы
 const POOL={
  os:{n:"Основные средства (по первоначальной стоимости)",c:"1150",s:1,r:[1800,4200],why:"Строка 1150. В балансе основные средства показывают по остаточной стоимости — за вычетом амортизации."},
  am_os:{n:"Амортизация основных средств",base:"os",pct:[.2,.45],why:"Отдельной строки в балансе нет: амортизацию (сч. 02) вычитают из основных средств — строка 1150 показывается нетто."},
@@ -241,7 +235,6 @@ function makeVariant(){
  let np=balanceGap(v);
  if(np<40){amt.den+=r10(40-np+rnd(20,120));np=balanceGap(v)}
  amt.np=np;
- // порядок блоков: случайный, но регулирующая сумма идёт после своей статьи
  let q=shuffle(ids);
  ids.forEach(id=>{const b=POOL[id].base;if(!b)return;const i=q.indexOf(id),j=q.indexOf(b);if(i<j){q.splice(i,1);const k=q.indexOf(b);q.splice(rnd(k+1,q.length),0,id)}});
  v.order=q;return v}
@@ -253,7 +246,6 @@ function totals(v,pl){const t={1:0,2:0,3:0,4:0,5:0};
  return t}
 function balanceGap(v){const pl=correctPlace(v);delete pl.np;const t=totals(v,pl);return t[1]+t[2]-t[3]-t[4]-t[5]}
 
-/* ---------- состояние ---------- */
 let st=load()||fresh();
 function fresh(){const v=makeVariant();return{v,place:{},queue:v.order.slice(),checked:false}}
 function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.v&&s.v.ids.every(id=>POOL[id]))return s}catch(e){}return null}
@@ -269,16 +261,13 @@ function placeCur(target){const id=cur();if(!id)return;
  if(!st.queue.length)st.checked=true;
  save();render();if(st.checked){const r=$("res");try{r.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}}}
 function pickUp(id){
- // статья возвращается наверх вместе со всем, что из неё вычтено
  const back=[id];Object.keys(st.place).forEach(k=>{const p=st.place[k];if(p.t==="sub"&&p.on===id)back.push(k)});
  back.forEach(k=>delete st.place[k]);
  st.queue=back.concat(st.queue.filter(x=>!back.includes(x)));st.checked=false;save();render();window.scrollTo({top:0,behavior:"smooth"})}
 function later(){if(st.queue.length<2)return;const id=st.queue.shift();
- // вместе со статьёй в конец уходят суммы, которые из неё вычитаются
  const subs=st.queue.filter(k=>POOL[k].base===id);
  st.queue=st.queue.filter(k=>!subs.includes(k)).concat([id],subs);save();render()}
 
-/* ---------- отрисовка ---------- */
 function render(){
  const v=st.v,total=v.ids.length,placed=total-st.queue.length;
  $("firm").innerHTML=`<b>${esc(v.firm)}</b>, баланс на 31 декабря ${v.year} г. Блоков: ${total}.`;
@@ -326,7 +315,6 @@ function render(){
  r.innerHTML=h;bindDrag();
 }
 
-/* ---------- события ---------- */
 document.addEventListener("click",e=>{
  const t=e.target.closest("button");if(!t)return;
  if(t.id==="b-new"||t.id==="b-new2"){st=fresh();save();render();window.scrollTo({top:0});return}
@@ -334,14 +322,12 @@ document.addEventListener("click",e=>{
  if(t.id==="b-later"){later();return}
  if(t.id==="b-res"){$("res").scrollIntoView({behavior:"smooth",block:"start"});return}
  if(t.id==="b-fix"){const ok=correctPlace(st.v);const bad=st.v.ids.filter(k=>{const a=st.place[k],b=ok[k];return!(a&&a.t===b.t&&(a.t==="sec"?a.s===b.s:a.on===b.on))});
-  // ошибочные блоки возвращаются в очередь; регулирующие — после своих статей
   bad.forEach(k=>delete st.place[k]);Object.keys(st.place).forEach(k=>{const p=st.place[k];if(p.t==="sub"&&!st.place[p.on]){delete st.place[k];if(!bad.includes(k))bad.push(k)}});
   st.queue=bad.sort((a,b)=>st.v.order.indexOf(a)-st.v.order.indexOf(b));st.checked=false;save();render();window.scrollTo({top:0,behavior:"smooth"});return}
  if(t.dataset.put!=null){placeCur({t:"sec",s:+t.dataset.put});return}
  if(t.dataset.sub){placeCur({t:"sub",on:t.dataset.sub});return}
  if(t.dataset.up){pickUp(t.dataset.up);return}
 });
-// перетаскивание мышью (на телефоне работает нажатие)
 function bindDrag(){const c=$("card");if(!c)return;
  c.addEventListener("dragstart",e=>{try{e.dataTransfer.setData("text/plain",cur());e.dataTransfer.effectAllowed="move"}catch(x){}c.classList.add("drag")});
  c.addEventListener("dragend",()=>c.classList.remove("drag"))}
