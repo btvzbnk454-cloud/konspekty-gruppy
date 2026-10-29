@@ -78,8 +78,11 @@ input{font:inherit;color:inherit}
 table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
 .rep th{font-weight:400;font-size:11px;color:var(--ink2);text-align:right;border-bottom:1.5px solid var(--ink);padding:2px 3px;vertical-align:bottom}
 .rep th:first-child{text-align:left}
+.rep th:nth-child(2){text-align:center}
 .rep td{padding:2.5px 3px;border-bottom:1px solid var(--line);vertical-align:top}
 .rep td.v{font-family:var(--mono);font-size:12px;text-align:right;white-space:nowrap;width:82px}
+.rep td.code{font-family:var(--mono);font-size:10px;color:var(--ink2);opacity:.75;text-align:center;width:30px;padding-left:1px;padding-right:1px}
+.rep td.v.old{color:var(--ink2)}
 .rep tr.s td{font-style:italic;text-align:center;border-bottom:0;padding-top:7px;color:var(--ink2)}
 .rep tr.t td{font-weight:700}
 .rep tr.T td{font-weight:700;border-bottom:3px double var(--ink)}
@@ -653,31 +656,32 @@ const OFR = [
 ];
 const cell = (v, neg) => v===0 ? "—" : (neg || v<0) ? "(" + nf(Math.abs(v)) + ")" : nf(v);
 
+const NEED_BAL = [null, [1150,1200,1210,1230,1240,1250,1600], [1200]], NEED_OFR = [null, [2110]];
 function reportHTML(rep){
   const [y0,y1] = rep.years;
-  const rows = (list, cols) => list.map(([c,name,cls])=>{
+  const rows = (list, cols, need) => list.map(([c,name,cls])=>{
     if(c==="h") return "";
-    if(c==="s") return `<tr class="s"><td colspan="${cols.length+1}">${name}</td></tr>`;
-    return `<tr class="r ${cls==="t"||cls==="T"?cls:""}" data-c="${c}"><td>${name}</td>`
-      + cols.map(r=>`<td class="v">${cell(r[c], cls==="neg")}</td>`).join("") + "</tr>";
+    if(c==="s") return `<tr class="s"><td colspan="${cols.length+2}">${name}</td></tr>`;
+    return `<tr class="r ${cls==="t"||cls==="T"?cls:""}" data-c="${c}"><td>${name}</td><td class="code">${c}</td>`
+      + cols.map((r,i)=>`<td class="v${i?" old":""}">${!need[i] || need[i].includes(c) ? cell(r[c], cls==="neg") : ""}</td>`).join("") + "</tr>";
   }).join("");
   const extra = rep.dds ? `<div class="rep-title">Из расшифровок к ОФР</div>
-    <table class="rep"><thead><tr><th>Наименование показателя</th><th>За ${y1} г.</th><th>За ${y0} г.</th></tr></thead><tbody>
-      <tr class="r"><td>Амортизация основных средств (в коммерческих расходах)</td><td class="v">(${nf(rep.y[1].am1)})</td><td class="v">(${nf(rep.y[0].am1)})</td></tr>
-      <tr class="r"><td>Амортизация (в управленческих расходах)</td><td class="v">(${nf(rep.y[1].am2)})</td><td class="v">(${nf(rep.y[0].am2)})</td></tr></tbody></table>
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>Код</th><th>За ${y1} г.</th></tr></thead><tbody>
+      <tr class="r"><td>Амортизация основных средств (в коммерческих расходах)</td><td class="code"></td><td class="v">(${nf(rep.y[1].am1)})</td></tr>
+      <tr class="r"><td>Амортизация (в управленческих расходах)</td><td class="code"></td><td class="v">(${nf(rep.y[1].am2)})</td></tr></tbody></table>
     <div class="rep-title">Отчёт о движении денежных средств: инвестиционные операции</div>
-    <table class="rep"><thead><tr><th>Наименование показателя</th><th>За ${y1} г.</th><th>За ${y0} г.</th></tr></thead><tbody>
-      <tr class="r"><td>Поступления — всего</td><td class="v">${nf(rep.y[1][4210])}</td><td class="v">${nf(rep.y[0][4210])}</td></tr>
-      <tr class="r t"><td>Платежи — всего</td><td class="v">(${nf(rep.y[1][4220])})</td><td class="v">(${nf(rep.y[0][4220])})</td></tr>
-      <tr class="r"><td>в том числе на приобретение, создание, модернизацию внеоборотных активов</td><td class="v">(${nf(rep.y[1][4221])})</td><td class="v">(${nf(rep.y[0][4221])})</td></tr></tbody></table>` : "";
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>Код</th><th>За ${y1} г.</th></tr></thead><tbody>
+      <tr class="r"><td>Поступления — всего</td><td class="code">4210</td><td class="v">${nf(rep.y[1][4210])}</td></tr>
+      <tr class="r t"><td>Платежи — всего</td><td class="code">4220</td><td class="v">(${nf(rep.y[1][4220])})</td></tr>
+      <tr class="r"><td>в том числе на приобретение, создание, модернизацию внеоборотных активов</td><td class="code">4221</td><td class="v">(${nf(rep.y[1][4221])})</td></tr></tbody></table>` : "";
   return `<div class="rep-head"><div class="org">${rep.name}</div>
       <div class="meta">Единица измерения: тыс. руб. · ${rep.real ? rep.meta : "выдуманный отчёт, вариант № " + rep.variant}</div></div>
     <div class="rep-title">Бухгалтерский баланс на 31 декабря ${y1} г.</div>
-    <table class="rep"><thead><tr><th>Наименование показателя</th><th>На 31 декабря ${y1} г.</th><th>На 31 декабря ${y0} г.</th><th>На 31 декабря ${rep.base} г.</th></tr></thead>
-      <tbody>${rows(BAL,[rep.y[1],rep.y[0],rep.b0])}</tbody></table>
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>Код</th><th>На 31 декабря ${y1} г.</th><th>На 31 декабря ${y0} г.</th><th>На 31 декабря ${rep.base} г.</th></tr></thead>
+      <tbody>${rows(BAL,[rep.y[1],rep.y[0],rep.b0],NEED_BAL)}</tbody></table>
     <div class="rep-title">Отчёт о финансовых результатах за ${y1} г.</div>
-    <table class="rep"><thead><tr><th>Наименование показателя</th><th>За ${y1} г.</th><th>За ${y0} г.</th></tr></thead>
-      <tbody>${rows(OFR,[rep.y[1],rep.y[0]])}</tbody></table>${extra}
+    <table class="rep"><thead><tr><th>Наименование показателя</th><th>Код</th><th>За ${y1} г.</th><th>За ${y0} г.</th></tr></thead>
+      <tbody>${rows(OFR,[rep.y[1],rep.y[0]],NEED_OFR)}</tbody></table>${extra}
     <div class="rep-tip">нажми на строку — она выделится маркером</div>`;
 }
 function bindReport(box){
