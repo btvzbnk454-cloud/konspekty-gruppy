@@ -228,6 +228,8 @@ table.tt{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.2}
 .kr-in input.lz{border-color:#7b8db5;background:#eef0f6}
 .kr-fix{font-family:var(--hand);font-size:17px;line-height:1.05;color:var(--red);margin-top:3px}
 .kr-fix.okc{color:var(--ok)}
+.kr .fx{font-size:13.5px;margin:6px 0 2px;color:var(--pen)}
+.kr .fx .frac>span:first-child{border-color:var(--pen)}
 .kr-sol{font-family:var(--mono);font-size:11.5px;line-height:1.35;color:var(--pen);margin-top:4px;word-break:break-word}
 .kr-dyn{font-size:12.5px;color:var(--ink2);margin-top:3px}
 .score{padding:10px 12px;margin:6px 0 4px;background:rgba(255,255,255,.45);border-left:3px solid var(--ink)}
@@ -1013,7 +1015,7 @@ function renderRK(){
       else { cls = "bad"; fix = `<div class="kr-fix">${fmtV(ind, s.v)}${jd.hint?" — "+jd.hint:""}</div>`; }
     }
     let extra = "";
-    if(lz) extra += `<div class="kr-sol">${s.line}</div>`;
+    if(lz) extra += fxHTML(ind) + `<div class="kr-sol">${s.line}</div>`;
     if((K.checked || lz) && ind.verdict) extra += `<div class="kr-dyn">вывод: ${ind.verdict(s.v)}</div>`;
     else if((K.checked || lz) && ind.norm) extra += `<div class="kr-dyn">норматив ${ind.norm}${ind.ok ? " — " + (ind.ok(s.v, rep) ? "выполняется" : "не выполняется") : ""}</div>`;
     return `<div class="kr"><div class="kr-h"><b><i>${n+1}.</i>${ind.name}${star(ind)}</b>${lz||K.checked?"":`<button class="lazy" data-lazy="${ind.id}">я ленивый(ая)</button>`}</div>
