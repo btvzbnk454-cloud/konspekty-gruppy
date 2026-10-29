@@ -129,6 +129,15 @@ table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
 
 .cd{font-family:var(--mono);font-size:.6em;font-weight:400;color:var(--ink2);opacity:.7;margin-left:1px;vertical-align:-.35em;line-height:0;white-space:nowrap;letter-spacing:-.03em}
 .tl-r .cd,.bal-r .cd{color:#fff}
+.pf{padding:5px 0 6px;border-bottom:1px dashed var(--line)}
+.pf-h{font-family:var(--vyaz);font-size:15px;line-height:1.15}
+.pf-h b{font-weight:400;color:var(--red)}
+.pf .fx{margin:4px 0 0;font-size:14px}
+.web{display:inline-block;margin-left:6px;padding:1px 6px;border:1px dashed #b3a78f;border-radius:9px;font-family:var(--text);font-size:10.5px;color:var(--ink2);vertical-align:2px}
+.kr-f{display:block;width:100%;margin-top:5px;padding:4px 6px;border:1.5px solid #c9bfa9;border-radius:4px;background:#fbf8f2;font-family:var(--text);font-size:13px}
+.m-photo .pf{padding:10px 0}
+.m-photo .pf-h{font-size:17px}
+.m-photo .fx{font-size:15.5px}
 .pg.sh{display:flex;flex-direction:column}
 .shz{display:flex;flex-direction:column;gap:18px}
 .orig{color:var(--red);font-family:var(--text);font-weight:700;margin-left:2px;font-size:.9em}
@@ -656,7 +665,7 @@ const OFR = [
 ];
 const cell = (v, neg) => v===0 ? "—" : (neg || v<0) ? "(" + nf(Math.abs(v)) + ")" : nf(v);
 
-const NEED_BAL = [null, [1150,1200,1210,1230,1240,1250,1600], [1200]], NEED_OFR = [null, [2110]];
+const NEED_BAL = [null, [1150,1200,1210,1230,1240,1250,1300,1600], [1200]], NEED_OFR = [null, [2110]];
 function reportHTML(rep){
   const [y0,y1] = rep.years;
   const rows = (list, cols, need) => list.map(([c,name,cls])=>{
@@ -713,10 +722,9 @@ function judge(ind, v, raw, rep){
 
 const pl = document.getElementById("pl"), pr = document.getElementById("pr");
 const TABS = [
-  { id:"menu",  label:"Меню",       y:[65,212] },
-  { id:"tests", label:"Тесты",      y:[221,369] },
-  { id:"sheet", label:"Шпаргалка",  y:[378,527] },
-  { id:"rk",    label:"Пробный РК", y:[536,683] },
+  { id:"menu",   label:"Меню",       y:[65,212] },
+  { id:"psheet", label:"Шпаргалка",  y:[221,369] },
+  { id:"prk",    label:"РК по фото", y:[378,527] },
   { id:"home",  label:"На главную", y:[691,849] },
 ];
 let mode = "menu";
@@ -742,8 +750,9 @@ function go(m){
   renderTabs();
   pl.classList.add("fade"); pr.classList.add("fade");
   setTimeout(()=>{
-    pl.classList.toggle("sh", m==="sheet"); pr.classList.toggle("sh", m==="sheet");
-    ({ menu:renderMenu, tests:renderTests, sheet:renderSheet, rk:renderRK })[m]();
+    const sh = m==="sheet" || m==="psheet";
+    pl.classList.toggle("sh", sh); pr.classList.toggle("sh", sh);
+    ({ menu:renderMenu, tests:renderTests, sheet:renderSheet, rk:renderRK, psheet:renderPSheet, prk:renderRK })[m]();
     pl.scrollTop = pr.scrollTop = 0;
     pl.classList.remove("fade"); pr.classList.remove("fade");
   }, 180);
@@ -756,13 +765,12 @@ function vyazHTML(text){
 function renderMenu(){
   pl.innerHTML = `<div class="vz" role="img" aria-label="РК 2">${vyazHTML("РК 2")}</div>
     <div class="menu-sub">финансовый анализ</div>
-    <p class="menu-what">Дадут бухгалтерскую отчётность из ресурса БФО — баланс, отчёт о финансовых результатах и пояснения — и попросят посчитать показатели. Их ${IND.length}, но они собраны в ${GROUPS.length} групп по общей логике:</p>
-    <ol class="menu-list">${GROUPS.map(g=>`<li>${g.title} <span class="muted">· ${IND.filter(i=>i.g===g.id).length}</span></li>`).join("")}</ol>
+    <p class="menu-what">Бланк контрольной: ${PHOTO.length} показателей, для каждого — формула и расчёт по БФО организации.</p>
+    <ol class="menu-list">${PHOTO.map(i=>`<li>${i.pname}</li>`).join("")}</ol>
     <div class="menu-date">РК — 30 октября</div>`;
   pr.innerHTML = `<div class="menu-pick">Выбери формат</div>
-    <button class="fmt" data-go="tests"><b data-n="I.">Тесты</b><span>15 вопросов: формулы, нормативы и расчёты по БФО «Садов Придонья»</span></button>
-    <button class="fmt" data-go="sheet"><b data-n="II.">Шпаргалка</b><span>${IND.length} формул словами в ${GROUPS.length} группах — у каждой группы общая логика</span></button>
-    <button class="fmt" data-go="rk"><b data-n="III.">Пробный РК</b><span>настоящая БФО «Садов Придонья», все ${calcFor(REAL).length} показателей за 2025 год, проверка в конце</span></button>
+    <button class="fmt" data-go="psheet"><b data-n="I.">Шпаргалка</b><span>${PHOTO.length} показателей с бланка: название и формула</span></button>
+    <button class="fmt" data-go="prk"><b data-n="II.">РК по фото</b><span>как на контрольной: формула и расчёт по БФО «Садов Придонья», проверка в конце</span></button>
     <div class="menu-foot">калькулятор и таймер лежат справа — таймер заведётся сам, как только откроешь любой формат</div>`;
   pr.querySelectorAll("[data-go]").forEach(b=>b.onclick = ()=>go(b.dataset.go));
 }
@@ -990,7 +998,7 @@ const SHEET = [
   [BLK.g7 + BLK.g8, BLK.g10],
 ];
 
-function renderMobile(){
+function renderMobileOld(){
   const order = [["rules","Правила"],["bricks","Кирпичики"],...["g1","g2","g3","g4","g5","g6","g7"].map(g=>[g,gt(g)]),["g8","Оборачиваемость"],["g10",gt("g10")]];
   document.getElementById("mob").innerHTML = `
     <header class="m-head"><a href="${HOME}">← на главную</a>
@@ -998,6 +1006,13 @@ function renderMobile(){
       <p>Финансовый анализ · шпаргалка: ${IND.length} формул</p></header>
     <nav class="m-nav">${order.map(([k,t])=>`<a href="#m-${k}">${t}</a>`).join("")}</nav>
     <main class="m-main">${order.map(([k])=>`<div class="m-sec" id="m-${k}">${BLK[k]}</div>`).join("")}</main>`;
+}
+function renderMobile(){
+  document.getElementById("mob").innerHTML = `
+    <header class="m-head"><a href="${HOME}">← на главную</a>
+      <div class="vz" role="img" aria-label="РК 2">${vyazHTML("РК 2")}</div>
+      <p>Финансовый анализ · шпаргалка по бланку контрольной</p></header>
+    <main class="m-main m-photo">${PHOTO.map(i=>`<div class="pf"><div class="pf-h"><b>${i.pn}.</b> ${i.pname}${webTag(i)}</div>${fxHTML(i)}</div>`).join("")}</main>`;
 }
 let sp = 0;
 function fitSheet(){
@@ -1020,15 +1035,45 @@ function renderSheet(){
   document.getElementById("spNext").onclick = ()=>turn(1);
 }
 
-const K = { rep:null, val:{}, lazy:{}, checked:false };
-function newRK(fake){ K.rep = fake ? makeReport() : REAL; K.val = {}; K.lazy = {}; K.checked = false; }
+const PNEW = [
+  { id:"assets_avg", name:"Средняя стоимость имущества", ab:"Иср", sum:"(Валюта баланса на начало года + Валюта баланса на конец года) / 2", unit:"тыс. руб.", dec:0, norm:"", web:true, tol:()=>1.01,
+    calc:rep=>avg(rep,[1600]) },
+  { id:"cap", name:"Капитал предприятия", ab:"К", sum:"Собственный капитал + Заёмный капитал", unit:"тыс. руб.", dec:0, norm:"", web:true,
+    calc:rep=>{ const c=cur(rep); return { v:c[1300]+c[1400]+c[1500], t:`${n0(c[1300])} + (${plus(c,[1400,1500])})` }; } },
+  { id:"rko", name:"Рентабельность капитала организации", ab:"Рк", num:"Прибыль до налогообложения", den:"Капитал (валюта баланса)", k:"100", unit:"%", dec:2, norm:"> 0", ok:v=>v>0,
+    calc:rep=>{ const c=cur(rep); return { v:c[2300]/c[1700]*100, t:`${n0(c[2300])} / ${n0(c[1700])} × 100` }; } },
+  { id:"ra", name:"Рентабельность активов", ab:"Ра", num:"Чистая прибыль", den:"Активы", k:"100", unit:"%", dec:2, norm:"> 0", ok:v=>v>0,
+    calc:rep=>{ const c=cur(rep); return { v:c[2400]/c[1600]*100, t:`${n0(c[2400])} / ${n0(c[1600])} × 100` }; } },
+  { id:"ksz", name:"Коэффициент соотношения собственных и заёмных средств", ab:"Кс", num:"Собственный капитал", den:"Заёмный капитал", k:"100", unit:"%", dec:2, norm:"",
+    calc:rep=>{ const c=cur(rep), z=c[1400]+c[1500]; return { v:c[1300]/z*100, t:`${n0(c[1300])} / (${plus(c,[1400,1500])}) × 100 = ${n0(c[1300])} / ${n0(z)} × 100` }; } },
+  { id:"dkap", name:"Долг к капитализации", ab:"Дк", num:"Долгосрочные обязательства", den:"Собственный капитал + Долгосрочные обязательства", k:"100", unit:"%", dec:2, norm:"рост — хуже",
+    calc:rep=>{ const c=cur(rep), d=c[1300]+c[1400]; return { v:c[1400]/d*100, t:`${n0(c[1400])} / (${plus(c,[1300,1400])}) × 100 = ${n0(c[1400])} / ${n0(d)} × 100` }; } },
+  { id:"osk", name:"Коэффициент оборачиваемости собственного капитала", ab:"Оск", num:"Выручка", den:"Средний собственный капитал", k:"", unit:"", times:true, dec:3, norm:"чем больше, тем лучше", web:true,
+    calc:rep=>timesFrom(rep,[1300],2110) },
+];
+const PHOTO = [
+  ["np"], ["km"], ["assets_avg"], ["cap"], ["sok","СОК (собственный оборотный капитал)"], ["ka"],
+  ["riz","Рентабельность издержек организации"], ["rpd","Рентабельность производственной деятельности организации"], ["rko"],
+  ["rrp"], ["ros"], ["ra"], ["ksz"], ["kfs"], ["fo"], ["srok"], ["dkap"], ["osk"],
+].map(([id, pname], n)=>{ const i = IND.find(x=>x.id===id) || PNEW.find(x=>x.id===id); return Object.assign(Object.create(i), { pn:n+1, pname:pname||i.name }); });
+const webTag = i => i.web ? `<span class="web" title="формулы нет в материалах группы — взята из интернета">интернет</span>` : "";
+
+function renderPSheet(){
+  const row = i => `<div class="pf"><div class="pf-h"><b>${i.pn}.</b> ${i.pname}${webTag(i)}</div>${fxHTML(i)}</div>`;
+  pl.innerHTML = `<div class="shz">${PHOTO.slice(0,9).map(row).join("")}</div>`;
+  pr.innerHTML = `<div class="shz">${PHOTO.slice(9).map(row).join("")}</div>`;
+  fitSheet();
+}
+
+const K = { rep:null, val:{}, fx:{}, lazy:{}, checked:false };
+function newRK(fake){ K.rep = fake ? makeReport() : REAL; K.val = {}; K.fx = {}; K.lazy = {}; K.checked = false; }
 
 function renderRK(){
   if(!K.rep) newRK();
   const rep = K.rep;
   pl.innerHTML = reportHTML(rep); bindReport(pl);
   let ok = 0;
-  const LIST = calcFor(rep);
+  const photo = mode==="prk", LIST = photo ? PHOTO : calcFor(rep);
   const html = LIST.map((ind, n)=>{
     const s = solve(ind, rep), v = K.val[ind.id] ?? "", lz = K.lazy[ind.id];
     let cls = "", fix = "";
@@ -1040,29 +1085,32 @@ function renderRK(){
     }
     let extra = "";
     if(lz) extra += fxHTML(ind) + `<div class="kr-sol">${s.line}</div>`;
+    else if(photo && K.checked) extra += fxHTML(ind);
     if((K.checked || lz) && ind.verdict) extra += `<div class="kr-dyn">вывод: ${ind.verdict(s.v)}</div>`;
     else if((K.checked || lz) && ind.norm) extra += `<div class="kr-dyn">норматив ${ind.norm}${ind.ok ? " — " + (ind.ok(s.v, rep) ? "выполняется" : "не выполняется") : ""}</div>`;
-    return `<div class="kr"><div class="kr-h"><b><i>${n+1}.</i>${ind.name}${star(ind)}</b>${lz||K.checked?"":`<button class="lazy" data-lazy="${ind.id}">я ленивый(ая)</button>`}</div>
-      <div class="kr-in"><input data-k="${ind.id}" class="${cls}" inputmode="decimal" autocomplete="off" placeholder="${unitText(ind).split(",")[0]}" value="${String(v).replace(/"/g,"&quot;")}" ${lz||K.checked?"readonly":""}>${fix}</div>${extra}</div>`;
+    const fIn = photo ? `<input class="kr-f" data-f="${ind.id}" autocomplete="off" placeholder="формула" value="${String(K.fx[ind.id] ?? "").replace(/"/g,"&quot;")}" ${lz||K.checked?"readonly":""}>` : "";
+    return `<div class="kr"><div class="kr-h"><b><i>${n+1}.</i>${photo ? ind.pname + webTag(ind) : ind.name + star(ind)}</b>${lz||K.checked?"":`<button class="lazy" data-lazy="${ind.id}">я ленивый(ая)</button>`}</div>
+      ${fIn}<div class="kr-in"><input data-k="${ind.id}" class="${cls}" inputmode="decimal" autocomplete="off" placeholder="${unitText(ind).split(",")[0]}" value="${String(v).replace(/"/g,"&quot;")}" ${lz||K.checked?"readonly":""}>${fix}</div>${extra}</div>`;
   }).join("");
   const lazyN = Object.keys(K.lazy).length, total = LIST.length - lazyN;
   const score = K.checked ? `<div class="score"><b>${ok} / ${total}</b> ${lazyN?`<span class="muted">· за тебя посчитано: ${lazyN}</span>`:""}
       <div class="hand">${total && ok===total ? "идеально, можно идти на РК" : ok >= total*.75 ? "хорошо! посмотри, где ошибки" : "загляни в шпаргалку и возьми новый отчёт"}</div></div>` : "";
-  pr.innerHTML = `<div class="qtop"><h2>Пробный РК</h2><small>${rep.real ? "настоящая БФО" : "вариант № " + rep.variant}</small></div>
-    <p class="small muted">Посчитай все показатели по отчёту слева за ${rep.years[1]} год. Средние остатки — по балансу на начало и конец года. Доли и разы — 3 знака, проценты и дни — 2, суммы — в тыс. руб.</p>
+  pr.innerHTML = `<div class="qtop"><h2>${photo ? "РК по фото" : "Пробный РК"}</h2><small>${rep.real ? "настоящая БФО" : "вариант № " + rep.variant}</small></div>
+    <p class="small muted">${photo ? "Впиши формулу и посчитай" : "Посчитай все показатели"} по отчёту слева за ${rep.years[1]} год. Доли и разы — 3 знака, проценты и дни — 2, суммы — в тыс. руб.${photo ? " Формулу проверь сам(а) после сдачи." : ""}</p>
     ${score}${html}
     <div class="kr-btns">
       ${K.checked ? "" : `<button class="btn main" id="kCheck">Сдать на проверку</button><button class="lazy" id="kAll">я ленивый(ая): посчитать всё</button>`}
       <button class="btn" id="kNew">${rep.real ? "Выдуманный отчёт" : "Новый выдуманный"}</button>${rep.real ? "" : `<button class="btn" id="kReal">Вернуть Сады Придонья</button>`}
     </div>`;
   pr.querySelectorAll("input[data-k]").forEach(inp=>inp.oninput = ()=>{ K.val[inp.dataset.k] = inp.value; });
+  pr.querySelectorAll("input[data-f]").forEach(inp=>inp.oninput = ()=>{ K.fx[inp.dataset.f] = inp.value; });
   pr.querySelectorAll("[data-lazy]").forEach(b=>b.onclick = ()=>lazyRK(b.dataset.lazy));
   const ck = document.getElementById("kCheck");
   if(ck) ck.onclick = ()=>{ K.checked = true; renderRK(); pr.scrollTop = 0; };
   const all = document.getElementById("kAll");
   if(all) all.onclick = ()=>{ LIST.forEach(i=>lazyRK(i.id, true)); renderRK(); };
   const restart = fake => {
-    if(!K.checked && Object.values(K.val).some(v=>String(v).trim()) && !confirm("Начать заново? Введённые ответы пропадут.")) return;
+    if(!K.checked && [...Object.values(K.val), ...Object.values(K.fx)].some(v=>String(v).trim()) && !confirm("Начать заново? Введённые ответы пропадут.")) return;
     newRK(fake); renderRK(); pl.scrollTop = pr.scrollTop = 0;
   };
   document.getElementById("kNew").onclick = ()=>restart(true);
@@ -1070,7 +1118,7 @@ function renderRK(){
   if(kr) kr.onclick = ()=>restart(false);
 }
 function lazyRK(id, quiet){
-  const ind = CALC.find(i=>i.id===id);
+  const ind = (mode==="prk" ? PHOTO : CALC).find(i=>i.id===id);
   K.lazy[id] = true;
   K.val[id] = nf(solve(ind, K.rep).v, ind.dec);
   if(!quiet){ const top = pr.scrollTop; renderRK(); pr.scrollTop = top; }
@@ -1216,7 +1264,7 @@ function fit(){
   const ox = (w - 1600*k)/2, oy = (h - 900*k)/2;
   desk.style.transform = "translate(" + ox + "px," + oy + "px) scale(" + k + ")";
   fitNotebook(w, h, k, ox, oy);
-  if(mode==="sheet") setTimeout(fitSheet, 750);
+  if(mode==="sheet" || mode==="psheet") setTimeout(fitSheet, 750);
 }
 
 const SL = [[0,90,0],[90,520,1],[520,650,0],[650,1085,1],[1085,1189,0]];
