@@ -124,26 +124,93 @@ table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
 .final .big{font-family:var(--vyaz);font-size:64px;line-height:1}
 .final .hand{font-size:30px;margin:10px 0 24px}
 
-.card{padding:6px 0 22px}
-.card+.card{padding-top:14px;border-top:1.5px dashed var(--line)}
-.grp+.grp{margin-top:26px;padding-top:4px;border-top:2px solid var(--line)}
-.orig{color:var(--red);font-family:var(--text);font-weight:700;margin-left:5px;font-size:.95em}
-.gnote{font-family:var(--hand);font-size:20px;line-height:1.05;color:var(--red);margin:0 0 8px}
-.card .expl{position:relative;margin:8px 4px 0;padding:8px 12px 9px}
-.card .expl::before{content:"";position:absolute;inset:-2px -3px;pointer-events:none;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M1.5 4C30 2.5 68 3.5 98.5 2.5M97.5 1C98.5 32 97 68 98 98.5M99 96.5C68 97.5 31 98.5 2 97M3.5 99C2 68 3 33 2 1.5' fill='none' stroke='%231f3a6b' stroke-width='1.6' stroke-linecap='round' vector-effect='non-scaling-stroke' opacity='.85'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.card h4{margin:0 0 4px;font-family:var(--vyaz);font-weight:400;font-size:17px;line-height:1.15}
-.card h4 b{font-weight:400;color:var(--red);margin-right:4px}
-.card .fx{font-size:15px}
-.card .nm{font-size:13.5px;color:var(--ink2)}
-.card .memo{font-family:var(--hand);color:var(--pen);font-size:19px;line-height:1.02;margin-top:3px}
-.rules{margin:0;padding-left:20px;font-size:15px}
-.rules li{margin-bottom:5px}
-table.tb{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 8px}
-.tb td,.tb th{border-bottom:1px solid var(--line);padding:4px 4px;text-align:left;vertical-align:top}
-.tb th{font-weight:400;color:var(--ink2);font-size:12.5px;border-bottom:1.5px solid var(--ink)}
-.tb .mono{font-size:12.5px}
-.pager{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-family:var(--hand);font-size:22px;color:var(--ink2)}
+.pg.sh{display:flex;flex-direction:column}
+.shz{display:flex;flex-direction:column;gap:18px}
+.orig{color:var(--red);font-family:var(--text);font-weight:700;margin-left:2px;font-size:.9em}
+.gb{--c:var(--ink);border-left:4px solid var(--c);padding:1px 0 2px 12px}
+.gh{display:flex;align-items:center;gap:8px;font-family:var(--vyaz);font-weight:400;font-size:19px;line-height:1.1;color:var(--c);margin:0 0 8px}
+.gh .bd{margin-left:auto}
+.tg{font-weight:700;white-space:nowrap;color:var(--ink)}
+.lb{display:flex;flex-direction:column;line-height:1.1;min-width:0}
+.lb .tg{font-size:16px}
+.lb small{font-size:11.5px;color:var(--ink2);margin-top:1px}
+.bds{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+.bd{display:inline-block;font-family:var(--text);font-size:11.5px;line-height:1;padding:3px 7px;border-radius:10px;white-space:nowrap;font-weight:400}
+.bd.n{background:rgba(47,107,58,.13);color:var(--ok)}
+.bd.u{border:1px dashed #b3a78f;color:var(--ink2)}
+.eq{display:inline-flex;flex-wrap:wrap;align-items:center;row-gap:3px;min-width:0}
+.eq.nw{flex-wrap:nowrap}
+.lb small{overflow-wrap:anywhere}
+.ch{display:inline-block;padding:1px 6px;border:1px solid #cfc5b1;border-radius:4px;background:rgba(255,255,255,.55);font-size:13.5px;line-height:1.25}
+.op{font-style:normal;font-weight:700;color:var(--c,var(--ink));padding:0 4px;font-size:16px}
+.par{font-style:normal;color:var(--ink2);font-size:19px;line-height:1;padding:0 1px}
+.k{font-style:normal;font-weight:700;white-space:nowrap;margin-left:6px;font-size:14px;color:var(--c,var(--ink))}
+.fr{display:inline-flex;flex-direction:column;align-items:stretch;text-align:center;vertical-align:middle;font-size:14px;line-height:1.2}
+.fr>span:first-child{border-bottom:1.5px solid var(--ink);padding:0 5px 2px}
+.fr>span:last-child{padding:2px 5px 0}
+.fr.sm{font-size:12px}
+.it{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 0}
+.it+.it{border-top:1px dashed var(--line)}
+.fan{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:5px 8px;align-items:center}
+.fan-t{justify-self:center}
+.fan-bar{border-top:2px solid var(--ink)}
+.fan-b{justify-self:center}
+.fan-b .ch{font-size:15px;font-weight:700;border:1.5px solid var(--c);padding:2px 10px}
+.mx{display:grid;gap:4px;align-items:center}
+.mx-h{font-size:11.5px;line-height:1.1;color:var(--ink2);text-align:center;align-self:end}
+.mx-c{height:24px;border-radius:4px;border:1px dashed #cfc5b1;display:grid;place-items:center;color:#fff;font-weight:700}
+.mx-c.on{background:var(--c);border:0}
+.mx-c.neg{background:var(--red);border:0;opacity:.8}
+.mx-n{display:flex;justify-content:flex-end;margin:4px 0 10px}
+.ld .st{display:inline-block;padding-left:calc(var(--s)*14px)}
+.m2{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;align-items:stretch}
+.m2 .k{align-self:end;margin:0}
+.m2-h{text-align:center;font-size:14px;font-weight:700;border-bottom:2px solid var(--ink);padding-bottom:3px}
+.m2-r{font-size:13.5px;font-weight:700;text-align:right;align-self:center;max-width:90px;line-height:1.15}
+.m2-c{border:1.5px solid var(--c);border-radius:6px;padding:7px 4px;text-align:center;background:rgba(255,255,255,.45);display:flex;flex-direction:column;align-items:center;gap:3px}
+.m2-c .tg{font-size:17px}
+.m2-c small{font-size:11.5px;line-height:1.1;color:var(--ink2)}
+.m2-c.off{border-style:dashed;border-color:#cfc5b1;background:none}
+.tf{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:0 0 10px}
+.tf>div{display:flex;align-items:center;gap:4px}
+.tf-l{font-family:var(--vyaz);font-size:16px;color:var(--c);margin-right:4px}
+table.tt{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.2}
+.tt th{font-weight:400;font-size:11.5px;color:var(--ink2);border-bottom:1.5px solid var(--ink);padding:2px 3px;text-align:center}
+.tt td{padding:5px 3px;border-bottom:1px solid var(--line);text-align:center}
+.tt th:first-child,.tt td:first-child{text-align:left}
+.tt .tg{font-size:14.5px}
+.tt-s{color:var(--red);font-weight:700}
+.tt-a{color:var(--ok);font-weight:700;margin-left:3px}
+.tt-no{color:#c9bfa9}
+.ex-h{font-size:11.5px;color:var(--ink2);margin:12px 0 0;text-transform:uppercase;letter-spacing:.06em}
+.tl{margin:0 0 6px}
+.tl-r{display:flex;gap:3px;margin:3px 0}
+.tl-r>span{padding:4px 6px;border-radius:4px;text-align:center}
+.tl-r>span .tg{color:#fff}
+.brace{position:relative;border-top:2px solid var(--ink);border-radius:0;margin-top:4px}
+.brace::before,.brace::after{content:"";position:absolute;top:-8px;width:0;height:8px;border-left:2px solid var(--ink)}
+.brace::before{left:0}.brace::after{right:0}
+.tl-r>.brace{padding:2px 0 0}
+.tl-r>.brace .tg{color:var(--ink)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.tile{display:flex;align-items:center;gap:8px;padding:5px 8px;border:1.5px solid var(--line);border-radius:6px;background:rgba(255,255,255,.4);font-size:13px;line-height:1.2}
+.tile>b{flex:none;min-width:34px;text-align:center;font-family:var(--vyaz);font-weight:400;font-size:18px;color:var(--red)}
+.star-l{font-size:13px;margin-top:6px;color:var(--ink2)}
+.bal{display:grid;grid-template-columns:52px 1fr 30px;gap:4px 6px;align-items:center;margin-bottom:6px}
+.bal-l{font-size:12.5px;color:var(--ink2)}
+.bal-v{font-size:13px;color:var(--c)}
+.bal-r{display:flex;gap:2px;height:30px}
+.bal-r span{display:flex;align-items:center;justify-content:center;gap:4px;color:#fff;border-radius:3px;font-weight:700;font-size:13px}
+.bal-r small{font-weight:400;font-size:10.5px;opacity:.85}
+.bal-zk{display:flex;gap:2px;font-size:13px;font-weight:700;text-align:center}
+.bal-zk .brace{border-top:0;border-bottom:2px solid var(--ink);margin:-4px 0 0;padding-top:0}
+.bal-zk .brace::before,.bal-zk .brace::after{top:auto;bottom:-2px}
+.it2{display:grid;grid-template-columns:52px minmax(0,1fr);gap:6px;align-items:center;padding:4px 0}
+.it2+.it2{border-top:1px dashed var(--line)}
+.tl2{font-size:12.5px;color:var(--ink2)}
+.gl{display:flex;flex-wrap:wrap;gap:3px 10px;margin-top:6px;font-size:11.5px;color:var(--ink2)}
+.gl b{color:var(--ink)}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:auto;font-family:var(--hand);font-size:22px;color:var(--ink2)}
 .pager button{font-family:var(--hand);font-size:24px;color:var(--pen)}
 .pager button:disabled{opacity:.3;cursor:default}
 
@@ -201,9 +268,6 @@ table.tb{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 8px}
 .frac>span:last-child{padding:3px 6px 0}
 .fx .mul{font-weight:700;white-space:nowrap}
 .sumf{flex:1 1 200px}
-dl.bricks{margin:0;font-size:14.5px}
-.bricks dt{font-weight:700;margin-top:6px}
-.bricks dd{margin:0 0 0 12px;color:#4a4036}
 
 #mob{display:none}
 @media (max-width:860px){
@@ -219,25 +283,10 @@ dl.bricks{margin:0;font-size:14.5px}
   .m-nav::-webkit-scrollbar{display:none}
   .m-nav a{flex:none;padding:6px 12px;border:1.5px solid #cfc5b1;border-radius:999px;font-size:14px;background:#fbf8f2;white-space:nowrap}
   .m-main{padding:0 16px}
-  .m-main section{scroll-margin-top:60px;padding-top:22px}
-  .m-main h2{font-family:var(--vyaz);font-weight:400;font-size:23px;line-height:1.15;margin:0 0 8px;color:var(--red)}
-  .m-main h3{font-family:var(--vyaz);font-weight:400;font-size:18px;margin:18px 0 6px}
-  .m-note{margin:0 0 12px;color:var(--ink2);font-size:15.5px}
-  .m-main .rules{font-size:16px;padding-left:20px}
-  .m-main .rules li{margin-bottom:8px}
-  .m-main dl.bricks{font-size:16px}
-  .m-main .tb{font-size:15px}
-  .m-main .hand{font-size:22px}
-  .mc{background:#fbf8f2;border:1px solid #e0d7c6;border-radius:10px;padding:14px 14px 12px;margin:0 0 12px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-  .mc-h{display:flex;gap:10px;align-items:flex-start}
-  .mc-n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--red);color:#fff;font-size:14px;display:grid;place-items:center;margin-top:1px}
-  .mc h3{margin:0;font-family:var(--text);font-weight:700;font-size:17.5px;line-height:1.25}
-  .mc .fx{font-size:16.5px;margin:12px 0 10px;padding:10px 8px;background:#f1ece2;border-radius:6px;flex-direction:column;gap:6px;text-align:center}
-  .mc .sumf{flex:none}
-  .mc-tags{display:flex;flex-wrap:wrap;gap:6px}
-  .mc-tags span{font-size:13.5px;padding:3px 9px;border-radius:999px;background:#ece5d6;color:#4a4036}
-  .mc-tags b{color:var(--ink)}
-  .mc-memo{margin:10px 0 0;font-style:italic;color:var(--pen);font-size:15.5px;line-height:1.4}
+  .m-main .m-sec{scroll-margin-top:60px;padding-top:22px}
+  .m-main .gb{padding-left:10px}
+  .m-main .gh{font-size:20px}
+  .m-main .it,.m-main .fan{grid-template-columns:84px minmax(0,1fr) auto}
 }
 </style>
 </head>
@@ -667,6 +716,7 @@ function go(m){
   renderTabs();
   pl.classList.add("fade"); pr.classList.add("fade");
   setTimeout(()=>{
+    pl.classList.toggle("sh", m==="sheet"); pr.classList.toggle("sh", m==="sheet");
     ({ menu:renderMenu, tests:renderTests, sheet:renderSheet, rk:renderRK })[m]();
     pl.scrollTop = pr.scrollTop = 0;
     pl.classList.remove("fade"); pr.classList.remove("fade");
@@ -815,75 +865,129 @@ function renderFinal(){
   document.getElementById("againFake").onclick = ()=>{ newTests(true); renderTests(); pl.scrollTop = 0; };
 }
 
-const card = i => `<div class="card"><h4><b>${i.n}</b>${i.name}${star(i)}</h4>${fxHTML(i)}
-  <div class="expl"><div class="nm">${i.norm?`<b>норматив:</b> ${i.norm} · `:""}${unitText(i)}</div>
-  <div class="memo">${i.memo}</div></div></div>`;
-const groupHTML = g => `<div class="grp"><h2>${g.title}</h2><p class="gnote">${g.note}</p>${IND.filter(i=>i.g===g.id).map(card).join("")}</div>`;
-const G = id => groupHTML(GROUPS.find(g=>g.id===id));
-const RULES = `<ul class="rules">
-    <li>Баланс — данные <b>на дату</b> (31 декабря), отчёт о финансовых результатах — <b>за год</b>.</li>
-    <li><b>Средний остаток</b> = (на начало года + на конец года) / 2. Начало отчётного года — это 31 декабря прошлого.</li>
-    <li>Проценты: результат деления <b>×100</b>. Дни: <b>×360</b> — год в анализе 360 дней.</li>
-    <li>Расходы в ОФР стоят в скобках — подставляем <b>по модулю</b>.</li>
-    <li>Актив = пассив, это и есть валюта баланса.</li>
-    <li>Доли и разы — <b>3 знака</b> после запятой, проценты и дни — <b>2</b>.</li>
-    <li><span class="orig">★</span> — 12 показателей из первого списка (конспект Климовой).</li>
-  </ul>`;
-const BRICKS = `<dl class="bricks">
-    <dt>Собственный капитал, СК</dt><dd>итог раздела «Капитал и резервы» (+ доходы будущих периодов)</dd>
-    <dt>Заёмный капитал, ЗК</dt><dd>долгосрочные + краткосрочные обязательства (− доходы будущих периодов)</dd>
-    <dt>Валюта баланса, ВБ</dt><dd>итог баланса; ВБ = СК + ЗК</dd>
-    <dt>Внеоборотные активы, ВОА</dt><dd>итог раздела I актива</dd>
-    <dt>Доходы</dt><dd>выручка + доходы от участия в других организациях + проценты к получению + прочие доходы</dd>
-    <dt>Расходы</dt><dd>себестоимость + коммерческие + управленческие + проценты к уплате + прочие расходы + налог на прибыль</dd>
-    <dt>Однодневная выручка</dt><dd>выручка / 360</dd>
-  </dl>
-  <p class="hand">Проверка: доходы − расходы = чистая прибыль.</p>`;
-const NORMS = `<table class="tb"><tr><th>Показатель</th><th>Норматив / ориентир</th></tr>
-    ${IND.filter(i=>i.norm).map(i=>`<tr><td>${i.n}. ${i.name}</td><td>${i.norm}</td></tr>`).join("")}
-  </table>`;
-const GROUPS_LIST = `<ul class="rules">${GROUPS.map(g=>{ const ns = IND.filter(i=>i.g===g.id).map(i=>i.n); return `<li><b>${g.title}</b> (№${ns[0]}–${ns[ns.length-1]}) — ${g.note.charAt(0).toLowerCase()+g.note.slice(1)}</li>`; }).join("")}</ul>`;
-const ERRORS = `<ul class="rules">
-    <li>Взять остаток на конец года там, где нужен средний.</li>
-    <li>Оборачивать запасы и кредиторку выручкой — снизу или сверху у них себестоимость.</li>
-    <li>В рентабельности производственной деятельности забыть коммерческие и управленческие расходы в знаменателе.</li>
-    <li>В ROE по файлу поделить на собственный капитал — по файлу делим на валюту баланса.</li>
-    <li>Перевернуть соотношение заёмных и собственных: если долгов меньше, чем своего капитала, а вышло больше 100 % — дробь вверх ногами.</li>
-    <li>Забыть налог на прибыль в расходах или проценты к получению в доходах.</li>
-    <li>Подставить расходы с минусом. Посчитать дни на 365.</li>
-  </ul>`;
-const ANSWER = `<p class="small">Название → формула → подстановка → результат → сравнение с нормативом и короткий вывод.</p>`;
+const byId = id => IND.find(i=>i.id===id);
+const GC = { g0:"#6b6152", g1:"#8a5a2b", g2:"#2f6b3a", g3:"#1f3a6b", g4:"#3d6d8c", g5:"#a3322a", g6:"#b0611f", g7:"#7a3b69", g8:"#2c6e73", g10:"#5b4f8a" };
+const SHORT = { sk:"собственный капитал", ko:"краткосрочные обязательства", zk:"заёмный капитал", zs:"заёмные средства", ik:"инвестированный капитал",
+  cha:"чистые активы", fv:"финансовые вложения", sok:"собственный оборотный капитал", rab:"рабочий капитал",
+  dec:"собственные источники", det:"+ долгосрочные", des:"общая величина",
+  km:"маневренность", ks:"заёмные к собственным", ka:"автономия", kfs:"финансовая стабильность", dla:"доля ликвидных активов", roe:"рентабельность СК по файлу",
+  bp:"балансовая прибыль", pr:"прибыль от реализации", riz:"рентабельность издержек", rpd:"производственной деятельности", rrp:"реализованной продукции",
+  ksf:"самофинан&shy;сирование", fo:"фондоотдача ВОА", srok:"срок погашения обязательств", toc:"операционный цикл", tfc:"финансовый цикл", ekv:"экономическая выгода" };
+const NORM_S = { "чем больше, тем лучше":"↑ лучше", "чем меньше, тем лучше":"↓ лучше", "> 0 — излишек, < 0 — недостаток":"> 0 излишек · < 0 недостаток",
+  "≥ 1 — вложения покрыты своими деньгами":"≥ 1", "растёт; больше уставного капитала":"растёт, > уставного",
+  "< 0 — средства высвободились, > 0 — вовлечены дополнительные":"< 0 высвободились · > 0 вовлечены" };
+const unitS = i => i.unit || (i.times ? "раз" : "доли");
+const tg = id => { const i = byId(id); return `<span class="tg" title="${i.name}">${i.ab}${star(i)}</span>`; };
+const normB = id => { const n = byId(id).norm; return n ? `<span class="bd n">${NORM_S[n]||n}</span>` : ""; };
+const unitB = u => `<span class="bd u">${u}</span>`;
+const bds = (id, u) => `<span class="bds">${normB(id)}${u ? unitB(unitS(byId(id))) : ""}</span>`;
+const lab = id => `<div class="lb">${tg(id)}<small>${SHORT[id]||byId(id).name}</small></div>`;
+const E = s => `<span class="eq">` + s.split("|").map(t => t.length===1 && "+−×÷=".includes(t) ? `<i class="op">${t}</i>`
+  : t==="(" || t===")" ? `<i class="par">${t}</i>` : t[0]==="@" ? tg(t.slice(1)) : `<span class="ch">${t}</span>`).join("") + `</span>`;
+const F = (a, b, k) => `<span class="eq nw"><span class="fr"><span>${a}</span><span>${b}</span></span>${k ? `<i class="k">${k}</i>` : ""}</span>`;
+const IT = (id, html, u) => `<div class="it">${lab(id)}${html}${bds(id, u)}</div>`;
+const grp = (g, title, body, u) => `<section class="gb" style="--c:${GC[g]}"><h3 class="gh">${title}${u ? unitB(u) : ""}</h3>${body}</section>`;
+const gt = id => GROUPS.find(g=>g.id===id).title;
+const FAN = (rows, common, k) => `<div class="fan">${rows.map(([id, top])=>`${lab(id)}<div class="fan-t">${E(top)}</div>${bds(id)}`).join("")}
+  <i></i><div class="fan-bar"></div><i class="k">${k}</i><i></i><div class="fan-b">${E(common)}</div><i></i></div>`;
+const MX = (cols, rows) => `<div class="mx" style="grid-template-columns:96px repeat(${cols.length},minmax(0,1fr))">
+  <i></i>${cols.map(c=>`<div class="mx-h">${c}</div>`).join("")}
+  ${rows.map(([id, cells])=>lab(id) + cells.map(x=>`<div class="mx-c${x>0?" on":x<0?" neg":""}">${x>0?"+":x<0?"−":""}</div>`).join("")).join("")}</div>`;
+
+const BLK = {
+  rules: grp("g0", "Перед расчётом", `<div class="tiles">
+    <div class="tile"><b>⌀</b><span>средний = <span class="fr sm"><span>начало + конец</span><span>2</span></span></span></div>
+    <div class="tile"><b>31.12</b><span>баланс — на дату<br>ОФР — за год</span></div>
+    <div class="tile"><b>%</b><span>× 100<br>0,00</span></div>
+    <div class="tile"><b>дн.</b><span>× 360<br>0,00</span></div>
+    <div class="tile"><b>раз</b><span>разы и доли<br>0,000</span></div>
+    <div class="tile"><b>( )</b><span>расходы ОФР<br>по модулю</span></div>
+  </div><div class="star-l"><span class="orig">★</span> 12 показателей из первого списка</div>`),
+  bricks: grp("g0", "Кирпичики", `<div class="bal">
+    <span class="bal-l">Актив</span><div class="bal-r"><span style="flex:5;background:#8a5a2b">ВОА<small>I</small></span><span style="flex:4;background:#b08a5a">ОбА<small>II</small></span></div><b class="bal-v">ВБ</b>
+    <span class="bal-l">Пассив</span><div class="bal-r"><span style="flex:5;background:#2f6b3a">СК<small>III</small></span><span style="flex:1.6;background:#a3322a">ДО<small>IV</small></span><span style="flex:2.4;background:#c46a5e">КО<small>V</small></span></div><b class="bal-v">ВБ</b>
+    <i></i><div class="bal-zk"><span style="flex:5"></span><span class="brace" style="flex:4">ЗК</span></div><i></i>
+  </div>
+  <div class="it2"><span class="tl2">Доходы</span>${E("выручка|+|участие в других орг.|+|% к получению|+|прочие доходы")}</div>
+  <div class="it2"><span class="tl2">Расходы</span>${E("С/с|+|коммерческие|+|управленческие|+|% к уплате|+|прочие расходы|+|налог на прибыль")}</div>
+  <div class="it2"><span class="tl2">✓</span>${E("Доходы|−|Расходы|=|ЧП")}</div>
+  <div class="it2"><span class="tl2">1 день</span>${F("Выручка","360")}</div>
+  <div class="gl"><span><b>ДБП</b> доходы будущих периодов</span><span><b>ДС</b> денежные средства</span><span><b>КФВ</b> краткосрочные фин. вложения</span><span><b>С/с</b> себестоимость продаж</span><span><b>ЧП</b> чистая прибыль</span></div>`),
+  g1: grp("g1", gt("g1"), [
+    IT("sk", E("Капитал и резервы|+|ДБП")),
+    IT("ko", E("Раздел V|−|ДБП")),
+    IT("zk", E("ДО|+|@ko")),
+    IT("zs", E("долгосрочные заёмные|+|краткосрочные заёмные")),
+    IT("ik", E("СК|+|ДО")),
+    IT("cha", E("(|Активы|−|задолж. учредителей|)|−|(|ДО|+|Раздел V|−|ДБП|)")),
+    IT("fv", E("долгосрочные фин. вложения|+|краткосрочные фин. вложения")),
+  ].join(""), "тыс. руб."),
+  g2: grp("g2", gt("g2"), MX(["СК","+ ДО","− ВОА"], [["sok",[1,0,-1]],["rab",[1,1,-1]]]) + `<div class="mx-n">${normB("sok")}</div>`
+    + MX(["СОК","+ долгоср. заёмные","+ краткоср. заёмные","− запасы"], [["dec",[1,0,0,-1]],["det",[1,1,0,-1]],["des",[1,1,1,-1]]])
+    + `<div class="mx-n">${normB("dec")}</div>`, "тыс. руб."),
+  g3: grp("g3", gt("g3"), FAN([["km","СОК"],["ks","ЗК"]], "Собственный капитал", "× 100"), "%"),
+  g4: grp("g4", gt("g4"), FAN([["ka","СК"],["kfs","СК|+|ДО"],["dla","ДС|+|КФВ"],["roe","прибыль до налогообложения"]], "Валюта баланса", "× 100"), "%"),
+  g5: grp("g5", gt("g5"), IT("bp", E("прибыль до налогообложения")) + IT("pr", E("Выручка|−|С/с|−|коммерческие|−|управленческие")), "тыс. руб."),
+  g6: grp("g6", gt("g6"), `<div class="ld">`
+    + IT("riz", `<span class="st" style="--s:0">${F("валовая прибыль","С/с","× 100")}</span>`, true)
+    + IT("rpd", `<span class="st" style="--s:1">${F("прибыль от продаж","С/с + коммерческие + управленческие","× 100")}</span>`, true)
+    + IT("rrp", `<span class="st" style="--s:2">${F("ЧП","все расходы","× 100")}</span>`, true)
+    + `</div>` + IT("ksf", F("ЧП + амортизация","потребность в инвестициях"), true)),
+  g7: grp("g7", gt("g7"), `<div class="m2">
+    <i class="k">× 100</i><div class="m2-h">÷ Выручка</div><div class="m2-h">÷ Все доходы</div>
+    <div class="m2-r">прибыль от продаж</div><div class="m2-c">${tg("ros")}<small>рентабельность продаж</small></div><div class="m2-c off"></div>
+    <div class="m2-r">ЧП</div><div class="m2-c">${tg("nchp")}<small>норма чистой прибыли</small></div><div class="m2-c">${tg("np")}<small>норма прибыли</small>${normB("np")}</div>
+  </div>`, "%"),
+  g8: grp("g8", "Оборачиваемость: разы ↔ дни", `<div class="tf">
+      <div><span class="tf-l">разы</span>${F("Выручка","средний остаток")}</div>
+      <div><span class="tf-l">дни</span>${F("средний остаток × 360","Выручка")}<i class="op">=</i>${F("360","разы")}</div></div>
+    <table class="tt"><tr><th>средний остаток</th><th>Выручка / С/с</th><th>разы</th><th>дни</th></tr>
+    ${[["валюта баланса","В","koa",""],["оборотные активы","В","ooba","toba"],["основные средства","В","kova",""],["ДС + КФВ","В","ods","tds"],
+       ["дебиторская задолж.","В","odz","tdz"],["запасы","С","oz","tz"],["кредиторская задолж.","С","","tkz"]]
+      .map(([what, s, t, d])=>`<tr><td>${what}</td><td>${s==="С" ? `<span class="tt-s">С/с</span>` : "Выручка"}</td>${[t,d].map(id=>`<td>${id ? tg(id) + (byId(id).norm ? `<span class="tt-a">${t===id?"↑":"↓"}</span>` : "") : `<span class="tt-no">—</span>`}</td>`).join("")}</tr>`).join("")}
+    </table>
+    <div class="ex-h">без среднего, на конец года</div>
+    ${IT("fo", F("все доходы","ВОА на конец года"), true)}${IT("srok", F("ЗК × 360","все доходы"), true)}`),
+  g10: grp("g10", gt("g10"), `<div class="tl">
+      <div class="tl-r"><span style="flex:3;background:#8a7fb0">${tg("tz") }</span><span style="flex:2;background:#5b4f8a">${tg("tdz")}</span></div>
+      <div class="tl-r"><span class="brace" style="flex:1">${tg("toc")}</span></div>
+      <div class="tl-r"><span style="flex:2;background:#b9a98a">${tg("tkz")}</span><span style="flex:3;background:#3d3566">${tg("tfc")}</span></div>
+    </div>`
+    + IT("toc", E("@tz|+|@tdz"), true) + IT("tfc", E("@toc|−|@tkz"), true)
+    + `<div class="it">${lab("ekv")}<span class="eq nw">${E("(|Тоба отч.|−|Тоба прошл.|)")}<i class="op">×</i>${F("Выручка","360")}</span><span class="bds">${unitB("тыс. руб.")}</span></div>
+      <div class="mx-n">${normB("ekv")}</div>`),
+};
+
 const SHEET = [
-  [`<h2>Перед расчётом</h2>${RULES}<h3>Кирпичики</h3>${BRICKS}`, G("g1")],
-  [G("g2"), G("g3") + G("g4")],
-  [G("g5") + G("g6"), G("g7")],
-  [G("g8"), G("g9")],
-  [G("g10") + `<h2>Нормативы</h2>${NORMS}`, `<h2>Как не запутаться</h2>${GROUPS_LIST}<h3>Типичные ошибки</h3>${ERRORS}<h3>Как записать ответ</h3>${ANSWER}`],
+  [BLK.rules + BLK.bricks, BLK.g1 + BLK.g5],
+  [BLK.g2 + BLK.g3, BLK.g4 + BLK.g6],
+  [BLK.g7 + BLK.g8, BLK.g10],
 ];
 
 function renderMobile(){
-  const nav = [["m-rules","Правила"],["m-bricks","Кирпичики"],...GROUPS.map(g=>["m-"+g.id,g.title]),["m-norms","Нормативы"],["m-err","Ошибки"]];
-  const mcard = i => `<article class="mc"><div class="mc-h"><span class="mc-n">${i.n}</span><h3>${i.name}${star(i)}</h3></div>${fxHTML(i)}
-    <div class="mc-tags">${i.norm?`<span>норматив: <b>${i.norm}</b></span>`:""}<span>${unitText(i)}</span></div>
-    <p class="mc-memo">${i.memo}</p></article>`;
+  const order = [["rules","Правила"],["bricks","Кирпичики"],...["g1","g2","g3","g4","g5","g6","g7"].map(g=>[g,gt(g)]),["g8","Оборачиваемость"],["g10",gt("g10")]];
   document.getElementById("mob").innerHTML = `
     <header class="m-head"><a href="${HOME}">← на главную</a>
       <div class="vz" role="img" aria-label="РК 2">${vyazHTML("РК 2")}</div>
-      <p>Финансовый анализ · шпаргалка: ${IND.length} формул в ${GROUPS.length} группах</p></header>
-    <nav class="m-nav">${nav.map(([id,t])=>`<a href="#${id}">${t}</a>`).join("")}</nav>
-    <main class="m-main">
-      <section id="m-rules"><h2>Перед расчётом</h2>${RULES}</section>
-      <section id="m-bricks"><h2>Кирпичики</h2>${BRICKS}</section>
-      ${GROUPS.map(g=>`<section id="m-${g.id}"><h2>${g.title}</h2><p class="m-note">${g.note}</p>${IND.filter(i=>i.g===g.id).map(mcard).join("")}</section>`).join("")}
-      <section id="m-norms"><h2>Нормативы</h2>${NORMS}</section>
-      <section id="m-err"><h2>Типичные ошибки</h2>${ERRORS}<h3>Как записать ответ</h3>${ANSWER}</section>
-    </main>`;
+      <p>Финансовый анализ · шпаргалка: ${IND.length} формул</p></header>
+    <nav class="m-nav">${order.map(([k,t])=>`<a href="#m-${k}">${t}</a>`).join("")}</nav>
+    <main class="m-main">${order.map(([k])=>`<div class="m-sec" id="m-${k}">${BLK[k]}</div>`).join("")}</main>`;
 }
 let sp = 0;
+function fitSheet(){
+  const zs = document.querySelectorAll(".pg .shz");
+  if(!zs.length) return;
+  const over = () => pl.scrollHeight > pl.clientHeight || pr.scrollHeight > pr.clientHeight;
+  for(let z = Math.min(1.45, pl.clientWidth/400, pr.clientWidth/400); z > .6; z -= .05){
+    zs.forEach(e=>e.style.zoom = z);
+    if(!over()) break;
+  }
+}
 function renderSheet(){
   const [l, r] = SHEET[sp];
   const pager = `<div class="pager"><button id="spPrev" ${sp?"":"disabled"}>← назад</button><span>разворот ${sp+1} из ${SHEET.length}</span><button id="spNext" ${sp<SHEET.length-1?"":"disabled"}>вперёд →</button></div>`;
-  pl.innerHTML = l; pr.innerHTML = r + pager;
+  pl.innerHTML = `<div class="shz">${l}</div>`; pr.innerHTML = `<div class="shz">${r}</div>` + pager;
+  fitSheet();
   const turn = d => { sp += d; pl.classList.add("fade"); pr.classList.add("fade");
     setTimeout(()=>{ renderSheet(); pl.scrollTop = pr.scrollTop = 0; pl.classList.remove("fade"); pr.classList.remove("fade"); }, 160); };
   document.getElementById("spPrev").onclick = ()=>turn(-1);
@@ -1086,6 +1190,7 @@ function fit(){
   const ox = (w - 1600*k)/2, oy = (h - 900*k)/2;
   desk.style.transform = "translate(" + ox + "px," + oy + "px) scale(" + k + ")";
   fitNotebook(w, h, k, ox, oy);
+  if(mode==="sheet") setTimeout(fitSheet, 750);
 }
 
 const SL = [[0,90,0],[90,520,1],[520,650,0],[650,1085,1],[1085,1189,0]];
