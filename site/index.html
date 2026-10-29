@@ -17,8 +17,9 @@
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{min-height:100vh;color:var(--ink);font-family:var(--vyaz);overflow-x:hidden;overflow-y:auto;
-  background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%) center/cover fixed,url(img/web/wood.jpg) center/cover fixed,#2a1a12}
+body{min-height:100vh;color:var(--ink);font-family:var(--vyaz);overflow-x:hidden;overflow-y:auto;background:#2a1a12}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;will-change:transform;
+  background:radial-gradient(ellipse at 50% 45%,transparent 45%,rgba(0,0,0,.55) 100%) center/cover,url(img/web/wood.jpg) center/cover,#2a1a12}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px}
@@ -153,6 +154,7 @@ a.r-row:hover{color:var(--red)}
 @media (max-width:860px){
   body{overflow-x:hidden;overflow-y:auto;
     background:linear-gradient(90deg,rgba(0,0,0,.45),transparent 16%,transparent 84%,rgba(0,0,0,.45)),url(img/web/wood-v.jpg) center top/100% auto repeat-y,#2a1a12}
+  body::before{display:none}
   .desk-wrap{height:auto}
   .desk{width:auto;height:auto;transform:none!important;padding:16px 12px 40px;display:flex;flex-direction:column;gap:28px}
   .desk>*{position:relative;left:auto;top:auto;transform:none}
