@@ -124,6 +124,8 @@ table.rep{width:100%;border-collapse:collapse;font-size:12.5px;line-height:1.22}
 .final .big{font-family:var(--vyaz);font-size:64px;line-height:1}
 .final .hand{font-size:30px;margin:10px 0 24px}
 
+.cd{font-family:var(--mono);font-size:.6em;font-weight:400;color:var(--ink2);opacity:.7;margin-left:1px;vertical-align:-.35em;line-height:0;white-space:nowrap;letter-spacing:-.03em}
+.tl-r .cd,.bal-r .cd{color:#fff}
 .pg.sh{display:flex;flex-direction:column}
 .shz{display:flex;flex-direction:column;gap:18px}
 .orig{color:var(--red);font-family:var(--text);font-weight:700;margin-left:2px;font-size:.9em}
@@ -498,8 +500,26 @@ const star = i => i.orig ? `<span class="orig" title="из первых 12 по�
 const CALC = IND.filter(i=>i.calc);
 const calcFor = rep => CALC.filter(i=>!i.needs || rep[i.needs]);
 
-const fxHTML = i => `<div class="fx"><span class="ab">${i.ab} =</span> ` + (i.sum ? `<span class="sumf">${i.sum}</span>`
-  : `<span class="frac"><span>${i.num}</span><span>${i.den}</span></span>${i.k ? `<span class="mul">× ${i.k}</span>` : ""}`) + "</div>";
+const CODES = [
+  ["Краткосрочные обязательства (КО)","1500−1530"],["Капитал и резервы","1300"],["Доходы будущих периодов|ДБП","1530"],["Итог раздела V|Раздел V","1500"],
+  ["Долгосрочные обязательства|ДО","1400"],["Краткосрочные обязательства","1500"],["КО","1500−1530"],
+  ["Долгосрочные заёмные средства|Долгосрочные заёмные|долгоср. заёмные","1410"],["Краткосрочные заёмные средства|Краткосрочные заёмные|краткоср. заёмные","1510"],
+  ["Собственный капитал|СК","1300"],["Заёмный капитал|ЗК","1400+1500"],["Внеоборотные активы|ВОА","1100"],["Оборотные активы|ОбА","1200"],["Активы","1600"],
+  ["Запасы","1210"],["Валюта баланса","1600"],["Денежные средства|ДС","1250"],
+  ["Краткосрочные финансовые вложения|Краткосрочные фин. вложения|КФВ","1240"],["Долгосрочные финансовые вложения|Долгосрочные фин. вложения","1170"],
+  ["Прибыль (убыток) до налогообложения|Прибыль до налогообложения","2300"],["Выручка","2110"],["Себестоимость продаж|Себестоимость|С/с","2120"],
+  ["Коммерческие расходы|Коммерческие","2210"],["Управленческие расходы|Управленческие","2220"],["Валовая прибыль","2100"],["Прибыль от продаж","2200"],
+  ["Чистая прибыль|ЧП","2400"],["Потребность в инвестициях","4220"],["Участие в других орг.","2310"],["% к получению","2320"],["Прочие доходы","2340"],
+  ["% к уплате","2330"],["Прочие расходы","2350"],["Налог на прибыль","2410"],["Основных средств|Основные средства","1150"],
+  ["Доходы (все)|Все доходы","2110+2310+2320+2340"],["Расходы (все)|Все расходы","2120+2210+2220+2330+2350+2410"],
+  ["Дебиторская задолженность|Дебиторская задолж.","1230"],["Кредиторская задолженность|Кредиторская задолж.","1520"],
+].flatMap(([ts, c])=>ts.split("|").map(t=>[t, c]));
+const CODE_RE = new RegExp("(?<!\\p{L})(" + CODES.map(([t])=>{ const e = t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return t.length > 4 ? `[${t[0].toUpperCase()}${t[0].toLowerCase()}]` + e.slice(1) : e; }).join("|") + ")(?!\\p{L})", "gu");
+const codeOf = w => CODES.find(([t])=>t.toLowerCase()===w.toLowerCase())?.[1];
+const cd = t => String(t).replace(CODE_RE, w => `${w}<sub class="cd">${codeOf(w)}</sub>`);
+const fxHTML = i => `<div class="fx"><span class="ab">${i.ab} =</span> ` + (i.sum ? `<span class="sumf">${cd(i.sum)}</span>`
+  : `<span class="frac"><span>${cd(i.num)}</span><span>${cd(i.den)}</span></span>${i.k ? `<span class="mul">× ${i.k}</span>` : ""}`) + "</div>";
 const unitText = i => i.unit==="%" ? "в процентах, 2 знака" : i.unit==="дн." ? "в днях, 2 знака" : i.unit ? "в тыс. руб." : i.times ? "в разах, 3 знака" : "в долях, 3 знака";
 const fmtV = (ind, v) => nf(v, ind.dec).replace("-","−") + (ind.unit ? " " + ind.unit : "");
 const solve = (ind, rep) => { const c = ind.calc(rep); return { v:c.v, line:c.t + " = " + fmtV(ind, c.v) }; };
@@ -885,15 +905,15 @@ const unitB = u => `<span class="bd u">${u}</span>`;
 const bds = (id, u) => `<span class="bds">${normB(id)}${u ? unitB(unitS(byId(id))) : ""}</span>`;
 const lab = id => `<div class="lb">${tg(id)}<small>${SHORT[id]||byId(id).name}</small></div>`;
 const E = s => `<span class="eq">` + s.split("|").map(t => t.length===1 && "+−×÷=".includes(t) ? `<i class="op">${t}</i>`
-  : t==="(" || t===")" ? `<i class="par">${t}</i>` : t[0]==="@" ? tg(t.slice(1)) : `<span class="ch">${t}</span>`).join("") + `</span>`;
-const F = (a, b, k) => `<span class="eq nw"><span class="fr"><span>${a}</span><span>${b}</span></span>${k ? `<i class="k">${k}</i>` : ""}</span>`;
+  : t==="(" || t===")" ? `<i class="par">${t}</i>` : t[0]==="@" ? tg(t.slice(1)) : `<span class="ch">${cd(t)}</span>`).join("") + `</span>`;
+const F = (a, b, k) => `<span class="eq nw"><span class="fr"><span>${cd(a)}</span><span>${cd(b)}</span></span>${k ? `<i class="k">${k}</i>` : ""}</span>`;
 const IT = (id, html, u) => `<div class="it">${lab(id)}${html}${bds(id, u)}</div>`;
 const grp = (g, title, body, u) => `<section class="gb" style="--c:${GC[g]}"><h3 class="gh">${title}${u ? unitB(u) : ""}</h3>${body}</section>`;
 const gt = id => GROUPS.find(g=>g.id===id).title;
 const FAN = (rows, common, k) => `<div class="fan">${rows.map(([id, top])=>`${lab(id)}<div class="fan-t">${E(top)}</div>${bds(id)}`).join("")}
   <i></i><div class="fan-bar"></div><i class="k">${k}</i><i></i><div class="fan-b">${E(common)}</div><i></i></div>`;
 const MX = (cols, rows) => `<div class="mx" style="grid-template-columns:96px repeat(${cols.length},minmax(0,1fr))">
-  <i></i>${cols.map(c=>`<div class="mx-h">${c}</div>`).join("")}
+  <i></i>${cols.map(c=>`<div class="mx-h">${cd(c)}</div>`).join("")}
   ${rows.map(([id, cells])=>lab(id) + cells.map(x=>`<div class="mx-c${x>0?" on":x<0?" neg":""}">${x>0?"+":x<0?"−":""}</div>`).join("")).join("")}</div>`;
 
 const BLK = {
@@ -906,8 +926,8 @@ const BLK = {
     <div class="tile"><b>( )</b><span>расходы ОФР<br>по модулю</span></div>
   </div><div class="star-l"><span class="orig">★</span> 12 показателей из первого списка</div>`),
   bricks: grp("g0", "Кирпичики", `<div class="bal">
-    <span class="bal-l">Актив</span><div class="bal-r"><span style="flex:5;background:#8a5a2b">ВОА<small>I</small></span><span style="flex:4;background:#b08a5a">ОбА<small>II</small></span></div><b class="bal-v">ВБ</b>
-    <span class="bal-l">Пассив</span><div class="bal-r"><span style="flex:5;background:#2f6b3a">СК<small>III</small></span><span style="flex:1.6;background:#a3322a">ДО<small>IV</small></span><span style="flex:2.4;background:#c46a5e">КО<small>V</small></span></div><b class="bal-v">ВБ</b>
+    <span class="bal-l">Актив</span><div class="bal-r"><span style="flex:5;background:#8a5a2b">ВОА<small>I · 1100</small></span><span style="flex:4;background:#b08a5a">ОбА<small>II · 1200</small></span></div><b class="bal-v">ВБ<sub class="cd">1600</sub></b>
+    <span class="bal-l">Пассив</span><div class="bal-r"><span style="flex:5;background:#2f6b3a">СК<small>III · 1300</small></span><span style="flex:1.6;background:#a3322a">ДО<small>IV · 1400</small></span><span style="flex:2.4;background:#c46a5e">КО<small>V · 1500</small></span></div><b class="bal-v">ВБ<sub class="cd">1700</sub></b>
     <i></i><div class="bal-zk"><span style="flex:5"></span><span class="brace" style="flex:4">ЗК</span></div><i></i>
   </div>
   <div class="it2"><span class="tl2">Доходы</span>${E("выручка|+|участие в других орг.|+|% к получению|+|прочие доходы")}</div>
@@ -936,9 +956,9 @@ const BLK = {
     + IT("rrp", `<span class="st" style="--s:2">${F("ЧП","все расходы","× 100")}</span>`, true)
     + `</div>` + IT("ksf", F("ЧП + амортизация","потребность в инвестициях"), true)),
   g7: grp("g7", gt("g7"), `<div class="m2">
-    <i class="k">× 100</i><div class="m2-h">÷ Выручка</div><div class="m2-h">÷ Все доходы</div>
-    <div class="m2-r">прибыль от продаж</div><div class="m2-c">${tg("ros")}<small>рентабельность продаж</small></div><div class="m2-c off"></div>
-    <div class="m2-r">ЧП</div><div class="m2-c">${tg("nchp")}<small>норма чистой прибыли</small></div><div class="m2-c">${tg("np")}<small>норма прибыли</small>${normB("np")}</div>
+    <i class="k">× 100</i><div class="m2-h">÷ ${cd("Выручка")}</div><div class="m2-h">÷ Все доходы</div>
+    <div class="m2-r">${cd("прибыль от продаж")}</div><div class="m2-c">${tg("ros")}<small>рентабельность продаж</small></div><div class="m2-c off"></div>
+    <div class="m2-r">${cd("ЧП")}</div><div class="m2-c">${tg("nchp")}<small>норма чистой прибыли</small></div><div class="m2-c">${tg("np")}<small>норма прибыли</small>${normB("np")}</div>
   </div>`, "%"),
   g8: grp("g8", "Оборачиваемость: разы ↔ дни", `<div class="tf">
       <div><span class="tf-l">разы</span>${F("Выручка","средний остаток")}</div>
@@ -946,7 +966,7 @@ const BLK = {
     <table class="tt"><tr><th>средний остаток</th><th>Выручка / С/с</th><th>разы</th><th>дни</th></tr>
     ${[["валюта баланса","В","koa",""],["оборотные активы","В","ooba","toba"],["основные средства","В","kova",""],["ДС + КФВ","В","ods","tds"],
        ["дебиторская задолж.","В","odz","tdz"],["запасы","С","oz","tz"],["кредиторская задолж.","С","","tkz"]]
-      .map(([what, s, t, d])=>`<tr><td>${what}</td><td>${s==="С" ? `<span class="tt-s">С/с</span>` : "Выручка"}</td>${[t,d].map(id=>`<td>${id ? tg(id) + (byId(id).norm ? `<span class="tt-a">${t===id?"↑":"↓"}</span>` : "") : `<span class="tt-no">—</span>`}</td>`).join("")}</tr>`).join("")}
+      .map(([what, s, t, d])=>`<tr><td>${cd(what)}</td><td>${s==="С" ? `<span class="tt-s">${cd("С/с")}</span>` : cd("Выручка")}</td>${[t,d].map(id=>`<td>${id ? tg(id) + (byId(id).norm ? `<span class="tt-a">${t===id?"↑":"↓"}</span>` : "") : `<span class="tt-no">—</span>`}</td>`).join("")}</tr>`).join("")}
     </table>
     <div class="ex-h">без среднего, на конец года</div>
     ${IT("fo", F("все доходы","ВОА на конец года"), true)}${IT("srok", F("ЗК × 360","все доходы"), true)}`),
