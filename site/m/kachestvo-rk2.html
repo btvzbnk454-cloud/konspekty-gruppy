@@ -7,395 +7,447 @@
 <title>РК2 Управление качеством</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;800&family=Cormorant+Garamond:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --paper: #f4f5f9;
-  --card: #ffffff;
-  --soft: #eef0f6;
-  --ink: #1a2031;
-  --muted: #5b6477;
-  --line: #dde1ea;
-  --hl: #ffe45c;
-  --hl-ink: #1a2031;
-  --good: #17844a;
-  --bad: #c0392b;
-  --c-int: #2766d1;
-  --c-kc: #138a64;
-  --c-mic: #8247d6;
-  --c-mix: #d9690f;
-  --c-th: #3b4256;
-  --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
-  --body: "Golos Text", "Segoe UI", system-ui, sans-serif;
-  --mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+  --paper: #ecebe4;
+  --panel: #f6f5f0;
+  --sheet: #fffefb;
+  --ink: #141414;
+  --muted: #7c796f;
+  --rule: #c9c6bb;
+  --line: #141414;
+  --accent: #f0532e;
+  --blue: #74c7ec;
+  --good: #2c7a4b;
+  --bad: #b3202a;
+  --serif: "Cormorant Garamond", "Times New Roman", serif;
+  --sans: "Onest", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+  --exam: "Tinos", "Times New Roman", Times, serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper: #11141b; --card: #191d28; --soft: #222838; --ink: #e7eaf2; --muted: #9ba3b6; --line: #2d3445;
-    --hl: rgba(255, 222, 77, .28); --hl-ink: #fff6c8; --good: #4cc98a; --bad: #ff7b6b;
-    --c-int: #6e9cff; --c-kc: #3fc79a; --c-mic: #b58cff; --c-mix: #ff9a4a; --c-th: #aeb6cc;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper: #11141b; --card: #191d28; --soft: #222838; --ink: #e7eaf2; --muted: #9ba3b6; --line: #2d3445;
-  --hl: rgba(255, 222, 77, .28); --hl-ink: #fff6c8; --good: #4cc98a; --bad: #ff7b6b;
-  --c-int: #6e9cff; --c-kc: #3fc79a; --c-mic: #b58cff; --c-mix: #ff9a4a; --c-th: #aeb6cc;
-  color-scheme: dark;
-}
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+html { scroll-behavior: smooth; scroll-padding-top: 56px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.5 var(--body); -webkit-text-size-adjust: 100%; }
-.wrap { max-width: 880px; margin: 0 auto; padding: 0 16px 48px; }
-h1, h2, h3 { text-wrap: balance; margin: 0; }
-h1 { font: 700 clamp(22px, 5vw, 32px)/1.15 var(--display); letter-spacing: -.01em; }
-h2 { font: 700 clamp(19px, 4.2vw, 24px)/1.2 var(--display); }
-h3 { font: 600 17px/1.3 var(--body); }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 15.5px/1.5 var(--sans); -webkit-text-size-adjust: 100%; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
 p { margin: 0; }
-mark { background: var(--hl); color: var(--hl-ink); padding: 0 .2em; border-radius: 3px; }
-.num { font-variant-numeric: tabular-nums; }
 
-header.top { padding: 20px 0 12px; display: grid; gap: 6px; }
-.eyebrow { font: 600 12px/1 var(--body); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.lead { color: var(--muted); max-width: 62ch; }
+.mono { font-family: var(--mono); }
+.lbl { font: 500 11.5px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 
-nav.jump { position: sticky; top: 0; z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); margin: 0 -16px; padding: 8px 16px; }
-nav.jump ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.topbar { background: var(--ink); color: #f3f1ea; font: 500 11px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; }
+.topbar .in { max-width: 1240px; margin: 0 auto; padding: 10px 16px; display: flex; justify-content: space-between; gap: 12px; }
+.topbar .in span:nth-child(2) { display: none; }
+@media (min-width: 720px) { .topbar .in span:nth-child(2) { display: inline; } }
+.frame { max-width: 1240px; margin: 0 auto; border-left: 1px solid var(--rule); border-right: 1px solid var(--rule); position: relative; }
+@media (max-width: 640px) { .frame { border: 0; } }
+
+nav.jump { position: sticky; top: 0; z-index: 10; background: var(--paper); border-bottom: 1px solid var(--line); }
+nav.jump ul { list-style: none; margin: 0; padding: 0 8px; display: flex; overflow-x: auto; scrollbar-width: none; }
 nav.jump ul::-webkit-scrollbar { display: none; }
-nav.jump a { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; text-decoration: none; color: var(--ink); font: 600 14px/1 var(--body); padding: 9px 12px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); }
-nav.jump a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--c-int); outline-offset: 2px; }
-.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
+nav.jump a { display: flex; align-items: baseline; gap: 6px; padding: 13px 10px; text-decoration: none; color: var(--ink); font: 500 12.5px/1 var(--mono); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+nav.jump a b { font-weight: 600; color: var(--accent); }
+nav.jump a:hover { background: var(--panel); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.which { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin-top: 16px; }
-.which a { --c: var(--c-int); display: grid; gap: 6px; text-decoration: none; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--c); border-radius: 10px; padding: 12px; }
-.which b { font: 700 15px/1.2 var(--body); }
-.which span { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr); border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .hero { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); } }
+.hero-l { padding: 28px 16px 24px; display: grid; gap: 16px; align-content: start; }
+@media (min-width: 900px) { .hero-l { padding: 40px 32px; border-right: 1px solid var(--line); } }
+.hero h1 { font: 600 clamp(40px, 7vw, 76px)/.95 var(--serif); letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .lead { max-width: 56ch; font-size: 15px; color: #3b3a35; }
+.hero-r { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); }
+@media (min-width: 900px) { .hero-r { border-top: 0; } }
+.stat { padding: 16px; display: grid; align-content: end; gap: 2px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stat:nth-child(2n) { border-right: 0; }
+.stat:nth-child(n+3) { border-bottom: 0; }
+.stat b { font: 800 clamp(48px, 9vw, 84px)/.9 var(--sans); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.stat.dark { background: var(--ink); color: #f3f1ea; }
+.stat.dark .lbl { color: #b9b6ab; }
 
-section.task { --c: var(--c-int); margin-top: 28px; display: grid; gap: 14px; }
-.sec-head { display: grid; gap: 6px; padding-top: 6px; border-top: 3px solid var(--c); }
-.sec-head .eyebrow { color: var(--c); }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 10px; }
-.card > h3 { display: flex; align-items: center; gap: 8px; }
-.tag { font: 600 11px/1 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--c); }
+.index { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); border-bottom: 1px solid var(--line); }
+.index a { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; padding: 16px; text-decoration: none; color: var(--ink); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.index a:hover { background: var(--panel); }
+.index .n { grid-row: span 2; font: 800 44px/.9 var(--sans); letter-spacing: -.04em; }
+.index .t { font: 600 15px/1.2 var(--sans); }
+.index .k { font: 400 12px/1.4 var(--mono); color: var(--muted); }
 
-.f { font: 500 14.5px/1.55 var(--mono); background: var(--soft); border-left: 3px solid var(--c); border-radius: 6px; padding: 10px 12px; overflow-x: auto; white-space: pre; }
-.f.big { font-size: 16px; font-weight: 600; }
-.legend-list { display: grid; gap: 4px; font-size: 14.5px; }
-.legend-list div { display: grid; grid-template-columns: 4.6em 1fr; gap: 8px; }
-.legend-list code { font: 600 14px var(--mono); color: var(--c); }
+section.task { border-bottom: 1px solid var(--line); padding: 0 0 28px; }
+.t-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 18px; align-items: start; padding: 22px 16px 18px; border-bottom: 1px solid var(--line); position: relative; }
+.t-head::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--ink); }
+@media (min-width: 900px) { .t-head { padding: 28px 32px 22px; } }
+.t-num { font: 800 clamp(88px, 18vw, 168px)/.78 var(--sans); letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.t-day { font: 600 clamp(18px, 3vw, 24px)/1.1 var(--sans); color: var(--accent); }
+.t-head h2 { font: 600 clamp(26px, 4.4vw, 42px)/1 var(--serif); margin-top: 6px; }
+.t-head .lbl { margin-top: 10px; }
+.t-body { padding: 18px 16px 0; display: grid; gap: 18px; }
+@media (min-width: 900px) { .t-body { padding: 24px 32px 0; } }
 
-ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 10px; }
-ol.steps > li { counter-increment: s; display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: start; }
-ol.steps > li::before { content: counter(s); width: 30px; height: 30px; border-radius: 50%; background: var(--c); color: #fff; font: 700 14px/30px var(--body); text-align: center; }
-ol.steps > li > div { display: block; min-width: 0; padding-top: 4px; }
-section.task, .card, .variant.on, .sol, .sol .step, .gauge { grid-template-columns: minmax(0, 1fr); }
-section.task > *, .card > *, .variant > *, .sol > *, .sol .step > * { min-width: 0; }
+.fstrip { display: grid; grid-template-columns: minmax(0, 1fr); border: 1px solid var(--line); background: var(--panel); }
+@media (min-width: 900px) { .fstrip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); } }
+.fstrip .fx { background: var(--ink); color: #f6f4ec; padding: 16px; font: 500 15.5px/1.6 var(--mono); white-space: pre; overflow-x: auto; display: grid; align-content: center; }
+.fstrip .fx small { display: block; font: 500 10.5px/1 var(--mono); letter-spacing: .08em; color: #a7a49a; text-transform: uppercase; margin-bottom: 10px; }
+.legend { padding: 12px 16px; display: grid; gap: 6px; font-size: 14px; }
+.legend div { display: grid; grid-template-columns: 4.4em minmax(0, 1fr); gap: 10px; border-bottom: 1px dashed var(--rule); padding-bottom: 6px; }
+.legend div:last-child { border-bottom: 0; padding-bottom: 0; }
+.legend code { font: 600 13.5px var(--mono); color: var(--accent); }
 
-.traps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.traps li { background: color-mix(in srgb, var(--bad) 9%, var(--card)); border: 1px solid color-mix(in srgb, var(--bad) 35%, var(--line)); border-radius: 8px; padding: 9px 11px; font-size: 14.5px; }
-.traps li b { color: var(--bad); }
+.vbar { display: flex; flex-wrap: wrap; gap: 8px; }
+.vbtn { display: grid; grid-template-columns: auto 1fr; gap: 0 10px; align-items: center; text-align: left; cursor: pointer; background: var(--panel); color: var(--ink); border: 1px solid var(--rule); border-radius: 10px; padding: 8px 12px 8px 10px; font: inherit; }
+.vbtn b { font: 800 26px/1 var(--sans); grid-row: span 2; }
+.vbtn span { font: 600 13px/1.2 var(--sans); }
+.vbtn small { font: 400 11.5px/1.2 var(--mono); color: var(--muted); }
+.vbtn[aria-pressed="true"] { background: var(--sheet); border-color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
 
-.vbar { display: flex; flex-wrap: wrap; gap: 6px; }
-.vbtn { font: 600 14px/1.2 var(--body); color: var(--ink); background: var(--card); border: 1.5px solid var(--line); border-radius: 8px; padding: 8px 11px; cursor: pointer; text-align: left; }
-.vbtn small { display: block; font-weight: 500; font-size: 12px; color: var(--muted); }
-.vbtn[aria-pressed="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, var(--card)); }
-.variant { display: none; gap: 12px; }
-.variant.on { display: grid; }
-.vtitle { font: 700 16px/1.3 var(--body); }
-.vtitle .tag { margin-right: 6px; }
-.cond { font-size: 14.5px; color: var(--muted); }
+.variant { display: none; }
+.variant.on { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (min-width: 1000px) {
+  .variant.on { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+  .variant .sheet-wrap { position: sticky; top: 62px; }
+}
 
+.sheet-wrap { display: grid; gap: 6px; min-width: 0; }
+.sheet-wrap > .lbl { display: flex; justify-content: space-between; gap: 8px; }
+.sheet { background: var(--sheet); color: #111; font: 400 13.5px/1.35 var(--exam); padding: 22px 22px 26px; border: 1px solid #d9d6cb; box-shadow: 0 1px 0 #d9d6cb, 0 14px 28px -18px rgba(40, 30, 10, .35); overflow-x: auto; }
+.sheet .c { text-align: center; }
+.sheet .h1 { font-weight: 700; font-size: 15px; text-align: center; }
+.sheet .h2 { text-align: center; font-size: 12.5px; margin-top: 2px; }
+.sheet .fio { display: flex; gap: 8px; align-items: baseline; justify-content: center; margin: 6px 0 12px; font-size: 14px; }
+.sheet .fio i { display: inline-block; border-bottom: 1px solid #111; height: 1em; }
+.sheet .z { font-weight: 700; text-align: center; font-size: 14.5px; margin-bottom: 3px; }
+.sheet .txt { text-align: justify; text-indent: 2em; hyphens: auto; }
+.sheet ol { margin: 0 0 8px; padding-left: 1.4em; }
+.sheet .cap { margin-top: 6px; }
+.sheet table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin-top: 2px; font-variant-numeric: tabular-nums; }
+.sheet th, .sheet td { border: 1px solid #111; padding: 2px 5px; text-align: center; font-weight: 400; }
+.sheet td.l, .sheet th.l { text-align: left; }
+.sheet tr.g td { background: #e6e6e6; }
+.sheet mark { background: linear-gradient(transparent 52%, rgba(240, 83, 46, .38) 52%); color: inherit; padding: 0 1px; }
+.sheet .pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+@media (min-width: 560px) { .sheet .pair { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+.sheet .wide { min-width: 470px; }
+
+.sol { display: grid; gap: 12px; min-width: 0; }
+.sol .lbl b { color: var(--accent); font-weight: 600; }
+.step { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: start; }
+.step > .sn { font: 800 22px/1 var(--sans); letter-spacing: -.03em; padding-top: 6px; }
+.step > div { min-width: 0; display: grid; gap: 6px; }
+.step h3 { font: 600 14.5px/1.3 var(--sans); padding-top: 7px; }
+.f { font: 500 13.5px/1.6 var(--mono); background: var(--panel); border: 1px solid var(--rule); padding: 9px 11px; overflow-x: auto; white-space: pre; }
 .tbl { overflow-x: auto; }
-table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
-th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: center; vertical-align: middle; }
-th { background: var(--soft); font-weight: 600; }
-td.l, th.l { text-align: left; }
-td.hi { background: color-mix(in srgb, var(--c) 14%, var(--card)); font-weight: 700; }
-td.up { color: var(--good); font-weight: 600; }
-td.dn { color: var(--bad); font-weight: 600; }
+.tbl table { border-collapse: collapse; width: 100%; font-size: 13.5px; font-variant-numeric: tabular-nums; background: var(--panel); }
+.tbl th, .tbl td { border: 1px solid var(--rule); padding: 5px 7px; text-align: center; }
+.tbl th { font: 500 11.5px var(--mono); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.tbl td.l, .tbl th.l { text-align: left; }
+.tbl td.hi { background: var(--ink); color: #f6f4ec; font-weight: 700; }
+.tbl td.up { color: var(--good); font-weight: 700; }
+.tbl td.dn { color: var(--bad); font-weight: 700; }
+.res { background: var(--accent); color: #fff; padding: 0 5px; }
+.concl { background: var(--ink); color: #f3f1ea; padding: 14px 16px; display: grid; gap: 6px; font-size: 15px; line-height: 1.5; }
+.concl .lbl { color: var(--blue); }
 
-.sol { display: grid; gap: 10px; }
-.sol .step { display: grid; gap: 4px; }
-.sol .step > b { font-size: 14px; color: var(--c); }
-.res { display: inline-block; font: 700 15px var(--mono); background: var(--hl); color: var(--hl-ink); padding: 1px 6px; border-radius: 4px; }
-.concl { border-radius: 10px; padding: 11px 13px; font-size: 15px; border: 1.5px solid var(--c); background: color-mix(in srgb, var(--c) 7%, var(--card)); }
-.concl b:first-child { display: block; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; color: var(--c); margin-bottom: 3px; }
-
-.gauge { display: grid; gap: 4px; }
-.gauge svg { width: 100%; height: auto; max-width: 520px; display: block; }
-.gauge text { font: 600 11px var(--body); fill: var(--muted); }
-.gauge .lbl { font: 700 13px var(--mono); fill: var(--ink); }
-
-.radar { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 12px; align-items: center; }
+.gauge svg { width: 100%; height: auto; max-width: 560px; display: block; }
+.gauge text { font: 500 10.5px var(--mono); fill: var(--muted); }
+.gauge .v { font: 600 12.5px var(--mono); fill: var(--ink); }
+.radar { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 14px; align-items: center; border: 1px solid var(--rule); background: var(--panel); padding: 10px; }
 .radar svg { width: 100%; height: auto; display: block; }
-.radar text { font: 600 11px var(--body); fill: var(--muted); }
-.radar .ax { font: 700 12px var(--body); fill: var(--ink); }
-.rleg { display: grid; gap: 5px; font-size: 14px; }
-.rleg span { display: inline-flex; align-items: center; gap: 8px; }
-.rleg i { width: 22px; height: 0; border-top: 3px solid var(--k); display: inline-block; }
+.radar text { font: 500 10.5px var(--mono); fill: var(--muted); }
+.radar .ax { font: 600 11px var(--mono); fill: var(--ink); text-transform: uppercase; }
+.rleg { display: grid; gap: 6px; font: 500 12.5px var(--mono); }
+.rleg span { display: flex; align-items: center; gap: 8px; }
+.rleg i { width: 24px; border-top: 3px solid var(--k); }
 .rleg i.dash { border-top-style: dashed; }
 @media (max-width: 560px) { .radar { grid-template-columns: 1fr; } }
 
-.search { display: flex; gap: 8px; align-items: center; }
-.search input { flex: 1; font: 500 16px var(--body); padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); }
-.qgrid { display: grid; gap: 10px; }
-.q { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 13px; display: grid; gap: 6px; }
-.q h3 { font-size: 15.5px; display: grid; grid-template-columns: 2.2em 1fr; gap: 4px; }
-.q h3 span { color: var(--muted); font-variant-numeric: tabular-nums; }
-.q p, .q li { font-size: 14.5px; line-height: 1.5; }
-.q ul { margin: 0; padding-left: 1.2em; display: grid; gap: 2px; }
-.mx { display: grid; grid-template-columns: auto 1fr 1fr; gap: 3px; font-size: 12.5px; max-width: 420px; }
-.mx div { padding: 6px 7px; border-radius: 5px; background: var(--soft); line-height: 1.3; }
-.mx .ax { background: none; color: var(--muted); font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; }
-.mx .g { background: color-mix(in srgb, var(--good) 18%, var(--card)); }
-.mx .y { background: color-mix(in srgb, #e7b400 22%, var(--card)); }
-.mx .r { background: color-mix(in srgb, var(--bad) 16%, var(--card)); }
-.mx3 { grid-template-columns: auto 1fr 1fr 1fr; }
-.empty { color: var(--muted); font-size: 14.5px; display: none; }
+.two { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--line); }
+@media (min-width: 900px) { .two { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
+.two > div { padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.two > div + div { border-top: 1px solid var(--line); }
+@media (min-width: 900px) { .two > div + div { border-top: 0; border-left: 1px solid var(--line); } }
+ol.alg { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 9px; }
+ol.alg li { counter-increment: s; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; font-size: 14.5px; }
+ol.alg li::before { content: counter(s, decimal-leading-zero); font: 600 12px/1.9 var(--mono); color: var(--accent); }
+ul.traps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+ul.traps li { font-size: 14.5px; padding-left: 12px; border-left: 3px solid var(--accent); }
+ul.traps b { font: 600 11.5px var(--mono); text-transform: uppercase; letter-spacing: .05em; display: block; color: var(--accent); }
 
-footer { margin-top: 36px; color: var(--muted); font-size: 13px; }
+.search { display: flex; border: 1px solid var(--line); background: var(--sheet); }
+.search label { font: 500 11.5px/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; padding: 0 12px; display: flex; align-items: center; background: var(--ink); color: #f3f1ea; }
+.search input { flex: 1; min-width: 0; border: 0; background: transparent; font: 500 16px var(--sans); padding: 11px 12px; color: var(--ink); }
+.qgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.q { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px; display: grid; gap: 8px; align-content: start; background: var(--panel); }
+.q h3 { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px; font: 600 15px/1.25 var(--sans); }
+.q h3 span { font: 800 26px/.9 var(--sans); letter-spacing: -.04em; }
+.q p, .q li { font-size: 14px; line-height: 1.5; }
+.q ul, .q ol { margin: 0; padding-left: 1.2em; display: grid; gap: 2px; }
+.mx { display: grid; grid-template-columns: auto 1fr 1fr; gap: 2px; font-size: 12px; max-width: 420px; }
+.mx3 { grid-template-columns: auto 1fr 1fr 1fr; }
+.mx div { padding: 6px; background: var(--sheet); border: 1px solid var(--rule); line-height: 1.3; }
+.mx .ax { background: none; border: 0; color: var(--muted); font: 500 10.5px var(--mono); text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-align: center; }
+.mx .g { background: #dcebdf; } .mx .y { background: #f4e7c3; } .mx .r { background: #f3d6cf; }
+.empty { display: none; font: 500 13px var(--mono); color: var(--muted); }
+
+footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 14px 16px 28px; font: 500 11px var(--mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
 
 @media print {
-  :root { --paper: #fff; --card: #fff; --soft: #f2f3f6; --ink: #000; --muted: #444; --line: #bbb; --hl: #fff08a; --hl-ink: #000; color-scheme: light; }
   @page { size: A4; margin: 8mm; }
-  body { font-size: 10.5pt; zoom: .62; }
-  nav.jump, .vbar, .search, .which, header .lead, .noprint, .gauge, footer { display: none !important; }
-  .traps li, .sol .step, .concl, .tbl { break-inside: avoid; }
-  .radar svg { max-width: 220px; }
-  .wrap { max-width: none; padding: 0; }
-  section.task { margin-top: 10px; gap: 6px; break-before: page; }
-  section#integral { break-before: auto; }
-  .variant { display: grid !important; break-inside: avoid; border-top: 1px dashed var(--line); padding-top: 6px; }
-  .card { padding: 8px; gap: 6px; break-inside: avoid; }
-  .f { font-size: 9.5pt; white-space: pre-wrap; }
-  .radar { grid-template-columns: 220px 1fr; }
-  .qgrid { grid-template-columns: 1fr 1fr; gap: 6px; }
-  .q { padding: 6px 8px; break-inside: avoid; }
-  .q p, .q li { font-size: 9pt; }
-  .empty { display: none !important; }
+  body { zoom: .6; background: #fff; }
+  nav.jump, .topbar, .hero-r, .index, .vbar, .search, .gauge, footer { display: none !important; }
+  .frame { border: 0; max-width: none; }
+  section.task { break-before: page; }
+  .variant { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; gap: 14px; break-inside: avoid; border-top: 1px dashed #999; padding-top: 10px; margin-top: 10px; }
+  .variant .sheet-wrap { position: static !important; }
+  .fstrip .fx, .concl, .tbl td.hi { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   .q[hidden] { display: grid !important; }
+  .qgrid { grid-template-columns: 1fr 1fr; }
+  .q { break-inside: avoid; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-
-<header class="top">
-  <div class="eyebrow">ИБМ-7 · Рубежный контроль № 2</div>
-  <h1>Управление качеством: задачи и теория</h1>
-  <p class="lead">На РК2 даётся один из четырёх типов задач. Найди свой тип по словам в условии, открой вариант с такими же цифрами и сверяйся по шагам. Если цифры другие, иди по алгоритму: он одинаковый для всех вариантов.</p>
-</header>
+<div class="topbar"><div class="in"><span>Управление качеством</span><span>Рубежный контроль № 2 · ИБМ-7</span><span>12.11</span></div></div>
+<div class="frame">
 
 <nav class="jump" aria-label="Разделы">
   <ul>
-    <li><a href="#integral" style="--c:var(--c-int)"><span class="dot"></span>Интегральный</a></li>
-    <li><a href="#kc" style="--c:var(--c-kc)"><span class="dot"></span>КС предприятия</a></li>
-    <li><a href="#mic" style="--c:var(--c-mic)"><span class="dot"></span>Микроскоп</a></li>
-    <li><a href="#mix" style="--c:var(--c-mix)"><span class="dot"></span>Смешанный</a></li>
-    <li><a href="#theory" style="--c:var(--c-th)"><span class="dot"></span>Теория</a></li>
+    <li><a href="#integral"><b>01</b>Интегральный</a></li>
+    <li><a href="#kc"><b>02</b>КС предприятия</a></li>
+    <li><a href="#mic"><b>03</b>Микроскоп</a></li>
+    <li><a href="#mix"><b>04</b>Смешанный</a></li>
+    <li><a href="#theory"><b>05</b>Теория</a></li>
   </ul>
 </nav>
 
-<div class="which" aria-label="Как узнать тип задачи">
-  <a href="#integral" style="--c:var(--c-int)"><b>Интегральный метод</b><span>Станок. «Выберите наиболее подходящий метод». Есть затраты на ремонт, стоимость станка, φ(t).</span></a>
-  <a href="#kc" style="--c:var(--c-kc)"><b>КС предприятия</b><span>3 вида продукции × 3 рынка, Kij, объём реализации, базовый и отчётный периоды.</span></a>
-  <a href="#mic" style="--c:var(--c-mic)"><b>Комплексный (микроскоп)</b><span>5 моделей, ранги 4 экспертов, «методом рангов», «постройте диаграмму».</span></a>
-  <a href="#mix" style="--c:var(--c-mix)"><b>Смешанный метод</b><span>Станок, группы показателей, «балльный метод», баллы 5 экспертов.</span></a>
+<header class="hero">
+  <div class="hero-l">
+    <div class="lbl">Шпаргалка к РК · задачи и теория</div>
+    <h1>Управление качеством. <em>Рубежный контроль № 2</em></h1>
+    <p class="lead">На РК дают бланк с одной задачей из четырёх типов. Сравни свой бланк с бланками ниже, найди такой же и иди по решению. Если цифры в бланке другие, решай по алгоритму под вариантами: он один на все варианты этого типа.</p>
+  </div>
+  <div class="hero-r">
+    <div class="stat dark"><b>04</b><span class="lbl">типа задач</span></div>
+    <div class="stat"><b>12</b><span class="lbl">вариантов с решением</span></div>
+    <div class="stat"><b>27</b><span class="lbl">вопросов теории</span></div>
+    <div class="stat"><b style="color:var(--accent)">1</b><span class="lbl">граница: лучше / хуже базового</span></div>
+  </div>
+</header>
+
+<div class="index" aria-label="Как узнать тип задачи">
+  <a href="#integral"><span class="n">01</span><span class="t">Интегральный метод</span><span class="k">станок · «выберите наиболее подходящий метод» · φ(t)</span></a>
+  <a href="#kc"><span class="n">02</span><span class="t">КС предприятия</span><span class="k">3 вида продукции × 3 рынка · Kij · объём реализации</span></a>
+  <a href="#mic"><span class="n">03</span><span class="t">Микроскоп</span><span class="k">5 моделей · «методом рангов» · «постройте диаграмму»</span></a>
+  <a href="#mix"><span class="n">04</span><span class="t">Смешанный метод</span><span class="k">станок · группы показателей · «балльного метода»</span></a>
 </div>
 
-<section class="task" id="integral" style="--c:var(--c-int)">
-  <div class="sec-head">
-    <div class="eyebrow">Тип 1 · 3 варианта</div>
-    <h2>Интегральный метод: станок</h2>
+<section class="task" id="integral">
+  <div class="t-head">
+    <div class="t-num">01</div>
+    <div>
+      <div class="t-day">Интегральный метод</div>
+      <h2>Станок: сколько пользы на рубль затрат</h2>
+      <div class="lbl">3 варианта · ремонт +15% / +40%</div>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>Формула</h3>
-    <div class="f big">Ук = И / Иб
+  <div class="t-body">
+    <div class="fstrip">
+      <div class="fx"><small>формула</small>Ук = И / Иб
 
 И = Э / (Зс·φ(t) + Зэ)</div>
-    <div class="legend-list">
-      <div><code>Э</code><span>полезный эффект за срок службы = П<sub>год</sub> · (1 − доля простоев) · T</span></div>
-      <div><code>Зс</code><span>единовременные затраты = стоимость станка</span></div>
-      <div><code>Зэ</code><span>эксплуатация за срок службы = ремонт · T + прочие расходы (если они <mark>годовые</mark>, тоже · T)</span></div>
-      <div><code>φ(t)</code><span>поправочный коэффициент, дан в условии; ставим, если срок службы больше 1 года</span></div>
-      <div><code>И</code><span>тыс. деталей на тыс. руб.: сколько пользы на рубль затрат</span></div>
+      <div class="legend">
+        <div><code>Э</code><span>производительность · (1 − доля простоев) · срок службы</span></div>
+        <div><code>Зс</code><span>стоимость станка</span></div>
+        <div><code>Зэ</code><span>ремонт · срок + прочие расходы (если «годовые», тоже · срок)</span></div>
+        <div><code>φ(t)</code><span>поправочный коэффициент из таблицы</span></div>
+      </div>
     </div>
-  </div>
-
-  <div class="card">
-    <h3>Алгоритм</h3>
-    <ol class="steps">
-      <li><div><b>Выбор метода.</b> Пишешь: «Метод интегральный: известны полезный эффект (производительность) и все затраты на покупку и эксплуатацию».</div></li>
-      <li><div><b>Э</b> для оцениваемого и базового: производительность · (1 − простои) · срок. Проценты переводим в доли: 3% = 0,03.</div></li>
-      <li><div><b>Знаменатель</b>: стоимость · φ(t) + ремонт · срок + прочие.</div></li>
-      <li><div><b>И = Э / знаменатель</b> для обоих станков, затем <b>Ук = И / Иб</b>.</div></li>
-      <li><div><b>Вывод:</b> Ук &gt; 1 — оцениваемый лучше базового, Ук &lt; 1 — хуже.</div></li>
-      <li><div><b>«Что если»</b>: ремонт +15% → ремонт · 1,15; +40% → · 1,4; −15% → · 0,85. Пересчитываешь только И оцениваемого, Иб не меняется.</div></li>
-    </ol>
-  </div>
-
-  <ul class="traps">
-    <li><b>Ловушка 1.</b> +15% — это ×1,15, а не ×1,5. В одном из конспектов здесь опечатка.</li>
-    <li><b>Ловушка 2.</b> Посмотри, есть ли в строке «прочие расходы» слово <mark>годовые</mark>. Если есть, умножай на срок службы. Если нет (вариант А), прибавляй как есть, так решено в конспекте.</li>
-    <li><b>Ловушка 3.</b> В распечатке цифры съезжают на строку вверх. Читай по порядку: производительность → простои → стоимость → ремонт → прочие → срок → φ.</li>
-  </ul>
-
-  <div class="card">
-    <h3>Варианты</h3>
     <div class="vbar" data-group="int"></div>
     <div data-holder="int"></div>
+    <div class="two">
+      <div>
+        <div class="lbl">Алгоритм для любых цифр</div>
+        <ol class="alg">
+          <li><span><b>Метод</b>: «интегральный, так как известны полезный эффект и все затраты на покупку и эксплуатацию».</span></li>
+          <li><span><b>Э</b> для обоих станков. Проценты переводим в доли: 3% = 0,03.</span></li>
+          <li><span><b>Знаменатель</b>: стоимость · φ(t) + ремонт · срок + прочие.</span></li>
+          <li><span><b>И</b> = Э / знаменатель для обоих, затем <b>Ук = И / Иб</b>.</span></li>
+          <li><span><b>Вывод</b>: Ук &gt; 1 — лучше базового, Ук &lt; 1 — хуже.</span></li>
+          <li><span><b>Что если</b>: +15% → ремонт · 1,15; +40% → · 1,4. Пересчитываешь только И оцениваемого.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="lbl">Ловушки</div>
+        <ul class="traps">
+          <li><b>+15%</b>Это ×1,15, а не ×1,5. В одном конспекте из чата здесь опечатка.</li>
+          <li><b>«годовые»</b>Если прочие расходы годовые, умножай их на срок службы. Если слова нет (вариант А), прибавляй как есть.</li>
+          <li><b>Таблица съезжает</b>В бланке цифры стоят на строку выше подписи. Читай по порядку строк сверху вниз.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="task" id="kc" style="--c:var(--c-kc)">
-  <div class="sec-head">
-    <div class="eyebrow">Тип 2 · 3 варианта</div>
-    <h2>Конкурентоспособность предприятия по рынкам</h2>
-  </div>
-
-  <div class="card">
-    <h3>Формула</h3>
-    <div class="f big">КС = Σ αi · КСi       КСi = Σ Bj · Kij       αi = Vi / ΣV</div>
-    <div class="legend-list">
-      <div><code>Kij</code><span>КС i-го вида продукции на j-м рынке (из таблицы)</span></div>
-      <div><code>Bj</code><span>значимость рынка: развитые страны <b>1</b>, остальные страны <b>0,7</b>, внутренний рынок <b>0,5</b></span></div>
-      <div><code>αi</code><span>значимость (вес) вида продукции = его доля в объёме реализации</span></div>
-      <div><code>ΔКС</code><span>(КС<sub>отч</sub> / КС<sub>баз</sub> − 1) · 100%</span></div>
+<section class="task" id="kc">
+  <div class="t-head">
+    <div class="t-num">02</div>
+    <div>
+      <div class="t-day">КС предприятия</div>
+      <h2>Три вида продукции на трёх рынках</h2>
+      <div class="lbl">3 варианта · базовый и отчётный периоды</div>
     </div>
   </div>
-
-  <div class="card">
-    <h3>Алгоритм</h3>
-    <ol class="steps">
-      <li><div><b>Значимость рынков.</b> Обоснование: на рынке развитых стран самые жёсткие требования к качеству, поэтому вес 1. На остальных рынках требования ниже, вес 0,7. На внутреннем самые низкие, вес 0,5.</div></li>
-      <li><div><b>КС каждого вида</b> отдельно для базового и отчётного периода: считаем по строке таблицы, Kij умножаем на вес рынка и складываем.</div></li>
-      <li><div><b>αi</b> отдельно для каждого периода: объём / сумма объёмов. Сумма α = 1.</div></li>
-      <li><div><b>КС предприятия</b> = Σ α · КСi для базового и для отчётного.</div></li>
-      <li><div><b>Вывод:</b> сравни КС<sub>отч</sub> и КС<sub>баз</sub>, посчитай изменение в %, назови самый сильный вид продукции.</div></li>
-    </ol>
-  </div>
-
-  <ul class="traps">
-    <li><b>Ловушка.</b> Периоды между собой не складываются. Каждый период считается отдельно со своими α. В одном решении из чата их сложили, так делать нельзя.</li>
-    <li><b>Kij = 0</b> значит, что продукция на этом рынке не продаётся. Слагаемое просто равно нулю.</li>
-  </ul>
-
-  <div class="card">
-    <h3>Варианты</h3>
+  <div class="t-body">
+    <div class="fstrip">
+      <div class="fx"><small>формула</small>КС  = Σ αi · КСi
+КСi = Σ Bj · Kij
+αi  = Vi / ΣV</div>
+      <div class="legend">
+        <div><code>Kij</code><span>КС вида продукции i на рынке j, из таблицы</span></div>
+        <div><code>Bj</code><span>значимость рынка: развитые страны 1 · остальные 0,7 · внутренний 0,5</span></div>
+        <div><code>αi</code><span>значимость вида продукции = доля в объёме реализации</span></div>
+        <div><code>ΔКС</code><span>(КС отч / КС баз − 1) · 100%</span></div>
+      </div>
+    </div>
     <div class="vbar" data-group="kc"></div>
     <div data-holder="kc"></div>
+    <div class="two">
+      <div>
+        <div class="lbl">Алгоритм для любых цифр</div>
+        <ol class="alg">
+          <li><span><b>Значимость рынков</b>: в развитых странах самые жёсткие требования к качеству, поэтому вес 1. В остальных странах требования ниже, вес 0,7. На внутреннем рынке самые низкие, вес 0,5.</span></li>
+          <li><span><b>КСi</b> по каждой строке таблицы: Kij умножаем на вес рынка и складываем. Отдельно для базового и отчётного периода.</span></li>
+          <li><span><b>αi</b> = объём / сумма объёмов, отдельно для каждого периода.</span></li>
+          <li><span><b>КС предприятия</b> = Σ α · КСi для базового и для отчётного.</span></li>
+          <li><span><b>Вывод</b>: рост или падение в %, самый сильный вид продукции.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="lbl">Ловушки</div>
+        <ul class="traps">
+          <li><b>Периоды</b>Базовый и отчётный считаются отдельно, каждый со своими α. Складывать их нельзя.</li>
+          <li><b>Kij = 0</b>Продукция на этом рынке не продаётся, слагаемое просто равно нулю.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="task" id="mic" style="--c:var(--c-mic)">
-  <div class="sec-head">
-    <div class="eyebrow">Тип 3 · 4 варианта</div>
-    <h2>Микроскоп: комплексный метод и веса по рангам</h2>
-  </div>
-
-  <div class="card">
-    <h3>Формулы</h3>
-    <div class="f big">mi = (n − ri + 1) / Sn        Sn = 1+2+…+n = 10
-
-qi = (P / Pб)^E        КПК = Σ mi · qi        Ук = КПК / КПКб</div>
-    <div class="legend-list">
-      <div><code>ri</code><span>итоговый ранг показателя: самая маленькая сумма рангов экспертов = ранг 1 (самый важный)</span></div>
-      <div><code>n</code><span>число показателей = 4</span></div>
-      <div><code>E = +1</code><span>чем больше, тем лучше (увеличение): q = P / Pб</span></div>
-      <div><code>E = −1</code><span>чем меньше, тем лучше (габариты, масса, мощность): q = Pб / P</span></div>
-      <div><code>КПКб</code><span>у базовой модели все q = 1, поэтому КПКб = 1 и Ук = КПК</span></div>
+<section class="task" id="mic">
+  <div class="t-head">
+    <div class="t-num">03</div>
+    <div>
+      <div class="t-day">Комплексный метод</div>
+      <h2>Электронный микроскоп и веса по рангам</h2>
+      <div class="lbl">4 варианта · диаграмма · «что если»</div>
     </div>
   </div>
-
-  <div class="card">
-    <h3>Веса во всех вариантах одинаковые</h3>
-    <div class="tbl"><table>
-      <thead><tr><th class="l">Показатель</th><th>Э1</th><th>Э2</th><th>Э3</th><th>Э4</th><th>Σ</th><th>Ранг r</th><th>m</th><th>E</th></tr></thead>
-      <tbody id="rankBody"></tbody>
-    </table></div>
-    <div class="f" id="rankCalc"></div>
-  </div>
-
-  <div class="card">
-    <h3>Алгоритм</h3>
-    <ol class="steps">
-      <li><div><b>E для каждого показателя</b> (+1 / −1) и <b>веса m</b> методом рангов (таблица выше).</div></li>
-      <li><div><b>Единичные q</b> для всех 5 моделей относительно базовой (модель 1). Округляй до сотых.</div></li>
-      <li><div><b>Вывод по q:</b> где у модели 5 q &gt; 1, она лучше базовой; где q &lt; 1, хуже.</div></li>
-      <li><div><b>КПК = Σ m·q</b> для каждой модели. Ук = КПК (так как КПКб = 1).</div></li>
-      <li><div><b>Диаграмма</b>: сколько показателей, столько осей; сколько моделей, столько многоугольников. Круг 1 — это базовая модель. Чем больше фигура, тем выше качество.</div></li>
-      <li><div><b>«Что если»</b>: меняешь одно значение у модели 5 (×1,5 / ×1,2 / ×0,6), пересчитываешь её q и КПК.</div></li>
-      <li><div><b>Обоснование базового</b> (если спросят): за базу берут аналог того же назначения для тех же потребителей, обычно лидер рынка. Его показатели принимают за 1.</div></li>
-    </ol>
-  </div>
-
-  <ul class="traps">
-    <li><b>Ловушка 1.</b> Габариты, масса и мощность — показатели «меньше = лучше». Для них базовое значение делишь на значение модели, а не наоборот.</li>
-    <li><b>Ловушка 2.</b> «Уменьшится на 40%» — это × 0,6. «Увеличится на 20%» — × 1,2. «В 1,5 раза» — × 1,5.</li>
-  </ul>
-
-  <div class="card">
-    <h3>Варианты</h3>
+  <div class="t-body">
+    <div class="fstrip">
+      <div class="fx"><small>формула</small>mi  = (n − ri + 1) / Sn,  Sn = 10
+qi  = (P / Pб)^E
+КПК = Σ mi · qi,   Ук = КПК</div>
+      <div class="legend">
+        <div><code>ri</code><span>итоговый ранг: меньше сумма рангов → ранг 1, самый важный</span></div>
+        <div><code>E=+1</code><span>больше — лучше (увеличение): q = P / Pб</span></div>
+        <div><code>E=−1</code><span>меньше — лучше (габариты, масса, мощность): q = Pб / P</span></div>
+        <div><code>КПКб</code><span>у базовой все q = 1, поэтому КПКб = 1</span></div>
+      </div>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th class="l">Веса · одинаковые во всех вариантах</th><th>Э1</th><th>Э2</th><th>Э3</th><th>Э4</th><th>Σ</th><th>r</th><th>m</th><th>E</th></tr></thead>
+        <tbody id="rankBody"></tbody>
+      </table>
+    </div>
     <div class="vbar" data-group="mic"></div>
     <div data-holder="mic"></div>
-  </div>
-</section>
-
-<section class="task" id="mix" style="--c:var(--c-mix)">
-  <div class="sec-head">
-    <div class="eyebrow">Тип 4 · 2 варианта</div>
-    <h2>Смешанный метод: станок</h2>
-  </div>
-
-  <div class="card">
-    <h3>Формулы</h3>
-    <div class="f big">αi = Σ баллов группы / Σ баллов таблицы
-
-Ki = Σ mij · qij        qij = (P / Pб)^E
-
-Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
-    <div class="legend-list">
-      <div><code>m</code><span>вес показателя внутри группы, дан в таблице (0,75 / 0,25; 0,5 / 0,5; 1)</span></div>
-      <div><code>α</code><span>вес группы, считается балльным методом по таблице 2</span></div>
-      <div><code>E</code><span>производительность, срок службы, наработка: +1. Площадь, шум: −1</span></div>
+    <div class="two">
+      <div>
+        <div class="lbl">Алгоритм для любых цифр</div>
+        <ol class="alg">
+          <li><span><b>E и веса m</b> методом рангов (таблица выше).</span></li>
+          <li><span><b>q</b> для всех 5 моделей относительно модели 1, до сотых.</span></li>
+          <li><span><b>Вывод по q</b>: где у модели 5 q &gt; 1, она лучше базовой.</span></li>
+          <li><span><b>КПК = Σ m·q</b> для каждой модели, Ук = КПК.</span></li>
+          <li><span><b>Диаграмма</b>: осей столько, сколько показателей, фигур столько, сколько моделей. Ромб 1 — это базовая модель.</span></li>
+          <li><span><b>Что если</b>: меняешь одно значение модели 5, пересчитываешь её q и КПК.</span></li>
+          <li><span><b>Базовый образец</b> (если спросят): аналог того же назначения для тех же потребителей, обычно лидер рынка. Его показатели принимают за 1.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="lbl">Ловушки</div>
+        <ul class="traps">
+          <li><b>Меньше = лучше</b>Для габаритов, массы и мощности делишь базовое значение на значение модели, а не наоборот.</li>
+          <li><b>Проценты</b>−40% → ×0,6 · +20% → ×1,2 · в 1,5 раза → ×1,5.</li>
+        </ul>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <h3>Алгоритм</h3>
-    <ol class="steps">
-      <li><div><b>Веса групп α</b> балльным методом: сумма баллов строки / сумма всех баллов. Во всех вариантах 20, 12 и 8 из 40, то есть <b>0,5 · 0,3 · 0,2</b>.</div></li>
-      <li><div><b>Единичные q</b> для 5 показателей с учётом E.</div></li>
-      <li><div><b>Групповые K</b>: назначения, надёжности, эргономики.</div></li>
-      <li><div><b>Обобщённый Q</b> = 0,5·K₁ + 0,3·K₂ + 0,2·K₃.</div></li>
-      <li><div><b>Вывод</b>: Q &gt; 1 — качество выше базового. Назови, по каким группам станок лучше и по каким хуже.</div></li>
-    </ol>
+<section class="task" id="mix">
+  <div class="t-head">
+    <div class="t-num">04</div>
+    <div>
+      <div class="t-day">Смешанный метод</div>
+      <h2>Станок: группы показателей и баллы экспертов</h2>
+      <div class="lbl">2 варианта · веса групп 0,5 · 0,3 · 0,2</div>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>Варианты</h3>
+  <div class="t-body">
+    <div class="fstrip">
+      <div class="fx"><small>формула</small>αi = Σ баллов группы / Σ всех
+Ki = Σ mij · qij
+Q  = Σ αi · Ki,   Ук = Q</div>
+      <div class="legend">
+        <div><code>m</code><span>вес показателя в группе, дан в таблице (0,75 / 0,25; 0,5 / 0,5; 1)</span></div>
+        <div><code>α</code><span>вес группы, балльный метод по таблице 2</span></div>
+        <div><code>E</code><span>производительность, срок, наработка +1 · площадь, шум −1</span></div>
+      </div>
+    </div>
     <div class="vbar" data-group="mix"></div>
     <div data-holder="mix"></div>
+    <div class="two">
+      <div>
+        <div class="lbl">Алгоритм для любых цифр</div>
+        <ol class="alg">
+          <li><span><b>α групп</b>: сумма баллов строки / сумма всех баллов. Во всех вариантах 20, 12 и 8 из 40.</span></li>
+          <li><span><b>q</b> для 5 показателей с учётом E.</span></li>
+          <li><span><b>K</b> для групп назначения, надёжности и эргономики.</span></li>
+          <li><span><b>Q</b> = 0,5·K₁ + 0,3·K₂ + 0,2·K₃.</span></li>
+          <li><span><b>Вывод</b>: Q &gt; 1 — качество выше базового. Назови, по каким группам станок лучше и по каким хуже.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="lbl">Ловушки</div>
+        <ul class="traps">
+          <li><b>Площадь и шум</b>Меньше значит лучше, поэтому q = базовое / оцениваемое.</li>
+          <li><b>Веса</b>Вес группы (α) и вес показателя в группе (m) — разные числа, не путай.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="task" id="theory" style="--c:var(--c-th)">
-  <div class="sec-head">
-    <div class="eyebrow">Перечень вопросов к РК2</div>
-    <h2>Теория коротко</h2>
+<section class="task" id="theory">
+  <div class="t-head">
+    <div class="t-num">05</div>
+    <div>
+      <div class="t-day">Теория</div>
+      <h2>Перечень вопросов к РК 2, коротко</h2>
+      <div class="lbl">27 вопросов · поиск по слову или номеру</div>
+    </div>
   </div>
-  <div class="search">
-    <label for="qsearch" class="eyebrow" style="white-space:nowrap">Поиск</label>
-    <input id="qsearch" type="search" placeholder="БКГ, Ансофф, SWOT, номер вопроса…" autocomplete="off">
+  <div class="t-body">
+    <div class="search"><label for="qsearch">Поиск</label><input id="qsearch" type="search" placeholder="БКГ, Ансофф, SWOT, 13…" autocomplete="off"></div>
+    <p class="empty" id="qempty">Ничего не нашлось. Попробуй другое слово или номер.</p>
+    <div class="qgrid" id="qgrid"></div>
   </div>
-  <p class="empty" id="qempty">Ничего не нашлось. Попробуй другое слово или номер вопроса.</p>
-  <div class="qgrid" id="qgrid"></div>
 </section>
 
-<footer>Варианты собраны по фотографиям заданий РК2 из чата группы, все числа пересчитаны.</footer>
+<footer><span>Бланки и цифры — по фото заданий РК2 из чата группы</span><span>Все ответы пересчитаны</span></footer>
 </div>
 
 <script>
@@ -405,38 +457,44 @@ Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
   function fm(x, d) {
     if (d === undefined) d = 3;
     var p = Math.pow(10, d);
-    var s = String(Math.round(x * p) / p);
-    return s.replace(".", ",").replace("-", "−");
+    return String(Math.round(x * p) / p).replace(".", ",").replace("-", "−");
   }
-  function res(x, d) { return '<span class="res">' + fm(x, d) + "</span>"; }
+  function sum(a) { return a.reduce(function (s, v) { return s + v; }, 0); }
   function sv(s) {
-    return s.replace(/<(rect|line|circle|polygon)([^>]*)\/>/g, function (m, tag, attrs) {
+    return s.replace(/<(rect|line|circle|polygon)\b([^>]*)\/>/g, function (m, tag, attrs) {
       var st = [];
       attrs = attrs.replace(/\s(fill|stroke)="(var\([^"]*\))"/g, function (_, pr, v) { st.push(pr + ":" + v); return ""; });
       return "<" + tag + attrs + (st.length ? ' style="' + st.join(";") + '"' : "") + "/>";
     });
   }
-  function sum(a) { return a.reduce(function (s, v) { return s + v; }, 0); }
+  function step(n, title, body) { return '<div class="step"><div class="sn">' + n + "</div><div><h3>" + title + "</h3>" + body + "</div></div>"; }
+  function F(t) { return '<div class="f">' + t + "</div>"; }
+
+  function sheet(v, inner, opt) {
+    opt = opt || {};
+    var head = opt.z4 ? "" :
+      '<div class="h1">Управление качеством</div><div class="h2">Рубежный контроль №2</div>' +
+      '<div class="fio">Группа <i style="width:90px"></i> Ф.И.О. <i style="width:170px"></i></div>';
+    return '<div class="sheet-wrap"><div class="lbl"><span>Бланк · вариант ' + v.id + "</span><span>" + (opt.note || "как на РК") + '</span></div><div class="sheet">' + head + inner + "</div></div>";
+  }
 
   function gauge(vals) {
     var lo = 0.4, hi = 1.6;
-    vals.forEach(function (o) { lo = Math.min(lo, Math.floor(o.v * 10) / 10 - 0.1); hi = Math.max(hi, Math.ceil(o.v * 10) / 10 + 0.1); });
-    var W = 520, H = 30 + vals.length * 26, x0 = 20, x1 = W - 20;
+    vals.forEach(function (o) { lo = Math.min(lo, Math.floor(o.v * 10) / 10 - 0.1); hi = Math.max(hi, Math.ceil(o.v * 10) / 10 + 0.15); });
+    var W = 560, H = 34 + vals.length * 26, x0 = 12, x1 = W - 12;
     var X = function (v) { return x0 + (v - lo) / (hi - lo) * (x1 - x0); };
-    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Положение относительно базового (1)">';
-    s += '<rect x="' + x0 + '" y="8" width="' + (X(1) - x0) + '" height="' + (H - 26) + '" fill="var(--bad)" opacity=".08"/>';
-    s += '<rect x="' + X(1) + '" y="8" width="' + (x1 - X(1)) + '" height="' + (H - 26) + '" fill="var(--good)" opacity=".1"/>';
-    s += '<line x1="' + X(1) + '" x2="' + X(1) + '" y1="4" y2="' + (H - 16) + '" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 3"/>';
-    s += '<text x="' + X(1) + '" y="' + (H - 3) + '" text-anchor="middle">1 = базовый</text>';
-    s += '<text x="' + x0 + '" y="' + (H - 3) + '">хуже</text><text x="' + x1 + '" y="' + (H - 3) + '" text-anchor="end">лучше</text>';
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Положение относительно базового">';
+    for (var t = Math.ceil(lo * 10) / 10; t <= hi; t += 0.1) { var xx = X(t); s += '<line x1="' + xx + '" x2="' + xx + '" y1="8" y2="' + (H - 22) + '" stroke="var(--rule)" stroke-width="1"/>'; }
+    s += '<line x1="' + X(1) + '" x2="' + X(1) + '" y1="2" y2="' + (H - 18) + '" stroke="var(--ink)" stroke-width="2"/>';
+    s += '<text x="' + X(1) + '" y="' + (H - 4) + '" text-anchor="middle">1 = БАЗОВЫЙ</text><text x="' + x0 + '" y="' + (H - 4) + '">← ХУЖЕ</text><text x="' + x1 + '" y="' + (H - 4) + '" text-anchor="end">ЛУЧШЕ →</text>';
     vals.forEach(function (o, i) {
       var y = 22 + i * 26, x = X(o.v), good = o.v >= 1;
-      s += '<line x1="' + X(1) + '" x2="' + x + '" y1="' + y + '" y2="' + y + '" stroke="' + (good ? "var(--good)" : "var(--bad)") + '" stroke-width="6" stroke-linecap="round" opacity=".55"/>';
-      s += '<circle cx="' + x + '" cy="' + y + '" r="' + (o.strong ? 7 : 5) + '" fill="var(--c)" stroke="var(--card)" stroke-width="2"/>';
-      var anchorEnd = x > (x0 + x1) / 2 && !good ? "start" : (good ? "start" : "end");
-      var tx = good ? x + 11 : x - 11;
-      if (tx > x1 - 60) { tx = x - 11; anchorEnd = "end"; }
-      s += '<text class="lbl" x="' + tx + '" y="' + (y + 4) + '" text-anchor="' + anchorEnd + '">' + o.label + " " + fm(o.v, 3) + "</text>";
+      s += '<line x1="' + X(1) + '" x2="' + x + '" y1="' + y + '" y2="' + y + '" stroke="' + (good ? "var(--good)" : "var(--bad)") + '" stroke-width="8"/>';
+      s += '<rect x="' + (x - 5) + '" y="' + (y - 9) + '" width="10" height="18" fill="' + (o.strong ? "var(--accent)" : "var(--ink)") + '"/>';
+      var right = good ? x + 12 < x1 - 90 : x - 12 < x0 + 90;
+      var tx = good ? (right ? x + 12 : x - 12) : (right ? x + 12 : x - 12), anc = (good && right) || (!good && right) ? "start" : "end";
+      if (!good) { tx = x - 12; anc = "end"; if (tx < x0 + 90) { tx = x + 12; anc = "start"; } }
+      s += '<text class="v" x="' + tx + '" y="' + (y + 4) + '" text-anchor="' + anc + '">' + o.label + " " + fm(o.v, 3) + "</text>";
     });
     return '<div class="gauge">' + sv(s) + "</svg></div>";
   }
@@ -445,13 +503,13 @@ Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
     var bar = $('.vbar[data-group="' + group + '"]'), holder = $('[data-holder="' + group + '"]');
     list.forEach(function (v, i) {
       var b = document.createElement("button");
-      b.type = "button"; b.className = "vbtn"; b.id = group + "-btn-" + v.id;
+      b.type = "button"; b.className = "vbtn"; b.id = group + "-btn-" + i;
       b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
-      b.innerHTML = "Вариант " + v.id + "<small>" + v.short + "</small>";
+      b.innerHTML = "<b>" + v.id + "</b><span>" + v.short + "</span><small>" + v.tag + "</small>";
       bar.appendChild(b);
       var d = document.createElement("div");
-      d.className = "variant" + (i === 0 ? " on" : ""); d.id = group + "-" + v.id;
-      d.innerHTML = '<div class="vtitle"><span class="tag">Вариант ' + v.id + "</span>" + v.title + "</div>" + render(v);
+      d.className = "variant" + (i === 0 ? " on" : "");
+      d.innerHTML = render(v);
       holder.appendChild(d);
       b.addEventListener("click", function () {
         bar.querySelectorAll(".vbtn").forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
@@ -462,245 +520,209 @@ Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
   }
 
   var INT = [
-    { id: "А", short: "20 / 20 · ремонт +15%", title: "Станок 20 тыс. дет. против 20 · ремонт +15%",
-      o: [20, 3, 200, 2, 40, 4, .16], b: [20, 6, 50, 4, 40, 3, .38], annual: false, chg: 15 },
-    { id: "Б", short: "40 / 27 · ремонт +40%", title: "Станок 40 тыс. дет. против 27 · ремонт +40%",
-      o: [40, 3, 500, 5, 70, 20, .19], b: [27, 10, 410, 8, 40, 18, .23], annual: true, chg: 40 },
-    { id: "В", short: "40 / 20 · без «что если»", title: "Станок 40 тыс. дет. против 20",
-      o: [40, 3, 500, 5, 60, 20, .14], b: [20, 10, 50, 8, 40, 6, .23], annual: true, chg: null }
+    { id: "А", short: "20 / 20, ремонт +15%", tag: "чаще всего · 4 фото", o: [20, 3, 200, 2, 40, 4, .16], b: [20, 6, 50, 4, 40, 3, .38], annual: false, chg: 15 },
+    { id: "Б", short: "40 / 27, ремонт +40%", tag: "«прочие годовые»", o: [40, 3, 500, 5, 70, 20, .19], b: [27, 10, 410, 8, 40, 18, .23], annual: true, chg: 40 },
+    { id: "В", short: "40 / 20, без «что если»", tag: "«прочие годовые»", o: [40, 3, 500, 5, 60, 20, .14], b: [20, 10, 50, 8, 40, 6, .23], annual: true, chg: null }
   ];
   function intCalc(p, annual) {
     var E = p[0] * (1 - p[1] / 100) * p[5];
     var Z = p[2] * p[6] + p[3] * p[5] + (annual ? p[4] * p[5] : p[4]);
     return { E: E, Z: Z, I: E / Z };
   }
-  function intLines(p, annual, who) {
+  function intLines(p, annual, w) {
     var c = intCalc(p, annual);
-    var other = annual ? fm(p[4], 3) + "·" + fm(p[5], 3) : fm(p[4], 3);
-    return "Э" + who + " = " + fm(p[0]) + "·(1 − " + fm(p[1] / 100) + ")·" + fm(p[5]) + " = " + fm(c.E, 2) + "\n" +
-      "З" + who + " = " + fm(p[2]) + "·" + fm(p[6]) + " + " + fm(p[3]) + "·" + fm(p[5]) + " + " + other + " = " + fm(c.Z, 2) + "\n" +
-      "И" + who + " = " + fm(c.E, 2) + " / " + fm(c.Z, 2) + " = " + fm(c.I, 3) + " тыс. дет./тыс. руб.";
+    return "Э" + w + " = " + fm(p[0]) + "·(1 − " + fm(p[1] / 100) + ")·" + fm(p[5]) + " = " + fm(c.E, 2) + "\n" +
+      "З" + w + " = " + fm(p[2]) + "·" + fm(p[6]) + " + " + fm(p[3]) + "·" + fm(p[5]) + " + " + (annual ? fm(p[4]) + "·" + fm(p[5]) : fm(p[4])) + " = " + fm(c.Z, 2) + "\n" +
+      "И" + w + " = " + fm(c.E, 2) + " / " + fm(c.Z, 2) + " = " + fm(c.I, 3);
   }
   function renderInt(v) {
-    var names = ["Годовая производительность при безотказной работе, тыс. дет.", "Доля времени простоев из-за отказов", "Стоимость станка, тыс. руб.",
-      "Годовые затраты на ремонт, тыс. руб.", v.annual ? "Прочие <mark>годовые</mark> эксплуатационные расходы, тыс. руб." : "Прочие эксплуатационные расходы, тыс. руб.",
-      "Срок службы, лет", "Поправочный коэффициент φ(t)"];
+    var names = ["Годовая производительность при безотказной работе, тыс.дет.", "Доля времени простоев из-за отказов", "Стоимость станка, тыс. руб.", "Годовые затраты на ремонт, тыс. руб.",
+      v.annual ? "Прочие <mark>годовые</mark> эксплуатационные расходы, тыс.руб." : "Прочие эксплуатационные расходы, тыс.руб.", "Срок службы", "<mark>Поправочный коэффициент</mark>, зависящий от срока службы изделия"];
     var rows = names.map(function (n, i) {
-      var fmtv = function (x) { return i === 1 ? fm(x) + "%" : fm(x); };
-      return "<tr><td class=\"l\">" + n + "</td><td>" + fmtv(v.o[i]) + "</td><td>" + fmtv(v.b[i]) + "</td></tr>";
+      var f = function (x) { return i === 1 ? fm(x) + "%" : fm(x); };
+      return '<tr><td class="l">' + n + "</td><td>" + f(v.o[i]) + "</td><td>" + f(v.b[i]) + "</td></tr>";
     }).join("");
+    var txt = '<div class="z">Задача</div><p class="txt">Оцените уровень качества станка относительно базового образца. <mark>Выберите наиболее подходящий метод</mark> исходя из имеющихся данных. Сделайте вывод относительно полученных результатов.' +
+      (v.chg ? " Оцените, как изменится уровень качества оцениваемого станка, если <mark>годовые затраты на ремонт увеличатся на " + v.chg + "%</mark>." : "") + "</p>" +
+      '<table class="wide" style="margin-top:8px"><tr><th rowspan="2">Показатель качества</th><th colspan="2">Значение показателя</th></tr><tr><th>Оцениваемый станок</th><th>Базовый станок</th></tr>' + rows + "</table>";
     var co = intCalc(v.o, v.annual), cb = intCalc(v.b, v.annual), uk = co.I / cb.I;
-    var h = '<div class="tbl"><table><thead><tr><th class="l">Показатель</th><th>Оцениваемый</th><th>Базовый</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
-    h += '<div class="sol">';
-    h += '<div class="step"><b>1. Оцениваемый станок</b><div class="f">' + intLines(v.o, v.annual, "") + "</div></div>";
-    h += '<div class="step"><b>2. Базовый станок</b><div class="f">' + intLines(v.b, v.annual, "б") + "</div></div>";
-    h += '<div class="step"><b>3. Уровень качества</b><div class="f">Ук = И / Иб = ' + fm(co.I, 3) + " / " + fm(cb.I, 3) + " = " + fm(uk, 3) + "</div></div>";
+    var h = '<div class="sol"><div class="lbl">Решение · <b>интегральный метод</b></div>';
+    h += step("1", "Оцениваемый станок", F(intLines(v.o, v.annual, "")));
+    h += step("2", "Базовый станок", F(intLines(v.b, v.annual, "б")));
+    h += step("3", "Уровень качества", F("Ук = И / Иб = " + fm(co.I, 3) + " / " + fm(cb.I, 3) + ' = <span class="res">' + fm(uk, 3) + "</span>"));
     var gv = [{ v: uk, label: "Ук", strong: true }];
-    var concl = "Ук = " + fm(uk, 2) + (uk > 1 ? " > 1, значит, уровень качества оцениваемого станка выше базового: на каждый рубль затрат он даёт больше продукции." : " < 1, значит, уровень качества оцениваемого станка ниже базового.");
+    var concl = "Ук = " + fm(uk, 2) + (uk > 1 ? " > 1: уровень качества оцениваемого станка выше базового, на каждый рубль затрат он даёт больше продукции." : " < 1: уровень качества оцениваемого станка ниже базового.");
     if (v.chg) {
       var o2 = v.o.slice(); o2[3] = v.o[3] * (1 + v.chg / 100);
       var c2 = intCalc(o2, v.annual), uk2 = c2.I / cb.I;
-      h += '<div class="step"><b>4. Ремонт +' + v.chg + "%</b><div class=\"f\">ремонт = " + fm(v.o[3]) + "·" + fm(1 + v.chg / 100) + " = " + fm(o2[3], 3) + "\n" +
+      h += step("4", "Ремонт +" + v.chg + "%", F("ремонт = " + fm(v.o[3]) + "·" + fm(1 + v.chg / 100) + " = " + fm(o2[3], 3) + "\n" +
         "З' = " + fm(v.o[2]) + "·" + fm(v.o[6]) + " + " + fm(o2[3], 3) + "·" + fm(v.o[5]) + " + " + (v.annual ? fm(v.o[4]) + "·" + fm(v.o[5]) : fm(v.o[4])) + " = " + fm(c2.Z, 2) + "\n" +
-        "И' = " + fm(co.E, 2) + " / " + fm(c2.Z, 2) + " = " + fm(c2.I, 3) + "\n" +
-        "Ук' = " + fm(c2.I, 3) + " / " + fm(cb.I, 3) + " = " + fm(uk2, 3) + "</div></div>";
+        "И' = " + fm(co.E, 2) + " / " + fm(c2.Z, 2) + " = " + fm(c2.I, 3) + "\nУк' = " + fm(c2.I, 3) + " / " + fm(cb.I, 3) + ' = <span class="res">' + fm(uk2, 3) + "</span>"));
       gv.push({ v: uk2, label: "Ук'" });
-      concl += " Если затраты на ремонт вырастут на " + v.chg + "%, Ук снизится до " + fm(uk2, 2) + (uk2 > 1 ? ", но станок всё равно останется лучше базового." : " и станок станет хуже базового.");
+      concl += " Если затраты на ремонт вырастут на " + v.chg + "%, Ук снизится до " + fm(uk2, 2) + (uk2 > 1 ? ", но станок останется лучше базового." : " и станок станет хуже базового.");
     }
-    h += "</div>" + gauge(gv);
-    h += '<div class="concl"><b>Вывод</b>' + concl + "</div>";
+    h += gauge(gv) + '<div class="concl"><span class="lbl">Вывод</span>' + concl + "</div>";
     if (!v.annual) {
       var a1 = intCalc(v.o, true), a2 = intCalc(v.b, true);
-      h += '<p class="cond">Если преподаватель считает «прочие расходы» годовыми и умножает их на срок: И = ' + fm(a1.I, 3) + ", Иб = " + fm(a2.I, 3) + ", Ук = " + fm(a1.I / a2.I, 2) + ". Вывод тот же: лучше базового.</p>";
+      h += '<p class="lbl" style="text-transform:none;letter-spacing:0">Если преподаватель умножает «прочие расходы» на срок: И = ' + fm(a1.I, 3) + ", Иб = " + fm(a2.I, 3) + ", Ук = " + fm(a1.I / a2.I, 2) + ". Вывод тот же.</p>";
     }
-    return h;
+    return sheet(v, txt) + h + "</div>";
   }
   mountVariants("int", INT, renderInt);
 
   var B = [1, .7, .5];
   var KC = [
-    { id: "А", short: "0,95 · 0 · 1,1 …", title: "КС₁ на рынках 0,95 / 0 / 1,1 (как в конспекте)",
-      Kb: [[.95, 0, 1.1], [0, .85, .8], [.7, .9, 1.05]], Ko: [[1, 0, 1.2], [.6, 0, .9], [0, .8, 1]], Vb: [40, 30, 30], Vo: [50, 40, 30] },
-    { id: "Б", short: "«Задача № 4» · 0,9 · 0 · 1,1", title: "«Задача № 4»: КС₁ на рынках 0,9 / 0 / 1,1",
-      Kb: [[.9, 0, 1.1], [0, .85, .8], [.8, .9, 1.05]], Ko: [[.95, 0, 1.2], [0, .87, .9], [.9, .9, 1.1]], Vb: [40, 30, 30], Vo: [50, 40, 30] },
-    { id: "В", short: "объёмы 20/50/30 → 50/40/40", title: "КС₁ на рынках 0,8 / 1 / 1,1, объёмы 20 / 50 / 30 → 50 / 40 / 40",
-      Kb: [[.8, 1, 1.1], [0, .85, .8], [.8, .9, 1.05]], Ko: [[.95, 0, 1.2], [0, .87, .9], [1, .9, 1.1]], Vb: [20, 50, 30], Vo: [50, 40, 40] }
+    { id: "А", short: "0,95 · 0 · 1,1 …", tag: "с таблицей 3 · как в конспекте", Kb: [[.95, 0, 1.1], [0, .85, .8], [.7, .9, 1.05]], Ko: [[1, 0, 1.2], [.6, 0, .9], [0, .8, 1]], Vb: [40, 30, 30], Vo: [50, 40, 30] },
+    { id: "Б", short: "«Задача № 4»", tag: "список 1–5 · без таблицы 3", z4: true, Kb: [[.9, 0, 1.1], [0, .85, .8], [.8, .9, 1.05]], Ko: [[.95, 0, 1.2], [0, .87, .9], [.9, .9, 1.1]], Vb: [40, 30, 30], Vo: [50, 40, 30] },
+    { id: "В", short: "0,8 · 1 · 1,1 …", tag: "объёмы 20/50/30", Kb: [[.8, 1, 1.1], [0, .85, .8], [.8, .9, 1.05]], Ko: [[.95, 0, 1.2], [0, .87, .9], [1, .9, 1.1]], Vb: [20, 50, 30], Vo: [50, 40, 40] }
   ];
   function kcPeriod(K, V, tag) {
     var kci = K.map(function (row) { return sum(row.map(function (k, j) { return B[j] * k; })); });
     var SV = sum(V), a = V.map(function (x) { return x / SV; });
     var total = sum(a.map(function (x, i) { return x * kci[i]; }));
-    var l1 = K.map(function (row, i) {
-      return "КС" + (i + 1) + tag + " = " + row.map(function (k, j) { return fm(B[j]) + "·" + fm(k); }).join(" + ") + " = " + fm(kci[i], 3);
-    }).join("\n");
-    var l2 = V.map(function (x, i) { return "α" + (i + 1) + tag + " = " + x + " / " + SV + " = " + fm(a[i], 3); }).join("\n");
-    var l3 = "КС" + tag + " = " + a.map(function (x, i) { return fm(x, 3) + "·" + fm(kci[i], 3); }).join(" + ") + " = " + fm(total, 3);
-    return { kci: kci, a: a, total: total, l1: l1, l2: l2, l3: l3 };
+    return { kci: kci, a: a, total: total,
+      l1: K.map(function (row, i) { return "КС" + (i + 1) + tag + " = " + row.map(function (k, j) { return fm(B[j]) + "·" + fm(k); }).join(" + ") + " = " + fm(kci[i], 3); }).join("\n"),
+      l2: V.map(function (x, i) { return "α" + (i + 1) + tag + " = " + x + "/" + SV + " = " + fm(a[i], 3); }).join("   "),
+      l3: "КС" + tag + " = " + a.map(function (x, i) { return fm(x, 3) + "·" + fm(kci[i], 3); }).join(" + ") + " = " + fm(total, 3) };
   }
   function renderKC(v) {
-    var head = '<thead><tr><th rowspan="2">Вид</th><th colspan="3">Базовый период</th><th colspan="3">Отчётный период</th><th colspan="2">Объём, млн руб.</th></tr>' +
-      "<tr><th>Р1 · 1</th><th>Р2 · 0,7</th><th>Р3 · 0,5</th><th>Р1</th><th>Р2</th><th>Р3</th><th>баз.</th><th>отч.</th></tr></thead>";
-    var body = [0, 1, 2].map(function (i) {
-      return "<tr><td>" + (i + 1) + "</td>" + v.Kb[i].map(function (k) { return "<td>" + fm(k) + "</td>"; }).join("") +
-        v.Ko[i].map(function (k) { return "<td>" + fm(k) + "</td>"; }).join("") + "<td>" + v.Vb[i] + "</td><td>" + v.Vo[i] + "</td></tr>";
-    }).join("");
-    var b = kcPeriod(v.Kb, v.Vb, "б"), o = kcPeriod(v.Ko, v.Vo, "о");
-    var d = (o.total / b.total - 1) * 100;
-    var h = '<div class="tbl"><table>' + head + "<tbody>" + body + "</tbody></table></div>";
-    h += '<div class="sol">';
-    h += '<div class="step"><b>1. КС каждого вида продукции · базовый</b><div class="f">' + b.l1 + "</div></div>";
-    h += '<div class="step"><b>   · отчётный</b><div class="f">' + o.l1 + "</div></div>";
-    h += '<div class="step"><b>2. Значимость видов продукции α</b><div class="f">' + b.l2 + "\n\n" + o.l2 + "</div></div>";
-    h += '<div class="step"><b>3. КС предприятия</b><div class="f">' + b.l3 + "\n" + o.l3 + "</div></div>";
-    h += '<div class="step"><b>4. Изменение</b><div class="f">ΔКС = (' + fm(o.total, 3) + " / " + fm(b.total, 3) + " − 1)·100% = " + fm(d, 1) + "%</div></div>";
-    h += "</div>";
-    h += gauge([{ v: b.total, label: "баз." }, { v: o.total, label: "отч.", strong: true }]).replace("1 = базовый", "1");
-    var bestB = b.kci.indexOf(Math.max.apply(null, b.kci)) + 1, bestO = o.kci.indexOf(Math.max.apply(null, o.kci)) + 1;
-    var bigO = o.a.indexOf(Math.max.apply(null, o.a)) + 1;
-    h += '<div class="concl"><b>Вывод</b>КС предприятия ' + (d < 0 ? "снизилась" : "выросла") + " с " + fm(b.total, 2) + " до " + fm(o.total, 2) +
-      " (" + (d > 0 ? "+" : "") + fm(d, 1) + "%). Самый конкурентоспособный вид продукции: в базовом периоде вид " + bestB + ", в отчётном вид " + bestO +
-      ". Наибольшую значимость в отчётном периоде имеет вид " + bigO + " (α = " + fm(o.a[bigO - 1], 2) + ").</div>";
-    return h;
+    var k1 = '<table class="wide"><tr><th rowspan="3">Вид продукции</th><th colspan="6">Конкурентоспособность продукции Kij</th></tr><tr><th colspan="3">Базовый период</th><th colspan="3">Отчетный период</th></tr>' +
+      "<tr><th>Рынок 1</th><th>Рынок 2</th><th>Рынок 3</th><th>Рынок 1</th><th>Рынок 2</th><th>Рынок 3</th></tr>" +
+      [0, 1, 2].map(function (i) { return "<tr><td>" + (i + 1) + "</td>" + v.Kb[i].concat(v.Ko[i]).map(function (k) { return "<td>" + (k === 0 ? (v.z4 ? "0,0" : "0") : fm(k)) + "</td>"; }).join("") + "</tr>"; }).join("") + "</table>";
+    var k2 = '<table><tr><th rowspan="2">Вид продукции</th><th colspan="2">Объем реализации продукции, млн. руб</th></tr><tr><th>Базовый период</th><th>Отчетный период</th></tr>' +
+      [0, 1, 2].map(function (i) { return "<tr><td>" + (i + 1) + "</td><td>" + v.Vb[i] + "</td><td>" + v.Vo[i] + "</td></tr>"; }).join("") + "</table>";
+    var k3 = '<table><tr><th class="l">Вид рынка</th><th>Показатель значимости</th><th></th></tr><tr><td class="l">рынок 1</td><td>1</td><td class="l">Развитые страны</td></tr><tr><td class="l">рынок 2</td><td>0,7</td><td class="l">Остальные страны</td></tr><tr><td class="l">рынок3</td><td>0,5</td><td class="l">Внутренний рынок</td></tr></table>';
+    var txt;
+    if (v.z4) {
+      txt = '<div class="z">Задача № 4</div><ol><li>Определить конкурентоспособность каждого из <mark>3-х видов продукции</mark> предприятия</li><li>Оценить значимость каждого вида продукции</li><li><mark>Обосновать значимость рынков</mark> сбыта продукции</li><li>Оценить конкурентоспособность предприятия в базовом и отчетном периодах</li><li>Дать оценку изменения конкурентоспособности предприятия</li></ol>' +
+        '<div class="pair"><div style="overflow-x:auto">' + k1 + "</div><div>" + k2 + "</div></div>";
+    } else {
+      txt = '<div class="z">Задача</div><p class="txt">Определите конкурентоспособность каждого из <mark>3-х видов продукции</mark> предприятия. Оцените значимость каждого вида продукции. Оцените конкурентоспособность предприятия в <mark>базовом и отчетном периодах</mark>. Дайте оценку изменения конкурентоспособности предприятия. Сделайте вывод относительно полученных результатов.</p>' +
+        '<div class="cap">Таблица 1 – Исходные значения</div>' + k1 +
+        '<div class="pair" style="margin-top:8px"><div><div class="cap">Таблица 2 – Исходные значения по объему реализации</div>' + k2 + '</div><div><div class="cap">Таблица 3 Показатели значимости рынков</div>' + k3 + "</div></div>";
+    }
+    var b = kcPeriod(v.Kb, v.Vb, "б"), o = kcPeriod(v.Ko, v.Vo, "о"), d = (o.total / b.total - 1) * 100;
+    var h = '<div class="sol"><div class="lbl">Решение · <b>модель учёта рынков</b></div>';
+    if (v.z4) h += step("0", "Значимость рынков (её нет в бланке)", F("Р1 развитые страны: B = 1 (самые жёсткие требования)\nР2 остальные страны: B = 0,7\nР3 внутренний рынок: B = 0,5"));
+    h += step("1", "КС каждого вида · базовый", F(b.l1));
+    h += step("", "· отчётный", F(o.l1));
+    h += step("2", "Значимость видов продукции α", F(b.l2 + "\n" + o.l2));
+    h += step("3", "КС предприятия", F(b.l3 + "\n" + o.l3));
+    h += step("4", "Изменение", F("ΔКС = (" + fm(o.total, 3) + " / " + fm(b.total, 3) + ' − 1)·100% = <span class="res">' + (d > 0 ? "+" : "") + fm(d, 1) + "%</span>"));
+    var bestB = b.kci.indexOf(Math.max.apply(null, b.kci)) + 1, bestO = o.kci.indexOf(Math.max.apply(null, o.kci)) + 1, big = o.a.indexOf(Math.max.apply(null, o.a)) + 1;
+    h += '<div class="concl"><span class="lbl">Вывод</span>КС предприятия ' + (d < 0 ? "снизилась" : "выросла") + " с " + fm(b.total, 2) + " до " + fm(o.total, 2) + " (" + (d > 0 ? "+" : "") + fm(d, 1) +
+      "%). Самый конкурентоспособный вид продукции: в базовом периоде " + bestB + "-й, в отчётном " + bestO + "-й. Наибольшую значимость в отчётном периоде имеет " + big + "-й вид (α = " + fm(o.a[big - 1], 2) + ").</div>";
+    return sheet(v, txt, { z4: v.z4, note: v.z4 ? "лист без шапки" : "как на РК" }) + h + "</div>";
   }
   mountVariants("kc", KC, renderKC);
 
-  var IND = ["Макс. увеличение, крат", "Габариты, м³", "Масса, г", "Потребляемая мощность, кВт"];
+  var IND = ["Максимальное увеличение, крат", "Габариты, м<sup>3</sup>", "Масса, г", "Потребляемая мощность, квт"];
   var SHORT = ["увеличение", "габариты", "масса", "мощность"];
   var E = [1, -1, -1, -1];
   var RANKS = [[1, 2, 2, 3], [4, 3, 1, 1], [3, 1, 4, 4], [2, 4, 3, 2]];
-  var rs = RANKS.map(sum);
-  var order = rs.map(function (s, i) { return i; }).sort(function (a, b) { return rs[a] - rs[b]; });
-  var R = []; order.forEach(function (idx, pos) { R[idx] = pos + 1; });
-  var n = 4, Sn = n * (n + 1) / 2;
-  var M = R.map(function (r) { return (n - r + 1) / Sn; });
+  var rs = RANKS.map(sum), R = [];
+  rs.map(function (s, i) { return i; }).sort(function (a, b) { return rs[a] - rs[b]; }).forEach(function (idx, pos) { R[idx] = pos + 1; });
+  var M = R.map(function (r) { return (4 - r + 1) / 10; });
   $("#rankBody").innerHTML = RANKS.map(function (row, i) {
-    return '<tr><td class="l">' + IND[i] + "</td>" + row.map(function (x) { return "<td>" + x + "</td>"; }).join("") +
-      "<td>" + rs[i] + "</td><td>" + R[i] + "</td><td class=\"hi\">" + fm(M[i], 2) + "</td><td>" + (E[i] > 0 ? "+1" : "−1") + "</td></tr>";
-  }).join("");
-  $("#rankCalc").textContent = R.map(function (r, i) { return "m" + (i + 1) + " = (4 − " + r + " + 1) / 10 = " + fm(M[i], 2) + "   (" + SHORT[i] + ")"; }).join("\n") + "\nПроверка: Σm = " + fm(sum(M), 2);
+    return '<tr><td class="l">' + SHORT[i] + "</td>" + row.map(function (x) { return "<td>" + x + "</td>"; }).join("") + "<td>" + rs[i] + "</td><td>" + R[i] + '</td><td class="hi">' + fm(M[i], 2) + "</td><td>" + (E[i] > 0 ? "+1" : "−1") + "</td></tr>";
+  }).join("") + '<tr><td class="l" colspan="9" style="font-family:var(--mono);font-size:12.5px">m = (4 − r + 1) / 10 · проверка Σm = 1</td></tr>';
 
   var MIC = [
-    { id: "А", short: "600…500 · масса ×1,5", title: "Увеличение 600 / 500 / 450 / 400 / 500 · масса в 1,5 раза",
-      P: [[600, 500, 450, 400, 500], [.9, .52, 1.57, .78, .7], [300, 250, 750, 471, 250], [2, 1.05, 2.5, 2, 1.5]], k: 2, f: 1.5, what: "масса увеличится в 1,5 раза" },
-    { id: "Б", short: "600…400 · увеличение −40%", title: "Увеличение 600 / 500 / 350 / 300 / 400 · увеличение −40%",
-      P: [[600, 500, 350, 300, 400], [.9, .52, 1.57, .78, .7], [300, 250, 750, 471, 250], [2, 1.05, 2.5, 2, 1.5]], k: 0, f: .6, what: "максимальное увеличение уменьшится на 40%" },
-    { id: "В", short: "400…350 · мощность +20%", title: "Увеличение 400 / 300 / 250 / 300 / 350 · мощность +20%",
-      P: [[400, 300, 250, 300, 350], [.4, .52, 1.57, .78, .3], [150, 250, 350, 271, 120], [1.5, 1.5, 2.5, 2, 1.75]], k: 3, f: 1.2, what: "потребляемая мощность увеличится на 20%" },
-    { id: "Г", short: "500…700 · мощность +20%", title: "Увеличение 500 / 150 / 500 / 100 / 700 · мощность +20%",
-      P: [[500, 150, 500, 100, 700], [.52, 1.57, 1.57, .78, 1.57], [250, 700, 700, 471, 550], [1.05, 2.5, 2, 2, 1.5]], k: 3, f: 1.2, what: "потребляемая мощность увеличится на 20%" }
+    { id: "А", short: "масса ×1,5", tag: "увеличение 600…500", P: [[600, 500, 450, 400, 500], [.9, .52, 1.57, .78, .7], [300, 250, 750, 471, 250], [2, 1.05, 2.5, 2, 1.5]], k: 2, f: 1.5, what: "масса увеличится в 1,5 раза" },
+    { id: "Б", short: "увеличение −40%", tag: "600…400 · «обоснуйте базовый»", base: true, P: [[600, 500, 350, 300, 400], [.9, .52, 1.57, .78, .7], [300, 250, 750, 471, 250], [2, 1.05, 2.5, 2, 1.5]], k: 0, f: .6, what: "максимальное увеличение уменьшится на 40%" },
+    { id: "В", short: "мощность +20%", tag: "увеличение 400…350", P: [[400, 300, 250, 300, 350], [.4, .52, 1.57, .78, .3], [150, 250, 350, 271, 120], [1.5, 1.5, 2.5, 2, 1.75]], k: 3, f: 1.2, what: "потребляемая мощность увеличится на 20%" },
+    { id: "Г", short: "мощность +20%", tag: "увеличение 500…700", P: [[500, 150, 500, 100, 700], [.52, 1.57, 1.57, .78, 1.57], [250, 700, 700, 471, 550], [1.05, 2.5, 2, 2, 1.5]], k: 3, f: 1.2, what: "потребляемая мощность увеличится на 20%" }
   ];
-  var MODEL_COL = ["var(--muted)", "#e0a100", "#1aa3a3", "#d6457a", "var(--c)"];
-
+  var MCOL = ["var(--ink)", "#a29e92", "#4fb3e0", "#c99a1e", "var(--accent)"];
   function radar(Q) {
-    var size = 320, cx = 160, cy = 160, Rr = 118;
-    var mx = 0; Q.forEach(function (row) { row.forEach(function (x) { mx = Math.max(mx, x); }); });
+    var size = 300, cx = 150, cy = 150, Rr = 108, mx = 0;
+    Q.forEach(function (row) { row.forEach(function (x) { mx = Math.max(mx, x); }); });
     var top = Math.max(1.5, Math.ceil(mx * 2) / 2);
     var ang = [-90, 0, 90, 180].map(function (a) { return a * Math.PI / 180; });
     var pt = function (k, val) { var r = val / top * Rr; return [cx + r * Math.cos(ang[k]), cy + r * Math.sin(ang[k])]; };
-    var s = '<svg viewBox="0 0 ' + size + " " + size + '" role="img" aria-label="Лепестковая диаграмма единичных показателей">';
+    var s = '<svg viewBox="0 0 ' + size + " " + size + '" role="img" aria-label="Диаграмма единичных показателей">';
     for (var t = 0.5; t <= top + 1e-9; t += 0.5) {
-      var ring = [0, 1, 2, 3].map(function (k) { return pt(k, t).join(","); }).join(" ");
-      var isOne = Math.abs(t - 1) < 1e-9;
-      s += '<polygon points="' + ring + '" fill="none" stroke="var(--' + (isOne ? "ink" : "line") + ')" stroke-width="' + (isOne ? 1.4 : 1) + '"' + (isOne ? ' stroke-dasharray="4 3"' : "") + "/>";
-      var lp = pt(0, t);
-      s += '<text x="' + (lp[0] + 4) + '" y="' + (lp[1] + 11) + '">' + fm(t, 1) + "</text>";
+      var one = Math.abs(t - 1) < 1e-9;
+      s += '<polygon points="' + [0, 1, 2, 3].map(function (k) { return pt(k, t).join(","); }).join(" ") + '" fill="none" stroke="var(--' + (one ? "ink" : "rule") + ')" stroke-width="' + (one ? 1.3 : 1) + '"' + (one ? ' stroke-dasharray="4 3"' : "") + "/>";
+      var lp = pt(0, t); s += '<text x="' + (lp[0] + 4) + '" y="' + (lp[1] + 11) + '">' + fm(t, 1) + "</text>";
     }
-    [0, 1, 2, 3].forEach(function (k) { var e = pt(k, top); s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0] + '" y2="' + e[1] + '" stroke="var(--line)"/>'; });
-    var lab = [[cx, 14, "middle", "увеличение"], [size - 4, cy - 8, "end", "габариты"], [cx, size - 4, "middle", "масса"], [4, cy - 8, "start", "мощность"]];
-    lab.forEach(function (l) { s += '<text class="ax" x="' + l[0] + '" y="' + l[1] + '" text-anchor="' + l[2] + '">' + l[3] + "</text>"; });
+    [0, 1, 2, 3].forEach(function (k) { var e = pt(k, top); s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0] + '" y2="' + e[1] + '" stroke="var(--rule)"/>'; });
+    [[cx, 14, "middle", "увеличение"], [size - 2, cy - 8, "end", "габариты"], [cx, size - 3, "middle", "масса"], [2, cy - 8, "start", "мощность"]].forEach(function (l) { s += '<text class="ax" x="' + l[0] + '" y="' + l[1] + '" text-anchor="' + l[2] + '">' + l[3] + "</text>"; });
     [1, 2, 3, 0, 4].forEach(function (mi) {
-      var pts = [0, 1, 2, 3].map(function (k) { return pt(k, Q[k][mi]).join(","); }).join(" ");
       var main = mi === 4;
-      s += '<polygon points="' + pts + '" fill="' + (main ? "var(--c)" : "none") + '" fill-opacity="' + (main ? .14 : 0) + '" stroke="' + MODEL_COL[mi] + '" stroke-width="' + (main ? 3 : 1.7) + '"' + (mi === 0 ? ' stroke-dasharray="5 4"' : "") + "/>";
-      if (main) [0, 1, 2, 3].forEach(function (k) { var p = pt(k, Q[k][4]); s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.5" fill="var(--c)"/>'; });
+      s += '<polygon points="' + [0, 1, 2, 3].map(function (k) { return pt(k, Q[k][mi]).join(","); }).join(" ") + '" fill="' + (main ? "var(--accent)" : "none") + '" fill-opacity="' + (main ? .13 : 0) + '" stroke="' + MCOL[mi] + '" stroke-width="' + (main ? 3 : 1.6) + '"' + (mi === 0 ? ' stroke-dasharray="5 4"' : "") + "/>";
     });
     s += "</svg>";
-    var leg = '<div class="rleg">' + ["1 · базовая", "2", "3", "4", "5 · оцениваемая"].map(function (t, i) {
-      return '<span style="--k:' + MODEL_COL[i] + '"><i' + (i === 0 ? ' class="dash"' : "") + "></i>Модель " + t + "</span>";
-    }).join("") + '<span style="color:var(--muted);font-size:13px">Пунктирный ромб 1 — уровень базовой модели. Фигура шире ромба — лучше базовой.</span></div>';
-    return '<div class="radar">' + sv(s) + leg + "</div>";
+    return '<div class="radar">' + sv(s) + '<div class="rleg">' + ["1 · базовая", "2", "3", "4", "5 · оцениваемая"].map(function (t, i) {
+      return '<span style="--k:' + MCOL[i] + '"><i' + (i === 0 ? ' class="dash"' : "") + "></i>Модель " + t + "</span>";
+    }).join("") + "</div></div>";
   }
-
   function renderMic(v) {
-    var Q = v.P.map(function (row, k) { return row.map(function (p) { return Math.pow(p / row[0], E[k]); }); });
-    var Qr = Q.map(function (row) { return row.map(function (x) { return Math.round(x * 100) / 100; }); });
+    var txt = '<div class="z">Задача</div><p class="txt">Оцените уровень качества оцениваемого электронного микроскопа. ' + (v.base ? "Обоснуйте выбор базового образца. " : "") +
+      "Определите весовые коэффициенты показателей <mark>методом рангов</mark>. Рассчитайте единичные относительные показатели для каждой модели. Сделайте вывод относительно полученных результатов оцениваемой модели. Рассчитайте обобщенный показатель качества комплексным методом. <mark>Постройте диаграмму</mark>. На основе диаграммы сделайте вывод об уровне качества оцениваемого относительно базового образца и аналогов. Проанализируйте, как изменится уровень качества оцениваемого товара, если <mark>" + v.what + "</mark>.</p>" +
+      '<table class="wide" style="margin-top:8px"><tr><th rowspan="2">Показатель</th><th colspan="5">Модель</th><th colspan="4">Оценка экспертов, <b>ранги</b></th></tr><tr><th>1<br>(базовый)</th><th>2</th><th>3</th><th>4</th><th>5<br>(оцениваемый)</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>' +
+      v.P.map(function (row, k) { return '<tr><td class="l">' + IND[k] + "</td>" + row.map(function (x) { return "<td>" + fm(x) + "</td>"; }).join("") + RANKS[k].map(function (x) { return "<td>" + x + "</td>"; }).join("") + "</tr>"; }).join("") + "</table>";
+    var Qr = v.P.map(function (row, k) { return row.map(function (p) { return Math.round(Math.pow(p / row[0], E[k]) * 100) / 100; }); });
     var KPK = [0, 1, 2, 3, 4].map(function (mi) { return sum([0, 1, 2, 3].map(function (k) { return M[k] * Qr[k][mi]; })); });
-    var h = '<div class="tbl"><table><thead><tr><th class="l">Показатель</th><th>1 (баз.)</th><th>2</th><th>3</th><th>4</th><th>5 (оцен.)</th></tr></thead><tbody>' +
-      v.P.map(function (row, k) { return '<tr><td class="l">' + IND[k] + "</td>" + row.map(function (x) { return "<td>" + fm(x) + "</td>"; }).join("") + "</tr>"; }).join("") +
-      "</tbody></table></div>";
-    h += '<div class="sol">';
-    var qlines = [0, 1, 2, 3].map(function (k) {
+    var h = '<div class="sol"><div class="lbl">Решение · <b>комплексный метод</b></div>';
+    h += step("1", "Единичные показатели q", F([0, 1, 2, 3].map(function (k) {
       var b = v.P[k][0];
-      return SHORT[k] + ": " + [1, 2, 3, 4].map(function (mi) {
-        var p = v.P[k][mi];
-        return "q" + (mi + 1) + " = " + (E[k] > 0 ? fm(p) + "/" + fm(b) : fm(b) + "/" + fm(p)) + " = " + fm(Qr[k][mi], 2);
-      }).join("; ");
-    }).join("\n");
-    h += '<div class="step"><b>1. Единичные показатели q</b><div class="f">' + qlines + "</div></div>";
-    h += '<div class="tbl"><table><thead><tr><th class="l">q</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>' +
-      Qr.map(function (row, k) {
-        return '<tr><td class="l">' + SHORT[k] + " · m=" + fm(M[k], 2) + "</td>" + row.map(function (x, mi) {
-          var cls = mi === 4 ? (x > 1 ? "up" : (x < 1 ? "dn" : "")) : "";
-          return '<td class="' + cls + '">' + fm(x, 2) + "</td>";
-        }).join("") + "</tr>";
-      }).join("") +
-      '<tr><td class="l"><b>КПК = Σ m·q</b></td>' + KPK.map(function (x, mi) { return '<td class="' + (mi === 4 ? "hi" : "") + '">' + fm(x, 3) + "</td>"; }).join("") + "</tr>" +
-      "</tbody></table></div>";
-    h += '<div class="step"><b>2. КПК оцениваемой модели</b><div class="f">КПК5 = ' + [0, 1, 2, 3].map(function (k) { return fm(M[k], 2) + "·" + fm(Qr[k][4], 2); }).join(" + ") + " = " + fm(KPK[4], 3) + "\nУк = КПК5 / КПК1 = " + fm(KPK[4], 3) + " / 1 = " + fm(KPK[4], 3) + "</div></div>";
-    h += "</div>";
-    h += '<div class="step"><b style="color:var(--c);font-size:14px">3. Диаграмма</b>' + radar(Qr) + "</div>";
-    var better = [], worse = [];
-    [0, 1, 2, 3].forEach(function (k) { if (Qr[k][4] > 1) better.push(SHORT[k]); else if (Qr[k][4] < 1) worse.push(SHORT[k]); });
-    var above = [], below = [];
-    [1, 2, 3].forEach(function (mi) { if (KPK[4] > KPK[mi]) above.push(mi + 1); else below.push(mi + 1); });
-    var newP = v.P[v.k][4] * v.f;
-    var qn = Math.round(Math.pow(newP / v.P[v.k][0], E[v.k]) * 100) / 100;
-    var KPKn = KPK[4] - M[v.k] * Qr[v.k][4] + M[v.k] * qn;
-    h += '<div class="step"><b style="color:var(--c);font-size:14px">4. Что если ' + v.what + '</b><div class="f">' + SHORT[v.k] + "5 = " + fm(v.P[v.k][4]) + "·" + fm(v.f) + " = " + fm(newP, 3) + "\n" +
-      "q = " + (E[v.k] > 0 ? fm(newP, 3) + "/" + fm(v.P[v.k][0]) : fm(v.P[v.k][0]) + "/" + fm(newP, 3)) + " = " + fm(qn, 2) + "\n" +
-      "КПК5' = " + [0, 1, 2, 3].map(function (k) { return fm(M[k], 2) + "·" + fm(k === v.k ? qn : Qr[k][4], 2); }).join(" + ") + " = " + fm(KPKn, 3) + "</div></div>";
+      return SHORT[k] + ": " + [1, 2, 3, 4].map(function (mi) { var p = v.P[k][mi]; return "q" + (mi + 1) + "=" + (E[k] > 0 ? fm(p) + "/" + fm(b) : fm(b) + "/" + fm(p)) + "=" + fm(Qr[k][mi], 2); }).join("; ");
+    }).join("\n")) +
+      '<div class="tbl"><table><thead><tr><th class="l">q · вес</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody>' +
+      Qr.map(function (row, k) { return '<tr><td class="l">' + SHORT[k] + " · " + fm(M[k], 2) + "</td>" + row.map(function (x, mi) { return '<td class="' + (mi === 4 ? (x > 1 ? "up" : x < 1 ? "dn" : "") : "") + '">' + fm(x, 2) + "</td>"; }).join("") + "</tr>"; }).join("") +
+      '<tr><td class="l"><b>КПК = Σ m·q</b></td>' + KPK.map(function (x, mi) { return '<td class="' + (mi === 4 ? "hi" : "") + '">' + fm(x, 3) + "</td>"; }).join("") + "</tr></tbody></table></div>");
+    h += step("2", "КПК оцениваемой модели", F("КПК5 = " + [0, 1, 2, 3].map(function (k) { return fm(M[k], 2) + "·" + fm(Qr[k][4], 2); }).join(" + ") + ' = <span class="res">' + fm(KPK[4], 3) + "</span>\nУк = КПК5 / КПК1 = " + fm(KPK[4], 3)));
+    h += step("3", "Диаграмма", radar(Qr));
+    var newP = v.P[v.k][4] * v.f, qn = Math.round(Math.pow(newP / v.P[v.k][0], E[v.k]) * 100) / 100, KPKn = KPK[4] - M[v.k] * Qr[v.k][4] + M[v.k] * qn;
+    h += step("4", "Что если " + v.what, F(SHORT[v.k] + "5 = " + fm(v.P[v.k][4]) + "·" + fm(v.f) + " = " + fm(newP, 3) + "\nq = " + (E[v.k] > 0 ? fm(newP, 3) + "/" + fm(v.P[v.k][0]) : fm(v.P[v.k][0]) + "/" + fm(newP, 3)) + " = " + fm(qn, 2) +
+      "\nКПК5' = " + [0, 1, 2, 3].map(function (k) { return fm(M[k], 2) + "·" + fm(k === v.k ? qn : Qr[k][4], 2); }).join(" + ") + ' = <span class="res">' + fm(KPKn, 3) + "</span>"));
     h += gauge([{ v: KPK[4], label: "Ук", strong: true }, { v: KPKn, label: "Ук'" }]);
-    var c = "Оцениваемая модель " + (better.length ? "лучше базовой по показателям: " + better.join(", ") : "ни по одному показателю не лучше базовой") +
-      (worse.length ? "; хуже по: " + worse.join(", ") : "") + ". КПК = " + fm(KPK[4], 2) + (KPK[4] > 1 ? " > 1, уровень качества выше базового." : " < 1, уровень качества ниже базового.") +
-      (above.length ? " По обобщённому показателю она выше моделей " + above.join(", ") : "") + (below.length ? (above.length ? ", но уступает модели " : " Уступает моделям ") + below.join(", ") : "") + ". " +
-      "Если " + v.what + ", КПК станет " + fm(KPKn, 2) + ": уровень качества " + (KPKn < KPK[4] ? "снизится" : "вырастет") + (KPKn > 1 ? ", но останется выше базового." : " и станет ниже базового.");
-    h += '<div class="concl"><b>Вывод</b>' + c + "</div>";
-    return h;
+    var bt = [], wr = [], ab = [], bl = [];
+    [0, 1, 2, 3].forEach(function (k) { if (Qr[k][4] > 1) bt.push(SHORT[k]); else if (Qr[k][4] < 1) wr.push(SHORT[k]); });
+    [1, 2, 3].forEach(function (mi) { (KPK[4] > KPK[mi] ? ab : bl).push(mi + 1); });
+    h += '<div class="concl"><span class="lbl">Вывод</span>' + (v.base ? "Базовый образец — модель 1: аналог того же назначения, который принят за эталон рынка. " : "") +
+      "Оцениваемая модель " + (bt.length ? "лучше базовой по показателям: " + bt.join(", ") : "ни по одному показателю не лучше базовой") + (wr.length ? "; хуже по: " + wr.join(", ") : "") +
+      ". КПК = " + fm(KPK[4], 2) + (KPK[4] > 1 ? " > 1, уровень качества выше базового." : " < 1, уровень качества ниже базового.") +
+      (ab.length ? " По обобщённому показателю она выше моделей " + ab.join(", ") : "") + (bl.length ? (ab.length ? ", но уступает модели " : " Уступает моделям ") + bl.join(", ") : "") +
+      ". Если " + v.what + ", КПК станет " + fm(KPKn, 2) + ": уровень качества " + (KPKn < KPK[4] ? "снизится" : "вырастет") + (KPKn > 1 ? ", но останется выше базового." : " и станет ниже базового.") + "</div>";
+    return sheet(v, txt) + h + "</div>";
   }
   mountVariants("mic", MIC, renderMic);
 
   var BALLS = [[5, 4, 5, 3, 3], [2, 4, 1, 2, 3], [2, 2, 1, 2, 1]];
-  var GROUPS = ["Назначения", "Надёжности и долговечности", "Эргономические"];
-  var MXI = [["Производительность, шт./ч", 0, .75, 1], ["Размер занимаемой площади, м²", 0, .25, -1], ["Срок службы до кап. ремонта, дней", 1, .5, 1], ["Наработка на отказ, ч", 1, .5, 1], ["Уровень шума, дБ", 2, 1, -1]];
+  var GROUPS = ["Показатели назначения", "Показатели надежности и долговечности", "Эргономические показатели"];
+  var GSHORT = ["назначения", "надёжности", "эргономики"];
+  var MXI = [["Производительность, шт./ч", 0, .75, 1], ["Размер занимаемой площади, м2", 0, .25, -1], ["Срок службы до капитального ремонта, дней", 1, .5, 1], ["Наработка на отказ, ч", 1, .5, 1], ["Уровень шума, дБ", 2, 1, -1]];
   var MIX = [
-    { id: "А", short: "600 → 690 · шум 8,3 → 9", title: "Производительность 600 → 690, шум 8,3 → 9", b: [600, 6, 3200, 550, 8.3], o: [690, 8, 4270, 700, 9] },
-    { id: "Б", short: "630 → 690 · шум 8,7 → 7", title: "Производительность 630 → 690, шум 8,7 → 7", b: [630, 8, 3700, 550, 8.7], o: [690, 10, 3770, 580, 7] }
+    { id: "А", short: "600 → 690", tag: "шум 8,3 → 9 · из конспекта", b: [600, 6, 3200, 550, 8.3], o: [690, 8, 4270, 700, 9] },
+    { id: "Б", short: "630 → 690", tag: "шум 8,7 → 7", b: [630, 8, 3700, 550, 8.7], o: [690, 10, 3770, 580, 7] }
   ];
   function renderMix(v) {
-    var tot = sum(BALLS.map(sum)), al = BALLS.map(function (r) { return sum(r) / tot; });
-    var q = MXI.map(function (m, i) { return Math.pow(v.o[i] / v.b[i], m[3]); });
-    var K = [0, 1, 2].map(function (g) { return sum(MXI.map(function (m, i) { return m[1] === g ? m[2] * q[i] : 0; })); });
-    var Q = sum(al.map(function (a, g) { return a * K[g]; }));
-    var rows = "", lastG = -1;
+    var rows = "", g = -1;
     MXI.forEach(function (m, i) {
-      if (m[1] !== lastG) { rows += '<tr><th class="l" colspan="3">' + GROUPS[m[1]] + "</th><th>" + fm(al[m[1]], 2) + "</th><th></th></tr>"; lastG = m[1]; }
+      if (m[1] !== g) { g = m[1]; rows += '<tr class="g"><td class="l" colspan="5">' + GROUPS[g] + "</td></tr>"; }
       rows += '<tr><td class="l">' + m[0] + "</td><td>" + fm(v.b[i]) + "</td><td>" + fm(v.o[i]) + "</td><td></td><td>" + fm(m[2]) + "</td></tr>";
     });
-    var h = '<div class="tbl"><table><thead><tr><th class="l">Показатель</th><th>Баз.</th><th>Оцен.</th><th>α группы</th><th>m</th></tr></thead><tbody>' + rows + "</tbody></table></div>";
-    h += '<div class="sol">';
-    h += '<div class="step"><b>1. Веса групп (балльный метод)</b><div class="f">' + BALLS.map(function (r, g) { return "α" + (g + 1) + " = (" + r.join("+") + ") / " + tot + " = " + sum(r) + "/" + tot + " = " + fm(al[g], 2); }).join("\n") + "</div></div>";
-    h += '<div class="step"><b>2. Единичные q</b><div class="f">' + MXI.map(function (m, i) {
-      return "q" + (i + 1) + " = " + (m[3] > 0 ? fm(v.o[i]) + "/" + fm(v.b[i]) : fm(v.b[i]) + "/" + fm(v.o[i])) + " = " + fm(q[i], 3) + "   (" + m[0].split(",")[0].toLowerCase() + ", E=" + (m[3] > 0 ? "+1" : "−1") + ")";
-    }).join("\n") + "</div></div>";
-    h += '<div class="step"><b>3. Групповые K</b><div class="f">K1 = 0,75·' + fm(q[0], 3) + " + 0,25·" + fm(q[1], 3) + " = " + fm(K[0], 3) + "\nK2 = 0,5·" + fm(q[2], 3) + " + 0,5·" + fm(q[3], 3) + " = " + fm(K[1], 3) + "\nK3 = 1·" + fm(q[4], 3) + " = " + fm(K[2], 3) + "</div></div>";
-    h += '<div class="step"><b>4. Обобщённый показатель</b><div class="f">Q = ' + al.map(function (a, g) { return fm(a, 2) + "·" + fm(K[g], 3); }).join(" + ") + " = " + fm(Q, 3) + "\nУк = Q / Qб = " + fm(Q, 3) + " / 1 = " + fm(Q, 3) + "</div></div>";
-    h += "</div>";
+    var txt = '<div class="z">Задача</div><p class="txt">Оцените уровень качества станка относительно базового образца, используя <b><mark>смешанный метод</mark></b>. Определите коэффициенты значимости групп показателей с помощью <mark>балльного метода</mark> (данные о мнениях экспертов представлены в Таблице 2). Сделайте вывод относительно полученных результатов.</p>' +
+      '<div class="cap">Таблица 1 – Исходные значения</div><table class="wide"><tr><th rowspan="3">Показатель</th><th colspan="4">Модель станка</th></tr><tr><th rowspan="2">Базовый</th><th rowspan="2">Оцениваемый</th><th colspan="2">Коэффициент значимости</th></tr><tr><th>Группа</th><th>Показатель</th></tr>' + rows + "</table>" +
+      '<div class="cap">Таблица 2 – Баллы экспертов</div><table class="wide"><tr><th rowspan="2">Группа показателей</th><th colspan="5">Оценка экспертов, <b>баллы</b></th></tr><tr><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>' +
+      BALLS.map(function (r, i) { return '<tr><td class="l">' + GROUPS[i] + "</td>" + r.map(function (x) { return "<td>" + x + "</td>"; }).join("") + "</tr>"; }).join("") + "</table>";
+    var tot = sum(BALLS.map(sum)), al = BALLS.map(function (r) { return sum(r) / tot; });
+    var q = MXI.map(function (m, i) { return Math.pow(v.o[i] / v.b[i], m[3]); });
+    var K = [0, 1, 2].map(function (gg) { return sum(MXI.map(function (m, i) { return m[1] === gg ? m[2] * q[i] : 0; })); });
+    var Q = sum(al.map(function (a, gg) { return a * K[gg]; }));
+    var h = '<div class="sol"><div class="lbl">Решение · <b>смешанный метод</b></div>';
+    h += step("1", "Веса групп, балльный метод", F(BALLS.map(function (r, i) { return "α" + (i + 1) + " = (" + r.join("+") + ")/" + tot + " = " + sum(r) + "/" + tot + " = " + fm(al[i], 2); }).join("\n")));
+    h += step("2", "Единичные q", F(MXI.map(function (m, i) { return "q" + (i + 1) + " = " + (m[3] > 0 ? fm(v.o[i]) + "/" + fm(v.b[i]) : fm(v.b[i]) + "/" + fm(v.o[i])) + " = " + fm(q[i], 3) + "   " + m[0].split(",")[0].toLowerCase(); }).join("\n")));
+    h += step("3", "Групповые K", F("K1 = 0,75·" + fm(q[0], 3) + " + 0,25·" + fm(q[1], 3) + " = " + fm(K[0], 3) + "\nK2 = 0,5·" + fm(q[2], 3) + " + 0,5·" + fm(q[3], 3) + " = " + fm(K[1], 3) + "\nK3 = 1·" + fm(q[4], 3) + " = " + fm(K[2], 3)));
+    h += step("4", "Обобщённый показатель", F("Q = " + al.map(function (a, gg) { return fm(a, 2) + "·" + fm(K[gg], 3); }).join(" + ") + ' = <span class="res">' + fm(Q, 3) + "</span>\nУк = Q / Qб = " + fm(Q, 3) + " / 1"));
     h += gauge([{ v: K[0], label: "K назнач." }, { v: K[1], label: "K надёжн." }, { v: K[2], label: "K эргон." }, { v: Q, label: "Q", strong: true }]);
     var bt = [], wr = [];
-    K.forEach(function (k, g) { (k >= 1 ? bt : wr).push(GROUPS[g].toLowerCase()); });
-    h += '<div class="concl"><b>Вывод</b>Q = ' + fm(Q, 2) + (Q > 1 ? " > 1: уровень качества оцениваемого станка выше базового." : " < 1: уровень качества ниже базового.") +
-      " Станок лучше по группам: " + bt.join(", ") + (wr.length ? "; хуже по группе: " + wr.join(", ") : "") + ". Наибольший вес у показателей назначения (α = 0,5).</div>";
-    return h;
+    K.forEach(function (k, gg) { (k >= 1 ? bt : wr).push(GSHORT[gg]); });
+    h += '<div class="concl"><span class="lbl">Вывод</span>Q = ' + fm(Q, 2) + (Q > 1 ? " > 1: уровень качества оцениваемого станка выше базового." : " < 1: уровень качества ниже базового.") +
+      " Станок лучше по показателям " + bt.join(" и ") + (wr.length ? ", хуже по показателям " + wr.join(" и ") : "") + ". Наибольший вес у показателей назначения (α = 0,5).</div>";
+    return sheet(v, txt) + h + "</div>";
   }
   mountVariants("mix", MIX, renderMix);
 
@@ -721,7 +743,7 @@ Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
     [14, "Классификация методов оценки КС предприятия", "<ul><li><b>Индексные</b>: простая сумма показателей, среднее взвешенное арифметическое и геометрическое, по видам продукции, по товарной массе.</li><li><b>Матричные</b>: БКГ, GE/McKinsey, Ансофф, Портер, ADL (Литтл), SWOT, конкурентная карта.</li><li><b>Стоимостные</b>: рыночная стоимость бизнеса как интегральный показатель.</li><li>Графические: многоугольник КС.</li></ul><p>Общий минус — субъективность весов. Лучше сочетать несколько методов.</p>", "индексные матричные стоимостные"],
     [15, "Групповой показатель экономических параметров", "<p>I<sub>эп</sub> = З/З<sub>0</sub>, где З — цена потребления (цена покупки и все затраты за срок службы) у оцениваемого товара, З<sub>0</sub> — у образца. Можно считать и как Σ ai·qi по экономическим параметрам. Чем меньше I<sub>эп</sub>, тем лучше. Итог: K = I<sub>тп</sub>/I<sub>эп</sub>.</p>", "экономический Iэп цена потребления"],
     [16, "SWOT-анализ", "<p>Strengths и Weaknesses — внутренние сильные и слабые стороны. Opportunities и Threats — внешние возможности и угрозы. Цель: опереться на сильные стороны и возможности, преодолеть слабости, защититься от угроз. На пересечениях строят стратегии SO, WO, ST, WT. Метод качественный и простой, но субъективный.</p><div class=\"mx\"><div class=\"ax\"></div><div class=\"ax\">Возможности O</div><div class=\"ax\">Угрозы T</div><div class=\"ax\">Сильные S</div><div class=\"g\">SO: использовать силу для возможностей</div><div class=\"y\">ST: силой отразить угрозы</div><div class=\"ax\">Слабые W</div><div class=\"y\">WO: возможностями закрыть слабости</div><div class=\"r\">WT: защищаться, сокращать риски</div></div>", "swot сильные слабые угрозы"],
-    [17, "Основные этапы оценки КС товара", "<ol style=\"margin:0;padding-left:1.2em\"><li>Изучить рынок и потребности, выбрать образец для сравнения.</li><li>Определить параметры: нормативные, технические, экономические.</li><li>Рассчитать единичные показатели q.</li><li>Рассчитать групповые I<sub>нп</sub>, I<sub>тп</sub>, I<sub>эп</sub>.</li><li>Найти интегральный K = I<sub>нп</sub>·I<sub>тп</sub>/I<sub>эп</sub>.</li><li>Сделать вывод: K &gt; 1 — лучше образца.</li></ol>", "этапы"],
+    [17, "Основные этапы оценки КС товара", "<ol><li>Изучить рынок и потребности, выбрать образец для сравнения.</li><li>Определить параметры: нормативные, технические, экономические.</li><li>Рассчитать единичные показатели q.</li><li>Рассчитать групповые I<sub>нп</sub>, I<sub>тп</sub>, I<sub>эп</sub>.</li><li>Найти интегральный K = I<sub>нп</sub>·I<sub>тп</sub>/I<sub>эп</sub>.</li><li>Сделать вывод: K &gt; 1 — лучше образца.</li></ol>", "этапы"],
     [18, "«Идеальная модель» в оценке КС", "<p>Гипотетический эталонный товар с лучшими значениями всех параметров среди аналогов или с желаемыми для потребителя. С ней сравнивают реальные товары: чем ближе K к 1, тем ближе товар к идеалу. Плюс: даёт ориентир, что улучшать. Метод идеальной точки.</p>", "идеал эталон"],
     [19, "Диаграмма (многоугольник) конкурентоспособности", "<p>Число осей равно числу показателей, на осях откладывают единичные q, каждая модель — свой многоугольник. Чем больше площадь фигуры, тем выше КС. По форме видно сильные и слабые стороны относительно конкурентов. Пример: прогнозная диаграмма МС-21.</p>", "многоугольник лепестковая радар циклограмма"],
     [20, "Стоимость жизненного цикла продукции", "<p>Суммарные затраты за весь жизненный цикл: подготовка к закупке, покупка, владение и эксплуатация (энергия, ремонт, обслуживание), утилизация. Это цена потребления, она входит в I<sub>эп</sub>. Товар, дешёвый в покупке, может быть неконкурентоспособен, если дорог в эксплуатации.</p>", "СЖЦ затраты утилизация"],
@@ -735,14 +757,13 @@ Q = Σ αi · Ki          Ук = Q / Qб = Q</div>
   ];
   var grid = $("#qgrid");
   grid.innerHTML = TH.map(function (t) {
-    return '<article class="q" data-s="' + (t[0] + " " + t[1] + " " + t[3] + " " + t[2].replace(/<[^>]+>/g, " ")).toLowerCase() + '"><h3><span>' + t[0] + ".</span>" + t[1] + "</h3>" + t[2] + "</article>";
+    return '<article class="q" data-n="' + t[0] + '" data-s="' + (t[1] + " " + t[3] + " " + t[2].replace(/<[^>]+>/g, " ")).toLowerCase() + '"><h3><span>' + (t[0] < 10 ? "0" : "") + t[0] + "</span>" + t[1] + "</h3>" + t[2] + "</article>";
   }).join("");
   var inp = $("#qsearch"), empty = $("#qempty");
   inp.addEventListener("input", function () {
     var v = inp.value.trim().toLowerCase(), shown = 0;
     grid.querySelectorAll(".q").forEach(function (el) {
-      var num = el.querySelector("h3 span").textContent.replace(".", "");
-      var ok = !v || (/^\d+$/.test(v) ? num === v : el.getAttribute("data-s").indexOf(v) >= 0);
+      var ok = !v || (/^\d+$/.test(v) ? el.getAttribute("data-n") === String(+v) : el.getAttribute("data-s").indexOf(v) >= 0);
       el.hidden = !ok; if (ok) shown++;
     });
     empty.style.display = shown ? "none" : "block";
